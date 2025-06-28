@@ -483,6 +483,11 @@ function initializeReviewSlider() {
 // =========================================================================
 
 // Fungsi utama yang menjalankan semua fungsi di atas berdasarkan halaman yang aktif
+// =========================================================================
+// GANTI FUNGSI initializeApp LAMA DENGAN VERSI FINAL DI BAWAH INI
+// =========================================================================
+
+// Fungsi utama yang menjalankan semua fungsi di atas berdasarkan halaman yang aktif
 const initializeApp = () => {
     // Selalu perbarui UI bersama seperti ikon keranjang
     updateSharedUI();
@@ -490,22 +495,32 @@ const initializeApp = () => {
     // Ambil path URL untuk menentukan halaman mana yang sedang dibuka
     const path = window.location.pathname;
 
-    // Logika baru yang lebih andal untuk mendeteksi halaman
-    if (path.endsWith('/produk.html')) {
+    // "Mata-mata" untuk melihat path asli di console browser (tekan F12)
+    // Ini akan membantu kita memastikan path mana yang sebenarnya digunakan oleh Netlify
+    console.log('Current Path Dideteksi:', path);
+
+    // LOGIKA BARU YANG LEBIH FLEKSIBEL: Menggunakan .includes()
+    // Ini akan bekerja untuk '/produk.html' maupun '/produk/'
+    if (path.includes('/produk')) {
+        console.log('Menjalankan renderProductPage()...');
         renderProductPage();
-    } else if (path.includes('/detail-produk.html')) {
+    } else if (path.includes('/detail-produk')) {
+        console.log('Menjalankan renderDetailPage()...');
         renderDetailPage();
-    } else if (path.endsWith('/keranjang.html')) {
+    } else if (path.includes('/keranjang')) {
+        console.log('Menjalankan renderCartPage()...');
         renderCartPage();
-    } else if (path.endsWith('/pembayaran.html')) {
+    } else if (path.includes('/pembayaran')) {
+        console.log('Menjalankan renderCheckoutPage()...');
         renderCheckoutPage();
-    } else if (path.endsWith('/cara-bayar.html')) {
+    } else if (path.includes('/cara-bayar')) {
+        console.log('Menjalankan renderCaraBayarPage()...');
         renderCaraBayarPage();
-    } else if (path.endsWith('/') || path.endsWith('/index.html')) {
-        // Jika ini halaman utama, jalankan slider review
+    } else if (path.endsWith('/') || path.includes('/index.html')) {
+        // Untuk halaman utama, kita bisa biarkan seperti ini
+        console.log('Menjalankan initializeReviewSlider()...');
         initializeReviewSlider();
     }
-    // Untuk halaman statis seperti cerita-kami.html, tidak perlu ada tindakan khusus
 };
 
     // Jalankan aplikasi!
