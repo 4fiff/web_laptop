@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang Belanja - Macintoz</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Macintoz</a>
+            <div class="nav-menu">
+                <a href="produk.html">Mac</a>
+                <a href="#">iPhone (Segera)</a>
+                <a href="#">Watch (Segera)</a>
+            </div>
+            <div class="nav-icons">
+                <a href="#" id="search-icon"><i class="fas fa-search"></i></a>
+                <div class="cart-container">
+                    <a href="keranjang.html" id="cart-icon-link"><i class="fas fa-shopping-bag"></i><span id="cart-count">0</span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="cart-page-container">
+        <h1>Keranjang Belanja Anda</h1>
+        <div id="cart-page-content">
+            <div id="cart-items-list">
+                </div>
+            <div id="cart-summary" class="cart-summary">
+                <h2>Ringkasan</h2>
+                <div class="summary-line">
+                    <span>Total Produk</span>
+                    <span id="summary-total-items">0</span>
+                </div>
+                <div class="summary-line">
+                    <span>Total Harga</span>
+                    <strong id="summary-total-price">Rp 0</strong>
+                </div>
+                <a href="pembayaran.html" id="checkout-button" class="button button-full">Lanjut ke Checkout</a>
+            </div>
+        </div>
+        <div id="empty-cart-message" style="display: none; text-align: center; padding: 50px 0;">
+            <h2>Keranjang Anda masih kosong.</h2>
+            <a href="produk.html" class="button">Mulai Belanja</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Belanja dan Pelajari</h3>
+                <ul>
+                    <li><a href="produk.html">Mac</a></li>
+                    <li><a href="#">iPhone</a></li>
+                    <li><a href="#">Watch</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Layanan</h3>
+                <ul>
+                    <li><a href="#">Lacak Pesanan</a></li>
+                    <li><a href="#">Pusat Bantuan</a></li>
+                    <li><a href="#">Kebijakan Garansi</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Tentang Macintoz</h3>
+                <ul>
+                    <li><a href="cerita-kami.html">Cerita Kami</a></li>
+                    <li><a href="karir.html">Karir</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Hak Cipta &copy; 2025 Macintoz. Semua Hak Dilindungi.</p>
+            <div class="footer-socials">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
