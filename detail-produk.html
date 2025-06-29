@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="nav-container">
@@ -19,7 +21,8 @@
             <div class="nav-icons">
                 <a href="#" id="search-icon"><i class="fas fa-search"></i></a>
                 <div class="cart-container">
-                    <a href="keranjang.html" id="cart-icon-link"><i class="fas fa-shopping-bag"></i><span id="cart-count">0</span></a>
+                    <a href="keranjang.html" id="cart-icon-link"><i class="fas fa-shopping-bag"></i><span
+                            id="cart-count">0</span></a>
                 </div>
             </div>
         </div>
@@ -29,23 +32,27 @@
         <div id="product-detail-content" class="product-detail-layout">
             <div class="product-detail-image">
                 <div class="slider-container">
-                    <img id="detail-img" src="https://placehold.co/600x600/f5f5f7/333?text=Loading..." alt="Gambar Produk">
+                    <img id="detail-img" src="https://placehold.co/600x600/f5f5f7/333?text=Loading..."
+                        alt="Gambar Produk">
                     <button id="prev-btn" class="slider-btn prev">&lt;</button>
                     <button id="next-btn" class="slider-btn next">&gt;</button>
-            </div>
-            <div id="slider-dots" class="slider-dots">
                 </div>
-        </div>
+                <div id="slider-dots" class="slider-dots">
+                </div>
+            </div>
             <div class="product-detail-info">
                 <h1 id="detail-name">Nama Produk Sedang Dimuat...</h1>
                 <p id="detail-specs" class="detail-specs">Spesifikasi sedang dimuat...</p>
                 <p id="detail-price" class="detail-price">Rp 0</p>
 
+                <p id="detail-sku" class="product-sku"></p>
+
                 <div class="detail-description">
                     <h3>Deskripsi</h3>
-                    <p id="detail-description-text">Memuat deskripsi...</p>
+                    <div id="detail-description-container">
+                    </div>
                 </div>
-                
+
                 <p id="detail-stock" class="product-stock"></p>
                 <button id="detail-add-to-cart-btn" class="button button-full">Tambah ke Keranjang</button>
             </div>
@@ -96,4 +103,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

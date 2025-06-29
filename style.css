@@ -1064,3 +1064,116 @@ a#cart-icon-link {
     font-weight: 600;
     color: var(--secondary-text-color);
 }
+
+/* Style untuk Fitur Kode Kupon */
+.coupon-input-group {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+.coupon-input-group .input-field {
+    flex-grow: 1; /* Membuat input text mengisi ruang */
+    margin-bottom: 0;
+}
+#apply-coupon-btn {
+    flex-shrink: 0; /* Mencegah tombol menyusut */
+    padding: 14px 20px;
+}
+#coupon-message {
+    font-size: 14px;
+    margin-top: 8px;
+    min-height: 20px; /* Memberi ruang agar layout tidak "melompat" */
+}
+#coupon-message.success {
+    color: #008a00; /* Warna hijau untuk pesan sukses */
+}
+#coupon-message.error {
+    color: #c50000; /* Warna merah untuk pesan error */
+}
+
+/* Style untuk Tombol Cancel Kupon */
+#apply-coupon-btn.cancel {
+    background-color: var(--bg-color);
+    color: #c50000;
+    border: 1px solid #c50000;
+}
+#apply-coupon-btn.cancel:hover {
+    background-color: #fff5f5;
+}
+
+/* Style untuk Ringkasan Pembayaran dengan diskon */
+.checkout-summary .summary-line.discount {
+    color: #008a00; /* Warna hijau untuk diskon */
+}
+
+/* Style untuk SKU Produk */
+.product-sku {
+    font-size: 14px;
+    color: var(--secondary-text-color);
+    font-family: monospace; /* Font khusus agar terlihat seperti kode */
+    margin-top: -8px;
+    margin-bottom: 24px;
+}
+
+/* Style untuk Deskripsi Terstruktur */
+.detail-description-section h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.detail-description-section ul {
+    padding-left: 20px;
+    margin: 0;
+    color: var(--secondary-text-color);
+}
+
+.detail-description-section li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+/* Style untuk Kontrol Produk (Search & Sort) */
+.product-controls {
+    display: flex;
+    gap: 15px;
+    max-width: 800px;
+    margin: 40px auto 0;
+}
+
+.product-controls .input-field {
+    margin-bottom: 0;
+}
+
+/* Penyesuaian untuk layar kecil */
+@media (max-width: 768px) {
+    .product-controls {
+        flex-direction: column;
+    }
+}
+
+/* Style untuk Catatan Kecil di Bawah Form */
+.form-note {
+    font-size: 13px;
+    color: var(--secondary-text-color);
+    margin-top: -8px;
+    margin-bottom: 24px;
+}
+
+/* Style untuk Section Video Showcase */
+.video-showcase-section {
+    /* Memberi jarak 20px dari section atas, dan 60px ke section bawah */
+    padding: 50px 0 50px 0; 
+    text-align: center; /* Memastikan video berada di tengah */
+    background-color: rgb(232, 232, 237); /* Pastikan background-nya putih */
+}
+
+.video-showcase-section video {
+    width: 80%; /* Lebar video 80% dari lebar layar */
+    max-width: 1200px; /* Batas lebar maksimal agar tidak terlalu besar di layar lebar */
+    height: auto; /* Tinggi otomatis menyesuaikan aspek rasio video */
+    border-radius: 18px; /* Sudut melengkung agar sesuai desain Apple */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Efek bayangan agar terangkat */
+}

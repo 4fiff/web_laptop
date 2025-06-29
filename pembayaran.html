@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,44 +8,73 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
     <div class="checkout-container">
         <div class="checkout-form">
-    <a href="index.html" class="nav-logo checkout-logo">Macintoz</a>
-    <div class="breadcrumb">
-        <a href="keranjang.html">Keranjang</a> &gt; <span>Informasi</span> &gt; <span>Pembayaran</span>
-    </div>
+            <a href="index.html" class="nav-logo checkout-logo">Macintoz</a>
+            <div class="breadcrumb">
+                <a href="keranjang.html">Keranjang</a> &gt; <span>Informasi</span> &gt; <span>Pembayaran</span>
+            </div>
 
-    <form id="payment-form">
-        <h2>Informasi Kontak</h2>
-        <input type="email" placeholder="Email" class="input-field" required>
-        
-        <h2>Alamat Pengiriman</h2>
-        <input type="text" placeholder="Nama Lengkap" class="input-field" required>
-        <input type="text" placeholder="Alamat Lengkap (Jalan, No. Rumah, RT/RW)" class="input-field" required>
-        <input type="text" placeholder="Kota" class="input-field half-width" required>
-        <input type="text" placeholder="Kode Pos" class="input-field half-width" required>
-        <input type="tel" placeholder="contoh: 081234567890" class="input-field" pattern="[0-9]{10,13}" title="Masukkan nomor telepon yang valid (10-13 digit angka)." required>
+            <form id="payment-form">
+                <h2>Informasi Kontak</h2>
+                <input type="email" placeholder="Email" class="input-field" required>
+                <p class="form-note">Nota Pembayaran dan Nomor Resi akan dikirim melalui Email ini.</p>
 
-        <div class="checkout-actions">
-            <a href="keranjang.html" class="back-link">&lt; Kembali ke Keranjang</a>
-            <button type="submit" class="button">Lanjut ke Pembayaran</button>
+                <h2>Alamat Pengiriman</h2>
+                <input type="text" placeholder="Nama Lengkap" class="input-field" required>
+                <input type="text" placeholder="Alamat Lengkap (Jalan, No. Rumah, RT/RW)" class="input-field" required>
+                <input type="text" placeholder="Kota" class="input-field half-width" required>
+                <input type="text" placeholder="Kode Pos" class="input-field half-width" required>
+                <input type="tel" placeholder="contoh: 081234567890" class="input-field" pattern="[0-9]{10,13}"
+                    title="Masukkan nomor telepon yang valid (10-13 digit angka)." required>
+
+                <h2>Opsi Pengiriman</h2>
+                <select id="shipping-service" class="input-field" required>
+                    <option value="" disabled selected>Pilih Jasa Pengiriman...</option>
+                    <option value="JNE">JNE</option>
+                    <option value="J&T">J&T</option>
+                    <option value="Si Cepat">Si Cepat</option>
+                </select>
+                <p class="form-note">Semua pengiriman menggunakan layanan Kargo, sudah termasuk packing kayu dan
+                    asuransi untuk keamanan maksimal.</p>
+
+                <div class="checkout-actions">
+                    <a href="keranjang.html" class="back-link">&lt; Kembali ke Keranjang</a>
+                    <button type="submit" class="button">Lanjut ke Pembayaran</button>
+                </div>
+            </form>
         </div>
-    </form>
-    </div>
         <div class="checkout-summary">
             <div id="checkout-items-list">
-                </div>
+            </div>
             <hr>
             <div class="summary-line">
                 <span>Subtotal</span>
                 <span id="checkout-subtotal">Rp 0</span>
             </div>
+
+            <div id="discount-line" class="summary-line discount" style="display: none;">
+                <span>Diskon Kupon</span>
+                <span id="discount-amount">- Rp 0</span>
+            </div>
+
             <div class="summary-line">
                 <span>Pengiriman</span>
                 <span>Gratis</span>
             </div>
+
             <hr>
+            <div id="coupon-section">
+                <div class="coupon-input-group">
+                    <input type="text" id="coupon-code" placeholder="Masukkan kode kupon" class="input-field">
+                    <button type="button" id="apply-coupon-btn" class="button button-secondary">Submit</button>
+                </div>
+                <p id="coupon-message"></p>
+            </div>
+            <hr>
+
             <div class="summary-line total-line">
                 <span>Total</span>
                 <strong id="checkout-total">Rp 0</strong>
@@ -53,4 +83,5 @@
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>

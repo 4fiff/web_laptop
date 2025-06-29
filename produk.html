@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
 
     <nav class="navbar">
@@ -20,7 +22,8 @@
             <div class="nav-icons">
                 <a href="#" id="search-icon"><i class="fas fa-search"></i></a>
                 <div class="cart-container">
-                    <a href="keranjang.html" id="cart-icon-link"><i class="fas fa-shopping-bag"></i><span id="cart-count">0</span></a>
+                    <a href="keranjang.html" id="cart-icon-link"><i class="fas fa-shopping-bag"></i><span
+                            id="cart-count">0</span></a>
                 </div>
             </div>
         </div>
@@ -29,11 +32,21 @@
     <header class="page-header">
         <h1>MacBook</h1>
         <p>Pilih MacBook yang tepat untuk Anda.</p>
+
+        <div class="product-controls">
+            <input type="text" id="search-input" class="input-field"
+                placeholder="Cari berdasarkan nama (misal: M1, Pro 16)...">
+            <select id="sort-select" class="input-field">
+                <option value="default">Urutan Default</option>
+                <option value="price-asc">Harga: Terendah ke Tertinggi</option>
+                <option value="price-desc">Harga: Tertinggi ke Terendah</option>
+            </select>
+        </div>
     </header>
 
     <main class="product-grid-container">
         <div id="product-grid" class="product-grid">
-            </div>
+        </div>
     </main>
 
     <footer class="footer">
@@ -75,4 +88,5 @@
 
     <script src="/script.js"></script>
 </body>
+
 </html>
