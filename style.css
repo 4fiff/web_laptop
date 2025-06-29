@@ -631,6 +631,24 @@ a#cart-icon-link {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .cart-item {
+        flex-wrap: wrap; /* Izinkan item untuk pindah baris jika tidak muat */
+        row-gap: 15px; /* Beri jarak vertikal jika ada item yang pindah baris */
+    }
+
+    .cart-item-info {
+        /* Pastikan info produk mengambil sisa ruang di samping gambar */
+        flex-basis: calc(100% - 140px); 
+        flex-grow: 1;
+    }
+
+    .cart-item-price {
+        /* Pindahkan harga ke baris baru dan ratakan ke kanan */
+        flex-basis: 100%; 
+        text-align: right;
+        margin-top: 10px;
+    }
+
     .nav-menu {
         display: none; /* Simple solution for mobile, can be replaced with hamburger menu */
     }
