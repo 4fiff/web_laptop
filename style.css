@@ -604,7 +604,7 @@ a#cart-icon-link {
         position: static;
     }
     .checkout-container {
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
     .checkout-form, .checkout-summary {
         width: 100%;
@@ -1519,5 +1519,38 @@ color: var(--accent-color);
     }
     .nav-icons {
         gap: 0; /* Hapus gap agar hamburger menempel di kanan */
+    }
+}
+
+/* Style untuk Tombol Aksi di Kotak Ringkasan */
+.summary-actions {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.summary-actions .button {
+    width: 100%; /* Tombol Lanjut ke Pembayaran mengambil sisa ruang */
+    flex-grow: 1;
+}
+
+/* Logika untuk menyembunyikan/menampilkan link "Kembali" */
+.mobile-only-link {
+    display: none; /* Sembunyikan link kembali versi mobile di desktop */
+}
+
+/* Di dalam @media (max-width: 768px) */
+@media (max-width: 768px) {
+    /* ... (kode media query Anda yang lain ada di sini) ... */
+
+    /* Sembunyikan link kembali versi desktop di mobile */
+    .desktop-only-link {
+        display: none;
+    }
+
+    /* Tampilkan link kembali versi mobile */
+    .mobile-only-link {
+        display: inline-block;
+        margin-right: 20px;
     }
 }

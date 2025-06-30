@@ -57,12 +57,12 @@
                         <input type="text" id="npwp-number" class="input-field"
                             placeholder="Nomor NPWP (contoh: 01.234.567.8-910.000)">
                         <input type="text" id="npwp-name" class="input-field" placeholder="Nama Sesuai NPWP">
+                        <input type="text" id="npwp-address" class="input-field" placeholder="Alamat Sesuai NPWP">
                     </div>
                 </div>
 
-                <div class="checkout-actions">
+                <div class="checkout-actions desktop-only-link">
                     <a href="keranjang.html" class="back-link">&lt; Kembali ke Keranjang</a>
-                    <button type="submit" class="button">Lanjut ke Pembayaran</button>
                 </div>
             </form>
         </div>
@@ -99,9 +99,13 @@
                 <span>Total</span>
                 <strong id="checkout-total">Rp 0</strong>
             </div>
+
+            <div class="summary-actions">
+                <a href="keranjang.html" class="back-link mobile-only-link">&lt; Kembali</a>
+                <button type="submit" form="payment-form" class="button">Lanjut ke Pembayaran</button>
+            </div>
         </div>
-    </div>
-    <script src="script.js"></script>
+        <script src="script.js"></script>
 </body>
 
 </html>
