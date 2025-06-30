@@ -1554,3 +1554,38 @@ color: var(--accent-color);
         margin-right: 20px;
     }
 }
+
+/* Style untuk Banner Notifikasi Pembayaran Tertunda */
+.pending-payment-banner {
+    background-color: #0071e3;
+    color: white;
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.pending-payment-banner a {
+    color: white;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.pending-payment-banner .cancel-btn {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    border-radius: 980px;
+    padding: 4px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.pending-payment-banner .cancel-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}

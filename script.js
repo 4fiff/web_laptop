@@ -720,7 +720,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     code: uniqueCode,
                     endTime: paymentEndTime
                 };
-                sessionStorage.setItem('paymentData', JSON.stringify(paymentData));
+                localStorage.setItem('paymentData', JSON.stringify(paymentData));
                 
                 cart = [];
                 saveCart();
@@ -736,7 +736,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const renderCaraBayarPage = () => {
-        const paymentDataString = sessionStorage.getItem('paymentData');
+        const paymentDataString = localStorage.getItem('paymentData');
         if (!paymentDataString) {
             alert('Data pembayaran tidak ditemukan. Silakan ulangi dari keranjang.');
             window.location.href = 'keranjang.html';
@@ -771,10 +771,49 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (timerDisplay) { timerDisplay.textContent = "00:00"; }
                 if (paymentDetailsWrapper) { paymentDetailsWrapper.style.display = 'none'; }
                 if (timeUpMessage) { timeUpMessage.style.display = 'block'; }
-                sessionStorage.removeItem('paymentData');
+                localStorage.removeItem('paymentData');
             }
         }, 1000);
     };
+
+    function checkPendingPayment() {
+        const paymentDataString = localStorage.getItem('paymentData');
+        const body = document.querySelector('body');
+        
+        if (paymentDataString) {
+            const paymentData = JSON.parse(paymentDataString);
+            
+            // Periksa apakah pembayaran sudah kedaluwarsa
+            if (new Date().getTime() > paymentData.endTime) {
+                localStorage.removeItem('paymentData'); // Hapus jika sudah kedaluwarsa
+                return;
+            }
+
+            // Jika belum kedaluwarsa dan kita TIDAK sedang di halaman cara-bayar
+            if (!window.location.pathname.includes('cara-bayar.html')) {
+                // Buat banner notifikasi
+                const banner = document.createElement('div');
+                banner.className = 'pending-payment-banner';
+                banner.innerHTML = `
+                    <span>Anda memiliki pembayaran yang belum selesai.</span>
+                    <a href="cara-bayar.html">Lihat Detail Pembayaran</a>
+                    <button class="cancel-btn">Batalkan Pesanan</button>
+                `;
+
+                // Tambahkan banner ke bagian paling atas body
+                body.prepend(banner);
+
+                // Beri fungsi pada tombol "Batalkan"
+                banner.querySelector('.cancel-btn').addEventListener('click', () => {
+                    if(confirm('Apakah Anda yakin ingin membatalkan pesanan ini?')) {
+                        localStorage.removeItem('paymentData');
+                        banner.remove(); // Hapus banner dari tampilan
+                        alert('Pesanan telah dibatalkan.');
+                    }
+                });
+            }
+        }
+    }
     
     function initializeReviewSlider() {
         const sliderContainer = document.querySelector('.review-slider-container');
@@ -806,6 +845,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const initializeApp = () => {
+        checkPendingPayment();
         updateSharedUI();
         initializeNavbar();
         const path = window.location.pathname;
