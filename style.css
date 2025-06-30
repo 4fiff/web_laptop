@@ -305,7 +305,7 @@ a#cart-icon-link {
 /* Product Page */
 .page-header {
     text-align: center;
-    padding: 60px 20px;
+    padding: 0px 20px 60px;
 }
 .page-header h1 {
     font-size: 48px;
@@ -324,6 +324,7 @@ a#cart-icon-link {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
+    width: 100%;
 }
 .product-card {
     background: #fdfdfd;
@@ -369,74 +370,6 @@ a#cart-icon-link {
     display: flex;
     gap: 10px;
     justify-content: center;
-}
-
-/* Login Page */
-.login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: var(--footer-bg);
-}
-.login-box {
-    background-color: var(--bg-color);
-    padding: 40px;
-    border-radius: 18px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-}
-.login-page-logo {
-    margin-bottom: 30px;
-    font-size: 24px;
-}
-.login-box h2 {
-    margin-top: 0;
-    font-size: 28px;
-}
-.divider {
-    font-size: 14px;
-    color: var(--secondary-text-color);
-    margin: 20px 0;
-    display: flex;
-    align-items: center;
-    text-align: center;
-}
-.divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    border-bottom: 1px solid var(--border-color);
-}
-.divider:not(:empty)::before {
-    margin-right: .25em;
-}
-.divider:not(:empty)::after {
-    margin-left: .25em;
-}
-.button-google {
-    background-color: #fff;
-    color: #444;
-    border: 1px solid var(--border-color);
-}
-.button-google:hover {
-    background-color: #f5f5f5;
-}
-.button-google i {
-    margin-right: 10px;
-    font-size: 18px;
-    vertical-align: middle;
-}
-.signup-link {
-    margin-top: 20px;
-    font-size: 14px;
-}
-.error-message {
-    color: #bf0000;
-    font-size: 14px;
-    min-height: 20px;
 }
 
 /* Cart Page */
@@ -1194,4 +1127,397 @@ a#cart-icon-link {
     height: auto; /* Tinggi otomatis menyesuaikan aspek rasio video */
     border-radius: 18px; /* Sudut melengkung agar sesuai desain Apple */
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Efek bayangan agar terangkat */
+}
+
+/* Style untuk Info Lokasi Pengiriman */
+.shipping-origin {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    background-color: var(--footer-bg);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--secondary-text-color);
+    margin-bottom: 20px;
+}
+
+.shipping-origin i {
+    color: var(--button-bg);
+}
+
+.shipping-origin.checkout-note {
+    margin-top: -10px; /* Atur jarak di halaman checkout */
+}
+
+/* Style untuk lokasi di footer */
+.footer-location {
+    font-size: 12px;
+}
+.footer-location i {
+    margin-right: 5px;
+}
+
+/* Style untuk Halaman FAQ */
+.faq-container {
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--border-color);
+    padding: 20px 0;
+}
+
+.faq-item summary {
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none; /* Menghilangkan panah default */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none; /* Menghilangkan panah default untuk Chrome/Safari */
+}
+
+/* Membuat ikon panah custom */
+.faq-item summary::after {
+    content: '\f078'; /* Kode ikon panah ke bawah dari Font Awesome */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    transition: transform 0.3s ease;
+}
+
+/* Memutar panah saat pertanyaan dibuka */
+.faq-item[open] > summary::after {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    padding-top: 15px;
+    color: var(--secondary-text-color);
+    line-height: 1.7;
+}
+
+.faq-answer ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+/* Style untuk Label/Lencana Grade Produk */
+.product-grade-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 980px; /* Membuatnya seperti pil */
+    color: #fff;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+/* Pewarnaan Lencana Grade */
+.grade-a { background-color: #008a00; } /* Hijau tua untuk kualitas terbaik */
+.grade-b { background-color: #0071e3; } /* Biru untuk kualitas baik */
+.grade-c { background-color: #f5a623; } /* Oranye untuk kualitas cukup */
+
+
+/* Style untuk Tampilan Grade di Halaman Detail */
+.product-grade-detail {
+    margin-top: -8px;
+    margin-bottom: 15px;
+}
+.product-grade-detail .product-grade-badge {
+    margin-top: 13px;
+    margin-right: 0px;
+    vertical-align: middle;
+}
+.product-grade-detail span {
+    font-size: 15px;
+    color: var(--secondary-text-color);
+    vertical-align: middle;
+}
+
+/* Style untuk Tata Letak Halaman Produk Baru */
+.page-content-wrapper {
+    display: flex;
+    gap: 30px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    align-items: flex-start;
+}
+
+.filter-sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 88px;
+}
+
+.product-grid-container {
+    flex: 1; /* Perintah agar wadah produk ini mengisi semua sisa ruang */
+    min-width: 0; /* Trik CSS untuk mencegah overflow pada flex item */
+}
+
+.filter-sidebar h3 {
+    font-size: 21px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.filter-group {
+    margin-bottom: 25px;
+}
+
+.filter-group h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.filter-option label {
+    font-size: 15px;
+    color: var(--secondary-text-color);
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.filter-option input[type="checkbox"] {
+    cursor: pointer;
+}
+
+/* Penyesuaian untuk layar kecil */
+@media (max-width: 992px) {
+    .page-content-wrapper {
+        flex-direction: column;
+    }
+    .filter-sidebar {
+        width: 100%;
+        position: static; /* Hapus sticky di mobile */
+        margin-bottom: 40px;
+    }
+}
+
+.related-products-section {
+    max-width: 1280px;
+    margin: 80px auto 0; /* Memberi jarak dari konten di atasnya */
+    padding: 0 20px;
+}
+
+.related-products-section h2 {
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Mengatur agar grid produk terkait menampilkan maksimal 4 kolom di layar besar */
+.related-products-section .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* Menggunakan kembali style dari filter agar konsisten */
+.tax-invoice-section .filter-option {
+    margin-bottom: 0;
+}
+.tax-invoice-section .filter-option label {
+    font-size: 16px; /* Sedikit lebih besar dari label filter */
+    color: var(--text-color);
+}
+
+#tax-invoice-details {
+    margin-top: 16px;
+    padding-left: 28px; /* Sejajarkan dengan input di atasnya */
+}
+
+#tax-invoice-details .input-field {
+    margin-bottom: 10px;
+}
+
+/* Style untuk Grup Input (Kota & Kode Pos) */
+.input-group {
+    display: flex;
+    gap: 16px;
+}
+
+/* Style untuk Fitur Faktur Pajak */
+.tax-invoice-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.checkbox-container label {
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Style untuk menyembunyikan dan menampilkan kolom NPWP */
+.hidden-fields {
+    max-height: 0; /* Awalnya tinggi 0 */
+    overflow: hidden; /* Sembunyikan konten yang meluap */
+    transition: max-height 0.4s ease-out; /* Animasi halus saat membuka/menutup */
+    padding-top: 0;
+}
+
+.hidden-fields.show {
+    max-height: 500px; /* Beri tinggi maksimal saat ditampilkan */
+    transition: max-height 0.5s ease-in;
+    padding-top: 15px; /* Beri jarak atas saat muncul */
+}
+
+/* Style untuk Halaman Placeholder (iPhone, Watch, dll) & Lacak Pesanan */
+.placeholder-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: calc(100vh - 250px); /* Kalkulasi tinggi viewport dikurangi tinggi header & footer */
+    padding: 40px 20px;
+}
+
+.placeholder-page h1, .track-order-box h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.placeholder-page p, .track-order-box p {
+    font-size: 18px;
+    color: var(--secondary-text-color);
+    max-width: 500px;
+    margin-bottom: 24px;
+}
+
+.track-order-box {
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--footer-bg);
+    padding: 40px;
+    border-radius: 18px;
+}
+
+.track-order-form {
+    display: flex;
+    gap: 10px;
+}
+
+/* Style untuk Halaman Review Pelanggan */
+.review-page-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+
+/* Style untuk Navbar Responsif (Hamburger Menu) */
+.nav-menu-desktop {
+    display: flex; /* Tampil di desktop */
+    gap: 30px;
+}
+
+.nav-menu-desktop a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 14px; /* <-- TAMBAHKAN BARIS INI UNTUK MENGEMBALIKAN UKURAN FONT */
+    transition: color 0.3s ease;
+}
+
+.nav-menu-desktop a:hover {
+color: var(--accent-color);
+}
+
+.hamburger-btn {
+    display: none; /* Sembunyi di desktop */
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-menu-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.close-menu-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 25px;
+}
+
+.mobile-menu-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/* Media Query untuk mengaktifkan mode mobile */
+@media (max-width: 768px) {
+    .nav-menu-desktop, #search-icon, #cart-icon-link {
+        display: none; /* Sembunyikan menu desktop & ikon di mobile */
+    }
+    .hamburger-btn {
+        display: block; /* Tampilkan tombol hamburger di mobile */
+    }
+    .nav-icons {
+        gap: 0; /* Hapus gap agar hamburger menempel di kanan */
+    }
 }

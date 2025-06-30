@@ -13,20 +13,39 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">Macintoz</a>
-            <div class="nav-menu">
+
+            <div class="nav-menu-desktop">
                 <a href="produk.html">Mac</a>
-                <a href="#">iPhone (Segera)</a>
-                <a href="#">Watch (Segera)</a>
+                <a href="iphone.html">iPhone (segera)</a>
+                <a href="watch.html">Watch (segera)</a>
+                <a href="ipad.html">iPad (segera)</a>
+                <a href="our-review.html">Our Review</a>
             </div>
+
             <div class="nav-icons">
                 <a href="#" id="search-icon"><i class="fas fa-search"></i></a>
-                <div class="cart-container">
-                    <a href="keranjang.html" id="cart-icon-link"><i class="fas fa-shopping-bag"></i><span
-                            id="cart-count">0</span></a>
-                </div>
+                <a href="keranjang.html" id="cart-icon-link">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="cart-count">0</span>
+                </a>
+                <button id="hamburger-btn" class="hamburger-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
     </nav>
+
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+        <button id="close-menu-btn" class="close-menu-btn">&times;</button>
+        <div class="mobile-menu-links">
+            <a href="produk.html">Mac</a>
+            <a href="iphone.html">iPhone</a>
+            <a href="watch.html">Watch</a>
+            <a href="ipad.html">iPad</a>
+            <a href="our-review.html">Review</a> <a href="faq.html">FAQ</a>
+            <a href="kontak.html">Kontak</a>
+        </div>
+    </div>
 
     <main class="product-detail-container">
         <div id="product-detail-content" class="product-detail-layout">
@@ -43,6 +62,7 @@
             <div class="product-detail-info">
                 <h1 id="detail-name">Nama Produk Sedang Dimuat...</h1>
                 <p id="detail-specs" class="detail-specs">Spesifikasi sedang dimuat...</p>
+                <div id="detail-grade" class="product-grade-detail"></div>
                 <p id="detail-price" class="detail-price">Rp 0</p>
 
                 <p id="detail-sku" class="product-sku"></p>
@@ -54,6 +74,12 @@
                 </div>
 
                 <p id="detail-stock" class="product-stock"></p>
+
+                <div class="shipping-origin">
+                    <i class="fas fa-truck"></i>
+                    <span>Dikirim dari Pangkal Pinang, Bangka</span>
+                </div>
+
                 <button id="detail-add-to-cart-btn" class="button button-full">Tambah ke Keranjang</button>
             </div>
         </div>
@@ -62,6 +88,12 @@
             <p>Maaf, produk yang Anda cari tidak ada. Mungkin tautannya salah atau produk sudah tidak tersedia.</p>
             <a href="produk.html" class="button">Kembali ke Daftar Produk</a>
         </div>
+
+        <section class="related-products-section">
+            <h2>Anda Mungkin Juga Suka</h2>
+            <div id="related-products-grid" class="product-grid">
+                </div>
+        </section>
     </main>
 
     <footer class="footer">
@@ -70,29 +102,32 @@
                 <h3>Belanja dan Pelajari</h3>
                 <ul>
                     <li><a href="produk.html">Mac</a></li>
-                    <li><a href="#">iPhone</a></li>
-                    <li><a href="#">Watch</a></li>
+                    <li><a href="iphone.html">iPhone</a></li>
+                    <li><a href="watch.html">Watch</a></li>
+                    <li><a href="ipad.html">iPad</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h3>Layanan</h3>
                 <ul>
-                    <li><a href="#">Lacak Pesanan</a></li>
-                    <li><a href="#">Pusat Bantuan</a></li>
+                    <li><a href="lacak-pesanan.html">Lacak Pesanan</a></li>
+                    <li><a href="faq.html">Tanya Jawab (FAQ)</a></li>
                     <li><a href="#">Kebijakan Garansi</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h3>Tentang Macintoz</h3>
                 <ul>
-                    <li><a href="#">Cerita Kami</a></li>
-                    <li><a href="#">Karir</a></li>
-                    <li><a href="#">Kontak</a></li>
+                    <li><a href="cerita-kami.html">Cerita Kami</a></li>
+                    <li><a href="our-review.html">Review Pelanggan</a></li>
+                    <li><a href="karir.html">Karir</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
             <p>Hak Cipta &copy; 2025 Macintoz. Semua Hak Dilindungi.</p>
+            <p class="footer-location"><i class="fas fa-map-marker-alt"></i> Pangkal Pinang, Indonesia</p>
             <div class="footer-socials">
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>

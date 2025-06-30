@@ -19,26 +19,46 @@
 
             <form id="payment-form">
                 <h2>Informasi Kontak</h2>
-                <input type="email" placeholder="Email" class="input-field" required>
+                <input type="email" id="email" placeholder="Email" class="input-field" required>
                 <p class="form-note">Nota Pembayaran dan Nomor Resi akan dikirim melalui Email ini.</p>
 
                 <h2>Alamat Pengiriman</h2>
-                <input type="text" placeholder="Nama Lengkap" class="input-field" required>
-                <input type="text" placeholder="Alamat Lengkap (Jalan, No. Rumah, RT/RW)" class="input-field" required>
-                <input type="text" placeholder="Kota" class="input-field half-width" required>
-                <input type="text" placeholder="Kode Pos" class="input-field half-width" required>
-                <input type="tel" placeholder="contoh: 081234567890" class="input-field" pattern="[0-9]{10,13}"
-                    title="Masukkan nomor telepon yang valid (10-13 digit angka)." required>
+                <input type="text" id="full-name" placeholder="Nama Lengkap" class="input-field" required>
+
+                <select id="province" class="input-field" required>
+                    <option value="" disabled selected>Pilih Provinsi...</option>
+                </select>
+
+                <div class="input-group">
+                    <input type="text" id="city" placeholder="Kabupaten/Kota" class="input-field" required>
+                    <input type="text" id="postal-code" placeholder="Kode Pos" class="input-field" required>
+                </div>
+
+                <textarea id="address" class="input-field" placeholder="Alamat Lengkap (Jalan, No. Rumah, RT/RW)"
+                    rows="3" required></textarea>
+
+                <input type="tel" id="phone" placeholder="contoh: 081234567890" class="input-field"
+                    pattern="[0-9]{10,13}" title="Masukkan nomor telepon yang valid (10-13 digit angka)." required>
 
                 <h2>Opsi Pengiriman</h2>
                 <select id="shipping-service" class="input-field" required>
                     <option value="" disabled selected>Pilih Jasa Pengiriman...</option>
-                    <option value="JNE">JNE</option>
-                    <option value="J&T">J&T</option>
-                    <option value="Si Cepat">Si Cepat</option>
                 </select>
                 <p class="form-note">Semua pengiriman menggunakan layanan Kargo, sudah termasuk packing kayu dan
                     asuransi untuk keamanan maksimal.</p>
+
+                <div class="tax-invoice-section">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="request-tax-invoice">
+                        <label for="request-tax-invoice">Saya ingin mencetak Faktur Pajak</label>
+                    </div>
+
+                    <div id="tax-invoice-fields" class="hidden-fields">
+                        <input type="text" id="npwp-number" class="input-field"
+                            placeholder="Nomor NPWP (contoh: 01.234.567.8-910.000)">
+                        <input type="text" id="npwp-name" class="input-field" placeholder="Nama Sesuai NPWP">
+                    </div>
+                </div>
 
                 <div class="checkout-actions">
                     <a href="keranjang.html" class="back-link">&lt; Kembali ke Keranjang</a>
@@ -62,7 +82,7 @@
 
             <div class="summary-line">
                 <span>Pengiriman</span>
-                <span>Gratis</span>
+                <span id="shipping-cost">Pilih provinsi</span>
             </div>
 
             <hr>
