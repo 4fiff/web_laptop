@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cara Pembayaran - Macintoz</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Kebijakan Garansi - Macintoz</title>
+    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">Macintoz</a>
@@ -45,69 +44,52 @@
             <a href="kontak.html">Kontak</a>
         </div>
     </div>
-
-    <header class="page-header" style="padding-bottom: 0;">
-        <h1>Selesaikan Pembayaran Anda</h1>
-        <p>Satu langkah terakhir untuk mendapatkan MacBook Anda.</p>
+    
+    <header class="page-header">
+        <h1>Kebijakan Garansi Macintoz</h1>
+        <p>Ketenangan Anda adalah prioritas kami.</p>
     </header>
 
-    <main class="payment-instruction-container">
-        <div class="payment-box">
-    <div class="payment-amount-section">
-        <p>Total Pembayaran</p>
-        <h2 id="final-amount">Rp 0</h2>
-        <div id="payment-timer-container">
-            <p>Selesaikan pembayaran dalam:</p>
-            <span id="timer-display">15:00</span>
-        </div>
-        <p class="unique-code-info">Sudah termasuk kode unik <strong id="unique-code">000</strong> untuk verifikasi otomatis. Mohon transfer sesuai nominal di atas.</p>
-    </div>
+    <main class="static-page-content">
+        <section>
+            <p>Di Macintoz, kami berkomitmen penuh terhadap kualitas setiap produk yang kami jual. Untuk memberikan Anda ketenangan pikiran, setiap pembelian MacBook bekas di toko kami dilindungi oleh garansi terbatas selama 12 bulan (1 Tahun) sejak tanggal pembelian.</p>
+        </section>
 
-    <div id="payment-details-wrapper">
-        <div class="payment-details-section">
-            <h3>Transfer ke Rekening Berikut:</h3>
-            <div class="bank-info">
-                <p>Bank: <strong id="bank-name">...</strong></p>
-                <p>Nomor Rekening: <strong id="account-number">...</strong></p>
-                <p>Atas Nama: <strong id="account-name">...</strong></p>
-            </div>
-        </div>
+        <section>
+            <h3>Apa Saja yang Dicakup Garansi?</h3>
+            <p>Garansi kami mencakup perbaikan atau penggantian komponen untuk kerusakan fungsi perangkat keras yang bukan disebabkan oleh kelalaian pengguna. Ini termasuk:</p>
+            <ul>
+                <li>Kerusakan pada Motherboard (Logic Board).</li>
+                <li>Masalah pada layar seperti *dead pixel* atau *whitespot* yang muncul saat penggunaan normal.</li>
+                <li>Kerusakan pada Keyboard, Trackpad, dan Speaker internal.</li>
+                <li>Masalah pada port (USB, Thunderbolt, HDMI) yang tidak berfungsi.</li>
+                <li>Adapter pengisi daya (Magsafe/USB-C) yang disertakan dalam paket pembelian.</li>
+            </ul>
+        </section>
 
-        <div class="payment-method-instructions">
-            <h3>Cara Transfer</h3>
-            <div class="instruction-group">
-                <h4>Via ATM</h4>
-                <ol>
-                    <li>Masukkan kartu ATM dan PIN Anda.</li>
-                    <li>Pilih menu "Transaksi Lainnya" > "Transfer" > "Ke Rekening BRI".</li>
-                    <li>Masukkan nomor rekening tujuan di atas.</li>
-                    <li>Masukkan nominal transfer **sesuai dengan total pembayaran** di atas (termasuk kode unik).</li>
-                    <li>Periksa kembali detail transaksi, jika sudah benar, tekan "Ya".</li>
-                    <li>Simpan struk sebagai bukti pembayaran.</li>
-                </ol>
-            </div>
-            <div class="instruction-group">
-                <h4>Via Internet Banking / Mobile Banking</h4>
-                <ol>
-                    <li>Login ke akun internet/mobile banking Anda.</li>
-                    <li>Pilih menu "Transfer" > "Transfer ke Rekening BRI".</li>
-                    <li>Masukkan nomor rekening tujuan dan nominal transfer **sesuai total pembayaran**.</li>
-                    <li>Pastikan nama penerima dan nominal sudah benar sebelum konfirmasi.</li>
-                    <li>Masukkan PIN/Token/Password transaksi Anda.</li>
-                    <li>Simpan bukti transfer digital Anda.</li>
-                </ol>
-            </div>
-        </div>
-    </div>
+        <section>
+            <h3>Apa yang Tidak Dicakup Garansi?</h3>
+            <p>Garansi ini tidak berlaku untuk kondisi berikut:</p>
+            <ul>
+                <li>Kerusakan akibat kelalaian pengguna, seperti jatuh, terbentur, atau terkena cairan.</li>
+                <li>Masalah perangkat lunak (software), termasuk sistem operasi, aplikasi, atau serangan virus.</li>
+                <li>Penurunan performa baterai yang bersifat normal seiring waktu pemakaian (konsumabel).</li>
+                <li>Produk yang telah dibongkar atau diperbaiki oleh pihak ketiga yang tidak terafiliasi dengan Macintoz.</li>
+                <li>Kerusakan kosmetik seperti goresan atau penyok yang sudah ada saat pembelian dan sesuai dengan grade kondisi produk.</li>
+            </ul>
+        </section>
 
-    <div id="time-up-message" style="display: none; text-align: center;">
-        <h3>Waktu Pembayaran Habis</h3>
-        <p>Silakan buat pesanan baru dari keranjang Anda.</p>
-        <a href="keranjang.html" class="button" style="margin-top: 20px;">Kembali ke Keranjang</a>
-    </div>
-
-    <a href="index.html" class="button button-secondary" style="margin-top: 30px;">Kembali ke Halaman Utama</a>
-</div>
+        <section>
+            <h3>Bagaimana Cara Klaim Garansi?</h3>
+            <p>Proses klaim garansi kami buat semudah mungkin:</p>
+            <ol>
+                <li>Hubungi tim Customer Service kami melalui WhatsApp dengan menyertakan nomor pesanan Anda.</li>
+                <li>Jelaskan kendala yang Anda alami dan sertakan video singkat yang menunjukkan masalah pada perangkat.</li>
+                <li>Tim kami akan melakukan verifikasi awal dan memberikan instruksi untuk langkah selanjutnya.</li>
+                <li>Jika perbaikan fisik diperlukan, Anda akan diminta untuk mengirimkan unit ke alamat servis kami. Biaya pengiriman awal ditanggung oleh pelanggan.</li>
+                <li>Setelah perbaikan selesai, kami akan mengirimkan kembali unit kepada Anda tanpa biaya tambahan.</li>
+            </ol>
+        </section>
     </main>
     
     <footer class="footer">
@@ -150,6 +132,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="/script.js"></script>
 </body>
 </html>

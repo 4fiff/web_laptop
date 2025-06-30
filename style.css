@@ -1589,3 +1589,67 @@ color: var(--accent-color);
 .pending-payment-banner .cancel-btn:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
+
+/* ============================================== */
+/* CSS BARU UNTUK HALAMAN REVIEW (STORY GALLERY) */
+/* ============================================== */
+
+/* Wadah utama untuk galeri */
+.story-gallery-container {
+    padding: 60px 0;
+    background-color: #000; /* Background hitam agar fokus ke story */
+    overflow: hidden; /* Sembunyikan gambar saat keluar layar */
+    
+    /* Trik untuk membuat efek fade di sisi kiri dan kanan */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* Baris yang akan bergerak */
+.story-track {
+    display: flex;
+    gap: 20px;
+    /* Lebar track dihitung 2x lipat untuk loop yang mulus */
+    width: calc(280px * 14); /* (lebar gambar + gap) * jumlah gambar * 2 */
+    animation: scroll 80s linear infinite; /* Animasi utama */
+}
+
+.story-track:not(:first-child) {
+    margin-top: 20px;
+}
+
+/* Gambar screenshot story */
+.story-track img {
+    height: 500px; /* Atur tinggi gambar agar seragam */
+    width: auto; /* Lebar otomatis menyesuaikan aspek rasio */
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+/* Efek saat di-hover */
+.story-track:hover {
+    animation-play-state: paused; /* Jeda animasi saat mouse di atasnya */
+}
+
+.story-track img:hover {
+    transform: scale(1.05); /* Sedikit membesar saat di-hover */
+    cursor: pointer;
+}
+
+/* Animasi untuk menggeser track */
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        /* Geser sejauh setengah dari total lebar track */
+        transform: translateX(calc(-280px * 7)); /* (lebar gambar + gap) * jumlah gambar */
+    }
+}
+
+/* Penyesuaian untuk layar HP */
+@media (max-width: 768px) {
+    .story-track img {
+        height: 400px; /* Perkecil tinggi gambar di HP */
+    }
+}
