@@ -228,11 +228,11 @@ a#cart-icon-link {
     box-sizing: border-box;
 }
 
-/* Info Section (index.html) */
 .info-section {
-    display: flex;
-    justify-content: space-around;
-    max-width: 1024px;
+    display: grid; /* <-- Ubah ke grid */
+    /* Buat kolom otomatis dengan lebar minimal 240px */
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    max-width: 1200px;
     margin: 60px auto;
     padding: 0 20px;
     gap: 30px;
@@ -768,6 +768,7 @@ a#cart-icon-link {
     font-size: 28px;
     font-weight: 600;
     margin-bottom: 32px;
+    margin-top: 10px;
 }
 .detail-description {
     margin-bottom: 32px;
@@ -938,7 +939,7 @@ a#cart-icon-link {
     font-size: 15px;
     color: var(--secondary-text-color);
     margin-bottom: 16px;
-    margin-top: -8px; /* Sedikit naik agar lebih rapi */
+    margin-top: 26px; /* Sedikit naik agar lebih rapi */
 }
 
 /* Style khusus jika stok hampir habis */
@@ -1217,6 +1218,7 @@ a#cart-icon-link {
     color: #fff;
     margin-bottom: 12px;
     text-transform: uppercase;
+    margin-right: 5px;
 }
 
 /* Pewarnaan Lencana Grade */
@@ -1232,7 +1234,7 @@ a#cart-icon-link {
 }
 .product-grade-detail .product-grade-badge {
     margin-top: 13px;
-    margin-right: 0px;
+    margin-right: 5px;
     vertical-align: middle;
 }
 .product-grade-detail span {
@@ -1652,4 +1654,176 @@ color: var(--accent-color);
     .story-track img {
         height: 400px; /* Perkecil tinggi gambar di HP */
     }
+}
+
+/* ============================================== */
+/* CSS BARU UNTUK HALAMAN DETAIL PRODUK */
+/* ============================================== */
+
+/* Mengatur layout sticky */
+.product-detail-layout {
+    align-items: flex-start; /* PENTING: agar sticky bekerja dengan benar */
+}
+
+.product-detail-image-sticky-container {
+    width: 45%; /* Sesuaikan lebar kolom gambar */
+    position: sticky;
+    top: 88px; /* Jarak dari navbar saat menempel */
+    flex-shrink: 0;
+}
+
+.product-detail-info {
+    width: 55%; /* Sesuaikan lebar kolom info */
+}
+
+/* Style untuk Section Kelebihan & Kekurangan */
+.detail-pros-cons-section {
+    margin-top: 30px;
+    
+    border-top: 1px solid var(--border-color);
+}
+
+.detail-pros-cons-section h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.detail-pros-cons-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.detail-pros-cons-section li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: var(--secondary-text-color);
+}
+
+.detail-pros-cons-section li::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 14px;
+}
+
+/* Ikon Centang untuk Kelebihan */
+#detail-pros li::before {
+    content: '\f00c'; /* Kode ikon centang Font Awesome */
+    color: #008a00; /* Warna hijau */
+}
+
+/* Ikon Silang untuk Kekurangan */
+#detail-cons li::before {
+    content: '\f00d'; /* Kode ikon silang Font Awesome */
+    color: #c50000; /* Warna merah */
+}
+
+/* Penyesuaian di layar kecil */
+@media (max-width: 992px) {
+    .product-detail-image-sticky-container {
+        position: static; /* Hapus sticky di mobile */
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .product-detail-info {
+        width: 100%;
+    }
+}
+
+/* Style untuk Lencana Jaminan Kepercayaan */
+.trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background-color: #eef7ff; /* Warna biru sangat muda */
+    border-radius: 8px;
+    border: 1px solid #cce4ff;
+    color: #004a99; /* Warna biru tua */
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.trust-badge i {
+    font-size: 18px;
+}
+
+/* Style untuk Banner Jaminan di Footer */
+.footer-guarantee-banner {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    max-width: 1024px;
+    margin: 0 auto 40px;
+    padding: 20px 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.guarantee-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+}
+
+.guarantee-item i {
+    font-size: 24px;
+    color: var(--button-bg);
+}
+
+.guarantee-item p {
+    margin: 0;
+    line-height: 1.4;
+    font-size: 14px;
+    color: var(--secondary-text-color);
+}
+
+.guarantee-item p strong {
+    color: var(--text-color);
+}
+
+/* Penyesuaian di layar kecil */
+@media (max-width: 768px) {
+    .footer-guarantee-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 20px;
+        gap: 20px;
+    }
+}
+
+/* Style untuk Wrapper Video dan Tombol Mute Custom */
+.video-wrapper {
+    position: relative; /* Penting untuk memposisikan tombol di atasnya */
+    display: inline-block; /* Agar wrapper mengikuti ukuran video */
+    line-height: 0; /* Menghilangkan spasi ekstra di bawah video */
+}
+
+.mute-btn {
+    position: absolute; /* Membuat tombol melayang di atas video */
+    bottom: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.mute-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }

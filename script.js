@@ -2,11 +2,11 @@
 // PUSAT PENGATURAN WEBSITE
 // ===================================================================================
 const CONFIG = {
-    PAYMENT_TIMER_MINUTES: 15,
+    PAYMENT_TIMER_MINUTES: 60,
     LOW_STOCK_THRESHOLD: 3,
     BANK_NAME: 'Bank Rakyat Indonesia (BRI)',
-    ACCOUNT_NUMBER: '85238832582',
-    ACCOUNT_NAME: 'Arera Vacuum Thomas',
+    ACCOUNT_NUMBER: '5699 0101 1018 501',
+    ACCOUNT_NAME: 'Arera Vacum Thomas',
     COUPONS: {
         'HAPPYJULY':    { flatDiscount: 299000, shippingDiscountPercent: 0 },
         'FIRSTUSER':    { flatDiscount: 499000, shippingDiscountPercent: 0 },
@@ -92,34 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- DATABASE PRODUK (Dengan Grade, Deskripsi dan SKU unik) ---
-    const products = [
-        { id: 1, name: 'MacBook Air 13" M1', specs: '8GB RAM, 256GB SSD (2020)', price: 12500000, stock: 10, grade: 'A', sku: 'M1A8256G20', images: ['images/1.jpg', 'images/2.jpg', 'images/1.jpg', 'images/2.jpg'], description: { intro: 'Pilihan sempurna untuk portabilitas dan performa sehari-hari. Chip M1 memberikan kecepatan luar biasa dan daya tahan baterai hingga 18 jam.', specs: [ 'Chip: Apple M1 (8-core CPU, 7-core GPU)', 'Layar: 13.3-inch Retina display with True Tone', 'Memori: 8GB RAM terpadu', 'Penyimpanan: 256GB SSD', 'Kamera: 720p FaceTime HD camera' ], condition: 'Kondisi fisik 98% mulus, bekas pemakaian wajar. Kesehatan baterai di atas 90%.' } },
-        { id: 2, name: 'MacBook Air 13" M1', specs: '16GB RAM, 512GB SSD (2020)', price: 15800000, stock: 3, grade: 'A', sku: 'M1A16512G20', images: ['images/2.jpg', 'images/4.jpg', 'images/5.jpg'], description: { intro: 'Versi upgrade dari MacBook Air M1 dengan RAM 16GB untuk multitasking yang lebih lancar dan penyimpanan 512GB yang lebih lega.', specs: [ 'Chip: Apple M1 (8-core CPU, 7-core GPU)', 'Layar: 13.3-inch Retina display', 'Memori: 16GB RAM terpadu'], condition: 'Kondisi fisik 97% mulus.' } },
-        { id: 3, name: 'MacBook Pro 14" M2 Pro', specs: '16GB RAM, 512GB SSD (2023)', price: 29800000, stock: 8, grade: 'A', sku: 'M2PP1416512G23', images: ['images/3.jpg', 'images/2.jpg', 'images/1.jpg'], description: { intro: 'Generasi berikutnya dari performa pro. Chip M2 Pro membawa CPU dan GPU yang lebih cepat...', specs: ['Chip: Apple M2 Pro', 'Layar: 14.2-inch Liquid Retina XDR', 'Memori: 16GB RAM'], condition: 'Garansi Macintoz 1 tahun.' } },
-        { id: 4, name: 'MacBook Air 13" M2', specs: '16GB RAM, 1TB SSD (2022)', price: 21500000, stock: 0, grade: 'A', sku: 'M2A161TBG22', images: ['https://placehold.co/600x600/e3e4e6/333?text=MacBook+Air+M2+13'], description: { intro: 'Spesifikasi maksimal untuk MacBook Air M2. Dengan RAM 16GB dan SSD 1TB, laptop ini siap menangani tugas berat tanpa hambatan.', specs: ['Chip: Apple M2', 'Layar: 13.6-inch Liquid Retina', 'Memori: 16GB RAM', 'Penyimpanan: 1TB SSD'], condition: 'Stok habis. Silakan hubungi kami untuk pre-order.' } },
-        { id: 5, name: 'MacBook Air 13" M3', specs: '8GB RAM, 256GB SSD (2024)', price: 18500000, stock: 12, grade: 'A', sku: 'M3A8256G24', images: ['https://placehold.co/600x600/dcdcdc/333?text=MacBook+Air+M3+13'], description: { intro: 'Ditenagai chip M3 terbaru, MacBook Air ini menawarkan lompatan besar dalam performa grafis dan kemampuan AI, menjadikannya laptop super portabel yang sangat bertenaga.', specs: ['Chip: Apple M3', 'Layar: 13.6-inch Liquid Retina', 'Memori: 8GB RAM'], condition: 'Produk baru, garansi resmi Macintoz 1 tahun.' } },
-        { id: 6, name: 'MacBook Air 15" M2', specs: '8GB RAM, 256GB SSD (2023)', price: 19200000, stock: 7, grade: 'A', sku: 'M2A158256G23', images: ['https://placehold.co/600x600/e3e4e6/333?text=MacBook+Air+M2+15'], description: { intro: 'Layar Liquid Retina 15 inci yang luas memberikan ruang kerja lebih banyak. Nikmati semua kelebihan MacBook Air M2 dalam ukuran yang lebih besar namun tetap sangat tipis.', specs: ['Chip: Apple M2', 'Layar: 15.3-inch Liquid Retina', 'Memori: 8GB RAM'], condition: 'Kondisi 99% mulus, jarang dipakai.' } },
-        { id: 7, name: 'MacBook Air 15" M2', specs: '16GB RAM, 512GB SSD (2023)', price: 22800000, stock: 4, grade: 'B', sku: 'M2A1516512G23', images: ['https://placehold.co/600x600/e3e4e6/333?text=MacBook+Air+M2+15'], description: { intro: 'Kombinasi layar besar 15 inci dengan memori dan penyimpanan yang ditingkatkan, ideal untuk mereka yang menginginkan produktivitas maksimal tanpa kompromi.', specs: ['Chip: Apple M2', 'Layar: 15.3-inch Liquid Retina', 'Memori: 16GB RAM', 'Penyimpanan: 512GB SSD'], condition: 'Ada goresan halus di casing bawah.' } },
-        { id: 8, name: 'MacBook Air 15" M3', specs: '16GB RAM, 512GB SSD (2024)', price: 25500000, stock: 9, grade: 'A', sku: 'M3A1516512G24', images: ['https://placehold.co/600x600/dcdcdc/333?text=MacBook+Air+M3+15'], description: { intro: 'Performa chip M3 dalam layar 15 inci yang lega. Laptop ini sempurna untuk bekerja dengan beberapa jendela sekaligus, presentasi, atau menikmati hiburan.', specs: ['Chip: Apple M3', 'Layar: 15.3-inch Liquid Retina', 'Memori: 16GB RAM'], condition: 'Kondisi istimewa, battery health 100%.' } },
-        { id: 9, name: 'MacBook Pro 13" M2', specs: '8GB RAM, 256GB SSD (2022)', price: 17900000, stock: 2, grade: 'B', sku: 'M2P138256G22', images: ['https://placehold.co/600x600/d1d1d6/333?text=MacBook+Pro+M2+13'], description: { intro: 'Dilengkapi sistem pendingin aktif, MacBook Pro 13 inci M2 mampu mempertahankan performa puncak untuk waktu yang lebih lama. Ideal untuk tugas yang intens.', specs: ['Chip: Apple M2', 'Layar: 13.3-inch Retina Display', 'Fitur: Touch Bar and Touch ID'], condition: 'Fisik 97% mulus.' } },
-        { id: 10, name: 'MacBook Pro 13" M2', specs: '16GB RAM, 512GB SSD (2022)', price: 21000000, stock: 3, grade: 'A', sku: 'M2P1316512G22', images: ['https://placehold.co/600x600/d1d1d6/333?text=MacBook+Pro+M2+13'], description: { intro: 'Dengan memori terpadu 16GB, MacBook Pro M2 ini memberikan performa grafis dan pemrosesan yang lebih cepat, cocok untuk editing foto dan video ringan.', specs: ['Chip: Apple M2', 'Memori: 16GB RAM', 'Penyimpanan: 512GB SSD'], condition: 'Sangat terawat.' } },
-        { id: 11, name: 'MacBook Pro 14" M1 Pro', specs: '16GB RAM, 512GB SSD (2021)', price: 25000000, stock: 5, grade: 'B', sku: 'M1PP1416512G21', images: ['https://placehold.co/600x600/cccccc/333?text=MacBook+Pro+14+M1Pro'], description: { intro: 'Mesin bertenaga untuk para profesional kreatif. Chip M1 Pro, layar Liquid Retina XDR, dan rangkaian port lengkap menjadikannya studio portabel yang andal.', specs: ['Chip: Apple M1 Pro (8-core CPU, 14-core GPU)', 'Layar: 14.2-inch Liquid Retina XDR', 'Memori: 16GB RAM'], condition: 'Layar aman, tanpa white spot.' } },
-        { id: 12, name: 'MacBook Pro 14" M1 Pro', specs: '16GB RAM, 1TB SSD (2021)', price: 28500000, stock: 2, grade: 'A', sku: 'M1PP14161TBG21', images: ['https://placehold.co/600x600/cccccc/333?text=MacBook+Pro+14+M1Pro'], description: { intro: 'Kapasitas penyimpanan 1TB memberikan ruang yang sangat luas untuk proyek-proyek besar, library foto, dan aplikasi profesional Anda.', specs: ['Chip: Apple M1 Pro (10-core CPU, 16-core GPU)', 'Penyimpanan: 1TB SSD', 'Port: HDMI, SDXC, Thunderbolt 4'], condition: 'Mulus terawat.' } },
-        { id: 13, name: 'MacBook Pro 16" M3 Max', specs: '48GB RAM, 1TB SSD (2023)', price: 58000000, stock: 2, grade: 'A', sku: 'M3PM16481TBG23', images: ['https://placehold.co/600x600/afafaf/333?text=MacBook+Pro+16+M3Max'], description: { intro: 'Dengan RAM 48GB, model ini mampu menjalankan beberapa aplikasi pro, instrumen virtual, dan efek secara bersamaan tanpa berkeringat.', specs: ['Chip: Apple M3 Max', 'Memori: 48GB RAM', 'Penyimpanan: 1TB SSD'], condition: 'Performa tertinggi untuk para profesional sejati.' } },
-        { id: 14, name: 'MacBook Pro 14" M2 Max', specs: '32GB RAM, 1TB SSD (2023)', price: 38000000, stock: 3, grade: 'A', sku: 'M2PM14321TBG23', images: ['https://placehold.co/600x600/c0c0c0/333?text=MacBook+Pro+14+M2Max'], description: { intro: 'Dengan chip M2 Max dan RAM 32GB, laptop ini dirancang untuk tugas paling berat seperti rendering 3D, simulasi ilmiah, dan pengembangan aplikasi skala besar.', specs: ['Chip: Apple M2 Max', 'Memori: 32GB RAM', 'Penyimpanan: 1TB SSD'], condition: 'Performa monster dalam bodi yang ringkas.' } },
-        { id: 15, name: 'MacBook Pro 14" M3 Pro', specs: '18GB RAM, 512GB SSD (2023)', price: 33000000, stock: 10, grade: 'A', sku: 'M3PP1418512G23', images: ['https://placehold.co/600x600/b8b8b8/333?text=MacBook+Pro+14+M3Pro'], description: { intro: 'Chip M3 Pro dengan arsitektur 3-nanometer memberikan efisiensi daya dan performa yang luar biasa. Warna Space Black baru yang elegan dan tahan sidik jari.', specs: ['Chip: Apple M3 Pro', 'Memori: 18GB RAM', 'Warna: Space Black'], condition: 'Barang seperti baru, cycle count baterai rendah.' } },
-        { id: 16, name: 'MacBook Pro 14" M3 Max', specs: '36GB RAM, 1TB SSD (2023)', price: 45000000, stock: 0, grade: 'A', sku: 'M3PM14361TBG23', images: ['https://placehold.co/600x600/b8b8b8/333?text=MacBook+Pro+14+M3Max'], description: { intro: 'Puncak performa MacBook. M3 Max mendorong batas-batas komputasi grafis dan pemrosesan, menjadikannya pilihan utama bagi para profesional top.', specs: ['Chip: Apple M3 Max', 'Memori: 36GB RAM', 'Penyimpanan: 1TB SSD'], condition: 'Stok habis.' } },
-        { id: 17, name: 'MacBook Pro 16" M1 Pro', specs: '16GB RAM, 512GB SSD (2021)', price: 29500000, stock: 4, grade: 'C', sku: 'M1PP1616512G21', images: ['https://placehold.co/600x600/c7c7c7/333?text=MacBook+Pro+16+M1Pro'], description: { intro: 'Layar Liquid Retina XDR 16 inci yang imersif memberikan kanvas kerja yang luas untuk semua proyek kreatif Anda. Performa M1 Pro yang konsisten dan andal.', specs: ['Chip: Apple M1 Pro', 'Layar: 16.2-inch Liquid Retina XDR', 'Memori: 16GB RAM'], condition: 'Fisik 93%, terdapat dent kecil di sudut.' } },
-        { id: 18, name: 'MacBook Pro 16" M1 Max', specs: '32GB RAM, 1TB SSD (2021)', price: 39000000, stock: 2, grade: 'B', sku: 'M1PM16321TBG21', images: ['https://placehold.co/600x600/c7c7c7/333?text=MacBook+Pro+16+M1Max'], description: { intro: 'Dengan bandwidth memori dua kali lipat dari M1 Pro, M1 Max menangani file-file raksasa dan multitasking di berbagai aplikasi pro dengan mudah.', specs: ['Chip: Apple M1 Max', 'Memori: 32GB RAM', 'Penyimpanan: 1TB SSD'], condition: 'Cocok untuk video editor profesional.' } },
-        { id: 19, name: 'MacBook Pro 16" M2 Pro', specs: '16GB RAM, 512GB SSD (2023)', price: 34000000, stock: 7, grade: 'A', sku: 'M2PP1616512G23', images: ['https://placehold.co/600x600/bbbbbb/333?text=MacBook+Pro+16+M2Pro'], description: { intro: 'Performa M2 Pro di layar 16 inci. Laptop ini adalah workstation portabel yang ideal untuk editor video, fotografer, dan musisi.', specs: ['Chip: Apple M2 Pro', 'Layar: 16.2-inch Liquid Retina XDR', 'Memori: 16GB RAM'], condition: 'Terinspeksi penuh.' } },
-        { id: 20, name: 'MacBook Pro 16" M2 Max', specs: '32GB RAM, 1TB SSD (2023)', price: 46500000, stock: 3, grade: 'A', sku: 'M2PM16321TBG23', images: ['https://placehold.co/600x600/bbbbbb/333?text=MacBook+Pro+16+M2Max'], description: { intro: 'GPU dahsyat pada M2 Max memungkinkan alur kerja grafis yang sebelumnya tidak mungkin dilakukan di laptop. Selesaikan proyek Anda lebih cepat dari sebelumnya.', specs: ['Chip: Apple M2 Max', 'Memori: 32GB RAM', 'Penyimpanan: 1TB SSD'], condition: 'Unit pilihan dengan performa terjamin.' } },
-        { id: 21, name: 'MacBook Pro 16" M3 Pro', specs: '18GB RAM, 512GB SSD (2023)', price: 39999000, stock: 9, grade: 'A', sku: 'M3PP1618512G23', images: ['https://placehold.co/600x600/afafaf/333?text=MacBook+Pro+16+M3Pro'], description: { intro: 'Efisiensi dan kekuatan chip M3 Pro bersinar di layar 16 inci. Nikmati daya tahan baterai hingga 22 jam, terlama yang pernah ada di Mac.', specs: ['Chip: Apple M3 Pro', 'Memori: 18GB RAM', 'Penyimpanan: 512GB SSD'], condition: 'Seperti baru, garansi panjang.' } },
-        { id: 22, name: 'MacBook Pro 16" M3 Max', specs: '48GB RAM, 1TB SSD (2023)', price: 58000000, stock: 2, grade: 'A', sku: 'M3PM16481TBG23', images: ['https://placehold.co/600x600/afafaf/333?text=MacBook+Pro+16+M3Max'], description: { intro: 'Dengan RAM 48GB, model ini mampu menjalankan beberapa aplikasi pro, instrumen virtual, dan efek secara bersamaan tanpa berkeringat.', specs: ['Chip: Apple M3 Max', 'Memori: 48GB RAM', 'Penyimpanan: 1TB SSD'], condition: 'Performa tertinggi untuk para profesional sejati.' } },
-        { id: 23, name: 'MacBook Air 13" M2', specs: '24GB RAM, 2TB SSD (2022)', price: 28000000, stock: 1, grade: 'B', sku: 'M2A13242TBG22', images: ['https://placehold.co/600x600/e3e4e6/333?text=MacBook+Air+M2+Custom'], description: { intro: 'Konfigurasi langka dengan RAM dan SSD maksimal. Ini adalah MacBook Air paling kuat yang bisa Anda dapatkan, menggabungkan portabilitas dengan kapasitas super.', specs: ['Chip: Apple M2', 'Memori: 24GB RAM', 'Penyimpanan: 2TB SSD'], condition: 'Unit langka.' } },
-        { id: 24, name: 'MacBook Pro 14" M3', specs: '8GB RAM, 512GB SSD (2023)', price: 26500000, stock: 0, grade: 'A', sku: 'M3P148512G23', images: ['https://placehold.co/600x600/b8b8b8/333?text=MacBook+Pro+14+M3'], description: { intro: 'Model dasar MacBook Pro 14 inci dengan chip M3 standar, memberikan pengenalan sempurna ke dunia performa Pro dengan harga yang lebih terjangkau.', specs: ['Chip: Apple M3', 'Memori: 8GB RAM', 'Penyimpanan: 512GB SSD'], condition: 'Stok akan segera tersedia.' } },
-    ];
-
     // --- LOGIKA UTAMA WEBSITE ---
     
     let cart = JSON.parse(localStorage.getItem('macintozCart')) || [];
@@ -196,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         function createFilters() {
             const models = [...new Set(products.map(p => p.name.includes('Air') ? 'Air' : 'Pro'))];
-            const chips = [...new Set(products.flatMap(p => (p.name.match(/M[1-3]/g) || [])))];
+            const chips = [...new Set(products.flatMap(p => (p.name.match(/(M[1-3]|Intel Core i[3579])/g) || [])))];
             const sizes = [...new Set(products.flatMap(p => (p.name.match(/1[3-6]/g) || [])))];
 
             filtersContainer.innerHTML = `
@@ -320,183 +292,230 @@ document.addEventListener('DOMContentLoaded', () => {
         displayProducts();
     };
 
-    const renderDetailPage = () => {
-        const contentDiv = document.getElementById('product-detail-content');
-        if (!contentDiv) return;
+    // GANTI FUNGSI renderDetailPage LAMA DENGAN VERSI LENGKAP INI
+const renderDetailPage = () => {
+    const contentDiv = document.getElementById('product-detail-content');
+    if (!contentDiv) return;
 
-        const notFoundDiv = document.getElementById('product-not-found');
-        const params = new URLSearchParams(window.location.search);
-        const productId = parseInt(params.get('id'));
+    const notFoundDiv = document.getElementById('product-not-found');
+    const params = new URLSearchParams(window.location.search);
+    const productId = parseInt(params.get('id'));
 
-        if (isNaN(productId)) {
-            contentDiv.style.display = 'none';
-            notFoundDiv.style.display = 'block';
-            return;
+    if (isNaN(productId)) {
+        contentDiv.style.display = 'none';
+        notFoundDiv.style.display = 'block';
+        return;
+    }
+
+    const currentProduct = products.find(p => p.id === productId);
+
+    if (currentProduct) {
+        // Tampilkan data dasar
+        contentDiv.style.display = 'flex';
+        notFoundDiv.style.display = 'none';
+        document.title = `${currentProduct.name} - Macintoz`;
+        document.getElementById('detail-name').textContent = currentProduct.name;
+        
+        const gradeElement = document.getElementById('detail-grade');
+        const gradeBadgeClass = `product-grade-badge grade-${currentProduct.grade.toLowerCase()}`;
+        const gradeDescriptions = {
+            'A': 'Seperti Baru',
+            'B': 'Sangat Baik',
+            'C': 'Baik'
+        };
+        gradeElement.innerHTML = `<div class="${gradeBadgeClass}">Grade ${currentProduct.grade}</div><span>Kondisi: ${gradeDescriptions[currentProduct.grade] || currentProduct.grade}</span>`;
+        
+        document.getElementById('detail-price').textContent = formatRupiah(currentProduct.price);
+        document.getElementById('detail-sku').textContent = `SKU: ${currentProduct.sku}`;
+
+        // --- Membangun Bagian Deskripsi, Kelebihan, dll. secara Dinamis ---
+
+        // 1. Deskripsi & Spesifikasi
+        const descriptionContainer = document.getElementById('detail-description-container');
+        descriptionContainer.innerHTML = '';
+        const introParagraph = document.createElement('p');
+        introParagraph.textContent = currentProduct.description.intro;
+        descriptionContainer.appendChild(introParagraph);
+
+        if (currentProduct.description.specs && currentProduct.description.specs.length > 0) {
+            const specsSection = document.createElement('div');
+            specsSection.className = 'detail-description-section';
+            const specsHeader = document.createElement('h4');
+            specsHeader.textContent = 'Spesifikasi Detail:';
+            const specsList = document.createElement('ul');
+            currentProduct.description.specs.forEach(specText => {
+                const listItem = document.createElement('li');
+                listItem.textContent = specText;
+                specsList.appendChild(listItem);
+            });
+            specsSection.appendChild(specsHeader);
+            specsSection.appendChild(specsList);
+            descriptionContainer.appendChild(specsSection);
         }
 
-        const currentProduct = products.find(p => p.id === productId);
+        // 2. Kelebihan & Kekurangan
+        const prosConsContainer = document.getElementById('detail-pros-cons-container');
+        prosConsContainer.innerHTML = '';
+        if (currentProduct.pros && currentProduct.pros.length > 0) {
+            const prosSection = document.createElement('div');
+            prosSection.id = 'detail-pros';
+            prosSection.className = 'detail-pros-cons-section';
+            const prosHeader = document.createElement('h4');
+            prosHeader.textContent = 'Kelebihan Produk';
+            const prosList = document.createElement('ul');
+            currentProduct.pros.forEach(text => {
+                const li = document.createElement('li');
+                li.textContent = text;
+                prosList.appendChild(li);
+            });
+            prosSection.appendChild(prosHeader);
+            prosSection.appendChild(prosList);
+            prosConsContainer.appendChild(prosSection);
+        }
+        if (currentProduct.cons && currentProduct.cons.length > 0) {
+            const consSection = document.createElement('div');
+            consSection.id = 'detail-cons';
+            consSection.className = 'detail-pros-cons-section';
+            const consHeader = document.createElement('h4');
+            consHeader.textContent = 'Kekurangan Produk';
+            const consList = document.createElement('ul');
+            currentProduct.cons.forEach(text => {
+                const li = document.createElement('li');
+                li.textContent = text;
+                consList.appendChild(li);
+            });
+            consSection.appendChild(consHeader);
+            consSection.appendChild(consList);
+            prosConsContainer.appendChild(consSection);
+        }
 
-        if (currentProduct) {
-            contentDiv.style.display = 'flex';
-            notFoundDiv.style.display = 'none';
-            document.title = `${currentProduct.name} - Macintoz`;
-            document.getElementById('detail-name').textContent = currentProduct.name;
-            document.getElementById('detail-specs').textContent = currentProduct.specs;
-            
-            const gradeElement = document.getElementById('detail-grade');
-            const gradeBadgeClass = `product-grade-badge grade-${currentProduct.grade.toLowerCase()}`;
-            const gradeDescriptions = {
-                'A': 'Seperti Baru',
-                'B': 'Sangat Baik',
-                'C': 'Baik'
-            };
-            gradeElement.innerHTML = `
-                <div class="${gradeBadgeClass}">Grade ${currentProduct.grade}</div>
-                <span>Kondisi: ${gradeDescriptions[currentProduct.grade] || currentProduct.grade}</span>
-            `;
+        // 3. Kelengkapan Produk
+        const inTheBoxContainer = document.getElementById('detail-in-the-box-container');
+        inTheBoxContainer.innerHTML = '';
+        if (currentProduct.inTheBox && currentProduct.inTheBox.length > 0) {
+            const inTheBoxSection = document.createElement('div');
+            inTheBoxSection.className = 'detail-description-section';
+            const inTheBoxHeader = document.createElement('h4');
+            inTheBoxHeader.textContent = 'Kelengkapan dalam Kotak';
+            const inTheBoxList = document.createElement('ul');
+            currentProduct.inTheBox.forEach(text => {
+                const li = document.createElement('li');
+                li.textContent = text;
+                inTheBoxList.appendChild(li);
+            });
+            inTheBoxSection.appendChild(inTheBoxHeader);
+            inTheBoxSection.appendChild(inTheBoxList);
+            inTheBoxContainer.appendChild(inTheBoxSection);
+        }
 
-            document.getElementById('detail-price').textContent = formatRupiah(currentProduct.price);
-            document.getElementById('detail-sku').textContent = `SKU: ${currentProduct.sku}`;
-            
-            const descriptionContainer = document.getElementById('detail-description-container');
-            descriptionContainer.innerHTML = ''; 
-
-            const introParagraph = document.createElement('p');
-            introParagraph.textContent = currentProduct.description.intro;
-            descriptionContainer.appendChild(introParagraph);
-
-            if (currentProduct.description.specs && currentProduct.description.specs.length > 0) {
-                const specsSection = document.createElement('div');
-                specsSection.className = 'detail-description-section';
-                const specsHeader = document.createElement('h4');
-                specsHeader.textContent = 'Spesifikasi Detail:';
-                const specsList = document.createElement('ul');
-                currentProduct.description.specs.forEach(specText => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = specText;
-                    specsList.appendChild(listItem);
-                });
-                specsSection.appendChild(specsHeader);
-                specsSection.appendChild(specsList);
-                descriptionContainer.appendChild(specsSection);
-            }
-
-            if (currentProduct.description.condition) {
-                const conditionSection = document.createElement('div');
-                conditionSection.className = 'detail-description-section';
-                const conditionHeader = document.createElement('h4');
-                conditionHeader.textContent = 'Kondisi Produk:';
-                const conditionParagraph = document.createElement('p');
-                conditionParagraph.textContent = currentProduct.description.condition;
-                conditionSection.appendChild(conditionHeader);
-                conditionSection.appendChild(conditionParagraph);
-                descriptionContainer.appendChild(conditionSection);
-            }
-
-            const stockElement = document.getElementById('detail-stock');
-            if (currentProduct.stock > 0) {
-                stockElement.textContent = `Ketersediaan: Sisa ${currentProduct.stock} unit`;
-                if(currentProduct.stock <= CONFIG.LOW_STOCK_THRESHOLD) {
-                    stockElement.classList.add('low-stock');
-                } else {
-                    stockElement.classList.remove('low-stock');
-                }
-            } else {
-                stockElement.textContent = `Ketersediaan: Stok Habis`;
+        // --- Sisa Logika (Stok, Tombol, Slider) ---
+        const stockElement = document.getElementById('detail-stock');
+        if (currentProduct.stock > 0) {
+            stockElement.textContent = `Ketersediaan: Sisa ${currentProduct.stock} unit`;
+            if (currentProduct.stock <= CONFIG.LOW_STOCK_THRESHOLD) {
                 stockElement.classList.add('low-stock');
-            }
-
-            const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
-            if (currentProduct.stock > 0) {
-                addToCartBtn.disabled = false;
-                addToCartBtn.textContent = 'Tambah ke Keranjang';
-                addToCartBtn.classList.remove('button-secondary');
-                addToCartBtn.onclick = () => addToCart(currentProduct.id);
             } else {
-                addToCartBtn.disabled = true;
-                addToCartBtn.textContent = 'Stok Kosong';
-                addToCartBtn.classList.add('button-secondary');
-                addToCartBtn.onclick = null;
+                stockElement.classList.remove('low-stock');
             }
-
-            const imgElement = document.getElementById('detail-img');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            const dotsContainer = document.getElementById('slider-dots');
-            let currentImageIndex = 0;
-
-            function updateSlider() {
-                imgElement.src = currentProduct.images[currentImageIndex];
-                imgElement.alt = `${currentProduct.name} - Gambar ${currentImageIndex + 1}`;
-                document.querySelectorAll('.slider-dot').forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentImageIndex);
-                });
-            }
-
-            dotsContainer.innerHTML = '';
-            currentProduct.images.forEach((_, index) => {
-                const dot = document.createElement('span');
-                dot.className = 'slider-dot';
-                dot.onclick = () => {
-                    currentImageIndex = index;
-                    updateSlider();
-                };
-                dotsContainer.appendChild(dot);
-            });
-            
-            prevBtn.onclick = () => {
-                currentImageIndex = (currentImageIndex - 1 + currentProduct.images.length) % currentProduct.images.length;
-                updateSlider();
-            };
-            nextBtn.onclick = () => {
-                currentImageIndex = (currentImageIndex + 1) % currentProduct.images.length;
-                updateSlider();
-            };
-            updateSlider();
-
-            const relatedGrid = document.getElementById('related-products-grid');
-            relatedGrid.innerHTML = '';
-
-            const primaryModel = currentProduct.name.includes('Air') ? 'Air' : 'Pro';
-            let relatedProducts = products.filter(p => 
-                p.name.includes(primaryModel) && p.id !== currentProduct.id
-            );
-
-            relatedProducts.sort(() => 0.5 - Math.random());
-            const selectedRelated = relatedProducts.slice(0, 4);
-
-            selectedRelated.forEach(product => {
-                const card = document.createElement('a');
-                card.href = `./detail-produk.html?id=${product.id}`;
-                card.className = 'product-card';
-                card.style.textDecoration = 'none';
-                card.style.color = 'inherit';
-                
-                const gradeBadge = `<div class="product-grade-badge grade-${product.grade.toLowerCase()}">Grade ${product.grade}</div>`;
-                
-                let stockHTML = '';
-                if (product.stock > 0) {
-                    stockHTML = `<p class="product-stock">Sisa stok: ${product.stock}</p>`;
-                }
-
-                card.innerHTML = `
-                    <img src="${product.images[0].replace('600x600', '240x240')}" alt="${product.name}">
-                    <div>
-                        ${gradeBadge}
-                        <h3 class="product-name">${product.name}</h3>
-                        <p class="product-specs">${product.specs}</p>
-                        ${stockHTML} 
-                        <p class="product-price">${formatRupiah(product.price)}</p>
-                    </div>
-                `;
-                relatedGrid.appendChild(card);
-            });
-
         } else {
-            contentDiv.style.display = 'none';
-            notFoundDiv.style.display = 'block';
+            stockElement.textContent = `Ketersediaan: Stok Habis`;
+            stockElement.classList.add('low-stock');
         }
-    };
+
+        const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
+        if (currentProduct.stock > 0) {
+            addToCartBtn.disabled = false;
+            addToCartBtn.textContent = 'Tambah ke Keranjang';
+            addToCartBtn.classList.remove('button-secondary');
+            addToCartBtn.onclick = () => addToCart(currentProduct.id);
+        } else {
+            addToCartBtn.disabled = true;
+            addToCartBtn.textContent = 'Stok Kosong';
+            addToCartBtn.classList.add('button-secondary');
+            addToCartBtn.onclick = null;
+        }
+
+        // Logika untuk slider gambar
+        const imgElement = document.getElementById('detail-img');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const dotsContainer = document.getElementById('slider-dots');
+        let currentImageIndex = 0;
+
+        function updateSlider() {
+            imgElement.src = currentProduct.images[currentImageIndex];
+            imgElement.alt = `${currentProduct.name} - Gambar ${currentImageIndex + 1}`;
+            document.querySelectorAll('.slider-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentImageIndex);
+            });
+        }
+
+        dotsContainer.innerHTML = '';
+        currentProduct.images.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.className = 'slider-dot';
+            dot.onclick = () => {
+                currentImageIndex = index;
+                updateSlider();
+            };
+            dotsContainer.appendChild(dot);
+        });
+
+        prevBtn.onclick = () => {
+            currentImageIndex = (currentImageIndex - 1 + currentProduct.images.length) % currentProduct.images.length;
+            updateSlider();
+        };
+        nextBtn.onclick = () => {
+            currentImageIndex = (currentImageIndex + 1) % currentProduct.images.length;
+            updateSlider();
+        };
+        updateSlider();
+
+
+        // Logika untuk Produk Terkait
+        const relatedGrid = document.getElementById('related-products-grid');
+        relatedGrid.innerHTML = '';
+
+        const primaryModel = currentProduct.name.includes('Air') ? 'Air' : 'Pro';
+        let relatedProducts = products.filter(p =>
+            p.name.includes(primaryModel) && p.id !== currentProduct.id
+        );
+
+        relatedProducts.sort(() => 0.5 - Math.random());
+        const selectedRelated = relatedProducts.slice(0, 4);
+
+        selectedRelated.forEach(product => {
+            const card = document.createElement('a');
+            card.href = `./detail-produk.html?id=${product.id}`;
+            card.className = 'product-card';
+            card.style.textDecoration = 'none';
+            card.style.color = 'inherit';
+
+            const gradeBadge = `<div class="product-grade-badge grade-${product.grade.toLowerCase()}">Grade ${product.grade}</div>`;
+
+            let stockHTML = '';
+            if (product.stock > 0) {
+                stockHTML = `<p class="product-stock">Sisa stok: ${product.stock}</p>`;
+            }
+
+            card.innerHTML = `
+                <img src="${product.images[0].replace('600x600', '240x240')}" alt="${product.name}">
+                <div>
+                    ${gradeBadge}
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-specs">${product.specs}</p>
+                    ${stockHTML}
+                    <p class="product-price">${formatRupiah(product.price)}</p>
+                </div>
+            `;
+            relatedGrid.appendChild(card);
+        });
+
+    } else {
+        contentDiv.style.display = 'none';
+        notFoundDiv.style.display = 'block';
+    }
+};
     
     const renderCartPage = () => {
         const itemsList = document.getElementById('cart-items-list');
@@ -814,6 +833,36 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+
+    function initializeVideoControls() {
+        const video = document.getElementById('showcase-video');
+        const muteBtn = document.getElementById('mute-btn');
+
+        // Hanya jalankan jika elemen video dan tombolnya ada di halaman ini
+        if (!video || !muteBtn) {
+            return;
+        }
+
+        // Fungsi untuk mengubah ikon berdasarkan status mute
+        function updateMuteButtonIcon() {
+            if (video.muted) {
+                muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            } else {
+                muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            }
+        }
+
+        // Event listener untuk tombol mute
+        muteBtn.addEventListener('click', () => {
+            // Balikkan status muted video (jika sedang mute, jadi un-mute, dan sebaliknya)
+            video.muted = !video.muted;
+            // Perbarui ikon tombol
+            updateMuteButtonIcon();
+        });
+
+        // Set ikon yang benar saat halaman pertama kali dimuat
+        updateMuteButtonIcon();
+    }
     
     function initializeReviewSlider() {
         const sliderContainer = document.querySelector('.review-slider-container');
@@ -862,6 +911,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderCaraBayarPage();
         } else if (path.endsWith('/') || path.includes('/index.html')) {
             initializeReviewSlider();
+            initializeVideoControls();
         }
     };
 

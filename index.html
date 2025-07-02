@@ -59,10 +59,14 @@
     </header>
 
     <section class="video-showcase-section">
-        <video width="100%" controls poster="images/nama-gambar-thumbnail.jpg">
-            <source src="videos/video_index.mp4" type="video/mp4">
-            Browser Anda tidak mendukung tag video.
-        </video>
+        <div class="video-wrapper">
+            <video id="showcase-video" width="100%" autoplay loop muted playsinline>
+                <source src="videos/video-showcase.mp4" type="video/mp4">
+                Browser Anda tidak mendukung tag video.
+            </video>
+            <button id="mute-btn" class="mute-btn">
+            </button>
+        </div>
     </section>
 
     <main>
@@ -79,8 +83,14 @@
             </div>
             <div class="info-card">
                 <i class="fas fa-dolly"></i>
-                <h3>Pengiriman Gratis Seluruh Indonesia</h3>
+                <h3>Pengiriman Aman</h3>
                 <p>Pengiriman berasuransi ke seluruh Indonesia dengan kemasan super aman.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-undo-alt"></i>
+                <h3>14 Hari Gratis Retur</h3>
+                <p>Tidak puas dengan produknya? Kembalikan dalam 14 hari dan dapatkan uang Anda kembali, tanpa syarat.
+                </p>
             </div>
         </section>
 
@@ -93,7 +103,7 @@
                 </p>
             </div>
             <div class="feature-image">
-                <img src="https://placehold.co/600x400/e8e8ed/333?text=Macintoz+Quality" alt="Kualitas Macintoz">
+                <img src="images/park.jpg" alt="Kualitas Macintoz">
             </div>
         </section>
 
@@ -114,8 +124,9 @@
                 </div>
                 <div class="process-step">
                     <span>3</span>
-                    <h3>Pengiriman Gratis Seluruh Indonesia</h3>
-                    <p>Pengiriman Gratis dan berasuransi ke seluruh Indonesia dengan kemasan super aman.</p>
+                    <h3>Garansi 1 Tahun</h3>
+                    <p>Kami memberikan garansi super hingga 1 tahun sehingga memberikan rasa aman kepada pelanggan kami.
+                    </p>
                 </div>
             </div>
         </section>
@@ -180,6 +191,21 @@
     </section>
 
     <footer class="footer">
+        <div class="footer-guarantee-banner">
+            <div class="guarantee-item">
+                <i class="fas fa-undo-alt"></i>
+                <p><strong>14 Hari Gratis Retur</strong><br>Tidak puas? Uang kembali.</p>
+            </div>
+            <div class="guarantee-item">
+                <i class="fas fa-shield-alt"></i>
+                <p><strong>Garansi 1 Tahun</strong><br>Perangkat keras terjamin.</p>
+            </div>
+            <div class="guarantee-item">
+                <i class="fas fa-check-circle"></i>
+                <p><strong>Kualitas Terinspeksi</strong><br>Lolos 30+ titik pengecekan.</p>
+            </div>
+        </div>
+
         <div class="footer-container">
             <div class="footer-column">
                 <h3>Belanja dan Pelajari</h3>
@@ -212,13 +238,14 @@
             <p>Hak Cipta &copy; 2025 Macintoz. Semua Hak Dilindungi.</p>
             <p class="footer-location"><i class="fas fa-map-marker-alt"></i> Pangkal Pinang, Indonesia</p>
             <div class="footer-socials">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/macintoz.store/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/Macintoz" target="_blank"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
             </div>
         </div>
     </footer>
 
+    <script src="/produk.js"></script>
     <script src="/script.js"></script>
 </body>
 
