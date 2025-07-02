@@ -43,15 +43,6 @@ const CONFIG = {
 // ===================================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    function generateRandomString(length) {
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let result = '';
-        for (let i = 0; i < length; i++) {
-            result += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return result;
-    }
     
     // Fungsi untuk menampilkan notifikasi custom yang cantik
     function showCustomToast(message) {
@@ -598,6 +589,59 @@ const renderDetailPage = () => {
         });
     };
 
+    // =========================================================================
+    // FUNGSI BARU UNTUK MENAMPILKAN POP-UP KONFIRMASI
+    // =========================================================================
+    function showConfirmationModal(title, message, confirmText, cancelText) {
+        // Fungsi ini mengembalikan 'Promise' yang akan selesai saat pengguna memilih
+        return new Promise((resolve) => {
+            // Buat elemen-elemen modal
+            const overlay = document.createElement('div');
+            overlay.className = 'modal-overlay';
+            
+            overlay.innerHTML = `
+                <div class="modal-box">
+                    <h3>${title}</h3>
+                    <p>${message}</p>
+                    <div class="modal-actions">
+                        <button id="modal-cancel-btn" class="button button-secondary">${cancelText}</button>
+                        <button id="modal-confirm-btn" class="button">${confirmText}</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(overlay);
+
+            // Tampilkan modal dengan animasi
+            setTimeout(() => overlay.classList.add('show'), 10);
+
+            const confirmBtn = document.getElementById('modal-confirm-btn');
+            const cancelBtn = document.getElementById('modal-cancel-btn');
+            const modalBox = overlay.querySelector('.modal-box');
+
+            // Fungsi untuk menutup modal
+            const closeModal = (resolution) => {
+                overlay.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(overlay);
+                    resolve(resolution); // Kirim hasil pilihan (true atau false)
+                }, 300); // Sesuaikan dengan durasi transisi CSS
+            };
+
+            // Tambahkan event listener ke tombol
+            confirmBtn.addEventListener('click', () => closeModal(true));
+            cancelBtn.addEventListener('click', () => closeModal(false));
+
+            // LOGIKA BARU: Menutup modal saat mengklik area overlay (latar belakang gelap)
+            overlay.addEventListener('click', (event) => {
+                // Hanya tutup jika yang diklik adalah overlay, bukan anaknya (modal-box)
+                if (event.target === overlay) {
+                    closeModal(null); // Kirim 'null' untuk menandakan tidak ada pilihan
+                }
+            });
+        });
+    }
+
     const renderCheckoutPage = () => {
         const itemsList = document.getElementById('checkout-items-list');
         if(!itemsList) return;
@@ -735,30 +779,52 @@ const renderDetailPage = () => {
         
         const paymentForm = document.getElementById('payment-form');
         if (paymentForm) {
-            paymentForm.addEventListener('submit', (e) => {
+            paymentForm.addEventListener('submit', async (e) => { // Fungsi diubah menjadi async
                 e.preventDefault();
                 
-                const finalShippingCost = shippingCost * (1 - shippingDiscountPercent / 100);
-                const finalTotal = subtotal - flatDiscount + finalShippingCost;
-                const uniqueCode = Math.floor(100 + Math.random() * 900);
-                const paymentEndTime = new Date().getTime() + CONFIG.PAYMENT_TIMER_MINUTES * 60 * 1000;
-                
-                const paymentId = generateRandomString(20);
+                // Cek apakah ada pembayaran tertunda di localStorage
+                const existingPayment = localStorage.getItem('paymentData');
 
-                const paymentData = {
-                    id: paymentId,
-                    totalPrice: finalTotal > 0 ? finalTotal : 0,
-                    code: uniqueCode,
-                    endTime: paymentEndTime
-                };
-                localStorage.setItem('paymentData', JSON.stringify(paymentData));
-                
-                cart = [];
-                saveCart();
-                updateSharedUI();
-                
-                window.location.href = `/cara-bayar?id=${paymentId}`;
+                if (existingPayment) {
+                    // Jika ADA, tampilkan pop-up konfirmasi
+                    const userChoice = await showConfirmationModal(
+                        'Pesanan Tertunda Ditemukan',
+                        'Anda memiliki pesanan yang belum dibayar. Melanjutkan akan membatalkan pesanan lama. Apa yang ingin Anda lakukan?',
+                        'Buat Pesanan Baru', // Teks untuk tombol konfirmasi (resolve true)
+                        'Lihat Pesanan Lama'  // Teks untuk tombol batal (resolve false)
+                    );
+
+                    // LOGIKA BARU: Menangani 3 kemungkinan pilihan
+                    if (userChoice === true) {
+                        // Pengguna memilih "Buat Pesanan Baru", lanjutkan proses
+                        proceedToPayment();
+                    } else if (userChoice === false) {
+                        // Pengguna memilih "Lihat Pesanan Lama", arahkan ke halaman pembayaran
+                        window.location.href = '/cara-bayar';
+                    }
+                    // Jika userChoice adalah null (klik di luar), tidak terjadi apa-apa.
+                    
+                } else {
+                    // Jika TIDAK ADA pembayaran tertunda, langsung lanjutkan
+                    proceedToPayment();
+                }
             });
+        }
+
+        // Fungsi untuk melanjutkan proses pembayaran setelah konfirmasi
+        function proceedToPayment() {
+            const finalTotal = subtotal - flatDiscount + (shippingCost * (1 - shippingDiscountPercent / 100));
+            const uniqueCode = Math.floor(100 + Math.random() * 900);
+            const paymentEndTime = new Date().getTime() + CONFIG.PAYMENT_TIMER_MINUTES * 60 * 1000;
+            
+            const paymentData = { totalPrice: finalTotal > 0 ? finalTotal : 0, code: uniqueCode, endTime: paymentEndTime };
+            localStorage.setItem('paymentData', JSON.stringify(paymentData));
+            
+            cart = [];
+            saveCart();
+            updateSharedUI();
+            
+            window.location.href = '/cara-bayar.html';
         }
         
         populateSelectOptions();
@@ -768,30 +834,15 @@ const renderDetailPage = () => {
 
     const renderCaraBayarPage = () => {
         const paymentDataString = localStorage.getItem('paymentData');
-        
-        // Ambil ID dari URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const paymentIdFromUrl = urlParams.get('id');
-
-        // Verifikasi
-        if (!paymentDataString || !paymentIdFromUrl) {
-            alert('Sesi pembayaran tidak ditemukan. Silakan ulangi proses checkout.');
+        if (!paymentDataString) {
+            alert('Data pembayaran tidak ditemukan. Silakan ulangi dari keranjang.');
             window.location.href = 'keranjang.html';
             return;
         }
         
         const paymentData = JSON.parse(paymentDataString);
-
-        // Cocokkan ID dari URL dengan ID yang tersimpan
-        if (paymentData.id !== paymentIdFromUrl) {
-            alert('ID Pembayaran tidak valid. Sesi mungkin telah kedaluwarsa.');
-            localStorage.removeItem('paymentData'); // Hapus data yang tidak valid
-            window.location.href = 'keranjang.html';
-            return;
-        }
-        
-        // Jika semua valid, lanjutkan menampilkan halaman
         const finalAmount = paymentData.totalPrice + paymentData.code;
+        
         document.getElementById('final-amount').textContent = formatRupiah(finalAmount);
         document.getElementById('unique-code').textContent = paymentData.code;
         document.getElementById('bank-name').textContent = CONFIG.BANK_NAME;
