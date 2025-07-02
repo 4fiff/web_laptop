@@ -43,6 +43,15 @@ const CONFIG = {
 // ===================================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    function generateRandomString(length) {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
     
     // Fungsi untuk menampilkan notifikasi custom yang cantik
     function showCustomToast(message) {
@@ -734,7 +743,10 @@ const renderDetailPage = () => {
                 const uniqueCode = Math.floor(100 + Math.random() * 900);
                 const paymentEndTime = new Date().getTime() + CONFIG.PAYMENT_TIMER_MINUTES * 60 * 1000;
                 
+                const paymentId = generateRandomString(20);
+
                 const paymentData = {
+                    id: paymentId,
                     totalPrice: finalTotal > 0 ? finalTotal : 0,
                     code: uniqueCode,
                     endTime: paymentEndTime
@@ -745,7 +757,7 @@ const renderDetailPage = () => {
                 saveCart();
                 updateSharedUI();
                 
-                window.location.href = 'cara-bayar.html';
+                window.location.href = `/cara-bayar?id=${paymentId}`;
             });
         }
         
@@ -756,15 +768,30 @@ const renderDetailPage = () => {
 
     const renderCaraBayarPage = () => {
         const paymentDataString = localStorage.getItem('paymentData');
-        if (!paymentDataString) {
-            alert('Data pembayaran tidak ditemukan. Silakan ulangi dari keranjang.');
+        
+        // Ambil ID dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const paymentIdFromUrl = urlParams.get('id');
+
+        // Verifikasi
+        if (!paymentDataString || !paymentIdFromUrl) {
+            alert('Sesi pembayaran tidak ditemukan. Silakan ulangi proses checkout.');
             window.location.href = 'keranjang.html';
             return;
         }
         
         const paymentData = JSON.parse(paymentDataString);
-        const finalAmount = paymentData.totalPrice + paymentData.code;
+
+        // Cocokkan ID dari URL dengan ID yang tersimpan
+        if (paymentData.id !== paymentIdFromUrl) {
+            alert('ID Pembayaran tidak valid. Sesi mungkin telah kedaluwarsa.');
+            localStorage.removeItem('paymentData'); // Hapus data yang tidak valid
+            window.location.href = 'keranjang.html';
+            return;
+        }
         
+        // Jika semua valid, lanjutkan menampilkan halaman
+        const finalAmount = paymentData.totalPrice + paymentData.code;
         document.getElementById('final-amount').textContent = formatRupiah(finalAmount);
         document.getElementById('unique-code').textContent = paymentData.code;
         document.getElementById('bank-name').textContent = CONFIG.BANK_NAME;
