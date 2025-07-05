@@ -1935,3 +1935,68 @@ color: var(--accent-color);
     flex-wrap: wrap;
     gap: 5px 15px;
 }
+
+/* ============================================== */
+/* CSS BARU UNTUK HALAMAN DAFTAR KUPON */
+/* ============================================== */
+
+/* Wadah utama untuk halaman kupon */
+.coupon-list-page {
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+/* Kartu untuk setiap kupon */
+.coupon-display-card {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+/* Style khusus untuk kupon unggulan */
+.coupon-display-card.featured {
+    border-left: 5px solid var(--button-bg);
+}
+
+/* Kode kupon */
+.coupon-display-card h4 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-family: monospace; /* Font khusus agar terlihat seperti kode */
+    color: var(--button-bg);
+    display: inline-block;
+    background-color: var(--footer-bg);
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+/* Deskripsi kupon */
+.coupon-display-card p {
+    margin: 0;
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+/* Syarat & ketentuan kupon */
+.coupon-display-card .coupon-terms {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--secondary-text-color);
+    font-style: italic;
+}
+
+/* Link "Lihat Kupon" di halaman pembayaran */
+.view-coupons-link {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--link-color);
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.view-coupons-link:hover {
+    text-decoration: underline;
+}
