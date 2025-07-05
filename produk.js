@@ -666,7 +666,7 @@ const products = [
     // Produk 25
     { 
         id: 25, name: 'Macbook Air 13" Intel Core i5 (2019) - Space Grey', specs: '16GB RAM, 512GB SSD', 
-        price: 5200000, stock: 8, grade: 'A', sku: '7RHX3GBK',  sold: 69,
+        price: 5200000, stock: 3, grade: 'A', sku: '7RHX3GBK',  sold: 69,
         images: ['images/produk/id25_7RHX3GBK/1.jpg', 'images/produk/id25_7RHX3GBK/2.jpg', 'images/produk/id25_7RHX3GBK/3.jpg', 'images/produk/id25_7RHX3GBK/4.jpg', 'images/produk/id25_7RHX3GBK/5.jpg', 'images/produk/id25_7RHX3GBK/6.jpg'], 
         description: {
             intro: 'Nilai tak terkalahkan untuk MacBook Air 2019. Unit ini punya RAM 16GB dan SSD 512GB, jauh di atas standar. Kondisi fisik 95% mulus dan baterai 92% sangat prima. Pilihan sempurna untuk yang butuh kecepatan dan kapasitas ekstra.',
