@@ -2000,3 +2000,19 @@ color: var(--accent-color);
 .view-coupons-link:hover {
     text-decoration: underline;
 }
+
+/* Style untuk tanggal berlaku kupon */
+.coupon-expiry {
+    font-size: 13px !important; /* Paksa ukuran font agar lebih kecil */
+    color: #e74c3c !important; /* Warna merah lembut untuk urgensi */
+    font-weight: 500;
+    margin-top: 15px !important;
+    padding-top: 10px !important;
+    border-top: 1px dashed var(--border-color);
+    font-style: normal !important;
+}
+
+.coupon-expiry i {
+    margin-right: 6px;
+    vertical-align: middle;
+}
