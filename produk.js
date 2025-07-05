@@ -327,7 +327,7 @@ const products = [
     // Produk 13
     { 
         id: 13, name: 'Macbook Pro 13" M1 (2020) - Space Grey', specs: '8GB RAM, 256GB SSD', 
-        price: 9000000, stock: 7, grade: 'A', sku: '7RCF3DWH',  sold: 58,
+        price: 9000000, stock: 4, grade: 'A', sku: '7RCF3DWH',  sold: 58,
         images: ['images/produk/id13_7RCF3DWH/1.jpg', 'images/produk/id13_7RCF3DWH/2.jpg', 'images/produk/id13_7RCF3DWH/3.jpg', 'images/produk/id13_7RCF3DWH/4.jpg', 'images/produk/id13_7RCF3DWH/5.jpg', 'images/produk/id13_7RCF3DWH/6.jpg', 'images/produk/id13_7RCF3DWH/7.jpg'], 
         description: {
             intro: 'Pilihan tepat untuk mendapatkan performa level Pro dalam kondisi istimewa. Berbeda dari MacBook Air, model Pro ini dilengkapi kipas pendingin untuk menjaga performa puncak tetap konsisten dan Touch Bar untuk alur kerja yang lebih efisien. Kondisi fisik produk 95% mulus dan yang terpenting, dibekali baterai baru (CC: 13), memberikan Anda performa dan daya tahan yang terasa seperti baru.',
@@ -469,7 +469,7 @@ const products = [
     // Produk 18
     { 
         id: 18, name: 'MacBook Air 13" M1 (2020) - Space Grey', specs: '8GB RAM, 256GB SSD', 
-        price: 7800000, stock: 8, grade: 'B', sku: 'OMHA9TBL',  sold: 47,
+        price: 7800000, stock: 2, grade: 'B', sku: 'OMHA9TBL',  sold: 47,
         images: ['images/produk/id18_OMHA9TBL/1.jpg', 'images/produk/id18_OMHA9TBL/2.jpg', 'images/produk/id18_OMHA9TBL/3.jpg', 'images/produk/id18_OMHA9TBL/4.jpg', 'images/produk/id18_OMHA9TBL/5.jpg', 'images/produk/id18_OMHA9TBL/6.jpg', 'images/produk/id18_OMHA9TBL/7.jpg', ], 
         description: {
             intro: 'Pilihan hemat untuk performa M1 yang fenomenal. MacBook Air ini dalam kondisi baik (fisik 90% mulus) dan baterai sangat sehat di 95%. Nikmati kecepatan, desain tipis, dan ketahanan baterai hingga 16 jam. Nilai terbaik untuk menunjang semua aktivitas Anda.',
@@ -638,7 +638,7 @@ const products = [
     // Produk 24
     { 
         id: 24, name: 'Macbook Pro 15" Intel Core i7 (2017) - Space Grey', specs: '16GB RAM, 512GB SSD', 
-        price: 5100000, stock: 6, grade: 'A', sku: '7RCF3EBK',  sold: 34,
+        price: 5100000, stock: 3, grade: 'A', sku: '7RCF3EBK',  sold: 34,
         images: ['images/produk/id24_7RCF3EBK/1.jpg', 'images/produk/id24_7RCF3EBK/2.jpg', 'images/produk/id24_7RCF3EBK/3.jpg', 'images/produk/id24_7RCF3EBK/4.jpg', 'images/produk/id24_7RCF3EBK/5.jpg'], 
         description: {
             intro: 'Sebuah powerhouse sejati. MacBook Pro 15" ini punya spek monster: Core i7, RAM 16GB, SSD 512GB, dan Dual VGA (AMD). Kondisi fisik 90% mulus dengan baterai yang sangat awet untuk kerja berat. Nilai terbaik untuk performa grafis dan komputasi profesional.',
@@ -725,7 +725,7 @@ const products = [
     // Produk 27
     { 
         id: 27, name: 'Macbook Air 13" Intel Core i3 (2020) - Space Grey', specs: '8GB RAM, 256GB SSD', 
-        price: 6300000, stock: 6, grade: 'A', sku: '7RCF3DBK',  sold: 62,
+        price: 6300000, stock: 4, grade: 'A', sku: '7RCF3DBK',  sold: 62,
         images: ['images/produk/id27_7RCF3DBK/1.jpg', 'images/produk/id27_7RCF3DBK/2.jpg', 'images/produk/id27_7RCF3DBK/3.jpg', 'images/produk/id27_7RCF3DBK/4.jpg', 'images/produk/id27_7RCF3DBK/5.jpg', 'images/produk/id27_7RCF3DBK/6.jpg'], 
         description: {
             intro: 'Nilai terbaik untuk MacBook Air 2020. Dengan kondisi fisik 95% mulus dan baterai sehat 89%, laptop ini menawarkan performa kencang untuk harganya. Sangat ideal dan hemat untuk mahasiswa atau pekerjaan ringan sehari-hari. Desain tipis, ringan, dan modern.',
@@ -811,7 +811,7 @@ const products = [
     // Produk 30
     { 
         id: 30, name: 'Macbook Pro 13" Intel Core i7 (2016) - Space Grey', specs: '16GB RAM, 256GB SSD', 
-        price: 5100000, stock: 7, grade: 'A', sku: 'OMLL6QWT',  sold: 39,
+        price: 5100000, stock: 2, grade: 'A', sku: 'OMLL6QWT',  sold: 39,
         images: ['images/produk/id30_OMLL6QWT/1.jpg', 'images/produk/id30_OMLL6QWT/2.jpg', 'images/produk/id30_OMLL6QWT/3.jpg', 'images/produk/id30_OMLL6QWT/4.jpg', 'images/produk/id30_OMLL6QWT/5.jpg'], 
         description: {
             intro: 'Dapatkan performa Pro bertenaga dengan MacBook Pro 2016 (i7/16GB RAM). Kondisi istimewa, fisik 95% mulus dan baterai 95% prima. Pilihan cerdas untuk pekerjaan yang butuh kecepatan lebih tanpa menguras kantong. Kualitas dan keandalan terjamin.',
@@ -840,7 +840,7 @@ const products = [
     // Produk 31
     { 
         id: 31, name: 'Macbook Air 13" Intel Core i5 (2018) - RoseGold', specs: '8GB RAM, 256GB SSD', 
-        price: 5750000, stock: 7, grade: 'A', sku: '7RHASNGR',  sold: 25,
+        price: 5750000, stock: 1, grade: 'A', sku: '7RHASNGR',  sold: 25,
         images: ['images/produk/id31_7RHASNGR/1.jpg', 'images/produk/id31_7RHASNGR/2.jpg', 'images/produk/id31_7RHASNGR/3.jpg', 'images/produk/id31_7RHASNGR/4.jpg', 'images/produk/id31_7RHASNGR/5.jpg', 'images/produk/id31_7RHASNGR/6.jpg', 'images/produk/id31_7RHASNGR/7.jpg'], 
         description: {
             intro: 'Seperti baru! MacBook Air 2018 Rose Gold dengan kondisi baterai sempurna 100% (CC sangat rendah: 53). Fisik 95% mulus, ditenagai Intel i5. Ini adalah nilai terbaik untuk mendapatkan laptop Apple yang terasa baru dengan daya tahan baterai maksimal.',
