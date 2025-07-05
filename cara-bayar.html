@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cara Pembayaran - Macintoz</title>
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Macintoz</a>
+
+            <div class="nav-menu-desktop">
+                <a href="produk.html">Mac</a>
+                <a href="iphone.html">iPhone (segera)</a>
+                <a href="watch.html">Watch (segera)</a>
+                <a href="ipad.html">iPad (segera)</a>
+                <a href="our-review.html">Our Review</a>
+            </div>
+
+            <div class="nav-icons">
+                <a href="#" id="search-icon"><i class="fas fa-search"></i></a>
+                <a href="keranjang.html" id="cart-icon-link">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="cart-count">0</span>
+                </a>
+                <button id="hamburger-btn" class="hamburger-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+        <button id="close-menu-btn" class="close-menu-btn">&times;</button>
+        <div class="mobile-menu-links">
+            <a href="produk.html">Mac</a>
+            <a href="iphone.html">iPhone</a>
+            <a href="watch.html">Watch</a>
+            <a href="ipad.html">iPad</a>
+            <a href="our-review.html">Review</a> <a href="faq.html">FAQ</a>
+            <a href="kontak.html">Kontak</a>
+        </div>
+    </div>
+
+    <header class="page-header" style="padding-bottom: 0;">
+        <h1>Selesaikan Pembayaran Anda</h1>
+        <p>Satu langkah terakhir untuk mendapatkan MacBook Anda.</p>
+    </header>
+
+    <main class="payment-instruction-container">
+        <div class="payment-box">
+    <div class="payment-amount-section">
+        <p>Total Pembayaran</p>
+        <h2 id="final-amount">Rp 0</h2>
+        <div id="payment-timer-container">
+            <p>Selesaikan pembayaran dalam:</p>
+            <span id="timer-display">59:59</span>
+        </div>
+        <p class="unique-code-info">Sudah termasuk kode unik <strong id="unique-code">000</strong> untuk verifikasi otomatis. Mohon transfer sesuai nominal di atas.</p>
+    </div>
+
+    <div id="payment-details-wrapper">
+        <div class="payment-details-section">
+            <h3>Transfer ke Rekening Berikut:</h3>
+            <div class="bank-info">
+                <p>Bank: <strong id="bank-name">...</strong></p>
+                <p>Nomor Rekening: <strong id="account-number">...</strong></p>
+                <p>Atas Nama: <strong id="account-name">...</strong></p>
+            </div>
+        </div>
+
+        <div class="payment-method-instructions">
+            <h3>Cara Transfer</h3>
+            <div class="instruction-group">
+                <h4>Via ATM</h4>
+                <ol>
+                    <li>Masukkan kartu ATM dan PIN Anda.</li>
+                    <li>Pilih menu "Transaksi Lainnya" > "Transfer" > "Ke Rekening BRI".</li>
+                    <li>Masukkan nomor rekening tujuan di atas.</li>
+                    <li>Masukkan nominal transfer **sesuai dengan total pembayaran** di atas (termasuk kode unik).</li>
+                    <li>Periksa kembali detail transaksi, jika sudah benar, tekan "Ya".</li>
+                    <li>Kamu akan mendapatkan Nota Pembayaran dan Resi melalui Email dalam max 5 jam.</li>
+                </ol>
+            </div>
+            <div class="instruction-group">
+                <h4>Via Internet Banking / Mobile Banking</h4>
+                <ol>
+                    <li>Login ke akun internet/mobile banking Anda.</li>
+                    <li>Pilih menu "Transfer" > "Transfer ke Rekening BRI".</li>
+                    <li>Masukkan nomor rekening tujuan dan nominal transfer **sesuai total pembayaran**.</li>
+                    <li>Pastikan nama penerima dan nominal sudah benar sebelum konfirmasi.</li>
+                    <li>Masukkan PIN/Token/Password transaksi Anda.</li>
+                    <li>Kamu akan mendapatkan Nota Pembayaran dan Resi melalui Email dalam max 5 jam.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div id="time-up-message" style="display: none; text-align: center;">
+        <h3>Waktu Pembayaran Habis</h3>
+        <p>Silakan buat pesanan baru dari keranjang Anda.</p>
+        <a href="keranjang.html" class="button" style="margin-top: 20px;">Kembali ke Keranjang</a>
+    </div>
+
+    <a href="index.html" class="button button-secondary" style="margin-top: 30px;">Kembali ke Halaman Utama</a>
+</div>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-guarantee-banner">
+            <div class="guarantee-item">
+                <i class="fas fa-undo-alt"></i>
+                <p><strong>14 Hari Gratis Retur</strong><br>Tidak puas? Uang kembali.</p>
+            </div>
+            <div class="guarantee-item">
+                <i class="fas fa-shield-alt"></i>
+                <p><strong>Garansi 1 Tahun</strong><br>Perangkat keras terjamin.</p>
+            </div>
+            <div class="guarantee-item">
+                <i class="fas fa-check-circle"></i>
+                <p><strong>Kualitas Terinspeksi</strong><br>Lolos 30+ titik pengecekan.</p>
+            </div>
+        </div>
+
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Belanja dan Pelajari</h3>
+                <ul>
+                    <li><a href="produk.html">Mac</a></li>
+                    <li><a href="iphone.html">iPhone</a></li>
+                    <li><a href="watch.html">Watch</a></li>
+                    <li><a href="ipad.html">iPad</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Layanan</h3>
+                <ul>
+                    <li><a href="lacak-pesanan.html">Lacak Pesanan</a></li>
+                    <li><a href="faq.html">Tanya Jawab (FAQ)</a></li>
+                    <li><a href="kebijakan-garansi.html">Kebijakan Garansi</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Tentang Macintoz</h3>
+                <ul>
+                    <li><a href="cerita-kami.html">Cerita Kami</a></li>
+                    <li><a href="our-review.html">Review Pelanggan</a></li>
+                    <li><a href="karir.html">Karir</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Hak Cipta &copy; 2025 Macintoz. Semua Hak Dilindungi.</p>
+            <p class="footer-location"><i class="fas fa-map-marker-alt"></i> Pangkal Pinang, Indonesia</p>
+            <div class="footer-socials">
+                <a href="https://www.instagram.com/macintoz.store/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/Macintoz" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/produk.js"></script>
+    <script src="/script.js"></script>
+</body>
+</html>
