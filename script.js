@@ -471,7 +471,7 @@ document.addEventListener('DOMContentLoaded', () => {
             flatDiscount = calculatedDiscount;
             shippingDiscountPercent = couponData.shippingDiscountPercent;
             appliedCoupon = code;
-            let successMsg = `Kode "${code}" diterapkan! Diskon barang ${formatRupiah(flatDiscount)}.`;
+            let successMsg = `Kode "${code}" diterapkan! Diskon barang ${formatRupiah(flatDiscount)}`;
             if (shippingDiscountPercent === 100) { successMsg += ` & Gratis Ongkir.`; }
             couponMsg.textContent = successMsg;
             couponMsg.className = 'success';
