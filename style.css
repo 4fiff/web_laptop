@@ -2038,3 +2038,62 @@ color: var(--accent-color);
     margin-top: 0; /* Hapus margin atas default dari nama reviewer */
     margin-bottom: 0;
 }
+
+/* ============================================== */
+/* CSS BARU UNTUK BANNER PROMOSI KUPON */
+/* ============================================== */
+.promo-banner-wrapper {
+    padding: 0 20px;
+    margin-bottom: 40px; /* Jarak ke konten di bawahnya */
+}
+
+.promo-banner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #0071e3 0%, #5ac8fa 100%);
+    color: white;
+}
+
+.promo-banner i {
+    font-size: 18px;
+}
+
+.promo-banner p {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.promo-banner a {
+    color: white;
+    font-weight: 700;
+    text-decoration: underline;
+    margin-left: 8px;
+}
+
+.promo-banner a:hover {
+    color: #e4f4ff;
+}
+
+/* Penyesuaian di layar kecil */
+@media (max-width: 768px) {
+    .promo-banner-wrapper {
+        margin-bottom: 20px;
+    }
+    .promo-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+    .promo-banner a {
+        display: block;
+        margin-top: 5px;
+        margin-left: 0;
+    }
+}
