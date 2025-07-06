@@ -2182,3 +2182,49 @@ color: var(--accent-color);
     border-radius: 12px; /* Sudut melengkung yang manis */
     margin-bottom: 30px; /* Jarak ke paragraf di bawahnya */
 }
+
+/* Style untuk Kotak Ringkasan Pengiriman */
+.shipping-summary-box {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-top: 30px;
+    text-align: left;
+}
+
+.shipping-summary-box h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.shipping-summary-box p {
+    margin: 8px 0;
+    color: var(--secondary-text-color);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.shipping-summary-box p strong {
+    color: var(--text-color);
+}
+
+/* Style untuk Tombol Batal Pesanan */
+.cancel-order-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.cancel-order-btn {
+    background: none;
+    border: none;
+    color: var(--secondary-text-color);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.cancel-order-btn:hover {
+    color: #c50000;
+}

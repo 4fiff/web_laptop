@@ -510,7 +510,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const finalTotal = subtotal - flatDiscount + finalShippingCost;
             const uniqueCode = Math.floor(100 + Math.random() * 900);
             const paymentEndTime = new Date().getTime() + CONFIG.PAYMENT_TIMER_MINUTES * 60 * 1000;
-            const paymentData = { totalPrice: finalTotal > 0 ? finalTotal : 0, code: uniqueCode, endTime: paymentEndTime };
+
+            const shippingInfo = {
+                email: document.getElementById('email').value,
+                name: document.getElementById('full-name').value,
+                province: document.getElementById('province').value,
+                city: document.getElementById('city').value,
+                postalCode: document.getElementById('postal-code').value,
+                address: document.getElementById('address').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('shipping-service').value
+            };
+            
+            const paymentData = { 
+                totalPrice: finalTotal > 0 ? finalTotal : 0, 
+                code: uniqueCode, 
+                endTime: paymentEndTime,
+                shippingInfo: shippingInfo // <-- Simpan info pengiriman
+            };
+
+            
+
             localStorage.setItem('paymentData', JSON.stringify(paymentData));
             cart = [];
             saveCart();
@@ -576,6 +596,26 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('bank-name').textContent = CONFIG.BANK_NAME;
         document.getElementById('account-number').textContent = CONFIG.ACCOUNT_NUMBER;
         document.getElementById('account-name').textContent = CONFIG.ACCOUNT_NAME;
+        
+        if (paymentData.shippingInfo) {
+            const info = paymentData.shippingInfo;
+            document.getElementById('summary-email').textContent = info.email;
+            document.getElementById('summary-name').textContent = info.name;
+            document.getElementById('summary-address').textContent = `${info.address}, ${info.city}, ${info.province}, ${info.postalCode}`;
+            document.getElementById('summary-shipping-service').textContent = info.service;
+        }
+
+        const cancelBtn = document.getElementById('cancel-order-btn');
+        if(cancelBtn) {
+            cancelBtn.addEventListener('click', () => {
+                if (confirm('Apakah Anda yakin ingin membatalkan pesanan ini? Sesi pembayaran Anda akan dihapus.')) {
+                    localStorage.removeItem('paymentData');
+                    alert('Pesanan telah berhasil dibatalkan.');
+                    window.location.href = 'index.html'; // Arahkan ke halaman utama
+                }
+            });
+        }
+        
         const timerDisplay = document.getElementById('timer-display');
         const paymentDetailsWrapper = document.getElementById('payment-details-wrapper');
         const timeUpMessage = document.getElementById('time-up-message');
