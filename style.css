@@ -152,7 +152,7 @@ a#cart-icon-link {
     width: 100%;
     height: 100%;
     /* GANTI URL GAMBAR DI BAWAH INI */
-    background-image: url(images/main-image.webp);
+    background-image: url('/images/hero-desktop.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -230,6 +230,7 @@ a#cart-icon-link {
 
 .info-section {
     display: grid; /* <-- Ubah ke grid */
+    text-align: center;
     /* Buat kolom otomatis dengan lebar minimal 240px */
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     max-width: 1200px;
@@ -614,6 +615,10 @@ a#cart-icon-link {
     .checkout-summary {
         border-left: none;
         border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-section::before {
+        background-image: url('/images/hero-mobile.webp');
     }
 }
 
@@ -1525,7 +1530,7 @@ color: var(--accent-color);
         display: block; /* Tampilkan tombol hamburger di mobile */
     }
     .nav-icons {
-        gap: 0; /* Hapus gap agar hamburger menempel di kanan */
+        gap: 10; /* Hapus gap agar hamburger menempel di kanan */
     }
 }
 
