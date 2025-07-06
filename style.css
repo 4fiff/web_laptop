@@ -2016,3 +2016,25 @@ color: var(--accent-color);
     margin-right: 6px;
     vertical-align: middle;
 }
+
+/* Style untuk Foto Profil di Kartu Review */
+.reviewer-info {
+    display: flex; /* Membuat foto dan nama sejajar */
+    align-items: center; /* Menengahkan secara vertikal */
+    margin-top: 20px;
+}
+
+.reviewer-photo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; /* Ini yang membuat gambar menjadi bulat */
+    object-fit: cover; /* Memastikan gambar mengisi lingkaran tanpa gepeng */
+    margin-right: 12px; /* Jarak antara foto dan nama */
+    border: 2px solid #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.review-card .reviewer-name {
+    margin-top: 0; /* Hapus margin atas default dari nama reviewer */
+    margin-bottom: 0;
+}
