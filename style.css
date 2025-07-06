@@ -1530,7 +1530,7 @@ color: var(--accent-color);
         display: block; /* Tampilkan tombol hamburger di mobile */
     }
     .nav-icons {
-        gap: 10; /* Hapus gap agar hamburger menempel di kanan */
+        gap: 12px; /* Hapus gap agar hamburger menempel di kanan */
     }
 }
 
@@ -2100,5 +2100,75 @@ color: var(--accent-color);
         display: block;
         margin-top: 5px;
         margin-left: 0;
+    }
+}
+
+/* Style untuk Teks Batasan di Banner Promo */
+.promo-limit {
+    opacity: 0.8;
+    font-weight: 400;
+    margin: 0 8px;
+}
+
+/* ============================================== */
+/* CSS BARU UNTUK FILTER YANG BISA DILIPAT (Collapsible) */
+/* ============================================== */
+
+/* Header untuk sidebar filter */
+.filter-sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.filter-sidebar-header h3 {
+    margin: 0; /* Hapus margin default dari h3 */
+    font-size: 21px;
+    border-bottom: 0;
+}
+
+/* Tombol panah untuk buka/tutup */
+.toggle-filter-btn {
+    display: none; /* Sembunyikan di desktop secara default */
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text-color);
+    transition: transform 0.3s ease;
+}
+
+/* Wadah untuk filter yang bisa disembunyikan */
+.collapsible-filters {
+    /* Style default untuk desktop (selalu terlihat) */
+}
+
+
+/* Penyesuaian di layar kecil */
+@media (max-width: 992px) {
+    /* Tampilkan tombol panah di mobile */
+    .toggle-filter-btn {
+        display: block;
+    }
+
+    /* Putar panah saat filter terbuka */
+    .toggle-filter-btn.open {
+        transform: rotate(180deg);
+    }
+    
+    /* Sembunyikan filter di mobile secara default */
+    .collapsible-filters {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+    }
+
+    /* Tampilkan filter saat class 'filters-open' ditambahkan oleh JS */
+    .collapsible-filters.filters-open {
+        max-height: 1000px; /* Angka besar untuk memastikan semua filter muat */
+        transition: max-height 0.5s ease-in;
     }
 }

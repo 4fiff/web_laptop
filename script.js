@@ -127,6 +127,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const searchInput = document.getElementById('search-input');
         const sortSelect = document.getElementById('sort-select');
         const filtersContainer = document.getElementById('filters-container');
+        const toggleFilterBtn = document.getElementById('toggle-filter-btn');
+        const collapsibleFilters = document.getElementById('collapsible-filters');
+
         let activeFilters = { model: [], chip: [], size: [], grade: [] };
         
         function createFilters() {
@@ -168,6 +171,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
+
+            if (toggleFilterBtn && collapsibleFilters) {
+            toggleFilterBtn.addEventListener('click', () => {
+                // Toggle class untuk animasi buka/tutup
+                collapsibleFilters.classList.toggle('filters-open');
+                // Toggle class untuk animasi putar panah
+                toggleFilterBtn.classList.toggle('open');
+            });
+            }
 
             if (searchTerm) {
                 processedProducts = processedProducts.filter(product => product.name.toLowerCase().includes(searchTerm));
