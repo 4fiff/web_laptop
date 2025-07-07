@@ -149,10 +149,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.querySelectorAll('#filters-container input[type="checkbox"]').forEach(checkbox => {
                 checkbox.addEventListener('change', (e) => {
-                    const category = e.target.dataset.category;
+                    const filterCategory = e.target.dataset.category;
                     const value = e.target.value;
-                    if (e.target.checked) { activeFilters[category].push(value); } 
-                    else { activeFilters[category] = activeFilters[category].filter(item => item !== value); }
+                    if (e.target.checked) {
+                        activeFilters[filterCategory].push(value);
+                    } else {
+                        activeFilters[filterCategory] = activeFilters[filterCategory].filter(item => item !== value);
+                    }
                     displayProducts();
                 });
             });
@@ -161,14 +164,13 @@ document.addEventListener('DOMContentLoaded', () => {
         function displayProducts() {
             const searchTerm = searchInput.value.toLowerCase();
             const sortOrder = sortSelect.value;
-            let categoryProducts = products.filter(p => p.kategori === category);
-            let processedProducts = [...categoryProducts];
+            let processedProducts = products.filter(p => p.kategori === category);
 
-            Object.keys(activeFilters).forEach(category => {
-                if (activeFilters[category].length > 0) {
+            Object.keys(activeFilters).forEach(filterCategory => {
+                if (activeFilters[filterCategory].length > 0) {
                     processedProducts = processedProducts.filter(product => {
-                        return activeFilters[category].some(filterValue => {
-                            if (category === 'grade') { return product.grade === filterValue; }
+                        return activeFilters[filterCategory].some(filterValue => {
+                            if (filterCategory === 'grade') { return product.grade === filterValue; }
                             return product.name.includes(filterValue);
                         });
                     });
@@ -197,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 processedProducts.forEach(product => {
                     const card = document.createElement('a');
-                    card.href = `/product/buy-${product.kategori.toLowerCase()}/detail-produk?id=${product.id}`;
+                    card.href = `/detail-produk.html?id=${product.id}`;
                     card.className = 'product-card';
                     card.style.textDecoration = 'none';
                     card.style.color = 'inherit';

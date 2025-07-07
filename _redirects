@@ -5,7 +5,7 @@
 /product/buy-iphone    /buy-iphone.html    200
 
 # Aturan untuk semua halaman lain agar tetap bersih
-/detail-produk      /detail-produk.html     200
+/product/buy-:category/detail-produk   /detail-produk.html   200
 /keranjang          /keranjang.html         200
 /pembayaran         /pembayaran.html        200
 /cara-bayar         /cara-bayar.html        200
