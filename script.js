@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const renderProductPage = () => {
+    const renderProductPage = (category) => {
         const productGrid = document.getElementById('product-grid');
         if (!productGrid) return;
 
@@ -133,10 +133,12 @@ document.addEventListener('DOMContentLoaded', () => {
         let activeFilters = { model: [], chip: [], size: [], grade: [] };
         
         function createFilters() {
-            const models = [...new Set(products.map(p => p.name.includes('Air') ? 'Air' : 'Pro'))];
-            const chips = [...new Set(products.flatMap(p => (p.name.match(/(M[1-4]|Intel i[3579])/g) || [])))];
-            const sizes = [...new Set(products.flatMap(p => (p.name.match(/1[3-6]/g) || [])))];
-            const grades = [...new Set(products.map(p => p.grade))];
+
+            const categoryProducts = products.filter(p => p.kategori === category);
+            const models = [...new Set(categoryProducts.map(p => p.name.includes('Air') ? 'Air' : 'Pro'))];
+            const chips = [...new Set(categoryProducts.flatMap(p => (p.name.match(/(M[1-4]|Intel i[3579])/g) || [])))];
+            const sizes = [...new Set(categoryProducts.flatMap(p => (p.name.match(/1[3-6]/g) || [])))];
+            const grades = [...new Set(categoryProducts.map(p => p.grade))];
 
             filtersContainer.innerHTML = `
                 <div class="filter-group"><h4>Model</h4>${models.map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.toLowerCase()}" data-category="model" value="${model}"><label for="model-${model.toLowerCase()}">MacBook ${model}</label></div>`).join('')}</div>
