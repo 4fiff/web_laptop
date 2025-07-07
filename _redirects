@@ -1,0 +1,23 @@
+# Aturan Redirect untuk Netlify
+
+# Aturan untuk Halaman Kategori Produk
+/product/buy-macbook   /buy-macbook.html   200
+/product/buy-iphone    /buy-iphone.html    200
+
+# Aturan untuk semua halaman lain agar tetap bersih
+/detail-produk      /detail-produk.html     200
+/keranjang          /keranjang.html         200
+/pembayaran         /pembayaran.html        200
+/cara-bayar         /cara-bayar.html        200
+/faq                /faq.html               200
+/kebijakan-garansi  /kebijakan-garansi.html 200
+/cerita-kami        /cerita-kami.html       200
+/karir              /karir.html             200
+/kontak             /kontak.html            200
+/our-review         /our-review.html        200
+/lacak-pesanan      /lacak-pesanan.html     200
+/ipad               /ipad.html              200
+/watch              /watch.html             200
+
+# Pengalihan dari URL lama ke baru
+/produk             /product/buy-macbook    301

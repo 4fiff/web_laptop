@@ -1,7 +1,7 @@
 const products = [
     // Produk 1
     { 
-        id: 1, name: 'Macbook Air 13" M4 (2024) - Sky Blue', specs: '16GB RAM, 256GB SSD', 
+        id: 1, kategori: 'Mac', name: 'Macbook Air 13" M4 (2024) - Sky Blue', specs: '16GB RAM, 256GB SSD', 
         price: 15799000, stock: 8, grade: 'Baru', sku: '7PZ3X8QA', sold: 312, 
         images: ['images/produk/id1_7PZ3X8QA/1.jpg', 'images/produk/id1_7PZ3X8QA/2.jpg', 'images/produk/id1_7PZ3X8QA/3.jpg', 'images/produk/id1_7PZ3X8QA/4.jpg', 'images/produk/id1_7PZ3X8QA/5.jpg', 'images/produk/id1_7PZ3X8QA/6.jpg', 'images/produk/id1_7PZ3X8QA/7.jpg', 'images/produk/id1_7PZ3X8QA/8.jpg'], 
         description: {
@@ -28,7 +28,7 @@ const products = [
     },
     // Produk 2
     { 
-        id: 2, name: 'Macbook Air 13" M4 (2024) - Midnight', specs: '16GB RAM, 256GB SSD', 
+        id: 2, kategori: 'Mac', name: 'Macbook Air 13" M4 (2024) - Midnight', specs: '16GB RAM, 256GB SSD', 
         price: 15799000, stock: 3, grade: 'Baru', sku: 'R4K81NZB',  sold: 163,
         images: ['images/produk/id2_R4K81NZB/1.jpg', 'images/produk/id2_R4K81NZB/2.jpg', 'images/produk/id2_R4K81NZB/3.jpg', 'images/produk/id2_R4K81NZB/4.jpg', 'images/produk/id2_R4K81NZB/5.jpg', 'images/produk/id2_R4K81NZB/6.jpg', 'images/produk/id2_R4K81NZB/7.jpg'], 
         description: {
@@ -55,7 +55,7 @@ const products = [
     },
     // Produk 3
     { 
-        id: 3, name: 'Macbook Air 15" M4 (2024) - Sky Blue', specs: '16GB RAM, 256GB SSD', 
+        id: 3, kategori: 'Mac', name: 'Macbook Air 15" M4 (2024) - Sky Blue', specs: '16GB RAM, 256GB SSD', 
         price: 19899000, stock: 5, grade: 'Baru', sku: 'G7X23MLQ',  sold: 232,
         images: ['images/produk/id3_G7X23MLQ/1.jpg', 'images/produk/id3_G7X23MLQ/2.jpg', 'images/produk/id3_G7X23MLQ/3.jpg', 'images/produk/id3_G7X23MLQ/4.jpg', 'images/produk/id3_G7X23MLQ/5.jpg', 'images/produk/id3_G7X23MLQ/6.jpg', 'images/produk/id3_G7X23MLQ/7.jpg', 'images/produk/id3_G7X23MLQ/8.jpg'], 
         description: {
@@ -82,7 +82,7 @@ const products = [
     },
     // Produk 4
     { 
-        id: 4, name: 'Macbook Air 15" M4 (2024) - Midnight', specs: '16GB RAM, 256GB SSD', 
+        id: 4, kategori: 'Mac', name: 'Macbook Air 15" M4 (2024) - Midnight', specs: '16GB RAM, 256GB SSD', 
         price: 19899000, stock: 6, grade: 'Baru', sku: '9HFZ3Y2A',  sold: 263,
         images: ['images/produk/id4_9HFZ3Y2A/1.jpg', 'images/produk/id4_9HFZ3Y2A/2.jpg', 'images/produk/id4_9HFZ3Y2A/3.jpg', 'images/produk/id4_9HFZ3Y2A/4.jpg', 'images/produk/id4_9HFZ3Y2A/5.jpg', 'images/produk/id4_9HFZ3Y2A/6.jpg', 'images/produk/id4_9HFZ3Y2A/7.jpg', 'images/produk/id4_9HFZ3Y2A/8.jpg'], 
         description: {
@@ -109,7 +109,7 @@ const products = [
     },
     // Produk 5
     { 
-        id: 5, name: 'Macbook Pro 14" M4 (2024) - Space Black', specs: '16GB RAM, 512GB SSD', 
+        id: 5, kategori: 'Mac', name: 'Macbook Pro 14" M4 (2024) - Space Black', specs: '16GB RAM, 512GB SSD', 
         price: 23999000, stock: 2, grade: 'Baru', sku: 'W1B8PZ6K', sold: 112,
         images: ['images/produk/id5_W1B8PZ6K/1.jpg', 'images/produk/id5_W1B8PZ6K/2.jpg', 'images/produk/id5_W1B8PZ6K/3.jpg', 'images/produk/id5_W1B8PZ6K/4.jpg', 'images/produk/id5_W1B8PZ6K/5.jpg', 'images/produk/id5_W1B8PZ6K/6.jpg', 'images/produk/id5_W1B8PZ6K/7.jpg', 'images/produk/id5_W1B8PZ6K/8.jpg'], 
         description: {
@@ -135,7 +135,7 @@ const products = [
     },
     // Produk 6
     { 
-        id: 6, name: 'Macbook Pro 14" M4 Pro (2024) - Space Black', specs: '24GB RAM, 512GB SSD', 
+        id: 6, kategori: 'Mac', name: 'Macbook Pro 14" M4 Pro (2024) - Space Black', specs: '24GB RAM, 512GB SSD', 
         price: 30799000, stock: 7, grade: 'Baru', sku: 'YZ93LMX4',  sold: 153,
         images: ['images/produk/id6_YZ93LMX4/1.jpg', 'images/produk/id6_YZ93LMX4/2.jpg', 'images/produk/id6_YZ93LMX4/3.jpg', 'images/produk/id6_YZ93LMX4/4.jpg', 'images/produk/id6_YZ93LMX4/5.jpg', 'images/produk/id6_YZ93LMX4/6.jpg', 'images/produk/id6_YZ93LMX4/7.jpg', 'images/produk/id6_YZ93LMX4/8.jpg'], 
         description: {
@@ -162,7 +162,7 @@ const products = [
     },
     // Produk 7
     { 
-        id: 7, name: 'Macbook Pro 14" M4 Max (2024) - Space Black', specs: '36GB RAM, 1TB SSD', 
+        id: 7, kategori: 'Mac', name: 'Macbook Pro 14" M4 Max (2024) - Space Black', specs: '36GB RAM, 1TB SSD', 
         price: 48999000, stock: 6, grade: 'Baru', sku: 'KQ7AZ813',  sold: 112,
         images: ['images/produk/id7_KQ7AZ813/1.jpg', 'images/produk/id7_KQ7AZ813/2.jpg', 'images/produk/id7_KQ7AZ813/3.jpg', 'images/produk/id7_KQ7AZ813/4.jpg', 'images/produk/id7_KQ7AZ813/5.jpg', 'images/produk/id7_KQ7AZ813/6.jpg', 'images/produk/id7_KQ7AZ813/7.jpg', 'images/produk/id7_KQ7AZ813/8.jpg'], 
         description: {
@@ -189,7 +189,7 @@ const products = [
     },
     // Produk 8
     { 
-        id: 8, name: 'Macbook Pro 16" M4 Pro (2024) - Space Black', specs: '24GB RAM, 512GB SSD', 
+        id: 8, kategori: 'Mac', name: 'Macbook Pro 16" M4 Pro (2024) - Space Black', specs: '24GB RAM, 512GB SSD', 
         price: 39999000, stock: 7, grade: 'Baru', sku: '6NVB4XPQ',  sold: 201,
         images: ['images/produk/id8_6NVB4XPQ/1.jpg', 'images/produk/id8_6NVB4XPQ/2.jpg', 'images/produk/id8_6NVB4XPQ/3.jpg', 'images/produk/id8_6NVB4XPQ/4.jpg', 'images/produk/id8_6NVB4XPQ/5.jpg', 'images/produk/id8_6NVB4XPQ/6.jpg', 'images/produk/id8_6NVB4XPQ/7.jpg', 'images/produk/id8_6NVB4XPQ/8.jpg'], 
         description: {
@@ -216,7 +216,7 @@ const products = [
     },
     // Produk 9
     { 
-        id: 9, name: 'Macbook Pro 16" M4 Max (2024) - Space Black', specs: '36GB RAM, 1TB SSD', 
+        id: 9, kategori: 'Mac', name: 'Macbook Pro 16" M4 Max (2024) - Space Black', specs: '36GB RAM, 1TB SSD', 
         price: 54999000, stock: 4, grade: 'Baru', sku: 'M29XQY8L',  sold: 142,
         images: ['images/produk/id9_M29XQY8L/1.jpg', 'images/produk/id9_M29XQY8L/2.jpg', 'images/produk/id9_M29XQY8L/3.jpg', 'images/produk/id9_M29XQY8L/4.jpg', 'images/produk/id9_M29XQY8L/5.jpg', 'images/produk/id9_M29XQY8L/6.jpg', 'images/produk/id9_M29XQY8L/7.jpg', 'images/produk/id9_M29XQY8L/8.jpg'], 
         description: {
@@ -243,7 +243,7 @@ const products = [
     },
     // Produk 10
     { 
-        id: 10, name: 'Macbook Air 13" M3 (2023) - Space Grey', specs: '16GB RAM, 256GB SSD', 
+        id: 10, kategori: 'Mac', name: 'Macbook Air 13" M3 (2023) - Space Grey', specs: '16GB RAM, 256GB SSD', 
         price: 14299000, stock: 11, grade: 'Baru', sku: 'AXZL5NQ7',  sold: 117,
         images: ['images/produk/id10_AXZL5NQ7/1.jpg', 'images/produk/id10_AXZL5NQ7/2.jpg', 'images/produk/id10_AXZL5NQ7/3.jpg', 'images/produk/id10_AXZL5NQ7/4.jpg'], 
         description: {
@@ -269,7 +269,7 @@ const products = [
     },
     // Produk 11
     { 
-        id: 11, name: 'Macbook Pro 15" Intel Core i7 (2016) - Space Grey', specs: '16GB RAM, 512GB SSD', 
+        id: 11, kategori: 'Mac', name: 'Macbook Pro 15" Intel Core i7 (2016) - Space Grey', specs: '16GB RAM, 512GB SSD', 
         price: 5600000, stock: 3, grade: 'A', sku: '7CCF0VDG',  sold: 72,
         images: ['images/produk/id11_7CCF0VDG/1.jpg', 'images/produk/id11_7CCF0VDG/2.jpg', 'images/produk/id11_7CCF0VDG/3.jpg', 'images/produk/id11_7CCF0VDG/4.jpg', 'images/produk/id11_7CCF0VDG/5.jpg', 'images/produk/id11_7CCF0VDG/6.jpg', 'images/produk/id11_7CCF0VDG/7.jpg'], 
         description: {
@@ -296,7 +296,7 @@ const products = [
     },
     // Produk 12
     { 
-        id: 12, name: 'Macbook Air 13" M1 (2020) - RoseGold', specs: '8GB RAM, 256GB SSD', 
+        id: 12, kategori: 'Mac', name: 'Macbook Air 13" M1 (2020) - RoseGold', specs: '8GB RAM, 256GB SSD', 
         price: 8100000, stock: 6, grade: 'A', sku: '7CLL02GD',  sold: 32,
         images: ['images/produk/id12_7CLL02GD/1.jpg', 'images/produk/id12_7CLL02GD/2.jpg', 'images/produk/id12_7CLL02GD/3.jpg', 'images/produk/id12_7CLL02GD/4.jpg', 'images/produk/id12_7CLL02GD/5.jpg', 'images/produk/id12_7CLL02GD/6.jpg', 'images/produk/id12_7CLL02GD/7.jpg'], 
         description: {
@@ -326,7 +326,7 @@ const products = [
     },
     // Produk 13
     { 
-        id: 13, name: 'Macbook Pro 13" M1 (2020) - Space Grey', specs: '8GB RAM, 256GB SSD', 
+        id: 13, kategori: 'Mac', name: 'Macbook Pro 13" M1 (2020) - Space Grey', specs: '8GB RAM, 256GB SSD', 
         price: 9000000, stock: 4, grade: 'A', sku: '7RCF3DWH',  sold: 58,
         images: ['images/produk/id13_7RCF3DWH/1.jpg', 'images/produk/id13_7RCF3DWH/2.jpg', 'images/produk/id13_7RCF3DWH/3.jpg', 'images/produk/id13_7RCF3DWH/4.jpg', 'images/produk/id13_7RCF3DWH/5.jpg', 'images/produk/id13_7RCF3DWH/6.jpg', 'images/produk/id13_7RCF3DWH/7.jpg'], 
         description: {
@@ -354,7 +354,7 @@ const products = [
     },
     // Produk 14
     { 
-        id: 14, name: 'MacBook Air 13" M1 (2020) - Space Grey', specs: '8GB RAM, 256GB SSD', 
+        id: 14, kategori: 'Mac', name: 'MacBook Air 13" M1 (2020) - Space Grey', specs: '8GB RAM, 256GB SSD', 
         price: 8000000, stock: 5, grade: 'A', sku: '7CLL1HBK',  sold: 80,
         images: ['images/produk/id14_7CLL1HBK/1.jpg', 'images/produk/id14_7CLL1HBK/2.jpg', 'images/produk/id14_7CLL1HBK/3.jpg', 'images/produk/id14_7CLL1HBK/4.jpg', 'images/produk/id14_7CLL1HBK/5.jpg', 'images/produk/id14_7CLL1HBK/6.jpg'], 
         description: {
@@ -383,7 +383,7 @@ const products = [
     },
     // Produk 15
     { 
-        id: 15, name: '15MacBook Pro 13" Intel Core i7 (2018) - Space Grey', specs: '16GB RAM, 512GB SSD', 
+        id: 15, kategori: 'Mac', name: '15MacBook Pro 13" Intel Core i7 (2018) - Space Grey', specs: '16GB RAM, 512GB SSD', 
         price: 5750000, stock: 3, grade: 'A', sku: 'OMOTA0GR',  sold: 41,
         images: ['images/produk/id15_OMOTA0GR/1.jpg', 'images/produk/id15_OMOTA0GR/2.jpg', 'images/produk/id15_OMOTA0GR/3.jpg', 'images/produk/id15_OMOTA0GR/4.jpg', 'images/produk/id15_OMOTA0GR/5.jpg'], 
         description: {
@@ -411,7 +411,7 @@ const products = [
     },
     // Produk 16
     { 
-        id: 16, name: 'Macbook Pro 13" Intel Core i5 (2019) - Space Grey', specs: '8GB RAM, 256GB SSD', 
+        id: 16, kategori: 'Mac', name: 'Macbook Pro 13" Intel Core i5 (2019) - Space Grey', specs: '8GB RAM, 256GB SSD', 
         price: 6300000, stock: 6, grade: 'A', sku: '7CTH4QBL',  sold: 29,
         images: ['images/produk/id16_7CTH4QBL/1.jpg', 'images/produk/id16_7CTH4QBL/2.jpg', 'images/produk/id16_7CTH4QBL/3.jpg', 'images/produk/id16_7CTH4QBL/4.jpg', 'images/produk/id16_7CTH4QBL/5.jpg', 'images/produk/id16_7CTH4QBL/6.jpg', 'images/produk/id16_7CTH4QBL/7.jpg'], 
         description: {
@@ -438,7 +438,7 @@ const products = [
     },
     // Produk 17
     { 
-        id: 17, name: 'Macbook Pro 14" M1 Pro (2021) - Space Grey', specs: '16GB RAM, 512GB SSD', 
+        id: 17, kategori: 'Mac', name: 'Macbook Pro 14" M1 Pro (2021) - Space Grey', specs: '16GB RAM, 512GB SSD', 
         price: 15300000, stock: 4, grade: 'A', sku: '7RHAEOWD',  sold: 65,
         images: ['images/produk/id17_7RHAEOWD/1.jpg', 'images/produk/id17_7RHAEOWD/2.jpg', 'images/produk/id17_7RHAEOWD/3.jpg', 'images/produk/id17_7RHAEOWD/4.jpg', 'images/produk/id17_7RHAEOWD/5.jpg', 'images/produk/id17_7RHAEOWD/6.jpg', 'images/produk/id17_7RHAEOWD/7.jpg'], 
         description: {
@@ -468,7 +468,7 @@ const products = [
     },
     // Produk 18
     { 
-        id: 18, name: 'MacBook Air 13" M1 (2020) - Space Grey', specs: '8GB RAM, 256GB SSD', 
+        id: 18, kategori: 'Mac', name: 'MacBook Air 13" M1 (2020) - Space Grey', specs: '8GB RAM, 256GB SSD', 
         price: 7800000, stock: 2, grade: 'B', sku: 'OMHA9TBL',  sold: 47,
         images: ['images/produk/id18_OMHA9TBL/1.jpg', 'images/produk/id18_OMHA9TBL/2.jpg', 'images/produk/id18_OMHA9TBL/3.jpg', 'images/produk/id18_OMHA9TBL/4.jpg', 'images/produk/id18_OMHA9TBL/5.jpg', 'images/produk/id18_OMHA9TBL/6.jpg', 'images/produk/id18_OMHA9TBL/7.jpg', ], 
         description: {
@@ -498,7 +498,7 @@ const products = [
     },
     // Produk 19
     { 
-        id: 19, name: 'Macbook Pro 13" Intel Core i5 (2018) - Space Grey', specs: '8GB RAM, 256GB SSD', 
+        id: 19, kategori: 'Mac', name: 'Macbook Pro 13" Intel Core i5 (2018) - Space Grey', specs: '8GB RAM, 256GB SSD', 
         price: 6400000, stock: 3, grade: 'A', sku: '7RLLD8WO',  sold: 37,
         images: ['images/produk/id19_7RLLD8WO/1.jpg', 'images/produk/id19_7RLLD8WO/2.jpg', 'images/produk/id19_7RLLD8WO/3.jpg', 'images/produk/id19_7RLLD8WO/4.jpg', 'images/produk/id19_7RLLD8WO/5.jpg', 'images/produk/id19_7RLLD8WO/6.jpg'], 
         description: {
@@ -527,7 +527,7 @@ const products = [
     },
     // Produk 20
     { 
-        id: 20, name: 'MacBook Air 13" M1 (2020) - RoseGold', specs: '8GB RAM, 256GB SSD', 
+        id: 20, kategori: 'Mac', name: 'MacBook Air 13" M1 (2020) - RoseGold', specs: '8GB RAM, 256GB SSD', 
         price: 8250000, stock: 5, grade: 'A', sku: '7CHKJ1TP',  sold: 76,
         images: ['images/produk/id20_7CHKJ1TP/1.jpg', 'images/produk/id20_7CHKJ1TP/2.jpg', 'images/produk/id20_7CHKJ1TP/3.jpg', 'images/produk/id20_7CHKJ1TP/4.jpg', 'images/produk/id20_7CHKJ1TP/5.jpg', 'images/produk/id20_7CHKJ1TP/6.jpg', 'images/produk/id20_7CHKJ1TP/7.jpg', 'images/produk/id20_7CHKJ1TP/8.jpg'], 
         description: {
@@ -555,7 +555,7 @@ const products = [
     },
     // Produk 21
     { 
-        id: 21, name: 'Macbook Pro 15" Intel Core i7 (2018) - Space Grey', specs: '16GB RAM, 512GB SSD', 
+        id: 21, kategori: 'Mac', name: 'Macbook Pro 15" Intel Core i7 (2018) - Space Grey', specs: '16GB RAM, 512GB SSD', 
         price: 6300000, stock: 2, grade: 'A', sku: 'OMHZR7YL',  sold: 59,
         images: ['images/produk/id21_OMHZR7YL/1.jpg', 'images/produk/id21_OMHZR7YL/2.jpg', 'images/produk/id21_OMHZR7YL/3.jpg', 'images/produk/id21_OMHZR7YL/4.jpg', 'images/produk/id21_OMHZR7YL/5.jpg'], 
         description: {
@@ -585,7 +585,7 @@ const products = [
     },
     // Produk 22
     { 
-        id: 22, name: 'Macbook Pro 15" Intel Core i7 (2018) - Space Grey', specs: '16GB RAM, 512GB SSD', 
+        id: 22, kategori: 'Mac', name: 'Macbook Pro 15" Intel Core i7 (2018) - Space Grey', specs: '16GB RAM, 512GB SSD', 
         price: 6600000, stock: 4, grade: 'A', sku: '7RHADMTP',  sold: 28,
         images: ['images/produk/id22_7RHADMTP/1.jpg', 'images/produk/id22_7RHADMTP/2.jpg', 'images/produk/id22_7RHADMTP/3.jpg', 'images/produk/id22_7RHADMTP/4.jpg', 'images/produk/id22_7RHADMTP/5.jpg', 'images/produk/id22_7RHADMTP/6.jpg', 'images/produk/id22_7RHADMTP/7.jpg'], 
         description: {
@@ -613,7 +613,7 @@ const products = [
     },
     // Produk 23
     { 
-        id: 23, name: 'Macbook Pro 13" Intel Core i7 (2015) - Silver', specs: '8GB RAM, 512GB SSD', 
+        id: 23, kategori: 'Mac', name: 'Macbook Pro 13" Intel Core i7 (2015) - Silver', specs: '8GB RAM, 512GB SSD', 
         price: 5200000, stock: 0, grade: 'B', sku: '7ROT12BK', sold: 84,
         images: ['images/produk/id23_7ROT12BK/1.jpg', 'images/produk/id23_7ROT12BK/2.jpg', 'images/produk/id23_7ROT12BK/3.jpg', 'images/produk/id23_7ROT12BK/4.jpg', 'images/produk/id23_7ROT12BK/5.jpg', 'images/produk/id23_7ROT12BK/6.jpg', 'images/produk/id23_7ROT12BK/7.jpg', 'images/produk/id23_7ROT12BK/8.jpg'], 
         description: {
@@ -637,7 +637,7 @@ const products = [
     },
     // Produk 24
     { 
-        id: 24, name: 'Macbook Pro 15" Intel Core i7 (2017) - Space Grey', specs: '16GB RAM, 512GB SSD', 
+        id: 24, kategori: 'Mac', name: 'Macbook Pro 15" Intel Core i7 (2017) - Space Grey', specs: '16GB RAM, 512GB SSD', 
         price: 5100000, stock: 3, grade: 'A', sku: '7RCF3EBK',  sold: 34,
         images: ['images/produk/id24_7RCF3EBK/1.jpg', 'images/produk/id24_7RCF3EBK/2.jpg', 'images/produk/id24_7RCF3EBK/3.jpg', 'images/produk/id24_7RCF3EBK/4.jpg', 'images/produk/id24_7RCF3EBK/5.jpg'], 
         description: {
@@ -665,7 +665,7 @@ const products = [
     },
     // Produk 25
     { 
-        id: 25, name: 'Macbook Air 13" Intel Core i5 (2019) - Space Grey', specs: '16GB RAM, 512GB SSD', 
+        id: 25, kategori: 'Mac', name: 'Macbook Air 13" Intel Core i5 (2019) - Space Grey', specs: '16GB RAM, 512GB SSD', 
         price: 5200000, stock: 3, grade: 'A', sku: '7RHX3GBK',  sold: 69,
         images: ['images/produk/id25_7RHX3GBK/1.jpg', 'images/produk/id25_7RHX3GBK/2.jpg', 'images/produk/id25_7RHX3GBK/3.jpg', 'images/produk/id25_7RHX3GBK/4.jpg', 'images/produk/id25_7RHX3GBK/5.jpg', 'images/produk/id25_7RHX3GBK/6.jpg'], 
         description: {
@@ -694,7 +694,7 @@ const products = [
     },
     // Produk 26
     { 
-        id: 26, name: 'Macbook Pro 15" Intel Core i7 (2018) - Space Grey', specs: '16GB RAM, 512GB SSD', 
+        id: 26, kategori: 'Mac', name: 'Macbook Pro 15" Intel Core i7 (2018) - Space Grey', specs: '16GB RAM, 512GB SSD', 
         price: 6900000, stock: 4, grade: 'A', sku: 'OMHZR7BR',  sold: 53,
         images: ['images/produk/id26_OMHZR7BR/1.jpg', 'images/produk/id26_OMHZR7BR/2.jpg', 'images/produk/id26_OMHZR7BR/3.jpg', 'images/produk/id26_OMHZR7BR/4.jpg', 'images/produk/id26_OMHZR7BR/5.jpg', 'images/produk/id26_OMHZR7BR/6.jpg', 'images/produk/id26_OMHZR7BR/7.jpg'], 
         description: {
@@ -724,7 +724,7 @@ const products = [
     },
     // Produk 27
     { 
-        id: 27, name: 'Macbook Air 13" Intel Core i3 (2020) - Space Grey', specs: '8GB RAM, 256GB SSD', 
+        id: 27, kategori: 'Mac', name: 'Macbook Air 13" Intel Core i3 (2020) - Space Grey', specs: '8GB RAM, 256GB SSD', 
         price: 6300000, stock: 4, grade: 'A', sku: '7RCF3DBK',  sold: 62,
         images: ['images/produk/id27_7RCF3DBK/1.jpg', 'images/produk/id27_7RCF3DBK/2.jpg', 'images/produk/id27_7RCF3DBK/3.jpg', 'images/produk/id27_7RCF3DBK/4.jpg', 'images/produk/id27_7RCF3DBK/5.jpg', 'images/produk/id27_7RCF3DBK/6.jpg'], 
         description: {
@@ -750,7 +750,7 @@ const products = [
     },
     // Produk 28
     { 
-        id: 28, name: 'Macbook Pro 15" Intel Core i7 (2019) - Space Grey', specs: '16GB RAM, 512GB SSD', 
+        id: 28, kategori: 'Mac', name: 'Macbook Pro 15" Intel Core i7 (2019) - Space Grey', specs: '16GB RAM, 512GB SSD', 
         price: 7300000, stock: 5, grade: 'A', sku: '7CHKCYBK',  sold: 45,
         images: ['images/produk/id28_7CHKCYBK/1.jpg', 'images/produk/id28_7CHKCYBK/2.jpg', 'images/produk/id28_7CHKCYBK/3.jpg', 'images/produk/id28_7CHKCYBK/4.jpg', 'images/produk/id28_7CHKCYBK/5.jpg', 'images/produk/id28_7CHKCYBK/6.jpg'], 
         description: {
@@ -781,7 +781,7 @@ const products = [
     },
     // Produk 29
     { 
-        id: 29, name: 'Macbook Pro 13" Intel Core i5 (2017) - Silver', specs: '8GB RAM, 256GB SSD', 
+        id: 29, kategori: 'Mac', name: 'Macbook Pro 13" Intel Core i5 (2017) - Silver', specs: '8GB RAM, 256GB SSD', 
         price: 4800000, stock: 0, grade: 'A', sku: 'OMHA44BK',  sold: 77,
         images: ['images/produk/id29_OMHA44BK/1.jpg', 'images/produk/id29_OMHA44BK/2.jpg', 'images/produk/id29_OMHA44BK/3.jpg', 'images/produk/id29_OMHA44BK/4.jpg', 'images/produk/id29_OMHA44BK/5.jpg', 'images/produk/id29_OMHA44BK/6.jpg'], 
         description: {
@@ -810,7 +810,7 @@ const products = [
     },
     // Produk 30
     { 
-        id: 30, name: 'Macbook Pro 13" Intel Core i7 (2016) - Space Grey', specs: '16GB RAM, 256GB SSD', 
+        id: 30, kategori: 'Mac', name: 'Macbook Pro 13" Intel Core i7 (2016) - Space Grey', specs: '16GB RAM, 256GB SSD', 
         price: 5100000, stock: 2, grade: 'A', sku: 'OMLL6QWT',  sold: 39,
         images: ['images/produk/id30_OMLL6QWT/1.jpg', 'images/produk/id30_OMLL6QWT/2.jpg', 'images/produk/id30_OMLL6QWT/3.jpg', 'images/produk/id30_OMLL6QWT/4.jpg', 'images/produk/id30_OMLL6QWT/5.jpg'], 
         description: {
@@ -839,7 +839,7 @@ const products = [
     },
     // Produk 31
     { 
-        id: 31, name: 'Macbook Air 13" Intel Core i5 (2018) - RoseGold', specs: '8GB RAM, 256GB SSD', 
+        id: 31, kategori: 'Mac', name: 'Macbook Air 13" Intel Core i5 (2018) - RoseGold', specs: '8GB RAM, 256GB SSD', 
         price: 5750000, stock: 1, grade: 'A', sku: '7RHASNGR',  sold: 25,
         images: ['images/produk/id31_7RHASNGR/1.jpg', 'images/produk/id31_7RHASNGR/2.jpg', 'images/produk/id31_7RHASNGR/3.jpg', 'images/produk/id31_7RHASNGR/4.jpg', 'images/produk/id31_7RHASNGR/5.jpg', 'images/produk/id31_7RHASNGR/6.jpg', 'images/produk/id31_7RHASNGR/7.jpg'], 
         description: {
@@ -866,7 +866,7 @@ const products = [
     },
     // Produk 32
     { 
-        id: 32, name: 'Macbook Air 13" Intel Core i5 (2017) - Silver', specs: '8GB RAM, 128GB SSD', 
+        id: 32, kategori: 'Mac', name: 'Macbook Air 13" Intel Core i5 (2017) - Silver', specs: '8GB RAM, 128GB SSD', 
         price: 2100000, stock: 0, grade: 'B', sku: '7RLLD8WH', sold: 22,
         images: ['images/produk/id32_7RLLD8WH/1.jpg', 'images/produk/id32_7RLLD8WH/2.jpg', 'images/produk/id32_7RLLD8WH/3.jpg', 'images/produk/id32_7RLLD8WH/4.jpg', 'images/produk/id32_7RLLD8WH/5.jpg'], 
         description: {
@@ -897,7 +897,7 @@ const products = [
     },
     // Produk 33
     { 
-        id: 33, name: 'Macbook Air 13" M2 (2022) - Silver', specs: '8GB RAM, 256GB SSD', 
+        id: 33, kategori: 'Mac', name: 'Macbook Air 13" M2 (2022) - Silver', specs: '8GB RAM, 256GB SSD', 
         price: 11200000, stock: 4, grade: 'A', sku: 'L9CF01BK',  sold: 51,
         images: ['images/produk/id33_L9CF01BK/1.jpg', 'images/produk/id33_L9CF01BK/2.jpg', 'images/produk/id33_L9CF01BK/3.jpg', 'images/produk/id33_L9CF01BK/4.jpg', 'images/produk/id33_L9CF01BK/5.jpg', 'images/produk/id33_L9CF01BK/6.jpg', 'images/produk/id33_L9CF01BK/7.jpg', 'images/produk/id33_L9CF01BK/8.jpg'], 
         description: {
@@ -925,7 +925,7 @@ const products = [
     },
     // Produk 34
     { 
-        id: 34, name: 'Macbook Air 13" Intel Core i3 (2020) - Space Grey', specs: '8GB RAM, 256GB SSD', 
+        id: 34, kategori: 'Mac', name: 'Macbook Air 13" Intel Core i3 (2020) - Space Grey', specs: '8GB RAM, 256GB SSD', 
         price: 6800000, stock: 2, grade: 'A', sku: '7RCF3ESV',  sold: 66,
         images: ['images/produk/id34_7RCF3ESV/1.jpg', 'images/produk/id34_7RCF3ESV/2.jpg', 'images/produk/id34_7RCF3ESV/3.jpg', 'images/produk/id34_7RCF3ESV/4.jpg', 'images/produk/id34_7RCF3ESV/5.jpg', 'images/produk/id34_7RCF3ESV/6.jpg', 'images/produk/id34_7RCF3ESV/7.jpg'], 
         description: {
@@ -949,4 +949,26 @@ const products = [
                 'USB-C Charge Cable (2m)',
                 'Kotak Original (jika tersedia)']
     },
+
+    // =========IPHONE=========IPHONE=======IPHONE=======IPHONE========IPHONE
+
+    {
+        id: 35,
+        kategori: 'iPhone', // <-- KATEGORI BARU
+        name: 'iPhone 15 Pro Max',
+        specs: '256GB - Natural Titanium',
+        price: 21500000,
+        stock: 10,
+        grade: 'Baru',
+        sku: 'IP15PM256NT',
+        sold: 55,
+        images: ['https://placehold.co/600x600/e0e0e0/333?text=iPhone+15+Pro+1', 'https://placehold.co/600x600/e0e0e0/333?text=iPhone+15+Pro+2'],
+        description: {
+            intro: 'iPhone 15 Pro Max. Ditempa dalam titanium dan menampilkan Chip A17 Pro yang terobosan, tombol Tindakan yang dapat disesuaikan, dan sistem kamera Pro yang paling kuat yang pernah ada di iPhone.',
+            specs: [ 'Layar: 6.7-inch Super Retina XDR display', 'Chip: A17 Pro', 'Kamera: Sistem kamera pro 48MP', 'Konektor: USB-C dengan USB 3' ],
+        },
+        pros: ['Bodi titanium yang ringan dan kuat', 'Performa A17 Pro untuk gaming berat', 'Kamera dengan kemampuan zoom luar biasa', 'Port USB-C yang universal'],
+        cons: ['Harga premium', 'Daya tahan baterai bisa lebih baik saat penggunaan berat'],
+        inTheBox: ['Unit iPhone 15 Pro Max', 'Kabel Pengisi Daya USB-C (1 m)']
+    }
 ];

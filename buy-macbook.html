@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watch | Macintoz Store</title>
+    <title>MacBook | Macintoz Store</title>
     <link rel="icon" type="image/png" href="/images/favicon.png">
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
+
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">Macintoz</a>
@@ -47,10 +50,52 @@
         </div>
     </div>
 
-    <main class="placeholder-page">
-        <h1>Watch Tidak Tersedia Untuk Saat Ini</h1>
-        <p>Kami sedang fokus untuk memberikan MacBook bekas dengan kualitas terbaik. Cek koleksi Mac kami!</p>
-        <a href="produk.html" class="button">Jelajahi Mac</a>
+    <header class="page-header">
+        <h1>MacBook</h1>
+        <p>Pilih MacBook yang tepat untuk Anda.</p>
+
+        <div class="product-controls">
+            <input type="text" id="search-input" class="input-field"
+                placeholder="Cari berdasarkan nama (misal: M1, Pro 16)...">
+            <select id="sort-select" class="input-field">
+                <option value="default">Urutan Default</option>
+                <option value="price-asc">Harga: Terendah ke Tertinggi</option>
+                <option value="price-desc">Harga: Tertinggi ke Terendah</option>
+            </select>
+        </div>
+    </header>
+
+    <div class="promo-banner-wrapper">
+        <div class="promo-banner">
+            <i class="fas fa-tags"></i>
+            <p>
+                Gunakan kode <strong>HAPPYUSER</strong> untuk diskon Rp 799.000!
+                <span class="promo-limit">(Hanya untuk 15 pembeli TERCEPAT)</span>
+                <a href="coupon-code.html" target="_blank">Lihat semua promo</a>
+            </p>
+        </div>
+    </div>
+
+    <main class="product-grid-container">
+        <div class="page-content-wrapper">
+            <aside class="filter-sidebar">
+                <div class="filter-sidebar-header">
+                    <h3>Filter</h3>
+                    <button id="toggle-filter-btn" class="toggle-filter-btn">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                <div id="collapsible-filters" class="collapsible-filters">
+                    <div id="filters-container">
+                    </div>
+                </div>
+            </aside>
+
+            <main class="product-grid-container">
+                <div id="product-grid" class="product-grid">
+                </div>
+            </main>
+        </div>
     </main>
 
     <footer class="footer">
@@ -107,8 +152,9 @@
             </div>
         </div>
     </footer>
-    
+
     <script src="/produk.js"></script>
     <script src="/script.js"></script>
 </body>
+
 </html>

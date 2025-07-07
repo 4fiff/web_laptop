@@ -159,7 +159,8 @@ document.addEventListener('DOMContentLoaded', () => {
         function displayProducts() {
             const searchTerm = searchInput.value.toLowerCase();
             const sortOrder = sortSelect.value;
-            let processedProducts = [...products];
+            let categoryProducts = products.filter(p => p.kategori === category);
+            let processedProducts = [...categoryProducts];
 
             Object.keys(activeFilters).forEach(category => {
                 if (activeFilters[category].length > 0) {
@@ -194,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 processedProducts.forEach(product => {
                     const card = document.createElement('a');
-                    card.href = `./detail-produk.html?id=${product.id}`;
+                    card.href = `/product/buy-${product.kategori.toLowerCase()}/detail-produk?id=${product.id}`;
                     card.className = 'product-card';
                     card.style.textDecoration = 'none';
                     card.style.color = 'inherit';
@@ -724,7 +725,8 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSharedUI();
         initializeNavbar();
         const path = window.location.pathname;
-        if (path.includes('/produk')) { renderProductPage(); } 
+        if (path.includes('/product/buy-macbook')) { renderProductPage('Mac'); }
+        else if (path.includes('/product/buy-iphone')) {renderProductPage('iPhone');} 
         else if (path.includes('/detail-produk')) { renderDetailPage(); } 
         else if (path.includes('/keranjang')) { renderCartPage(); } 
         else if (path.includes('/pembayaran')) { renderCheckoutPage(); } 
