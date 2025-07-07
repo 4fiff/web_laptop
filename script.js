@@ -130,22 +130,42 @@ document.addEventListener('DOMContentLoaded', () => {
         const toggleFilterBtn = document.getElementById('toggle-filter-btn');
         const collapsibleFilters = document.getElementById('collapsible-filters');
 
-        let activeFilters = { model: [], chip: [], size: [], grade: [] };
+        let activeFilters = {
+            model: [],
+            chip: [],
+            size: [],
+            grade: [],
+            iphoneModel: [] // Kategori filter baru khusus iPhone
+        };
         
         function createFilters() {
+            let filtersHTML = '';
 
             const categoryProducts = products.filter(p => p.kategori === category);
-            const models = [...new Set(categoryProducts.map(p => p.name.includes('Air') ? 'Air' : 'Pro'))];
-            const chips = [...new Set(categoryProducts.flatMap(p => (p.name.match(/(M[1-4]|Intel i[3579])/g) || [])))];
-            const sizes = [...new Set(categoryProducts.flatMap(p => (p.name.match(/1[3-6]/g) || [])))];
-            const grades = [...new Set(categoryProducts.map(p => p.grade))];
+            if (category === 'Mac') {
+                // --- Logika untuk membuat filter Mac ---
+                const models = [...new Set(categoryProducts.map(p => p.name.includes('Air') ? 'Air' : 'Pro'))];
+                const chips = [...new Set(categoryProducts.flatMap(p => (p.name.match(/(M[1-4]|Intel i[3579])/g) || [])))];
+                const sizes = [...new Set(categoryProducts.flatMap(p => (p.name.match(/1[3-6]/g) || [])))];
+                const grades = [...new Set(categoryProducts.map(p => p.grade))];
 
-            filtersContainer.innerHTML = `
-                <div class="filter-group"><h4>Model</h4>${models.map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.toLowerCase()}" data-category="model" value="${model}"><label for="model-${model.toLowerCase()}">MacBook ${model}</label></div>`).join('')}</div>
-                <div class="filter-group"><h4>Chip</h4>${chips.sort().map(chip => `<div class="filter-option"><input type="checkbox" id="chip-${chip.toLowerCase().replace(' ', '-')}" data-category="chip" value="${chip}"><label for="chip-${chip.toLowerCase().replace(' ', '-')}"">${chip}</label></div>`).join('')}</div>
-                <div class="filter-group"><h4>Ukuran Layar</h4>${sizes.sort().map(size => `<div class="filter-option"><input type="checkbox" id="size-${size}" data-category="size" value="${size}"><label for="size-${size}">${size} Inci</label></div>`).join('')}</div>
-                <div class="filter-group"><h4>Kondisi</h4>${grades.map(grade => `<div class="filter-option"><input type="checkbox" id="grade-${grade.toLowerCase()}" data-category="grade" value="${grade}"><label for="grade-${grade.toLowerCase()}">${grade === 'Baru' ? 'Baru (BNIB)' : `Grade ${grade}`}</label></div>`).join('')}</div>
-            `;
+                filtersHTML = `
+                    <div class="filter-group"><h4>Model</h4>${models.map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.toLowerCase()}" data-category="model" value="${model}"><label for="model-${model.toLowerCase()}">MacBook ${model}</label></div>`).join('')}</div>
+                    <div class="filter-group"><h4>Chip</h4>${chips.sort().map(chip => `<div class="filter-option"><input type="checkbox" id="chip-${chip.toLowerCase().replace(' ', '-')}" data-category="chip" value="${chip}"><label for="chip-${chip.toLowerCase().replace(' ', '-')}"">${chip}</label></div>`).join('')}</div>
+                    <div class="filter-group"><h4>Ukuran Layar</h4>${sizes.sort().map(size => `<div class="filter-option"><input type="checkbox" id="size-${size}" data-category="size" value="${size}"><label for="size-${size}">${size} Inci</label></div>`).join('')}</div>
+                    <div class="filter-group"><h4>Kondisi</h4>${grades.map(grade => `<div class="filter-option"><input type="checkbox" id="grade-${grade.toLowerCase()}" data-category="grade" value="${grade}"><label for="grade-${grade.toLowerCase()}">${grade === 'Baru' ? 'Baru (BNIB)' : `Grade ${grade}`}</label></div>`).join('')}</div>
+                `;
+            } else if (category === 'iPhone') {
+                // --- Logika untuk membuat filter iPhone ---
+                const iphoneModels = [...new Set(categoryProducts.flatMap(p => (p.name.match(/iPhone \d{1,2}/g) || [])))];
+
+                filtersHTML = `
+                    <div class="filter-group"><h4>Model iPhone</h4>${iphoneModels.map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.replace(' ', '-').toLowerCase()}" data-category="iphoneModel" value="${model}"><label for="model-${model.replace(' ', '-').toLowerCase()}">${model}</label></div>`).join('')}</div>
+                `;
+                // Filter Kondisi tidak ditampilkan untuk iPhone karena semua 'Baru'
+            }
+            
+            filtersContainer.innerHTML = filtersHTML;
 
             document.querySelectorAll('#filters-container input[type="checkbox"]').forEach(checkbox => {
                 checkbox.addEventListener('change', (e) => {
