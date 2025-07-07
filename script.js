@@ -84,13 +84,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveCart = () => localStorage.setItem('macintozCart', JSON.stringify(cart));
     
     const addToCart = (productData, quantity = 1) => {
-        let productToAdd;        
+        let productToAdd;
         if (typeof productData === 'number') {
             productToAdd = products.find(p => p.id === productData);
         } else {
             productToAdd = productData;
         }
+
         if (!productToAdd) return; 
+
         if (productToAdd.stock < quantity) {
             alert('Maaf, stok produk tidak mencukupi.');
             return;
@@ -100,11 +102,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const cartItem = cart.find(item => item.id === cartItemId);
 
         if (cartItem) {
-            if ((cartItem.quantity + quantity) <= productToAdd.stock) { cartItem.quantity += quantity; } 
-            else { alert('Jumlah di keranjang akan melebihi stok yang tersedia.'); return; }
+            if ((cartItem.quantity + quantity) <= productToAdd.stock) {
+                cartItem.quantity += quantity;
+            } else {
+                alert('Jumlah di keranjang akan melebihi stok yang tersedia.');
+                return;
+            }
         } else {
             const { images, description, variants, ...productInfo } = productToAdd;
-            cart.push({ ...productInfo, id: cartItemId, img: productToAdd.img, quantity: quantity });
+            cart.push({ 
+                ...productInfo,
+                id: cartItemId,
+                img: productToAdd.img || (images ? images[Object.keys(images)[0]][0] : ''),
+                quantity: quantity 
+            });
         }
         saveCart();
         updateSharedUI();
@@ -114,11 +125,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateQuantity = (productId, newQuantity) => {
         const cartItem = cart.find(item => item.id === productId);
         if (!cartItem) return;
-        if (newQuantity <= 0) { cart = cart.filter(item => item.id !== productId); } 
-        else if (newQuantity > cartItem.stock) { alert(`Stok hanya tersisa ${cartItem.stock} buah.`); cartItem.quantity = cartItem.stock; } 
-        else { cartItem.quantity = newQuantity; }
+
+        if (newQuantity <= 0) {
+            cart = cart.filter(item => item.id !== productId);
+        } else if (newQuantity > cartItem.stock) {
+            alert(`Stok hanya tersisa ${cartItem.stock} buah.`);
+            cartItem.quantity = cartItem.stock;
+        } else {
+            cartItem.quantity = newQuantity;
+        }
         saveCart();
-        if (window.location.pathname.includes('/keranjang')) { renderCartPage(); }
+        if (window.location.pathname.includes('/keranjang')) {
+            renderCartPage();
+        }
     };
 
     const updateSharedUI = () => {
@@ -137,42 +156,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const searchInput = document.getElementById('search-input');
         const sortSelect = document.getElementById('sort-select');
         const filtersContainer = document.getElementById('filters-container');
-
-        let activeFilters = {
-            model: [],
-            chip: [],
-            size: [],
-            grade: [],
-            iphoneModel: [] // Kategori filter baru khusus iPhone
-        };
+        let activeFilters = { model: [], chip: [], size: [], grade: [], iphoneModel: [] };
         
         function createFilters() {
             let filtersHTML = '';
-
             const categoryProducts = products.filter(p => p.kategori === category);
+
             if (category === 'Mac') {
-                // --- Logika untuk membuat filter Mac ---
                 const models = [...new Set(categoryProducts.map(p => p.name.includes('Air') ? 'Air' : 'Pro'))];
                 const chips = [...new Set(categoryProducts.flatMap(p => (p.name.match(/(M[1-4]|Intel i[3579])/g) || [])))];
                 const sizes = [...new Set(categoryProducts.flatMap(p => (p.name.match(/1[3-6]/g) || [])))];
                 const grades = [...new Set(categoryProducts.map(p => p.grade))];
-
-                filtersHTML = `
-                    <div class="filter-group"><h4>Model</h4>${models.map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.toLowerCase()}" data-category="model" value="${model}"><label for="model-${model.toLowerCase()}">MacBook ${model}</label></div>`).join('')}</div>
-                    <div class="filter-group"><h4>Chip</h4>${chips.sort().map(chip => `<div class="filter-option"><input type="checkbox" id="chip-${chip.toLowerCase().replace(' ', '-')}" data-category="chip" value="${chip}"><label for="chip-${chip.toLowerCase().replace(' ', '-')}"">${chip}</label></div>`).join('')}</div>
-                    <div class="filter-group"><h4>Ukuran Layar</h4>${sizes.sort().map(size => `<div class="filter-option"><input type="checkbox" id="size-${size}" data-category="size" value="${size}"><label for="size-${size}">${size} Inci</label></div>`).join('')}</div>
-                    <div class="filter-group"><h4>Kondisi</h4>${grades.map(grade => `<div class="filter-option"><input type="checkbox" id="grade-${grade.toLowerCase()}" data-category="grade" value="${grade}"><label for="grade-${grade.toLowerCase()}">${grade === 'Baru' ? 'Baru (BNIB)' : `Grade ${grade}`}</label></div>`).join('')}</div>
-                `;
+                filtersHTML = `<div class="filter-group"><h4>Model</h4>${models.map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.toLowerCase()}" data-category="model" value="${model}"><label for="model-${model.toLowerCase()}">MacBook ${model}</label></div>`).join('')}</div><div class="filter-group"><h4>Chip</h4>${chips.sort().map(chip => `<div class="filter-option"><input type="checkbox" id="chip-${chip.toLowerCase().replace(' ', '-')}" data-category="chip" value="${chip}"><label for="chip-${chip.toLowerCase().replace(' ', '-')}"">${chip}</label></div>`).join('')}</div><div class="filter-group"><h4>Ukuran Layar</h4>${sizes.sort().map(size => `<div class="filter-option"><input type="checkbox" id="size-${size}" data-category="size" value="${size}"><label for="size-${size}">${size} Inci</label></div>`).join('')}</div><div class="filter-group"><h4>Kondisi</h4>${grades.sort().map(grade => `<div class="filter-option"><input type="checkbox" id="grade-${grade.toLowerCase()}" data-category="grade" value="${grade}"><label for="grade-${grade.toLowerCase()}">${grade === 'Baru' ? 'Baru (BNIB)' : `Grade ${grade}`}</label></div>`).join('')}</div>`;
             } else if (category === 'iPhone') {
-                // Logika untuk membuat filter iPhone (HANYA model)
                 const iphoneModels = [...new Set(categoryProducts.map(p => p.name))];
-                filtersHTML = `
-                    <div class="filter-group"><h4>Model iPhone</h4>${iphoneModels.sort().map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.replace(/\s+/g, '-').toLowerCase()}" data-category="iphoneModel" value="${model}"><label for="model-${model.replace(/\s+/g, '-').toLowerCase()}">${model}</label></div>`).join('')}</div>
-                `;
+                filtersHTML = `<div class="filter-group"><h4>Model iPhone</h4>${iphoneModels.sort().map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.replace(/\s+/g, '-').toLowerCase()}" data-category="iphoneModel" value="${model}"><label for="model-${model.replace(/\s+/g, '-').toLowerCase()}">${model}</label></div>`).join('')}</div>`;
             }
             
             filtersContainer.innerHTML = filtersHTML;
-
             document.querySelectorAll('#filters-container input[type="checkbox"]').forEach(checkbox => {
                 checkbox.addEventListener('change', (e) => {
                     const filterCategory = e.target.dataset.category;
@@ -208,8 +209,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 processedProducts = processedProducts.filter(product => product.name.toLowerCase().includes(searchTerm));
             }
 
-            if (sortOrder === 'price-asc') { processedProducts.sort((a, b) => a.price - b.price); } 
-            else if (sortOrder === 'price-desc') { processedProducts.sort((a, b) => b.price - a.price); }
+            if (sortOrder === 'price-asc') {
+                processedProducts.sort((a, b) => (a.basePrice || a.price) - (b.basePrice || b.price));
+            } else if (sortOrder === 'price-desc') {
+                processedProducts.sort((a, b) => (b.basePrice || b.price) - (a.basePrice || a.price));
+            }
 
             productGrid.innerHTML = '';
             if (processedProducts.length === 0) {
@@ -226,9 +230,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     const displayPrice = isVariant ? product.basePrice : product.price;
                     const displayImage = isVariant ? product.images[product.variants[0].color][0] : product.images[0];
                     const displaySpecs = isVariant ? `${product.variants.length} pilihan warna & kapasitas` : product.specs;
-                    const displayGrade = product.grade ? (product.grade === 'Baru' ? 'BARU' : `GRADE ${product.grade}`) : '';
+                    const gradeText = product.grade ? (product.grade === 'Baru' ? 'BARU' : `GRADE ${product.grade}`) : '';
                     const gradeBadgeClass = product.grade ? `product-grade-badge grade-${product.grade.toLowerCase()}` : '';
-                    const gradeBadge = product.grade ? `<div class="${gradeBadgeClass}">${displayGrade}</div>` : '';
+                    const gradeBadge = product.grade ? `<div class="${gradeBadgeClass}">${gradeText}</div>` : '';
                     const buttonText = isVariant ? 'Lihat Opsi' : 'Lihat Detail';
 
                     if(isVariant){
@@ -257,133 +261,144 @@ document.addEventListener('DOMContentLoaded', () => {
         const notFoundDiv = document.getElementById('product-not-found');
         const params = new URLSearchParams(window.location.search);
         const productId = parseInt(params.get('id'));
-        if (isNaN(productId)) { contentDiv.style.display = 'none'; notFoundDiv.style.display = 'block'; return; }
+
+        if (isNaN(productId)) {
+            contentDiv.style.display = 'none';
+            notFoundDiv.style.display = 'block';
+            return;
+        }
 
         const product = products.find(p => p.id === productId);
-        if (!product) { contentDiv.style.display = 'none'; notFoundDiv.style.display = 'block'; return; }
 
-        // Jika produk tidak punya varian (misal: MacBook lama), gunakan render standar.
-        if (!product.variants) {
-            // Render standar untuk produk non-varian
-            contentDiv.style.display = 'flex'; notFoundDiv.style.display = 'none'; document.title = `${product.name} - Macintoz`;
-            document.getElementById('detail-name').textContent = product.name;
-            const gradeElement = document.getElementById('detail-grade');
+        if (!product) {
+            contentDiv.style.display = 'none';
+            notFoundDiv.style.display = 'block';
+            return;
+        }
+
+        if (product.variants && product.variants.length > 0) {
+            renderVariantProduct(product);
+        } else {
+            renderStandardProduct(product);
+        }
+    };
+    
+    function renderStandardProduct(product) {
+        const variantOptionsContainer = document.getElementById('variant-options-container');
+        if (variantOptionsContainer) variantOptionsContainer.style.display = 'none';
+
+        document.title = `${product.name} - Macintoz`;
+        document.getElementById('detail-name').textContent = product.name;
+
+        const gradeElement = document.getElementById('detail-grade');
+        if (gradeElement) {
             const gradeText = product.grade === 'Baru' ? 'BARU' : `GRADE ${product.grade}`;
             const gradeBadgeClass = `product-grade-badge grade-${product.grade.toLowerCase()}`;
             const gradeDescriptions = { 'A': 'Seperti Baru', 'B': 'Sangat Baik', 'C': 'Baik' };
             let gradeDescriptionText = (product.grade === 'Baru') ? 'Brand New In Box (BNIB)' : `Kondisi: ${gradeDescriptions[product.grade] || product.grade}`;
             gradeElement.innerHTML = `<div class="${gradeBadgeClass}">${gradeText}</div><span>${gradeDescriptionText}</span>`;
-            document.getElementById('detail-price').textContent = formatRupiah(product.price);
-            document.getElementById('detail-sku').textContent = `SKU: ${product.sku}`;
-            const descriptionContainer = document.getElementById('detail-description-container');
-            descriptionContainer.innerHTML = ''; 
-            const introParagraph = document.createElement('p');
-            introParagraph.textContent = product.description.intro;
-            descriptionContainer.appendChild(introParagraph);
-            if (currentProduct.description.specs && currentProduct.description.specs.length > 0) {
-                const specsSection = document.createElement('div');
-                specsSection.className = 'detail-description-section';
-                const specsHeader = document.createElement('h4');
-                specsHeader.textContent = 'Spesifikasi Detail:';
-                const specsList = document.createElement('ul');
-                currentProduct.description.specs.forEach(specText => { const listItem = document.createElement('li'); listItem.textContent = specText; specsList.appendChild(listItem); });
-                specsSection.appendChild(specsHeader);
-                specsSection.appendChild(specsList);
-                descriptionContainer.appendChild(specsSection);
-            }
-            const prosConsContainer = document.getElementById('detail-pros-cons-container');
-            prosConsContainer.innerHTML = '';
-            if (currentProduct.pros && currentProduct.pros.length > 0) {
-                const prosSection = document.createElement('div');
-                prosSection.id = 'detail-pros';
-                prosSection.className = 'detail-pros-cons-section';
-                const prosHeader = document.createElement('h4');
-                prosHeader.textContent = 'Kelebihan Produk';
-                const prosList = document.createElement('ul');
-                currentProduct.pros.forEach(text => { const li = document.createElement('li'); li.textContent = text; prosList.appendChild(li); });
-                prosSection.appendChild(prosHeader);
-                prosSection.appendChild(prosList);
-                prosConsContainer.appendChild(prosSection);
-            }
-            if (currentProduct.cons && currentProduct.cons.length > 0) {
-                const consSection = document.createElement('div');
-                consSection.id = 'detail-cons';
-                consSection.className = 'detail-pros-cons-section';
-                const consHeader = document.createElement('h4');
-                consHeader.textContent = 'Kekurangan Produk';
-                const consList = document.createElement('ul');
-                currentProduct.cons.forEach(text => { const li = document.createElement('li'); li.textContent = text; consList.appendChild(li); });
-                consSection.appendChild(consHeader);
-                consSection.appendChild(consList);
-                prosConsContainer.appendChild(consSection);
-            }
-            const inTheBoxContainer = document.getElementById('detail-in-the-box-container');
-            inTheBoxContainer.innerHTML = '';
-            if (currentProduct.inTheBox && currentProduct.inTheBox.length > 0) {
-                const inTheBoxSection = document.createElement('div');
-                inTheBoxSection.className = 'detail-description-section';
-                const inTheBoxHeader = document.createElement('h4');
-                inTheBoxHeader.textContent = 'Kelengkapan dalam Kotak';
-                const inTheBoxList = document.createElement('ul');
-                currentProduct.inTheBox.forEach(text => { const li = document.createElement('li'); li.textContent = text; inTheBoxList.appendChild(li); });
-                inTheBoxSection.appendChild(inTheBoxHeader);
-                inTheBoxSection.appendChild(inTheBoxList);
-                inTheBoxContainer.appendChild(inTheBoxSection);
-            }
-            const stockElement = document.getElementById('detail-stock');
-            let stockText = product.stock > 0 ? `Ketersediaan: Sisa ${product.stock} unit` : `Ketersediaan: Stok Habis`;
-            stockElement.textContent = stockText;
-            if (product.sold > 0) {
-                stockElement.innerHTML += ` &bull; <span class="sold-info"><i class="fas fa-fire"></i> ${product.sold} terjual</span>`;
-            
-            }
-            const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
-            if (product.stock > 0) { 
-                addToCartBtn.disabled = false;
-                addToCartBtn.textContent = 'Tambah ke Keranjang';
-                addToCartBtn.onclick = () => addToCart(product.id); 
-            } else { 
-                addToCartBtn.disabled = true; 
-                addToCartBtn.textContent = 'Stok Kosong'; 
-            }
+        }
+        
+        document.getElementById('detail-price').textContent = formatRupiah(product.price);
+        document.getElementById('detail-sku').textContent = `SKU: ${product.sku}`;
+        
+        const descriptionContainer = document.getElementById('detail-description-container');
+        descriptionContainer.innerHTML = '';
+        const introParagraph = document.createElement('p');
+        introParagraph.textContent = product.description.intro;
+        descriptionContainer.appendChild(introParagraph);
 
-            const imgElement = document.getElementById('detail-img');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            const dotsContainer = document.getElementById('slider-dots');
-            let currentImageIndex = 0;
-            function updateSlider() {
-                imgElement.src = currentProduct.images[currentImageIndex];
-                imgElement.alt = `${currentProduct.name} - Gambar ${currentImageIndex + 1}`;
-                document.querySelectorAll('.slider-dot').forEach((dot, index) => { dot.classList.toggle('active', index === currentImageIndex); });
-            }
-            dotsContainer.innerHTML = '';
-            currentProduct.images.forEach((_, index) => { const dot = document.createElement('span'); dot.className = 'slider-dot'; dot.onclick = () => { currentImageIndex = index; updateSlider(); }; dotsContainer.appendChild(dot); });
-            prevBtn.onclick = () => { currentImageIndex = (currentImageIndex - 1 + currentProduct.images.length) % currentProduct.images.length; updateSlider(); };
-            nextBtn.onclick = () => { currentImageIndex = (currentImageIndex + 1) % currentProduct.images.length; updateSlider(); };
-            updateSlider();
-            const relatedGrid = document.getElementById('related-products-grid');
-            relatedGrid.innerHTML = '';
-            const primaryModel = currentProduct.name.includes('Air') ? 'Air' : 'Pro';
-            let relatedProducts = products.filter(p => p.name.includes(primaryModel) && p.id !== currentProduct.id);
-            relatedProducts.sort(() => 0.5 - Math.random());
-            const selectedRelated = relatedProducts.slice(0, 4);
-            selectedRelated.forEach(product => {
-                const card = document.createElement('a');
-                card.href = `./detail-produk.html?id=${product.id}`;
-                card.className = 'product-card';
-                card.style.textDecoration = 'none';
-                card.style.color = 'inherit';
-                const gradeBadge = `<div class="product-grade-badge grade-${product.grade.toLowerCase()}">${product.grade === 'Baru' ? 'BARU' : `GRADE ${product.grade}`}</div>`;
-                let stockHTML = product.stock > 0 ? `<p class="product-stock">Sisa stok: ${product.stock}</p>` : '';
-                card.innerHTML = `<img src="${product.images[0].replace('600x600', '240x240')}" alt="${product.name}"><div>${gradeBadge}<h3 class="product-name">${product.name}</h3><p class="product-specs">${product.specs}</p>${stockHTML}<p class="product-price">${formatRupiah(product.price)}</p></div>`;
-                relatedGrid.appendChild(card);
+        if (product.description.specs && product.description.specs.length > 0) {
+            const specsSection = document.createElement('div');
+            specsSection.className = 'detail-description-section';
+            const specsHeader = document.createElement('h4');
+            specsHeader.textContent = 'Spesifikasi Detail:';
+            const specsList = document.createElement('ul');
+            product.description.specs.forEach(specText => {
+                const listItem = document.createElement('li');
+                listItem.textContent = specText;
+                specsList.appendChild(listItem);
             });
-        } else {
-            contentDiv.style.display = 'none';
-            notFoundDiv.style.display = 'block';
+            specsSection.appendChild(specsHeader);
+            specsSection.appendChild(specsList);
+            descriptionContainer.appendChild(specsSection);
         }
 
+        const prosConsContainer = document.getElementById('detail-pros-cons-container');
+        prosConsContainer.innerHTML = '';
+        if (product.pros && product.pros.length > 0) {
+            const prosSection = document.createElement('div');
+            prosSection.id = 'detail-pros';
+            prosSection.className = 'detail-pros-cons-section';
+            const prosHeader = document.createElement('h4');
+            prosHeader.textContent = 'Kelebihan Produk';
+            const prosList = document.createElement('ul');
+            product.pros.forEach(text => { const li = document.createElement('li'); li.textContent = text; prosList.appendChild(li); });
+            prosSection.appendChild(prosHeader);
+            prosSection.appendChild(prosList);
+            prosConsContainer.appendChild(prosSection);
+        }
+        if (product.cons && product.cons.length > 0) {
+            const consSection = document.createElement('div');
+            consSection.id = 'detail-cons';
+            consSection.className = 'detail-pros-cons-section';
+            const consHeader = document.createElement('h4');
+            consHeader.textContent = 'Kekurangan Produk';
+            const consList = document.createElement('ul');
+            product.cons.forEach(text => { const li = document.createElement('li'); li.textContent = text; consList.appendChild(li); });
+            consSection.appendChild(consHeader);
+            consSection.appendChild(consList);
+            prosConsContainer.appendChild(consSection);
+        }
+
+        const inTheBoxContainer = document.getElementById('detail-in-the-box-container');
+        inTheBoxContainer.innerHTML = '';
+        if (product.inTheBox && product.inTheBox.length > 0) {
+            const inTheBoxSection = document.createElement('div');
+            inTheBoxSection.className = 'detail-description-section';
+            const inTheBoxHeader = document.createElement('h4');
+            inTheBoxHeader.textContent = 'Kelengkapan dalam Kotak';
+            const inTheBoxList = document.createElement('ul');
+            product.inTheBox.forEach(text => { const li = document.createElement('li'); li.textContent = text; inTheBoxList.appendChild(li); });
+            inTheBoxSection.appendChild(inTheBoxHeader);
+            inTheBoxSection.appendChild(inTheBoxList);
+            inTheBoxContainer.appendChild(inTheBoxSection);
+        }
+        
+        const stockElement = document.getElementById('detail-stock');
+        let stockText = product.stock > 0 ? `Ketersediaan: Sisa ${product.stock} unit` : `Ketersediaan: Stok Habis`;
+        stockElement.textContent = stockText;
+        if (product.stock <= CONFIG.LOW_STOCK_THRESHOLD) { stockElement.classList.add('low-stock'); } 
+        else { stockElement.classList.remove('low-stock'); }
+        if (product.sold > 0) {
+            stockElement.innerHTML += ` &bull; <span class="sold-info"><i class="fas fa-fire"></i> ${product.sold} terjual</span>`;
+        }
+
+        const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
+        if (product.stock > 0) {
+            addToCartBtn.disabled = false;
+            addToCartBtn.textContent = 'Tambah ke Keranjang';
+            addToCartBtn.onclick = () => addToCart(product.id);
+        } else {
+            addToCartBtn.disabled = true;
+            addToCartBtn.textContent = 'Stok Kosong';
+            addToCartBtn.onclick = null;
+        }
+
+        const imgElement = document.getElementById('detail-img');
+        imgElement.src = `/${product.images[0]}`;
+        // Logika slider dan produk terkait bisa ditambahkan kembali di sini jika diperlukan
+    }
+
+    function renderVariantProduct(product) {
+        const variantOptionsContainer = document.getElementById('variant-options-container');
+        if (variantOptionsContainer) variantOptionsContainer.style.display = 'block';
+
+        const gradeElement = document.getElementById('detail-grade');
+        if(gradeElement) gradeElement.innerHTML = '';
+        
+        document.title = `${product.name} - Macintoz`;
+        
         let selectedColor = product.variants[0].color;
         let selectedStorage = product.variants[0].storage;
 
@@ -414,6 +429,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (currentVariant.sold > 0) {
                 stockEl.innerHTML += ` &bull; <span class="sold-info"><i class="fas fa-fire"></i> ${currentVariant.sold} terjual</span>`;
+            } else {
+                 const soldInfo = stockEl.querySelector('.sold-info');
+                 if(soldInfo) soldInfo.parentElement.innerHTML = stockEl.textContent;
             }
 
             addToCartBtn.disabled = currentVariant.stock === 0;
@@ -421,11 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCartBtn.onclick = () => {
                 if(currentVariant.stock > 0) {
                     const itemToAdd = {
-                        id: currentVariant.sku,
-                        name: `${product.name} (${currentVariant.storage}, ${currentVariant.color})`,
-                        price: finalPrice,
-                        stock: currentVariant.stock,
-                        img: product.images[currentVariant.color] ? product.images[currentVariant.color][0] : ''
+                        id: currentVariant.sku, name: `${product.name} (${currentVariant.storage}, ${currentVariant.color})`, price: finalPrice, stock: currentVariant.stock, img: product.images[currentVariant.color] ? product.images[currentVariant.color][0] : ''
                     };
                     addToCart(itemToAdd, 1);
                 }
@@ -480,21 +494,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     option.classList.add('disabled');
                 }
-
                 if (storageValue === selectedStorage) { option.classList.add('active'); }
                 storageSelector.appendChild(option);
             });
         }
-
-        document.getElementById('detail-grade').innerHTML = ''; // Sembunyikan grade A/B/C untuk produk varian
+        
         nameEl.textContent = product.name;
-        const descriptionContainer = document.getElementById('detail-description-container');
-        descriptionContainer.innerHTML = `<p>${product.description.intro}</p>`;
+        document.getElementById('detail-description-container').innerHTML = `<p>${product.description.intro}</p>`;
         // ... (Logika untuk menampilkan pros, cons, dll. bisa ditambahkan di sini jika perlu)
         
         updateDisplay();
         updateColorOptions();
-    };
+    }
     
     const renderCartPage = () => {
         const itemsList = document.getElementById('cart-items-list');
