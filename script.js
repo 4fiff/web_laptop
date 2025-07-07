@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let soldText = product.sold > 0 ? `<span class="sold-info"><i class="fas fa-fire"></i> ${product.sold} terjual</span>` : '';
                     const inventoryHTML = `<div class="inventory-info">${stockText}${soldText ? ` | ${soldText}` : ''}</div>`;
 
-                    card.innerHTML = `<img src="${product.images[0].replace('600x600', '240x240')}" alt="${product.name}"><div>${gradeBadge}<h3 class="product-name">${product.name}</h3><p class="product-specs">${product.specs}</p>${inventoryHTML}<p class="product-price">${formatRupiah(product.price)}</p>${product.stock > 0 ? `<div class="button">Lihat Detail</div>` : `<div class="button button-secondary" style="cursor:not-allowed;">Stok Kosong</div>`}</div>`;
+                    card.innerHTML = `<img src="/${product.images[0].replace('600x600', '240x240')}" alt="${product.name}"><div>${gradeBadge}<h3 class="product-name">${product.name}</h3><p class="product-specs">${product.specs}</p>${inventoryHTML}<p class="product-price">${formatRupiah(product.price)}</p>${product.stock > 0 ? `<div class="button">Lihat Detail</div>` : `<div class="button button-secondary" style="cursor:not-allowed;">Stok Kosong</div>`}</div>`;
                     productGrid.appendChild(card);
                 });
             }
