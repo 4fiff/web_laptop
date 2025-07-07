@@ -84,17 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveCart = () => localStorage.setItem('macintozCart', JSON.stringify(cart));
     
     const addToCart = (productData, quantity = 1) => {
-        let productToAdd;
-        // Jika yang dikirim adalah ID (untuk produk non-varian seperti Mac), cari produknya
+        let productToAdd;        
         if (typeof productData === 'number') {
             productToAdd = products.find(p => p.id === productData);
         } else {
-            // Jika yang dikirim adalah objek (untuk produk varian seperti iPhone), langsung gunakan
             productToAdd = productData;
         }
-
         if (!productToAdd) return; 
-
         if (productToAdd.stock < quantity) {
             alert('Maaf, stok produk tidak mencukupi.');
             return;
@@ -104,21 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const cartItem = cart.find(item => item.id === cartItemId);
 
         if (cartItem) {
-            if ((cartItem.quantity + quantity) <= productToAdd.stock) {
-                cartItem.quantity += quantity;
-            } else {
-                alert('Jumlah di keranjang akan melebihi stok yang tersedia.');
-                return;
-            }
+            if ((cartItem.quantity + quantity) <= productToAdd.stock) { cartItem.quantity += quantity; } 
+            else { alert('Jumlah di keranjang akan melebihi stok yang tersedia.'); return; }
         } else {
-            // Pastikan data yang masuk ke keranjang seragam
             const { images, description, variants, ...productInfo } = productToAdd;
-            cart.push({ 
-                ...productInfo,
-                id: cartItemId, // Gunakan ID unik dari SKU atau ID asli
-                img: productToAdd.img, // 'img' sudah disiapkan saat objek dikirim ke fungsi
-                quantity: quantity 
-            });
+            cart.push({ ...productInfo, id: cartItemId, img: productToAdd.img, quantity: quantity });
         }
         saveCart();
         updateSharedUI();
@@ -128,19 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateQuantity = (productId, newQuantity) => {
         const cartItem = cart.find(item => item.id === productId);
         if (!cartItem) return;
-        // Stok untuk item di keranjang sudah tercatat, jadi tidak perlu cari produk asli
-        if (newQuantity <= 0) {
-            cart = cart.filter(item => item.id !== productId);
-        } else if (newQuantity > cartItem.stock) {
-            alert(`Stok hanya tersisa ${cartItem.stock} buah.`);
-            cartItem.quantity = cartItem.stock;
-        } else {
-            cartItem.quantity = newQuantity;
-        }
+        if (newQuantity <= 0) { cart = cart.filter(item => item.id !== productId); } 
+        else if (newQuantity > cartItem.stock) { alert(`Stok hanya tersisa ${cartItem.stock} buah.`); cartItem.quantity = cartItem.stock; } 
+        else { cartItem.quantity = newQuantity; }
         saveCart();
-        if (window.location.pathname.includes('/keranjang')) {
-            renderCartPage();
-        }
+        if (window.location.pathname.includes('/keranjang')) { renderCartPage(); }
     };
 
     const updateSharedUI = () => {
@@ -159,8 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const searchInput = document.getElementById('search-input');
         const sortSelect = document.getElementById('sort-select');
         const filtersContainer = document.getElementById('filters-container');
-        const toggleFilterBtn = document.getElementById('toggle-filter-btn');
-        const collapsibleFilters = document.getElementById('collapsible-filters');
 
         let activeFilters = {
             model: [],
@@ -188,13 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="filter-group"><h4>Kondisi</h4>${grades.map(grade => `<div class="filter-option"><input type="checkbox" id="grade-${grade.toLowerCase()}" data-category="grade" value="${grade}"><label for="grade-${grade.toLowerCase()}">${grade === 'Baru' ? 'Baru (BNIB)' : `Grade ${grade}`}</label></div>`).join('')}</div>
                 `;
             } else if (category === 'iPhone') {
-                // --- Logika untuk membuat filter iPhone ---
-                const iphoneModels = [...new Set(categoryProducts.flatMap(p => (p.name.match(/iPhone \d{1,2}/g) || [])))];
-
+                // Logika untuk membuat filter iPhone (HANYA model)
+                const iphoneModels = [...new Set(categoryProducts.map(p => p.name))];
                 filtersHTML = `
-                    <div class="filter-group"><h4>Model iPhone</h4>${iphoneModels.map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.replace(' ', '-').toLowerCase()}" data-category="iphoneModel" value="${model}"><label for="model-${model.replace(' ', '-').toLowerCase()}">${model}</label></div>`).join('')}</div>
+                    <div class="filter-group"><h4>Model iPhone</h4>${iphoneModels.sort().map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.replace(/\s+/g, '-').toLowerCase()}" data-category="iphoneModel" value="${model}"><label for="model-${model.replace(/\s+/g, '-').toLowerCase()}">${model}</label></div>`).join('')}</div>
                 `;
-                // Filter Kondisi tidak ditampilkan untuk iPhone karena semua 'Baru'
             }
             
             filtersContainer.innerHTML = filtersHTML;
@@ -223,20 +197,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     processedProducts = processedProducts.filter(product => {
                         return activeFilters[filterCategory].some(filterValue => {
                             if (filterCategory === 'grade') { return product.grade === filterValue; }
+                            if (filterCategory === 'iphoneModel') { return product.name === filterValue; }
                             return product.name.includes(filterValue);
                         });
                     });
                 }
             });
-
-            if (toggleFilterBtn && collapsibleFilters) {
-            toggleFilterBtn.addEventListener('click', () => {
-                // Toggle class untuk animasi buka/tutup
-                collapsibleFilters.classList.toggle('filters-open');
-                // Toggle class untuk animasi putar panah
-                toggleFilterBtn.classList.toggle('open');
-            });
-            }
 
             if (searchTerm) {
                 processedProducts = processedProducts.filter(product => product.name.toLowerCase().includes(searchTerm));
@@ -256,14 +222,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     card.style.textDecoration = 'none';
                     card.style.color = 'inherit';
                     
-                    const gradeText = product.grade === 'Baru' ? 'BARU' : `GRADE ${product.grade}`;
-                    const gradeBadgeClass = `product-grade-badge grade-${product.grade.toLowerCase()}`;
-                    const gradeBadge = `<div class="${gradeBadgeClass}">${gradeText}</div>`;
-                    let stockText = product.stock > 0 ? `<span class="${product.stock <= CONFIG.LOW_STOCK_THRESHOLD ? 'stock-status low-stock' : 'stock-status'}">Sisa stok: ${product.stock}</span>` : `<span class="stock-status">Stok Habis</span>`;
-                    let soldText = product.sold > 0 ? `<span class="sold-info"><i class="fas fa-fire"></i> ${product.sold} terjual</span>` : '';
-                    const inventoryHTML = `<div class="inventory-info">${stockText}${soldText ? ` | ${soldText}` : ''}</div>`;
+                    const isVariant = !!product.variants;
+                    const displayPrice = isVariant ? product.basePrice : product.price;
+                    const displayImage = isVariant ? product.images[product.variants[0].color][0] : product.images[0];
+                    const displaySpecs = isVariant ? `${product.variants.length} pilihan warna & kapasitas` : product.specs;
+                    const displayGrade = product.grade ? (product.grade === 'Baru' ? 'BARU' : `GRADE ${product.grade}`) : '';
+                    const gradeBadgeClass = product.grade ? `product-grade-badge grade-${product.grade.toLowerCase()}` : '';
+                    const gradeBadge = product.grade ? `<div class="${gradeBadgeClass}">${displayGrade}</div>` : '';
+                    const buttonText = isVariant ? 'Lihat Opsi' : 'Lihat Detail';
 
-                    card.innerHTML = `<img src="/${product.images[0].replace('600x600', '240x240')}" alt="${product.name}"><div>${gradeBadge}<h3 class="product-name">${product.name}</h3><p class="product-specs">${product.specs}</p>${inventoryHTML}<p class="product-price">${formatRupiah(product.price)}</p>${product.stock > 0 ? `<div class="button">Lihat Detail</div>` : `<div class="button button-secondary" style="cursor:not-allowed;">Stok Kosong</div>`}</div>`;
+                    if(isVariant){
+                         card.innerHTML = `<img src="/${displayImage}" alt="${product.name}"><div><h3 class="product-name">${product.name}</h3><p class="product-specs">${displaySpecs}</p><p class="product-price">Mulai dari ${formatRupiah(displayPrice)}</p><div class="button">${buttonText}</div></div>`;
+                    } else {
+                        let stockText = product.stock > 0 ? `<span class="${product.stock <= CONFIG.LOW_STOCK_THRESHOLD ? 'stock-status low-stock' : 'stock-status'}">Sisa stok: ${product.stock}</span>` : `<span class="stock-status">Stok Habis</span>`;
+                        let soldText = product.sold > 0 ? `<span class="sold-info"><i class="fas fa-fire"></i> ${product.sold} terjual</span>` : '';
+                        const inventoryHTML = `<div class="inventory-info">${stockText}${soldText ? ` | ${soldText}` : ''}</div>`;
+                        card.innerHTML = `<img src="/${product.images[0]}" alt="${product.name}"><div>${gradeBadge}<h3 class="product-name">${product.name}</h3><p class="product-specs">${product.specs}</p>${inventoryHTML}<p class="product-price">${formatRupiah(displayPrice)}</p>${product.stock > 0 ? `<div class="button">${buttonText}</div>` : `<div class="button button-secondary" style="cursor:not-allowed;">Stok Kosong</div>`}</div>`;
+                    }
                     productGrid.appendChild(card);
                 });
             }
