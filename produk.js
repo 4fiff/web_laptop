@@ -967,10 +967,10 @@ const products = [
         basePrice: 18999000, // Harga untuk varian paling dasar
         images: {
                 // Sediakan gambar untuk setiap warna
-                'Natural Titanium': ['https://placehold.co/600x600/D7D4D0/333?text=iPhone+15+Pro+Natural+1', 'https://placehold.co/600x600/D7D4D0/333?text=iPhone+15+Pro+Natural+2'],
-                'Blue Titanium': ['https://placehold.co/600x600/3A4F6D/fff?text=iPhone+15+Pro+Blue+1', 'https://placehold.co/600x600/3A4F6D/fff?text=iPhone+15+Pro+Blue+2'],
-                'White Titanium': ['https://placehold.co/600x600/F5F5F0/333?text=iPhone+15+Pro+White+1'],
-                'Black Titanium': ['https://placehold.co/600x600/4D4D4D/fff?text=iPhone+15+Pro+Black+1'],
+                'Natural Titanium': ['images/produk/id34_7RCF3ESV/1.jpg', 'images/produk/id34_7RCF3ESV/2.jpg', 'images/produk/id34_7RCF3ESV/3.jpg'],
+                'Blue Titanium': ['images/produk/id34_7RCF3ESV/1.jpg', 'images/produk/id34_7RCF3ESV/2.jpg', 'images/produk/id34_7RCF3ESV/3.jpg'],
+                'White Titanium': ['images/produk/id34_7RCF3ESV/1.jpg', 'images/produk/id34_7RCF3ESV/2.jpg', 'images/produk/id34_7RCF3ESV/3.jpg'],
+                'Black Titanium': ['images/produk/id34_7RCF3ESV/1.jpg', 'images/produk/id34_7RCF3ESV/2.jpg', 'images/produk/id34_7RCF3ESV/3.jpg'],
         },
         // Daftar semua kemungkinan varian
         variants: [
@@ -994,8 +994,8 @@ const products = [
         kategori: 'iPhone',
         basePrice: 22999000,
         images: {
-                'Natural Titanium': ['https://placehold.co/600x600/D7D4D0/333?text=iPhone+15+Pro+Max+1'],
-                'Blue Titanium': ['https://placehold.co/600x600/3A4F6D/fff?text=iPhone+15+Pro+Max+2'],
+                'Natural Titanium': ['images/produk/id34_7RCF3ESV/1.jpg', 'images/produk/id34_7RCF3ESV/2.jpg', 'images/produk/id34_7RCF3ESV/3.jpg'],
+                'Blue Titanium': ['images/produk/id34_7RCF3ESV/1.jpg', 'images/produk/id34_7RCF3ESV/2.jpg', 'images/produk/id34_7RCF3ESV/3.jpg'],
         },
         variants: [
                 { sku: 'IP15PM-NT-256', color: 'Natural Titanium', colorHex: '#8A8A85', storage: '256GB', priceModifier: 0, stock: 20, sold: 200 },
