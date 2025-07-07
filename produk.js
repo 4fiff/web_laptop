@@ -951,24 +951,60 @@ const products = [
     },
 
     // =========IPHONE=========IPHONE=======IPHONE=======IPHONE========IPHONE
+    // =========IPHONE=========IPHONE=======IPHONE=======IPHONE========IPHONE
+    // =========IPHONE=========IPHONE=======IPHONE=======IPHONE========IPHONE
+    // =========IPHONE=========IPHONE=======IPHONE=======IPHONE========IPHONE
+    // =========IPHONE=========IPHONE=======IPHONE=======IPHONE========IPHONE
+    
+    // Tambahkan atau ganti produk iPhone Anda dengan struktur baru ini di dalam produk.js
 
-    {
+// ... (data produk MacBook Anda tetap di atas sini)
+        // produk 35
+        {
         id: 35,
-        kategori: 'iPhone', // <-- KATEGORI BARU
-        name: 'iPhone 15 Pro Max',
-        specs: '256GB - Natural Titanium',
-        price: 21500000,
-        stock: 10,
-        grade: 'Baru',
-        sku: 'IP15PM256NT',
-        sold: 55,
-        images: ['images/produk/id34_7RCF3ESV/1.jpg', 'images/produk/id34_7RCF3ESV/2.jpg'],
-        description: {
-            intro: 'iPhone 15 Pro Max. Ditempa dalam titanium dan menampilkan Chip A17 Pro yang terobosan, tombol Tindakan yang dapat disesuaikan, dan sistem kamera Pro yang paling kuat yang pernah ada di iPhone.',
-            specs: [ 'Layar: 6.7-inch Super Retina XDR display', 'Chip: A17 Pro', 'Kamera: Sistem kamera pro 48MP', 'Konektor: USB-C dengan USB 3' ],
+        name: 'iPhone 15 Pro',
+        kategori: 'iPhone',
+        basePrice: 18999000, // Harga untuk varian paling dasar
+        images: {
+                // Sediakan gambar untuk setiap warna
+                'Natural Titanium': ['https://placehold.co/600x600/D7D4D0/333?text=iPhone+15+Pro+Natural+1', 'https://placehold.co/600x600/D7D4D0/333?text=iPhone+15+Pro+Natural+2'],
+                'Blue Titanium': ['https://placehold.co/600x600/3A4F6D/fff?text=iPhone+15+Pro+Blue+1', 'https://placehold.co/600x600/3A4F6D/fff?text=iPhone+15+Pro+Blue+2'],
+                'White Titanium': ['https://placehold.co/600x600/F5F5F0/333?text=iPhone+15+Pro+White+1'],
+                'Black Titanium': ['https://placehold.co/600x600/4D4D4D/fff?text=iPhone+15+Pro+Black+1'],
         },
-        pros: ['Bodi titanium yang ringan dan kuat', 'Performa A17 Pro untuk gaming berat', 'Kamera dengan kemampuan zoom luar biasa', 'Port USB-C yang universal'],
-        cons: ['Harga premium', 'Daya tahan baterai bisa lebih baik saat penggunaan berat'],
+        // Daftar semua kemungkinan varian
+        variants: [
+                { sku: 'IP15P-NT-128', color: 'Natural Titanium', colorHex: '#8A8A85', storage: '128GB', priceModifier: 0, stock: 10, sold: 150 },
+                { sku: 'IP15P-NT-256', color: 'Natural Titanium', colorHex: '#8A8A85', storage: '256GB', priceModifier: 2000000, stock: 8, sold: 120 },
+                { sku: 'IP15P-BT-128', color: 'Blue Titanium', colorHex: '#2A3C4B', storage: '128GB', priceModifier: 0, stock: 15, sold: 90 },
+                { sku: 'IP15P-BT-256', color: 'Blue Titanium', colorHex: '#2A3C4B', storage: '256GB', priceModifier: 2000000, stock: 5, sold: 75 },
+                { sku: 'IP15P-WT-256', color: 'White Titanium', colorHex: '#F5F5F0', storage: '256GB', priceModifier: 2000000, stock: 12, sold: 85 },
+                { sku: 'IP15P-BKT-128', color: 'Black Titanium', colorHex: '#4D4D4D', storage: '128GB', priceModifier: 0, stock: 0, sold: 110 },
+        ],
+        // Deskripsi umum untuk produk ini
+        description: { intro: 'iPhone 15 Pro. Ditempa dalam titanium dan menampilkan Chip A17 Pro terobosan, tombol Tindakan yang dapat disesuaikan, dan sistem kamera Pro yang lebih kuat.', specs: ['Layar: 6.1-inch Super Retina XDR', 'Chip: A17 Pro', 'Kamera: Sistem kamera pro 48MP'], condition: 'Produk Baru, Garansi Resmi.' },
+        pros: ['Bodi titanium premium yang ringan dan kuat', 'Performa A17 Pro untuk gaming dan tugas berat', 'Kualitas kamera terdepan', 'Port USB-C dengan kecepatan transfer tinggi'],
+        cons: ['Harga premium', 'Daya tahan baterai standar'],
+        inTheBox: ['Unit iPhone 15 Pro', 'Kabel Pengisi Daya USB-C (1 m)']
+        },
+        //produk 36
+        {
+        id: 36,
+        name: 'iPhone 15 Pro Max',
+        kategori: 'iPhone',
+        basePrice: 22999000,
+        images: {
+                'Natural Titanium': ['https://placehold.co/600x600/D7D4D0/333?text=iPhone+15+Pro+Max+1'],
+                'Blue Titanium': ['https://placehold.co/600x600/3A4F6D/fff?text=iPhone+15+Pro+Max+2'],
+        },
+        variants: [
+                { sku: 'IP15PM-NT-256', color: 'Natural Titanium', colorHex: '#8A8A85', storage: '256GB', priceModifier: 0, stock: 20, sold: 200 },
+                { sku: 'IP15PM-NT-512', color: 'Natural Titanium', colorHex: '#8A8A85', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 95 },
+                { sku: 'IP15PM-BT-256', color: 'Blue Titanium', colorHex: '#2A3C4B', storage: '256GB', priceModifier: 0, stock: 18, sold: 130 },
+        ],
+        description: { intro: 'iPhone 15 Pro Max. Ditempa dalam titanium dan menampilkan Chip A17 Pro terobosan, tombol Tindakan yang dapat disesuaikan, dan sistem kamera Pro paling kuat yang pernah ada di iPhone dengan zoom optik 5x.', specs: ['Layar: 6.7-inch Super Retina XDR', 'Chip: A17 Pro', 'Kamera: Sistem kamera pro 48MP dengan 5x Telephoto'], condition: 'Produk Baru, Garansi Resmi.' },
+        pros: ['Layar lebih besar dan imersif', 'Kamera dengan kemampuan zoom optik 5x', 'Daya tahan baterai terbaik', 'Performa A17 Pro'],
+        cons: ['Ukuran besar mungkin tidak nyaman untuk semua orang', 'Harga sangat premium'],
         inTheBox: ['Unit iPhone 15 Pro Max', 'Kabel Pengisi Daya USB-C (1 m)']
-    }
+        },
 ];

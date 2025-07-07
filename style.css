@@ -2228,3 +2228,74 @@ color: var(--accent-color);
 .cancel-order-btn:hover {
     color: #c50000;
 }
+
+/* ============================================== */
+/* CSS BARU UNTUK PILIHAN VARIAN PRODUK */
+/* ============================================== */
+.variant-group {
+    margin-top: 20px;
+}
+.variant-label {
+    font-size: 16px;
+    color: var(--secondary-text-color);
+    margin-bottom: 10px;
+}
+.variant-label span {
+    color: var(--text-color);
+    font-weight: 600;
+}
+.selector-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+/* Style untuk Pilihan Warna */
+.color-swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--border-color);
+    transition: transform 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.color-swatch:hover {
+    transform: scale(1.1);
+}
+.color-swatch.active {
+    border-color: var(--button-bg);
+}
+.color-swatch.active::after {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px var(--button-bg);
+}
+
+/* Style untuk Pilihan Storage */
+.storage-option {
+    border: 2px solid var(--border-color);
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+.storage-option:hover {
+    border-color: #999;
+}
+.storage-option.active {
+    border-color: var(--button-bg);
+    background-color: var(--button-bg);
+    color: white;
+}
+.storage-option.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background-color: var(--footer-bg);
+}

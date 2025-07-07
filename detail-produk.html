@@ -75,7 +75,18 @@
 
             <div class="product-detail-info">
                 <h1 id="detail-name">Nama Produk Sedang Dimuat...</h1>
-                <div id="detail-grade" class="product-grade-detail"></div>
+
+                <div id="variant-options-container">
+                    <div class="variant-group">
+                        <p class="variant-label">Warna: <span id="selected-color-name"></span></p>
+                        <div id="color-selector" class="selector-group"></div>
+                    </div>
+                    <div class="variant-group">
+                        <p class="variant-label">Kapasitas:</p>
+                        <div id="storage-selector" class="selector-group"></div>
+                    </div>
+                </div>
+
                 <p id="detail-price" class="detail-price">Rp 0</p>
                 <p id="detail-sku" class="product-sku"></p>
 
@@ -89,17 +100,16 @@
                 <p id="detail-stock" class="product-stock"></p>
                 <div class="shipping-origin">
                     <i class="fas fa-truck"></i>
-                    <span>Dikirim dari Pangkal Pinang, Bangka</span>
+                    <span>Dikirim dari <strong>Pangkal Pinang, Bangka</strong></span>
                 </div>
-
                 <div class="trust-badge">
                     <i class="fas fa-shield-alt"></i>
                     <span>Jaminan Kepuasan, 14 Hari Gratis Pengembalian</span>
                 </div>
-
                 <button id="detail-add-to-cart-btn" class="button button-full">Tambah ke Keranjang</button>
             </div>
         </div>
+        
         <div id="product-not-found" style="display: none; text-align: center; padding: 50px;">
             <h2>Produk Tidak Ditemukan</h2>
             <p>Maaf, produk yang Anda cari tidak ada.</p>
