@@ -962,7 +962,7 @@ const products = [
         grade: 'Baru',
         sku: 'IP15PM256NT',
         sold: 55,
-        images: ['https://placehold.co/600x600/e0e0e0/333?text=iPhone+15+Pro+1', 'https://placehold.co/600x600/e0e0e0/333?text=iPhone+15+Pro+2'],
+        images: ['images/produk/id34_7RCF3ESV/1.jpg', 'images/produk/id34_7RCF3ESV/2.jpg'],
         description: {
             intro: 'iPhone 15 Pro Max. Ditempa dalam titanium dan menampilkan Chip A17 Pro yang terobosan, tombol Tindakan yang dapat disesuaikan, dan sistem kamera Pro yang paling kuat yang pernah ada di iPhone.',
             specs: [ 'Layar: 6.7-inch Super Retina XDR display', 'Chip: A17 Pro', 'Kamera: Sistem kamera pro 48MP', 'Konektor: USB-C dengan USB 3' ],
