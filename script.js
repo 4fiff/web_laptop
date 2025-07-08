@@ -747,7 +747,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cart = [];
             saveCart();
             updateSharedUI();
-            window.location.href = 'cara-bayar.html';
+            window.location.href = '/cara-bayar.html';
         }
 
         function setupEventListeners() {
@@ -906,7 +906,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!onPaymentPage) {
                 const banner = document.createElement('div');
                 banner.className = 'pending-payment-banner';
-                banner.innerHTML = `<span>Anda memiliki pembayaran yang belum selesai.</span><a href="cara-bayar.html">Lihat Detail Pembayaran</a><button class="cancel-btn">Batalkan Pesanan</button>`;
+                banner.innerHTML = `<span>Anda memiliki pembayaran yang belum selesai.</span><a href="/cara-bayar.html">Lihat Detail Pembayaran</a><button class="cancel-btn">Batalkan Pesanan</button>`;
                 body.prepend(banner);
                 banner.querySelector('.cancel-btn').addEventListener('click', () => {
                     if(confirm('Apakah Anda yakin ingin membatalkan pesanan ini?')) {
