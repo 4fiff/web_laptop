@@ -272,6 +272,8 @@ document.addEventListener('DOMContentLoaded', () => {
         displayProducts();
     };
 
+    // GANTI FUNGSI renderDetailPage LAMA ANDA DENGAN SEMUA KODE DI BAWAH INI
+
     const renderDetailPage = () => {
         const contentDiv = document.getElementById('product-detail-content');
         if (!contentDiv) return;
@@ -300,19 +302,26 @@ document.addEventListener('DOMContentLoaded', () => {
         document.title = `${product.name} - Macintoz`;
         document.getElementById('detail-name').textContent = product.name;
 
+        // PEMERIKSAAN UTAMA: Apakah produk ini punya varian?
         if (product.variants && product.variants.length > 0) {
+            // === JALUR 1: LOGIKA UNTUK PRODUK DENGAN VARIAN (iPHONE) ===
             renderVariantProduct(product);
         } else {
+            // === JALUR 2: LOGIKA UNTUK PRODUK STANDAR (MACBOOK) ===
             renderStandardProduct(product);
         }
+        
+        // Jalankan render produk terkait untuk SEMUA jenis produk
+        renderRelatedProducts(product);
     };
-    
+
+    // FUNGSI BARU UNTUK MENAMPILKAN PRODUK STANDAR (MACBOOK)
     function renderStandardProduct(product) {
+        // Sembunyikan wadah varian yang tidak digunakan
         const variantOptionsContainer = document.getElementById('variant-options-container');
         if (variantOptionsContainer) variantOptionsContainer.style.display = 'none';
 
-        
-
+        // Tampilkan info grade
         const gradeElement = document.getElementById('detail-grade');
         if (gradeElement) {
             const gradeText = product.grade === 'Baru' ? 'BARU' : `GRADE ${product.grade}`;
@@ -322,15 +331,16 @@ document.addEventListener('DOMContentLoaded', () => {
             gradeElement.innerHTML = `<div class="${gradeBadgeClass}">${gradeText}</div><span>${gradeDescriptionText}</span>`;
         }
         
+        // Tampilkan harga, SKU
         document.getElementById('detail-price').textContent = formatRupiah(product.price);
         document.getElementById('detail-sku').textContent = `SKU: ${product.sku}`;
         
+        // Tampilkan deskripsi terstruktur
         const descriptionContainer = document.getElementById('detail-description-container');
-        descriptionContainer.innerHTML = '';
+        descriptionContainer.innerHTML = ''; 
         const introParagraph = document.createElement('p');
         introParagraph.textContent = product.description.intro;
         descriptionContainer.appendChild(introParagraph);
-
         if (product.description.specs && product.description.specs.length > 0) {
             const specsSection = document.createElement('div');
             specsSection.className = 'detail-description-section';
@@ -387,7 +397,8 @@ document.addEventListener('DOMContentLoaded', () => {
             inTheBoxSection.appendChild(inTheBoxList);
             inTheBoxContainer.appendChild(inTheBoxSection);
         }
-        
+
+        // Tampilkan Stok & Terjual
         const stockElement = document.getElementById('detail-stock');
         let stockText = product.stock > 0 ? `Ketersediaan: Sisa ${product.stock} unit` : `Ketersediaan: Stok Habis`;
         stockElement.textContent = stockText;
@@ -397,6 +408,7 @@ document.addEventListener('DOMContentLoaded', () => {
             stockElement.innerHTML += ` &bull; <span class="sold-info"><i class="fas fa-fire"></i> ${product.sold} terjual</span>`;
         }
 
+        // Atur Tombol Add to Cart
         const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
         if (product.stock > 0) {
             addToCartBtn.disabled = false;
@@ -408,18 +420,17 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCartBtn.onclick = null;
         }
 
-        // === LOGIKA SLIDER YANG DIPERBAIKI ===
+        // Jalankan slider gambar
         setupImageSlider(product.images);
     }
 
+    // FUNGSI BARU UNTUK MENAMPILKAN PRODUK DENGAN VARIAN (iPHONE)
     function renderVariantProduct(product) {
         const variantOptionsContainer = document.getElementById('variant-options-container');
         if (variantOptionsContainer) variantOptionsContainer.style.display = 'block';
 
         const gradeElement = document.getElementById('detail-grade');
         if(gradeElement) gradeElement.innerHTML = '';
-        
-        document.title = `${product.name} - Macintoz`;
         
         let selectedColor = product.variants[0].color;
         let selectedStorage = product.variants[0].storage;
@@ -432,8 +443,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const storageSelector = document.getElementById('storage-selector');
         const selectedColorNameEl = document.getElementById('selected-color-name');
         const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
-        const imgElement = document.getElementById('detail-img');
-        const dotsContainer = document.getElementById('slider-dots');
 
         function updateDisplay() {
             const currentVariant = product.variants.find(v => v.color === selectedColor && v.storage === selectedStorage);
@@ -442,18 +451,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const finalPrice = product.basePrice + currentVariant.priceModifier;
             priceEl.textContent = formatRupiah(finalPrice);
             skuEl.textContent = `SKU: ${currentVariant.sku}`;
-            if (currentVariant.stock > 0) {
-                stockEl.textContent = `Ketersediaan: Sisa ${currentVariant.stock} unit`;
-                stockEl.className = currentVariant.stock <= CONFIG.LOW_STOCK_THRESHOLD ? 'product-stock low-stock' : 'product-stock';
-            } else {
-                stockEl.textContent = `Ketersediaan: Stok Habis`;
-                stockEl.className = 'product-stock low-stock';
-            }
+            
+            let stockText = currentVariant.stock > 0 ? `Ketersediaan: Sisa ${currentVariant.stock} unit` : `Ketersediaan: Stok Habis`;
+            stockEl.textContent = stockText;
+            if (currentVariant.stock <= CONFIG.LOW_STOCK_THRESHOLD) { stockEl.classList.add('low-stock'); } 
+            else { stockEl.classList.remove('low-stock'); }
+            
+            const soldInfoSpan = stockEl.querySelector('.sold-info');
+            if(soldInfoSpan) soldInfoSpan.remove();
+
             if (currentVariant.sold > 0) {
                 stockEl.innerHTML += ` &bull; <span class="sold-info"><i class="fas fa-fire"></i> ${currentVariant.sold} terjual</span>`;
-            } else {
-                 const soldInfo = stockEl.querySelector('.sold-info');
-                 if(soldInfo) soldInfo.parentElement.innerHTML = stockEl.textContent;
             }
 
             addToCartBtn.disabled = currentVariant.stock === 0;
@@ -522,11 +530,145 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         nameEl.textContent = product.name;
-        document.getElementById('detail-description-container').innerHTML = `<p>${product.description.intro}</p>`;
-        // ... (Logika untuk menampilkan pros, cons, dll. bisa ditambahkan di sini jika perlu)
+        const descriptionContainer = document.getElementById('detail-description-container');
+        descriptionContainer.innerHTML = `<p>${product.description.intro}</p>`;
+        // Anda bisa menambahkan logika untuk menampilkan pros, cons, dll. di sini jika perlu
         
         updateDisplay();
         updateColorOptions();
+    }
+
+    // --- FUNGSI SLIDER TERPUSAT ---
+    function setupImageSlider(imagesArray) {
+        const imgElement = document.getElementById('detail-img');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const dotsContainer = document.getElementById('slider-dots');
+
+        if (!imgElement || !prevBtn || !nextBtn || !dotsContainer || !imagesArray || imagesArray.length === 0) {
+            return;
+        }
+
+        let currentImageIndex = 0;
+
+        function updateSlider() {
+            imgElement.src = `/${imagesArray[currentImageIndex]}`;
+            imgElement.alt = `Gambar produk ${currentImageIndex + 1}`;
+            
+            document.querySelectorAll('.slider-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentImageIndex);
+            });
+        }
+
+        dotsContainer.innerHTML = '';
+        if (imagesArray.length > 1) {
+            imagesArray.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.className = 'slider-dot';
+                dot.onclick = () => {
+                    currentImageIndex = index;
+                    updateSlider();
+                };
+                dotsContainer.appendChild(dot);
+            });
+            prevBtn.style.display = 'flex';
+            nextBtn.style.display = 'flex';
+        } else {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+        }
+        
+        prevBtn.onclick = () => {
+            currentImageIndex = (currentImageIndex - 1 + imagesArray.length) % imagesArray.length;
+            updateSlider();
+        };
+        nextBtn.onclick = () => {
+            currentImageIndex = (currentImageIndex + 1) % imagesArray.length;
+            updateSlider();
+        };
+        
+        updateSlider();
+    }
+
+    // GANTI ATAU TAMBAHKAN FUNGSI INI DI DALAM script.js ANDA
+
+    function renderRelatedProducts(currentProduct) {
+        const relatedGrid = document.getElementById('related-products-grid');
+        // Jika tidak ada wadah untuk produk terkait di halaman, hentikan fungsi
+        if (!relatedGrid) return;
+
+        relatedGrid.innerHTML = ''; // Kosongkan dulu untuk menghindari duplikasi
+
+        // Tentukan kategori utama dari produk yang sedang dilihat
+        const primaryCategory = currentProduct.kategori;
+
+        // 1. Filter semua produk untuk menemukan yang kategorinya sama,
+        //    KECUALI produk yang sedang dilihat saat ini.
+        let relatedProducts = products.filter(p =>
+            p.kategori === primaryCategory && p.id !== currentProduct.id
+        );
+
+        // 2. Acak hasil filter dan ambil maksimal 4 produk untuk ditampilkan.
+        relatedProducts.sort(() => 0.5 - Math.random());
+        const selectedRelated = relatedProducts.slice(0, 4);
+
+        // Jika tidak ada produk terkait, sembunyikan section-nya
+        if (selectedRelated.length === 0) {
+            const relatedSection = document.querySelector('.related-products-section');
+            if(relatedSection) relatedSection.style.display = 'none';
+            return;
+        }
+
+        // 3. Tampilkan kartu untuk setiap produk terkait yang terpilih
+        selectedRelated.forEach(product => {
+            const card = document.createElement('a');
+            card.href = `/detail-produk.html?id=${product.id}`;
+            card.className = 'product-card';
+            card.style.textDecoration = 'none';
+            card.style.color = 'inherit';
+
+            const isVariant = !!product.variants;
+            const displayPrice = isVariant ? product.basePrice : product.price;
+            const displayImage = isVariant ? product.images[product.variants[0].color][0] : product.images[0];
+            const displaySpecs = isVariant ? `${product.variants.length} pilihan warna & kapasitas` : product.specs;
+            const gradeText = product.grade ? (product.grade === 'Baru' ? 'BARU' : `GRADE ${product.grade}`) : '';
+            const gradeBadgeClass = product.grade ? `product-grade-badge grade-${product.grade.toLowerCase()}` : '';
+            const gradeBadge = product.grade ? `<div class="${gradeBadgeClass}">${gradeText}</div>` : '';
+            const buttonText = isVariant ? 'Lihat Opsi' : 'Lihat Detail';
+
+            // Tampilan kartu untuk produk dengan varian (iPhone)
+            if (isVariant) {
+                card.innerHTML = `
+                    <img src="/${displayImage}" alt="${product.name}">
+                    <div>
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-specs">${displaySpecs}</p>
+                        <p class="product-price">Mulai dari ${formatRupiah(displayPrice)}</p>
+                        <div class="button">${buttonText}</div>
+                    </div>
+                `;
+            } 
+            // Tampilan kartu untuk produk non-varian (MacBook)
+            else {
+                let stockHTML = '';
+                if (product.stock > 0) {
+                    const stockClass = product.stock <= CONFIG.LOW_STOCK_THRESHOLD ? 'stock-status low-stock' : 'stock-status';
+                    stockHTML = `<p class="${stockClass}">Sisa stok: ${product.stock}</p>`;
+                }
+                card.innerHTML = `
+                    <img src="/${product.images[0]}" alt="${product.name}">
+                    <div>
+                        ${gradeBadge}
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-specs">${product.specs}</p>
+                        ${stockHTML}
+                        <p class="product-price">${formatRupiah(displayPrice)}</p>
+                        <div class="button">${buttonText}</div>
+                    </div>
+                `;
+            }
+            relatedGrid.appendChild(card);
+        });
     }
     
     const renderCartPage = () => {
@@ -798,56 +940,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setupEventListeners();
     };
 
-    function setupImageSlider(imagesArray) {
-        const imgElement = document.getElementById('detail-img');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const dotsContainer = document.getElementById('slider-dots');
-
-        if (!imgElement || !prevBtn || !nextBtn || !dotsContainer || !imagesArray || imagesArray.length === 0) {
-            return;
-        }
-
-        let currentImageIndex = 0;
-
-        function updateSlider() {
-            imgElement.src = `/${imagesArray[currentImageIndex]}`;
-            imgElement.alt = `Gambar produk ${currentImageIndex + 1}`;
-            
-            document.querySelectorAll('.slider-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentImageIndex);
-            });
-        }
-
-        dotsContainer.innerHTML = ''; // Kosongkan dot yang mungkin ada sebelumnya
-        if (imagesArray.length > 1) {
-            imagesArray.forEach((_, index) => {
-                const dot = document.createElement('span');
-                dot.className = 'slider-dot';
-                dot.onclick = () => {
-                    currentImageIndex = index;
-                    updateSlider();
-                };
-                dotsContainer.appendChild(dot);
-            });
-            prevBtn.style.display = 'flex';
-            nextBtn.style.display = 'flex';
-        } else {
-            prevBtn.style.display = 'none';
-            nextBtn.style.display = 'none';
-        }
-        
-        prevBtn.onclick = () => {
-            currentImageIndex = (currentImageIndex - 1 + imagesArray.length) % imagesArray.length;
-            updateSlider();
-        };
-        nextBtn.onclick = () => {
-            currentImageIndex = (currentImageIndex + 1) % imagesArray.length;
-            updateSlider();
-        };
-        
-        updateSlider(); // Panggil sekali untuk menampilkan gambar pertama
-    }
+    
 
     const renderCaraBayarPage = () => {
         const paymentDataString = localStorage.getItem('paymentData');
