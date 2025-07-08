@@ -955,7 +955,7 @@ a#cart-icon-link {
 
 /* CSS untuk Section Review */
 .review-section {
-    background-color: var(--bg-color); /* <--  warna putih */
+    background-color: var(--footer-bg); /* <--  warna putih */
     padding: 80px 0;
     overflow: hidden; /* Penting untuk slider */
 }
@@ -1124,7 +1124,7 @@ a#cart-icon-link {
     /* Memberi jarak 20px dari section atas, dan 60px ke section bawah */
     padding: 50px 0 50px 0; 
     text-align: center; /* Memastikan video berada di tengah */
-    background-color: rgb(232, 232, 237); /* Pastikan background-nya putih */
+    background-color: rgb(255, 255, 255); /* Pastikan background-nya putih */
 }
 
 .video-showcase-section video {
@@ -2298,4 +2298,133 @@ color: var(--accent-color);
     opacity: 0.4;
     cursor: not-allowed;
     background-color: var(--footer-bg);
+}
+
+/* ============================================== */
+/* CSS BARU UNTUK SECTION "HARGA TERBAIK" */
+/* ============================================== */
+.value-prop-section {
+    padding: 80px 20px;
+    background-color: #fff;
+}
+
+.value-prop-content {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.value-prop-text {
+    flex: 1;
+}
+
+.value-prop-text h2 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.value-prop-subtitle {
+    font-size: 18px;
+    color: var(--secondary-text-color);
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+.value-points {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.value-point-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.value-point-item i {
+    font-size: 24px;
+    color: var(--button-bg);
+    margin-top: 5px;
+    width: 30px;
+    text-align: center;
+}
+
+.value-point-item h4 {
+    margin: 0 0 5px 0;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.value-point-item p {
+    margin: 0;
+    color: var(--secondary-text-color);
+    line-height: 1.6;
+}
+
+.value-prop-image {
+    flex: 1;
+}
+
+.value-prop-image img {
+    width: 100%;
+    border-radius: 18px;
+}
+
+/* Penyesuaian di layar kecil */
+@media (max-width: 992px) {
+    .value-prop-content {
+        flex-direction: column-reverse; /* Gambar di atas, teks di bawah */
+    }
+}
+
+/* ============================================== */
+/* CSS BARU UNTUK SECTION PARTNER PENGIRIMAN */
+/* ============================================== */
+.partner-section {
+    padding: 60px 20px;
+    background-color: #fff; /* Latar belakang putih agar bersih */
+    text-align: center;
+}
+
+.partner-section h2 {
+    font-size: 21px;
+    font-weight: 600;
+    color: var(--secondary-text-color);
+    margin-bottom: 40px;
+}
+
+.partner-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px; /* Jarak antar logo */
+    max-width: 800px;
+    margin: 0 auto;
+    flex-wrap: wrap; /* Agar rapi di layar kecil */
+}
+
+.partner-logos img {
+    height: 40px; /* Mengatur tinggi logo agar seragam */
+    max-width: 150px;
+    filter: grayscale(100%) opacity(0.6); /* Membuat logo jadi abu-abu agar elegan */
+    transition: filter 0.3s ease;
+}
+
+.partner-logos img:hover {
+    filter: grayscale(0%) opacity(1); /* Logo menjadi berwarna saat di-hover */
+}
+
+/* Penyesuaian di layar kecil */
+@media (max-width: 768px) {
+    .partner-logos {
+        gap: 50px;
+    }
+    .partner-logos img {
+        height: 30px;
+    }
 }
