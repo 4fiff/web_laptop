@@ -242,6 +242,7 @@ a#cart-icon-link {
 .info-card {
     text-align: center;
     max-width: 300px;
+    margin: 0 auto;
 }
 
 .info-card i {
