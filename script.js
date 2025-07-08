@@ -294,6 +294,12 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Tampilkan konten umum yang ada di kedua jenis halaman
+        contentDiv.style.display = 'flex';
+        notFoundDiv.style.display = 'none';
+        document.title = `${product.name} - Macintoz`;
+        document.getElementById('detail-name').textContent = product.name;
+
         if (product.variants && product.variants.length > 0) {
             renderVariantProduct(product);
         } else {
@@ -305,8 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const variantOptionsContainer = document.getElementById('variant-options-container');
         if (variantOptionsContainer) variantOptionsContainer.style.display = 'none';
 
-        document.title = `${product.name} - Macintoz`;
-        document.getElementById('detail-name').textContent = product.name;
+        
 
         const gradeElement = document.getElementById('detail-grade');
         if (gradeElement) {
@@ -403,9 +408,8 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCartBtn.onclick = null;
         }
 
-        const imgElement = document.getElementById('detail-img');
-        imgElement.src = `/${product.images[0]}`;
-        // Logika slider dan produk terkait bisa ditambahkan kembali di sini jika diperlukan
+        // === LOGIKA SLIDER YANG DIPERBAIKI ===
+        setupImageSlider(product.images);
     }
 
     function renderVariantProduct(product) {
@@ -464,7 +468,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             
             if (product.images[selectedColor]) {
-                imgElement.src = `/${product.images[selectedColor][0]}`;
+                setupImageSlider(product.images[selectedColor]);
             }
             
             selectedColorNameEl.textContent = selectedColor;
@@ -793,6 +797,57 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTotals();
         setupEventListeners();
     };
+
+    function setupImageSlider(imagesArray) {
+        const imgElement = document.getElementById('detail-img');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const dotsContainer = document.getElementById('slider-dots');
+
+        if (!imgElement || !prevBtn || !nextBtn || !dotsContainer || !imagesArray || imagesArray.length === 0) {
+            return;
+        }
+
+        let currentImageIndex = 0;
+
+        function updateSlider() {
+            imgElement.src = `/${imagesArray[currentImageIndex]}`;
+            imgElement.alt = `Gambar produk ${currentImageIndex + 1}`;
+            
+            document.querySelectorAll('.slider-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentImageIndex);
+            });
+        }
+
+        dotsContainer.innerHTML = ''; // Kosongkan dot yang mungkin ada sebelumnya
+        if (imagesArray.length > 1) {
+            imagesArray.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.className = 'slider-dot';
+                dot.onclick = () => {
+                    currentImageIndex = index;
+                    updateSlider();
+                };
+                dotsContainer.appendChild(dot);
+            });
+            prevBtn.style.display = 'flex';
+            nextBtn.style.display = 'flex';
+        } else {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+        }
+        
+        prevBtn.onclick = () => {
+            currentImageIndex = (currentImageIndex - 1 + imagesArray.length) % imagesArray.length;
+            updateSlider();
+        };
+        nextBtn.onclick = () => {
+            currentImageIndex = (currentImageIndex + 1) % imagesArray.length;
+            updateSlider();
+        };
+        
+        updateSlider(); // Panggil sekali untuk menampilkan gambar pertama
+    }
 
     const renderCaraBayarPage = () => {
         const paymentDataString = localStorage.getItem('paymentData');
