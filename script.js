@@ -528,29 +528,78 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderCartPage = () => {
         const itemsList = document.getElementById('cart-items-list');
         if(!itemsList) return;
+
         const summaryTotalItems = document.getElementById('summary-total-items');
         const summaryTotalPrice = document.getElementById('summary-total-price');
         const emptyCartMsg = document.getElementById('empty-cart-message');
         const cartContent = document.getElementById('cart-page-content');
+        
         itemsList.innerHTML = '';
-        if (cart.length === 0) { emptyCartMsg.style.display = 'block'; cartContent.style.display = 'none'; return; }
+        if (cart.length === 0) {
+            emptyCartMsg.style.display = 'block';
+            cartContent.style.display = 'none';
+            return;
+        }
+
         emptyCartMsg.style.display = 'none';
         cartContent.style.display = 'flex';
         let totalItems = 0;
         let totalPrice = 0;
+
         cart.forEach(item => {
             const itemEl = document.createElement('div');
             itemEl.className = 'cart-item';
-            itemEl.innerHTML = `<img src="${item.img}" alt="${item.name}"><div class="cart-item-info"><h3>${item.name}</h3><p>${item.specs}</p><div class="cart-item-actions"><div class="quantity-control"><button class="quantity-decrease" data-id="${item.id}">-</button><span>${item.quantity}</span><button class="quantity-increase" data-id="${item.id}">+</button></div><button class="remove-item-btn" data-id="${item.id}">Hapus</button></div></div><div class="cart-item-price">${formatRupiah(item.price * item.quantity)}</div>`;
+            itemEl.innerHTML = `
+                <img src="/${item.img}" alt="${item.name}">
+                <div class="cart-item-info">
+                    <h3>${item.name}</h3>
+                    <p>${item.specs || ''}</p>
+                    <div class="cart-item-actions">
+                        <div class="quantity-control">
+                            <button class="quantity-decrease" data-id="${item.id}">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-increase" data-id="${item.id}">+</button>
+                        </div>
+                        <button class="remove-item-btn" data-id="${item.id}">Hapus</button>
+                    </div>
+                </div>
+                <div class="cart-item-price">${formatRupiah(item.price * item.quantity)}</div>
+            `;
             itemsList.appendChild(itemEl);
             totalItems += item.quantity;
             totalPrice += item.price * item.quantity;
         });
+
         summaryTotalItems.textContent = totalItems;
         summaryTotalPrice.textContent = formatRupiah(totalPrice);
-        document.querySelectorAll('.quantity-decrease').forEach(btn => { btn.onclick = e => { const id = parseInt(e.target.dataset.id); const currentItem = cart.find(i => i.id === id); updateQuantity(id, currentItem.quantity - 1); } });
-        document.querySelectorAll('.quantity-increase').forEach(btn => { btn.onclick = e => { const id = parseInt(e.target.dataset.id); const currentItem = cart.find(i => i.id === id); updateQuantity(id, currentItem.quantity + 1); } });
-        document.querySelectorAll('.remove-item-btn').forEach(btn => { btn.onclick = e => { if (confirm('Yakin ingin menghapus item ini?')) { const id = parseInt(e.target.dataset.id); updateQuantity(id, 0); } } });
+
+        // --- Event Listener yang sudah diperbaiki ---
+        document.querySelectorAll('.quantity-decrease').forEach(btn => {
+            btn.onclick = e => {
+                const id = e.target.dataset.id; // Ambil ID sebagai string
+                const currentItem = cart.find(i => String(i.id) === id);
+                if (currentItem) {
+                    updateQuantity(id, currentItem.quantity - 1);
+                }
+            }
+        });
+        document.querySelectorAll('.quantity-increase').forEach(btn => {
+            btn.onclick = e => {
+                const id = e.target.dataset.id; // Ambil ID sebagai string
+                const currentItem = cart.find(i => String(i.id) === id);
+                if (currentItem) {
+                    updateQuantity(id, currentItem.quantity + 1);
+                }
+            }
+        });
+        document.querySelectorAll('.remove-item-btn').forEach(btn => {
+            btn.onclick = e => {
+                if (confirm('Yakin ingin menghapus item ini?')) {
+                    const id = e.target.dataset.id; // Ambil ID sebagai string
+                    updateQuantity(id, 0);
+                }
+            }
+        });
     };
 
     const renderCheckoutPage = () => {
