@@ -966,8 +966,8 @@ const products = [
         kategori: 'iPhone',
         basePrice: 22999000,
         images: {
-                'Desert Titanium': ['images/produk/id35/iphone-16-pro-finish-.webp', 'images/produk/id34_7RCF3ESV/2.jpg', 'images/produk/id34_7RCF3ESV/3.jpg'],
-                'Natural Titanium': ['images/produk/id35/iphone-16-pro-finish-.webp', 'images/produk/id34_7RCF3ESV/2.jpg', 'images/produk/id34_7RCF3ESV/3.jpg'],
+                'Desert Titanium': ['images/produk/id35/ip16pro-dt-1.jpg', 'images/produk/id35/ip16pro-dt-2.jpg', 'images/produk/id35/ip16pro-dt-3.jpg', 'images/produk/id35/ip16pro-dt-4.jpg'],
+                'Natural Titanium': ['images/produk/id35/ip16pro-nt-1.jpg', 'images/produk/id35/ip16pro-nt-2.jpg', 'images/produk/id35/ip16pro-nt-3.jpg', 'images/produk/id35/ip16pro-nt-4.jpg'],
                 'Blue Titanium': ['images/produk/id34_7RCF3ESV/1.jpg', 'images/produk/id34_7RCF3ESV/2.jpg', 'images/produk/id34_7RCF3ESV/3.jpg'],
         },
         variants: [
