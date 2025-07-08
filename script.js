@@ -132,21 +132,51 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const updateQuantity = (productId, newQuantity) => {
-        const cartItem = cart.find(item => item.id === productId);
-        if (!cartItem) return;
+        // Karena ID bisa berupa angka (untuk Mac) atau teks (SKU untuk iPhone),
+        // kita perlu memastikan tipe datanya konsisten saat mencari.
+        const cartItem = cart.find(item => String(item.id) === String(productId));
+        
+        if (!cartItem) {
+            console.error('Item tidak ditemukan di keranjang:', productId);
+            return;
+        }
+
+        // Untuk mendapatkan info stok, kita cari produk aslinya di database products
+        // Kita perlu memeriksa apakah ID-nya numerik (Mac) atau string (iPhone)
+        let originalProduct;
+        if (typeof cartItem.id === 'number') {
+            originalProduct = products.find(p => p.id === cartItem.id);
+        } else {
+            // Untuk iPhone, kita cari berdasarkan SKU di dalam setiap varian
+            originalProduct = products.find(p => 
+                p.variants && p.variants.some(v => v.sku === cartItem.id)
+            );
+            // Jika ketemu, kita ambil detail varian yang spesifik
+            if(originalProduct) {
+                const variant = originalProduct.variants.find(v => v.sku === cartItem.id);
+                originalProduct = { ...originalProduct, ...variant }; // Gabungkan data untuk dapatkan stok varian
+            }
+        }
+
+        if (!originalProduct) {
+            console.error('Produk asli tidak ditemukan untuk item keranjang:', cartItem);
+            // Jika produk asli tidak ada, setidaknya jangan biarkan kuantitas melebihi stok yang tercatat di keranjang
+            originalProduct = cartItem; 
+        }
 
         if (newQuantity <= 0) {
-            cart = cart.filter(item => item.id !== productId);
-        } else if (newQuantity > cartItem.stock) {
-            alert(`Stok hanya tersisa ${cartItem.stock} buah.`);
-            cartItem.quantity = cartItem.stock;
+            // Logika untuk menghapus (newQuantity adalah 0)
+            cart = cart.filter(item => String(item.id) !== String(productId));
+        } else if (newQuantity > originalProduct.stock) {
+            alert(`Stok hanya tersisa ${originalProduct.stock} buah.`);
+            cartItem.quantity = originalProduct.stock;
         } else {
             cartItem.quantity = newQuantity;
         }
+        
         saveCart();
-        if (window.location.pathname.includes('/keranjang')) {
-            renderCartPage();
-        }
+        // Panggil renderCartPage untuk langsung memperbarui tampilan keranjang
+        renderCartPage();
     };
 
     const updateSharedUI = () => {
