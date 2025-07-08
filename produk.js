@@ -1069,9 +1069,9 @@ const products = [
                 'Black': ['images/produk/id38_ip15/ip15-bl-1.jpg', 'images/produk/id38_ip15/ip15-bl-2.jpg', 'images/produk/id38_ip15/ip15-bl-3.jpg'],
         },
         variants: [
-                { sku: 'IP15-BU-128', color: 'Blue', colorHex: '#FF0000', storage: '128GB', priceModifier: 0, stock: 20, sold: 200 },
-                { sku: 'IP15-BU-256', color: 'Blue', colorHex: '#FF0000', storage: '256GB', priceModifier: 2000000, stock: 20, sold: 200 },
-                { sku: 'IP15-BU-512', color: 'Blue', colorHex: '#FF0000', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 95 },
+                { sku: 'IP15-BU-128', color: 'Blue', colorHex: '#D6DDE0', storage: '128GB', priceModifier: 0, stock: 20, sold: 200 },
+                { sku: 'IP15-BU-256', color: 'Blue', colorHex: '#D6DDE0', storage: '256GB', priceModifier: 2000000, stock: 20, sold: 200 },
+                { sku: 'IP15-BU-512', color: 'Blue', colorHex: '#D6DDE0', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 95 },
                 { sku: 'IP15-PI-128', color: 'Pink', colorHex: '#ECD1D2', storage: '128GB', priceModifier: 0, stock: 20, sold: 200 },
                 { sku: 'IP15-PI-256', color: 'Pink', colorHex: '#ECD1D2', storage: '256GB', priceModifier: 2000000, stock: 20, sold: 200 },
                 { sku: 'IP15-PI-512', color: 'Pink', colorHex: '#ECD1D2', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 95 },
