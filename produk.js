@@ -1090,4 +1090,43 @@ const products = [
         cons: ['Ukuran besar mungkin tidak nyaman untuk semua orang', 'Harga sangat premium'],
         inTheBox: ['Unit iPhone 15', 'Kabel Pengisi Daya USB-C (1 m)']
         },
+        //produk 39
+        {
+        id: 39,
+        name: 'iPhone 14',
+        kategori: 'iPhone',
+        basePrice: 8999000,
+        images: {
+                'Red': ['images/produk/id39_ip14/ip14-re-1.jpg'],
+                'Blue': ['images/produk/id39_ip14/ip14-bu-1.jpg'],
+                'Purple': ['images/produk/id39_ip14/ip14-pu-1.jpg'],
+                'Yellow': ['images/produk/id39_ip14/ip14-ye-1.jpg'],
+                'Midnight': ['images/produk/id39_ip14/ip14-md-1.jpg'],
+                'Starlight': ['images/produk/id39_ip14/ip14-sr-1.jpg'],
+        },
+        variants: [
+                { sku: 'IP15-RE-128', color: 'Red', colorHex: '#FC0325', storage: '128GB', priceModifier: 0, stock: 20, sold: 200 },
+                { sku: 'IP15-RE-256', color: 'Red', colorHex: '#FC0325', storage: '256GB', priceModifier: 2000000, stock: 20, sold: 200 },
+                { sku: 'IP15-RE-512', color: 'Red', colorHex: '#FC0325', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 95 },
+                { sku: 'IP15-BU-128', color: 'Blue', colorHex: '#A0B4C7', storage: '128GB', priceModifier: 0, stock: 20, sold: 200 },
+                { sku: 'IP15-BU-256', color: 'Blue', colorHex: '#A0B4C7', storage: '256GB', priceModifier: 2000000, stock: 20, sold: 200 },
+                { sku: 'IP15-BU-512', color: 'Blue', colorHex: '#A0B4C7', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 95 },
+                { sku: 'IP15-PU-128', color: 'Purple', colorHex: '#E6DDEB', storage: '128GB', priceModifier: 0, stock: 20, sold: 200 },
+                { sku: 'IP15-PU-256', color: 'Purple', colorHex: '#E6DDEB', storage: '256GB', priceModifier: 2000000, stock: 20, sold: 200 },
+                { sku: 'IP15-PU-512', color: 'Purple', colorHex: '#E6DDEB', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 95 },
+                { sku: 'IP15-YE-128', color: 'Yellow', colorHex: '#FAE479', storage: '128GB', priceModifier: 0, stock: 20, sold: 200 },
+                { sku: 'IP15-YE-256', color: 'Yellow', colorHex: '#FAE479', storage: '256GB', priceModifier: 2000000, stock: 20, sold: 200 },
+                { sku: 'IP15-YE-512', color: 'Yellow', colorHex: '#FAE479', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 95 },
+                { sku: 'IP15-MD-128', color: 'Midnight', colorHex: '#222930', storage: '128GB', priceModifier: 0, stock: 20, sold: 200 },
+                { sku: 'IP15-MD-256', color: 'Midnight', colorHex: '#222930', storage: '256GB', priceModifier: 2000000, stock: 20, sold: 200 },
+                { sku: 'IP15-MD-512', color: 'Midnight', colorHex: '#222930', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 95 },
+                { sku: 'IP15-SR-128', color: 'Starlight', colorHex: '#FAF6F2', storage: '128GB', priceModifier: 0, stock: 20, sold: 200 },
+                { sku: 'IP15-SR-256', color: 'Starlight', colorHex: '#FAF6F2', storage: '256GB', priceModifier: 2000000, stock: 20, sold: 200 },
+                { sku: 'IP15-SR-512', color: 'Starlight', colorHex: '#FAF6F2', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 95 },
+        ],
+        description: { intro: 'iPhone 15. Ditempa dalam titanium dan menampilkan Chip A17 terobosan, tombol Tindakan yang dapat disesuaikan, dan sistem kamera Pro paling kuat yang pernah ada di iPhone dengan zoom optik 5x.', specs: ['Layar: 6.1-inch Super Retina XDR', 'Chip: A17', 'Kamera: Sistem kamera pro 48MP'], condition: 'Produk Baru, Garansi Resmi.' },
+        pros: ['Layar lebih besar dan imersif', 'Kamera dengan kemampuan zoom optik 5x', 'Daya tahan baterai terbaik', 'Performa A18'],
+        cons: ['Ukuran besar mungkin tidak nyaman untuk semua orang', 'Harga sangat premium'],
+        inTheBox: ['Unit iPhone 15', 'Kabel Pengisi Daya USB-C (1 m)']
+        },
 ];
