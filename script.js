@@ -85,13 +85,20 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const addToCart = (productData, quantity = 1) => {
         let productToAdd;
+        let productImg;
+
+        // Cek apakah yang dikirim adalah objek (varian) atau ID (non-varian)
         if (typeof productData === 'number') {
             productToAdd = products.find(p => p.id === productData);
+            if (productToAdd && productToAdd.images) {
+                productImg = productToAdd.images[0]; // Ambil gambar pertama untuk produk Mac
+            }
         } else {
             productToAdd = productData;
+            productImg = productToAdd.img; // Gunakan gambar yang sudah ada untuk varian iPhone
         }
 
-        if (!productToAdd) return; 
+        if (!productToAdd) return;
 
         if (productToAdd.stock < quantity) {
             alert('Maaf, stok produk tidak mencukupi.');
@@ -109,14 +116,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
         } else {
+            // Hapus data yang tidak perlu sebelum dimasukkan ke keranjang
             const { images, description, variants, ...productInfo } = productToAdd;
-            cart.push({ 
+            cart.push({
                 ...productInfo,
                 id: cartItemId,
-                img: productToAdd.img || (images ? images[Object.keys(images)[0]][0] : ''),
-                quantity: quantity 
+                img: productImg, // Gunakan variabel gambar yang sudah disiapkan
+                quantity: quantity
             });
         }
+        
         saveCart();
         updateSharedUI();
         showCustomToast(`"${productToAdd.name}" ditambahkan ke keranjang`);
