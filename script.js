@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Tampilkan konten umum yang ada di kedua jenis halaman
         contentDiv.style.display = 'flex';
         notFoundDiv.style.display = 'none';
-        document.title = `${product.name} - Macintoz`;
+        document.title = `${product.name} | Macintoz Store`;
         document.getElementById('detail-name').textContent = product.name;
 
         // PEMERIKSAAN UTAMA: Apakah produk ini punya varian?
