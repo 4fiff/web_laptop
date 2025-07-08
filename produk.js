@@ -1057,7 +1057,7 @@ const products = [
         },
         //produk 38
         {
-        id: 37,
+        id: 38,
         name: 'iPhone 15',
         kategori: 'iPhone',
         basePrice: 12999000,
