@@ -966,22 +966,25 @@ const products = [
         kategori: 'iPhone',
         basePrice: 22999000,
         images: {
-                'Desert Titanium': ['images/produk/id35/ip16pro-dt-1.jpg', 'images/produk/id35/ip16pro-dt-2.jpg', 'images/produk/id35/ip16pro-dt-3.jpg', 'images/produk/id35/ip16pro-dt-4.jpg'],
-                'Natural Titanium': ['images/produk/id35/ip16pro-nt-1.jpg', 'images/produk/id35/ip16pro-nt-2.jpg', 'images/produk/id35/ip16pro-nt-3.jpg', 'images/produk/id35/ip16pro-nt-4.jpg'],
-                'Blue Titanium': ['images/produk/id34_7RCF3ESV/1.jpg', 'images/produk/id34_7RCF3ESV/2.jpg', 'images/produk/id34_7RCF3ESV/3.jpg'],
+                'Desert Titanium': ['images/produk/id35&36/ip16pro-dt-1.jpg', 'images/produk/id35&36/ip16pro-dt-2.jpg', 'images/produk/id35&36/ip16pro-dt-3.jpg', 'images/produk/id35&36/ip16pro-dt-4.jpg'],
+                'Natural Titanium': ['images/produk/id35&36/ip16pro-nt-1.jpg', 'images/produk/id35&36/ip16pro-nt-2.jpg', 'images/produk/id35&36/ip16pro-nt-3.jpg', 'images/produk/id35&36/ip16pro-nt-4.jpg'],
+                'White Titanium': ['images/produk/id35&36/ip16pro-wt-1.jpg', 'images/produk/id35&36/ip16pro-wt-2.jpg', 'images/produk/id35&36/ip16pro-wt-3.jpg', 'images/produk/id35&36/ip16pro-wt-4.jpg'],
+                'Black Titanium': ['images/produk/id35&36/ip16pro-bt-1.jpg', 'images/produk/id35&36/ip16pro-bt-2.jpg', 'images/produk/id35&36/ip16pro-bt-3.jpg', 'images/produk/id35&36/ip16pro-bt-4.jpg'],
         },
         variants: [
                 { sku: 'IP15PM-DT-256', color: 'Desert Titanium', colorHex: '#C3AA97', storage: '256GB', priceModifier: 0, stock: 20, sold: 200 },
                 { sku: 'IP15PM-DT-512', color: 'Desert Titanium', colorHex: '#C3AA97', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 95 },
                 { sku: 'IP15PM-NT-256', color: 'Natural Titanium', colorHex: '#8A8A85', storage: '256GB', priceModifier: 0, stock: 20, sold: 200 },
                 { sku: 'IP15PM-NT-512', color: 'Natural Titanium', colorHex: '#8A8A85', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 95 },
-                { sku: 'IP15PM-BT-256', color: 'Blue Titanium', colorHex: '#2A3C4B', storage: '256GB', priceModifier: 0, stock: 18, sold: 130 },
-                { sku: 'IP15PM-BT-512', color: 'Blue Titanium', colorHex: '#2A3C4B', storage: '512GB', priceModifier: 4000000, stock: 18, sold: 130 },
+                { sku: 'IP15PM-WT-256', color: 'White Titanium', colorHex: '#F3F1EE', storage: '256GB', priceModifier: 0, stock: 18, sold: 130 },
+                { sku: 'IP15PM-WT-512', color: 'White Titanium', colorHex: '#F3F1EE', storage: '512GB', priceModifier: 4000000, stock: 18, sold: 130 },
+                { sku: 'IP15PM-BT-256', color: 'Black Titanium', colorHex: '#474747', storage: '256GB', priceModifier: 0, stock: 18, sold: 130 },
+                { sku: 'IP15PM-BT-512', color: 'Black Titanium', colorHex: '#474747', storage: '512GB', priceModifier: 4000000, stock: 18, sold: 130 },
         ],
-        description: { intro: 'iPhone 15 Pro Max. Ditempa dalam titanium dan menampilkan Chip A17 Pro terobosan, tombol Tindakan yang dapat disesuaikan, dan sistem kamera Pro paling kuat yang pernah ada di iPhone dengan zoom optik 5x.', specs: ['Layar: 6.7-inch Super Retina XDR', 'Chip: A17 Pro', 'Kamera: Sistem kamera pro 48MP dengan 5x Telephoto'], condition: 'Produk Baru, Garansi Resmi.' },
-        pros: ['Layar lebih besar dan imersif', 'Kamera dengan kemampuan zoom optik 5x', 'Daya tahan baterai terbaik', 'Performa A17 Pro'],
+        description: { intro: 'iPhone 16 Pro Max. Ditempa dalam titanium dan menampilkan Chip A18 Pro terobosan, tombol Tindakan yang dapat disesuaikan, dan sistem kamera Pro paling kuat yang pernah ada di iPhone dengan zoom optik 5x.', specs: ['Layar: 6.7-inch Super Retina XDR', 'Chip: A18 Pro', 'Kamera: Sistem kamera pro 48MP dengan 5x Telephoto'], condition: 'Produk Baru, Garansi Resmi.' },
+        pros: ['Layar lebih besar dan imersif', 'Kamera dengan kemampuan zoom optik 5x', 'Daya tahan baterai terbaik', 'Performa A18 Pro'],
         cons: ['Ukuran besar mungkin tidak nyaman untuk semua orang', 'Harga sangat premium'],
-        inTheBox: ['Unit iPhone 15 Pro Max', 'Kabel Pengisi Daya USB-C (1 m)']
+        inTheBox: ['Unit iPhone 16 Pro Max', 'Kabel Pengisi Daya USB-C (1 m)']
         },
         // produk 36
         {
