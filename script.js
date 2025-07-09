@@ -1172,8 +1172,9 @@ document.addEventListener('DOMContentLoaded', () => {
         initializeNavbar();
         const path = window.location.pathname;
         if (path.includes('/product/buy-macbook')) { renderProductPage('Mac'); }
-        else if (path.includes('/product/buy-iphone')) {renderProductPage('iPhone');}
-        else if (path.includes('/product/buy-ipad')) {renderProductPage('iPad');} 
+        else if (path.includes('/product/buy-iphone')) { renderProductPage('iPhone');}
+        else if (path.includes('/product/buy-ipad')) { renderProductPage('iPad');}
+        else if (path.includes('/product/buy-airpods')) { renderProductPage('AirPods');} 
         else if (path.includes('/detail-produk')) { renderDetailPage(); } 
         else if (path.includes('/keranjang')) { renderCartPage(); } 
         else if (path.includes('/pembayaran')) { renderCheckoutPage(); } 
