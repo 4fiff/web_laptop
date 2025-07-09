@@ -1366,12 +1366,14 @@ const products = [
         id: 47,
         kategori: 'AirPods',
         name: 'AirPods Pro (Generasi ke-2)',
-        price: 3999000,
-        stock: 10,
-        grade: 'Baru',
-        sku: 'APP-G2',
-        sold: 20,
-        images: ['images/produk/id47_app/1.jpg', 'images/produk/id47_app/2.jpg', 'images/produk/id47_app/3.jpg', 'images/produk/id47_app/4.jpg', 'images/produk/id47_app/5.jpg'],
+        basePrice: 3999000,
+        images: {
+                'White': ['https://placehold.co/600x600/f5f5f7/333?text=AirPods+Pro+2']
+        },
+        // Dibuat menjadi struktur varian meskipun hanya ada satu
+        variants: [
+                { sku: 'APP-G2-W', color: 'White', colorHex: '#f5f5f7', stock: 10, sold: 20 }
+        ],
         description: { intro: 'AirPods Pro telah direkayasa ulang untuk menghasilkan kualitas audio yang lebih kaya. Peredam Kebisingan Aktif level berikutnya dan Transparansi Adaptif mengurangi lebih banyak suara eksternal.', specs: ['Chip H2 Apple', 'Audio Spasial Personal', 'Casing Pengisian Daya MagSafe (USB-C)'], condition: 'Produk Baru, Garansi Resmi.' },
         pros: ['Peredam bising (ANC) jauh lebih baik', 'Kontrol volume sentuh pada batang', 'Kualitas audio meningkat signifikan', 'Daya tahan baterai lebih lama'],
         cons: ['Desain tidak banyak berubah dari generasi pertama'],

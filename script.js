@@ -170,44 +170,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderProductPage = (category) => {
         const productGrid = document.getElementById('product-grid');
         if (!productGrid) return;
-
-        // Ambil elemen-elemen kontrol dari HTML
         const searchInput = document.getElementById('search-input');
         const sortSelect = document.getElementById('sort-select');
         const filtersContainer = document.getElementById('filters-container');
-
-        // Sembunyikan sidebar jika tidak diperlukan (khususnya untuk kategori tanpa filter)
         const filterSidebar = document.querySelector('.filter-sidebar');
-        if (category === 'iPad' || category === 'AirPods') {
-            if(filterSidebar) filterSidebar.style.display = 'none';
-        } else {
-            if(filterSidebar) filterSidebar.style.display = 'block';
+        if ((category === 'iPad' || category === 'AirPods') && filterSidebar) {
+            filterSidebar.style.display = 'none';
+        } else if (filterSidebar) {
+            filterSidebar.style.display = 'block';
         }
-
-        // Objek untuk menyimpan filter yang sedang aktif
-        let activeFilters = {
-            model: [],
-            chip: [],
-            size: [],
-            grade: [],
-            iphoneModel: []
-        };
+        let activeFilters = { model: [], chip: [], size: [], grade: [], iphoneModel: [] };
         
-        // --- Fungsi untuk MEMBUAT filter secara dinamis berdasarkan kategori ---
         function createFilters() {
-            // Jika tidak ada container filter (seperti di halaman iPad/AirPods), hentikan fungsi
             if (!filtersContainer) return;
-
             let filtersHTML = '';
             const categoryProducts = products.filter(p => p.kategori === category);
-
             if (category === 'Mac') {
-                // Logika untuk membuat filter Mac
                 const models = [...new Set(categoryProducts.map(p => p.name.includes('Air') ? 'Air' : 'Pro'))];
                 const chips = [...new Set(categoryProducts.flatMap(p => (p.name.match(/(M[1-4]|Intel i[3579])/g) || [])))];
                 const sizes = [...new Set(categoryProducts.flatMap(p => (p.name.match(/1[3-6]/g) || [])))];
                 const grades = [...new Set(categoryProducts.map(p => p.grade))];
-
                 filtersHTML = `
                     <div class="filter-group"><h4>Model</h4>${models.map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.toLowerCase()}" data-category="model" value="${model}"><label for="model-${model.toLowerCase()}">MacBook ${model}</label></div>`).join('')}</div>
                     <div class="filter-group"><h4>Chip</h4>${chips.sort().map(chip => `<div class="filter-option"><input type="checkbox" id="chip-${chip.toLowerCase().replace(' ', '-')}" data-category="chip" value="${chip}"><label for="chip-${chip.toLowerCase().replace(' ', '-')}"">${chip}</label></div>`).join('')}</div>
@@ -215,25 +197,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="filter-group"><h4>Kondisi</h4>${grades.sort().map(grade => `<div class="filter-option"><input type="checkbox" id="grade-${grade.toLowerCase()}" data-category="grade" value="${grade}"><label for="grade-${grade.toLowerCase()}">${grade === 'Baru' ? 'Baru (BNIB)' : `Grade ${grade}`}</label></div>`).join('')}</div>
                 `;
             } else if (category === 'iPhone') {
-                // Logika untuk membuat filter iPhone
                 const iphoneModels = [...new Set(categoryProducts.map(p => p.name))];
-                filtersHTML = `
-                    <div class="filter-group"><h4>Model iPhone</h4>${iphoneModels.sort().map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.replace(/\s+/g, '-').toLowerCase()}" data-category="iphoneModel" value="${model}"><label for="model-${model.replace(/\s+/g, '-').toLowerCase()}">${model}</label></div>`).join('')}</div>
-                `;
+                filtersHTML = `<div class="filter-group"><h4>Model iPhone</h4>${iphoneModels.sort().map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.replace(/\s+/g, '-').toLowerCase()}" data-category="iphoneModel" value="${model}"><label for="model-${model.replace(/\s+/g, '-').toLowerCase()}">${model}</label></div>`).join('')}</div>`;
             }
-            
             filtersContainer.innerHTML = filtersHTML;
-
-            // Tambahkan event listener ke setiap checkbox yang baru dibuat
             document.querySelectorAll('#filters-container input[type="checkbox"]').forEach(checkbox => {
                 checkbox.addEventListener('change', (e) => {
                     const filterCategory = e.target.dataset.category;
                     const value = e.target.value;
-                    if (e.target.checked) {
-                        activeFilters[filterCategory].push(value);
-                    } else {
-                        activeFilters[filterCategory] = activeFilters[filterCategory].filter(item => item !== value);
-                    }
+                    if (e.target.checked) { activeFilters[filterCategory].push(value); } 
+                    else { activeFilters[filterCategory] = activeFilters[filterCategory].filter(item => item !== value); }
                     displayProducts();
                 });
             });
@@ -243,8 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const searchTerm = searchInput.value.toLowerCase();
             const sortOrder = sortSelect.value;
             let processedProducts = products.filter(p => p.kategori === category);
-
-            // Terapkan filter checkbox
             Object.keys(activeFilters).forEach(filterCategory => {
                 if (activeFilters[filterCategory].length > 0) {
                     processedProducts = processedProducts.filter(product => {
@@ -256,22 +227,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
-
-            // Terapkan filter search
-            if (searchTerm) {
-                processedProducts = processedProducts.filter(product => 
-                    product.name.toLowerCase().includes(searchTerm)
-                );
-            }
-
-            // Terapkan filter sort
-            if (sortOrder === 'price-asc') {
-                processedProducts.sort((a, b) => (a.basePrice || a.price) - (b.basePrice || b.price));
-            } else if (sortOrder === 'price-desc') {
-                processedProducts.sort((a, b) => (b.basePrice || b.price) - (a.basePrice || a.price));
-            }
-
-            // Render hasil akhir ke layar
+            if (searchTerm) { processedProducts = processedProducts.filter(product => product.name.toLowerCase().includes(searchTerm)); }
+            if (sortOrder === 'price-asc') { processedProducts.sort((a, b) => (a.basePrice || a.price) - (b.basePrice || b.price)); } 
+            else if (sortOrder === 'price-desc') { processedProducts.sort((a, b) => (b.basePrice || b.price) - (a.basePrice || a.price)); }
             productGrid.innerHTML = '';
             if (processedProducts.length === 0) {
                 productGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Tidak ada produk yang cocok dengan kriteria Anda.</p>';
@@ -285,7 +243,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     const isVariant = !!product.variants;
                     const displayPrice = isVariant ? product.basePrice : product.price;
-                    const displayImage = isVariant ? product.images[Object.keys(product.images)[0]][0] : product.images[0];
+                    const firstImageKey = Object.keys(product.images)[0];
+                    const displayImage = isVariant ? product.images[firstImageKey][0] : product.images[0];
                     const displaySpecs = isVariant ? `${product.variants.length} pilihan varian` : product.specs;
                     const gradeText = product.grade ? (product.grade === 'Baru' ? 'BARU' : `GRADE ${product.grade}`) : '';
                     const gradeBadgeClass = product.grade ? `product-grade-badge grade-${product.grade.toLowerCase()}` : '';
@@ -293,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const buttonText = isVariant ? 'Lihat Opsi' : 'Lihat Detail';
 
                     if(isVariant){
-                        card.innerHTML = `<img src="/${displayImage}" alt="${product.name}"><div><h3 class="product-name">${product.name}</h3><p class="product-specs">${displaySpecs}</p><p class="product-price">Mulai dari ${formatRupiah(displayPrice)}</p><div class="button">${buttonText}</div></div>`;
+                         card.innerHTML = `<img src="/${displayImage}" alt="${product.name}"><div><h3 class="product-name">${product.name}</h3><p class="product-specs">${displaySpecs}</p><p class="product-price">Mulai dari ${formatRupiah(displayPrice)}</p><div class="button">${buttonText}</div></div>`;
                     } else {
                         let stockText = product.stock > 0 ? `<span class="${product.stock <= CONFIG.LOW_STOCK_THRESHOLD ? 'stock-status low-stock' : 'stock-status'}">Sisa stok: ${product.stock}</span>` : `<span class="stock-status">Stok Habis</span>`;
                         let soldText = product.sold > 0 ? `<span class="sold-info"><i class="fas fa-fire"></i> ${product.sold} terjual</span>` : '';
@@ -306,8 +265,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         createFilters();
-        searchInput.addEventListener('input', displayProducts);
-        sortSelect.addEventListener('change', displayProducts);
+        if (searchInput) searchInput.addEventListener('input', displayProducts);
+        if (sortSelect) sortSelect.addEventListener('change', displayProducts);
         displayProducts();
     };
 
@@ -321,36 +280,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const params = new URLSearchParams(window.location.search);
         const productId = parseInt(params.get('id'));
 
-        if (isNaN(productId)) {
-            contentDiv.style.display = 'none';
-            notFoundDiv.style.display = 'block';
-            return;
-        }
-
+        if (isNaN(productId)) { contentDiv.style.display = 'none'; notFoundDiv.style.display = 'block'; return; }
         const product = products.find(p => p.id === productId);
+        if (!product) { contentDiv.style.display = 'none'; notFoundDiv.style.display = 'block'; return; }
 
-        if (!product) {
-            contentDiv.style.display = 'none';
-            notFoundDiv.style.display = 'block';
-            return;
-        }
-
-        // Tampilkan konten umum yang ada di kedua jenis halaman
         contentDiv.style.display = 'flex';
         notFoundDiv.style.display = 'none';
         document.title = `${product.name} | Macintoz Store`;
         document.getElementById('detail-name').textContent = product.name;
 
-        // PEMERIKSAAN UTAMA: Apakah produk ini punya varian?
         if (product.variants && product.variants.length > 0) {
-            // === JALUR 1: LOGIKA UNTUK PRODUK DENGAN VARIAN (iPHONE) ===
             renderVariantProduct(product);
         } else {
-            // === JALUR 2: LOGIKA UNTUK PRODUK STANDAR (MACBOOK) ===
             renderStandardProduct(product);
         }
-        
-        // Jalankan render produk terkait untuk SEMUA jenis produk
         renderRelatedProducts(product);
     };
 
@@ -472,7 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const gradeElement = document.getElementById('detail-grade');
         if(gradeElement) gradeElement.innerHTML = '';
         
-        document.title = `${product.name} - Macintoz`;
+        document.title = `${product.name} | Macintoz Store`;
         
         let selectedColor = product.variants[0].color;
         let selectedStorage = product.variants.find(v => v.color === selectedColor)?.storage;
