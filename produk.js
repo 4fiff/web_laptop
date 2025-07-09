@@ -1180,8 +1180,8 @@ const products = [
             //{ sku: 'IPP11-SL-2TB', color: 'Silver', colorHex: '#e3e4e6', storage: '2TB', priceModifier: 9000000, stock: 5, sold: 12 },
             { sku: 'IPP11-SB-256', color: 'Space Black', colorHex: '#3a3a3d', storage: '256GB', priceModifier: 0, stock: 7, sold: 95 },
             { sku: 'IPP11-SB-512', color: 'Space Black', colorHex: '#3a3a3d', storage: '512GB', priceModifier: 3500000, stock: 10, sold: 60 },
-            { sku: 'IPP11-SB-1TB', color: 'Space Black', colorHex: '#3a3a3d', storage: '1TB', priceModifier: 7000000, stock: 6, sold: 95 },
-            //{ sku: 'IPP11-SB-2TB', color: 'Space Black', colorHex: '#3a3a3d', storage: '2TB', priceModifier: 9000000, stock: 4, sold: 60 },
+            //{ sku: 'IPP11-SB-1TB', color: 'Space Black', colorHex: '#3a3a3d', storage: '1TB', priceModifier: 7000000, stock: 6, sold: 95 },
+            { sku: 'IPP11-SB-2TB', color: 'Space Black', colorHex: '#3a3a3d', storage: '2TB', priceModifier: 9000000, stock: 4, sold: 60 },
         ],
         description: {
             intro: 'iPad Pro. Tenaga luar biasa dengan layar paling canggih di dunia. Ditenagai chip Apple M4, iPad Pro baru menghadirkan performa menakjubkan dalam desain yang super tipis dan ringan.',
