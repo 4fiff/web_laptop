@@ -269,21 +269,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderDetailPage = () => {
         const contentDiv = document.getElementById('product-detail-content');
         if (!contentDiv) return;
+
         const notFoundDiv = document.getElementById('product-not-found');
         const params = new URLSearchParams(window.location.search);
         const productId = parseInt(params.get('id'));
-        if (isNaN(productId)) { contentDiv.style.display = 'none'; notFoundDiv.style.display = 'block'; return; }
+
+        if (isNaN(productId)) {
+            contentDiv.style.display = 'none';
+            notFoundDiv.style.display = 'block';
+            return;
+        }
+
         const product = products.find(p => p.id === productId);
-        if (!product) { contentDiv.style.display = 'none'; notFoundDiv.style.display = 'block'; return; }
+
+        if (!product) {
+            contentDiv.style.display = 'none';
+            notFoundDiv.style.display = 'block';
+            return;
+        }
+        
         contentDiv.style.display = 'flex';
         notFoundDiv.style.display = 'none';
         document.title = `${product.name} - Macintoz`;
         document.getElementById('detail-name').textContent = product.name;
+
         if (product.variants && product.variants.length > 0) {
             renderVariantProduct(product);
         } else {
             renderStandardProduct(product);
         }
+        
         renderRelatedProducts(product);
     };
 
@@ -582,7 +597,9 @@ document.addEventListener('DOMContentLoaded', () => {
         relatedGrid.innerHTML = '';
 
         const primaryCategory = currentProduct.kategori;
-        let relatedProducts = products.filter(p => p.kategori === primaryCategory && p.id !== currentProduct.id);
+        let relatedProducts = products.filter(p =>
+            p.kategori === primaryCategory && p.id !== currentProduct.id
+        );
 
         relatedProducts.sort(() => 0.5 - Math.random());
         const selectedRelated = relatedProducts.slice(0, 4);
@@ -603,19 +620,26 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const isVariant = !!product.variants;
             const displayPrice = isVariant ? product.basePrice : product.price;
-            const firstImageKey = Object.keys(product.images)[0];
-            const displayImage = isVariant ? product.images[firstImageKey][0] : product.images[0];
+            
+            let displayImage = '';
+            if(isVariant && product.images) {
+                const firstImageKey = Object.keys(product.images)[0];
+                displayImage = product.images[firstImageKey][0];
+            } else if (product.images) {
+                displayImage = product.images[0];
+            }
+
             const displaySpecs = isVariant ? `${product.variants.length} pilihan varian` : product.specs;
-            const gradeText = product.grade ? (product.grade === 'Baru' ? 'BARU' : `GRADE ${product.grade}`) : '';
-            const gradeBadgeClass = product.grade ? `product-grade-badge grade-${product.grade.toLowerCase()}` : '';
-            const gradeBadge = product.grade ? `<div class="${gradeBadgeClass}">${gradeText}</div>` : '';
             const buttonText = isVariant ? 'Lihat Opsi' : 'Lihat Detail';
 
             if(isVariant){
                  card.innerHTML = `<img src="/${displayImage}" alt="${product.name}"><div><h3 class="product-name">${product.name}</h3><p class="product-specs">${displaySpecs}</p><p class="product-price">Mulai dari ${formatRupiah(displayPrice)}</p><div class="button">${buttonText}</div></div>`;
             } else {
+                const gradeText = product.grade ? (product.grade === 'Baru' ? 'BARU' : `GRADE ${product.grade}`) : '';
+                const gradeBadgeClass = product.grade ? `product-grade-badge grade-${product.grade.toLowerCase()}` : '';
+                const gradeBadge = product.grade ? `<div class="${gradeBadgeClass}">${gradeText}</div>` : '';
                 let stockHTML = product.stock > 0 ? `<p class="product-stock">Sisa stok: ${product.stock}</p>` : '';
-                card.innerHTML = `<img src="/${product.images[0]}" alt="${product.name}"><div>${gradeBadge}<h3 class="product-name">${product.name}</h3><p class="product-specs">${product.specs}</p>${stockHTML}<p class="product-price">${formatRupiah(displayPrice)}</p><div class="button">${buttonText}</div></div>`;
+                card.innerHTML = `<img src="/${displayImage}" alt="${product.name}"><div>${gradeBadge}<h3 class="product-name">${product.name}</h3><p class="product-specs">${product.specs}</p>${stockHTML}<p class="product-price">${formatRupiah(displayPrice)}</p><div class="button">${buttonText}</div></div>`;
             }
             relatedGrid.appendChild(card);
         });
