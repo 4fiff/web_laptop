@@ -87,18 +87,19 @@ document.addEventListener('DOMContentLoaded', () => {
         let productToAdd;
         let productImg;
 
-        // Cek apakah yang dikirim adalah objek (varian) atau ID (non-varian)
         if (typeof productData === 'number') {
             productToAdd = products.find(p => p.id === productData);
             if (productToAdd && productToAdd.images) {
-                productImg = productToAdd.images[0]; // Ambil gambar pertama untuk produk Mac
+                productImg = productToAdd.images[0];
             }
         } else {
             productToAdd = productData;
-            productImg = productToAdd.img; // Gunakan gambar yang sudah ada untuk varian iPhone
+            // Jika produk varian (iPhone/iPad/AirPods), ambil gambar dari objeknya
+            // `productData.img` sudah disiapkan saat tombol 'Tambah ke keranjang' dibuat
+            productImg = productToAdd.img;
         }
 
-        if (!productToAdd) return;
+        if (!productToAdd) return; 
 
         if (productToAdd.stock < quantity) {
             alert('Maaf, stok produk tidak mencukupi.');
@@ -116,13 +117,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
         } else {
-            // Hapus data yang tidak perlu sebelum dimasukkan ke keranjang
             const { images, description, variants, ...productInfo } = productToAdd;
-            cart.push({
+            cart.push({ 
                 ...productInfo,
                 id: cartItemId,
                 img: productImg, // Gunakan variabel gambar yang sudah disiapkan
-                quantity: quantity
+                quantity: quantity 
             });
         }
         
@@ -731,11 +731,15 @@ document.addEventListener('DOMContentLoaded', () => {
         cart.forEach(item => {
             const itemEl = document.createElement('div');
             itemEl.className = 'cart-item';
+
+            // Cek apakah item.specs ada, jika tidak, tampilkan string kosong
+            const specsHTML = item.specs ? `<p>${item.specs}</p>` : '';
+
             itemEl.innerHTML = `
                 <img src="/${item.img}" alt="${item.name}">
                 <div class="cart-item-info">
                     <h3>${item.name}</h3>
-                    <p>${item.specs || ''}</p>
+                    ${specsHTML} 
                     <div class="cart-item-actions">
                         <div class="quantity-control">
                             <button class="quantity-decrease" data-id="${item.id}">-</button>
@@ -755,10 +759,9 @@ document.addEventListener('DOMContentLoaded', () => {
         summaryTotalItems.textContent = totalItems;
         summaryTotalPrice.textContent = formatRupiah(totalPrice);
 
-        // --- Event Listener yang sudah diperbaiki ---
         document.querySelectorAll('.quantity-decrease').forEach(btn => {
             btn.onclick = e => {
-                const id = e.target.dataset.id; // Ambil ID sebagai string
+                const id = e.target.dataset.id;
                 const currentItem = cart.find(i => String(i.id) === id);
                 if (currentItem) {
                     updateQuantity(id, currentItem.quantity - 1);
@@ -767,7 +770,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         document.querySelectorAll('.quantity-increase').forEach(btn => {
             btn.onclick = e => {
-                const id = e.target.dataset.id; // Ambil ID sebagai string
+                const id = e.target.dataset.id;
                 const currentItem = cart.find(i => String(i.id) === id);
                 if (currentItem) {
                     updateQuantity(id, currentItem.quantity + 1);
@@ -777,7 +780,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.remove-item-btn').forEach(btn => {
             btn.onclick = e => {
                 if (confirm('Yakin ingin menghapus item ini?')) {
-                    const id = e.target.dataset.id; // Ambil ID sebagai string
+                    const id = e.target.dataset.id;
                     updateQuantity(id, 0);
                 }
             }
