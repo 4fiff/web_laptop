@@ -1343,11 +1343,11 @@ const products = [
         name: 'AirPods Max',
         basePrice: 8999000,
         images: {
-            'Blue': ['https://placehold.co/600x600/a5b8cd/fff?text=AirPods+Max+Blue'],
-            'Purple': ['https://placehold.co/600x600/b8b5ce/fff?text=AirPods+Max+Purple'],
-            'Midnight': ['https://placehold.co/600x600/3a3a3d/fff?text=AirPods+Max+Midnight'],
-            'Starlight': ['https://placehold.co/600x600/f0e5d8/333?text=AirPods+Max+Starlight'],
-            'Orange': ['https://placehold.co/600x600/ff8c69/fff?text=AirPods+Max+Orange'],
+            'Blue': ['images/produk/id46_apm/apm_blue.jpg', 'images/produk/id46_apm/6.jpg', 'images/produk/id46_apm/7.jpg', 'images/produk/id46_apm/8.jpg', 'images/produk/id46_apm/9.jpg', 'images/produk/id46_apm/10.jpg'],
+            'Purple': ['images/produk/id46_apm/apm_purple.jpg', 'images/produk/id46_apm/6.jpg', 'images/produk/id46_apm/7.jpg', 'images/produk/id46_apm/8.jpg', 'images/produk/id46_apm/9.jpg', 'images/produk/id46_apm/10.jpg'],
+            'Midnight': ['images/produk/id46_apm/apm_midnight.jpg', 'images/produk/id46_apm/6.jpg', 'images/produk/id46_apm/7.jpg', 'images/produk/id46_apm/8.jpg', 'images/produk/id46_apm/9.jpg', 'images/produk/id46_apm/10.jpg'],
+            'Starlight': ['images/produk/id46_apm/apm_starlight.jpg', 'images/produk/id46_apm/6.jpg', 'images/produk/id46_apm/7.jpg', 'images/produk/id46_apm/8.jpg', 'images/produk/id46_apm/9.jpg', 'images/produk/id46_apm/10.jpg'],
+            'Orange': ['images/produk/id46_apm/apm_orange.jpg', 'images/produk/id46_apm/6.jpg', 'images/produk/id46_apm/7.jpg', 'images/produk/id46_apm/8.jpg', 'images/produk/id46_apm/9.jpg', 'images/produk/id46_apm/10.jpg'],
         },
         variants: [
             { sku: 'APM-BL', color: 'Blue', colorHex: '#a5b8cd', stock: 10, sold: 20 },
