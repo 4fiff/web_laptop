@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Review | Macintoz Store</title>
+    <title>Accessories | Macintoz Store</title>
     <link rel="icon" type="image/png" href="/images/favicon.png">
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="nav-container">
@@ -53,43 +55,20 @@
     </div>
 
     <header class="page-header">
-        <h1>Dipotret oleh Anda, Dibanggakan oleh Kami.</h1>
-        <p>Lihat pengalaman nyata dari para pelanggan setia Macintoz.</p>
-    </header>
-    
-    <main class="story-gallery-container">
-        <div class="story-track">
-            <img src="images/review/artis-rubenonsu.webp" alt="Review Instagram Story 1">
-            <img src="images/review/artis-andre.webp" alt="Review Instagram Story 2">
-            <img src="images/review/artis-raffi.webp" alt="Review Instagram Story 3">
-            <img src="images/review/artis-rubenonsu.webp" alt="Review Instagram Story 4">
-            <img src="images/review/artis-andre.webp" alt="Review Instagram Story 5">
-            <img src="images/review/artis-raffi.webp" alt="Review Instagram Story 6">
-            <img src="images/review/artis-rubenonsu.webp" alt="Review Instagram Story 7">
-            <img src="images/review/artis-andre.webp" alt="Review Instagram Story 1">
-            <img src="images/review/artis-raffi.webp" alt="Review Instagram Story 2">
-            <img src="images/review/artis-rubenonsu.webp" alt="Review Instagram Story 3">
-            <img src="images/review/artis-andre.webp" alt="Review Instagram Story 4">
-            <img src="images/review/artis-raffi.webp" alt="Review Instagram Story 5">
-            <img src="images/review/artis-rubenonsu.webp" alt="Review Instagram Story 6">
-            <img src="images/review/artis-andre.webp" alt="Review Instagram Story 7">
+        <h1>Aksesoris</h1>
+        <p>Lengkapi perangkat Apple Anda dengan aksesoris original.</p>
+        <div class="product-controls">
+            <input type="text" id="search-input" class="input-field" placeholder="Cari aksesoris...">
+            <select id="sort-select" class="input-field">
+                <option value="default">Urutan Default</option>
+                <option value="price-asc">Harga: Terendah ke Tertinggi</option>
+                <option value="price-desc">Harga: Tertinggi ke Terendah</option>
+            </select>
         </div>
+    </header>
 
-        <div class="story-track" style="animation-direction: reverse;">
-            <img src="images/review/orang1.webp" alt="Review Instagram Story 8">
-            <img src="images/review/orang2.webp" alt="Review Instagram Story 9">
-            <img src="images/review/orang3.jpg" alt="Review Instagram Story 10">
-            <img src="images/review/orang4.jpg" alt="Review Instagram Story 11">
-            <img src="images/review/orang1.webp" alt="Review Instagram Story 12">
-            <img src="images/review/orang2.webp" alt="Review Instagram Story 13">
-            <img src="images/review/orang3.jpg" alt="Review Instagram Story 14">
-            <img src="images/review/orang4.jpg" alt="Review Instagram Story 8">
-            <img src="images/review/orang1.webp" alt="Review Instagram Story 9">
-            <img src="images/review/orang2.webp" alt="Review Instagram Story 10">
-            <img src="images/review/orang3.jpg" alt="Review Instagram Story 11">
-            <img src="images/review/orang4.jpg" alt="Review Instagram Story 12">
-            <img src="images/review/orang1.webp" alt="Review Instagram Story 13">
-            <img src="images/review/orang2.webp" alt="Review Instagram Story 14">
+    <main class="product-grid-container" style="max-width: 1280px; margin: 0 auto; padding: 0 20px 60px;">
+        <div id="product-grid" class="product-grid">
         </div>
     </main>
 
@@ -120,6 +99,7 @@
                     <li><a href="/product/buy-airpods">AirPods</a></li>
                     <li><a href="/product/buy-accessories">Accessories</a></li>
                 </ul>
+                </ul>
             </div>
             <div class="footer-column">
                 <h3>Layanan</h3>
@@ -149,8 +129,9 @@
             </div>
         </div>
     </footer>
-    
+
     <script src="/produk.js"></script>
     <script src="/script.js"></script>
 </body>
+
 </html>

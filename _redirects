@@ -5,6 +5,7 @@
 /product/buy-iphone    /buy-iphone.html    200
 /product/buy-ipad      /buy-ipad.html      200
 /product/buy-airpods   /buy-airpods.html   200
+/product/buy-accessories /buy-accessories.html 200
 
 # Aturan untuk semua halaman lain agar tetap bersih
 /product/buy-:category/detail-produk   /detail-produk.html   200

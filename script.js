@@ -400,39 +400,42 @@ document.addEventListener('DOMContentLoaded', () => {
         setupImageSlider(product.images);
     }
 
-    // FUNGSI BARU UNTUK MENAMPILKAN PRODUK DENGAN VARIAN (iPHONE)
-    // GANTI FUNGSI renderVariantProduct LAMA ANDA DENGAN VERSI LENGKAP INI
     function renderVariantProduct(product) {
+        // Tampilkan wadah untuk pilihan varian
         const variantOptionsContainer = document.getElementById('variant-options-container');
         if (variantOptionsContainer) variantOptionsContainer.style.display = 'block';
 
+        // Sembunyikan elemen grade A/B/C yang tidak relevan untuk produk varian
         const gradeElement = document.getElementById('detail-grade');
         if(gradeElement) gradeElement.innerHTML = '';
         
-        document.title = `${product.name} | Macintoz Store`;
-        
+        // Inisialisasi state awal berdasarkan data varian pertama
         let selectedColor = product.variants[0].color;
         let selectedStorage = product.variants.find(v => v.color === selectedColor)?.storage;
         let selectedFeature = product.variants.find(v => v.color === selectedColor)?.feature;
 
+        // Ambil semua elemen HTML yang akan dimanipulasi
         const nameEl = document.getElementById('detail-name');
         const priceEl = document.getElementById('detail-price');
         const skuEl = document.getElementById('detail-sku');
         const stockEl = document.getElementById('detail-stock');
         const colorSelector = document.getElementById('color-selector');
         const storageSelector = document.getElementById('storage-selector');
-        const featureSelector = document.getElementById('feature-selector'); // Asumsi Anda punya div ini
+        const featureSelector = document.getElementById('feature-selector');
         const selectedColorNameEl = document.getElementById('selected-color-name');
         const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
         
+        // Fungsi utama untuk memperbarui seluruh tampilan berdasarkan pilihan
         function updateDisplay() {
-            const currentVariant = product.variants.find(v => {
+            // Cari varian yang cocok dengan semua pilihan saat ini
+            let currentVariant = product.variants.find(v => {
                 const colorMatch = !v.color || v.color === selectedColor;
                 const storageMatch = !v.storage || v.storage === selectedStorage;
                 const featureMatch = !v.feature || v.feature === selectedFeature;
                 return colorMatch && storageMatch && featureMatch;
             });
 
+            // Jika kombinasi tidak ada, kembali ke varian valid pertama untuk warna yang dipilih
             if (!currentVariant) {
                 const firstAvailable = product.variants.find(v => v.color === selectedColor);
                 if(firstAvailable) {
@@ -444,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            const finalPrice = (product.basePrice || 0) + (currentVariant.priceModifier || 0);
+            const finalPrice = (product.basePrice || product.price) + (currentVariant.priceModifier || 0);
             priceEl.textContent = formatRupiah(finalPrice);
             skuEl.textContent = `SKU: ${currentVariant.sku}`;
             
@@ -463,41 +466,55 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCartBtn.textContent = currentVariant.stock > 0 ? 'Tambah ke Keranjang' : 'Stok Kosong';
             addToCartBtn.onclick = () => {
                 if(currentVariant.stock > 0) {
+                    let variantName = `${product.name}`;
+                    if(currentVariant.feature) variantName += ` (${currentVariant.feature})`;
+                    if(currentVariant.storage) variantName += ` (${currentVariant.storage})`;
+                    if(currentVariant.color && !currentVariant.keys && !currentVariant.surface) variantName += `, ${currentVariant.color}`;
+                    
                     const itemToAdd = {
                         id: currentVariant.sku, 
-                        name: `${product.name} ${currentVariant.feature ? `(${currentVariant.feature})` : ''} ${currentVariant.storage ? `(${currentVariant.storage})` : ''} ${currentVariant.color ? `(${currentVariant.color})` : ''}`.replace(' ()','').trim(),
+                        name: variantName,
                         price: finalPrice, 
                         stock: currentVariant.stock, 
-                        img: product.images[currentVariant.color] ? product.images[currentVariant.color][0] : product.images['Default'][0],
-                        specs: product.specs || null 
+                        img: product.images[currentVariant.color || 'Default']?.[0] || ''
                     };
                     addToCart(itemToAdd, 1);
                 }
             };
             
-            if (product.images[selectedColor]) {
-                setupImageSlider(product.images[selectedColor]);
+            if (product.images[selectedColor || 'Default']) {
+                setupImageSlider(product.images[selectedColor || 'Default']);
             }
             
-            selectedColorNameEl.textContent = selectedColor;
-            createVariantSelectors(); // Panggil ini untuk update semua pilihan
+            if (selectedColorNameEl) selectedColorNameEl.textContent = selectedColor || '';
+            createVariantSelectors();
         }
 
+        // Fungsi untuk membuat tombol-tombol pilihan secara dinamis
         function createVariantSelectors() {
             const variantTypes = new Set(product.variants.flatMap(v => Object.keys(v)));
             
-            // Sembunyikan semua kontainer pilihan dulu
-            if(colorSelector) colorSelector.parentElement.style.display = 'none';
-            if(storageSelector) storageSelector.parentElement.style.display = 'none';
-            if(featureSelector) featureSelector.parentElement.style.display = 'none';
+            const colorGroup = document.getElementById('color-variant-group');
+            const storageGroup = document.getElementById('storage-variant-group');
+            const featureGroup = document.getElementById('feature-variant-group');
+            const keysGroup = document.getElementById('keys-variant-group');
+            const surfaceGroup = document.getElementById('surface-variant-group');
+
+            if(colorGroup) colorGroup.style.display = 'none';
+            if(storageGroup) storageGroup.style.display = 'none';
+            if(featureGroup) featureGroup.style.display = 'none';
+            if(keysGroup) keysGroup.style.display = 'none';
+            if(surfaceGroup) surfaceGroup.style.display = 'none';
             
-            // Hanya tampilkan dan buat pilihan yang ada di data varian
             if (variantTypes.has('color')) createColorOptions();
             if (variantTypes.has('storage')) createStorageOptions();
             if (variantTypes.has('feature')) createFeatureOptions();
+            if (variantTypes.has('keys')) createGenericOptions('keys', 'Pilihan Tombol');
+            if (variantTypes.has('surface')) createGenericOptions('surface', 'Pilihan Permukaan');
         }
 
         function createColorOptions() {
+            if (!colorSelector) return;
             colorSelector.parentElement.style.display = 'block';
             const uniqueColors = [...new Map(product.variants.map(v => [v.color, v])).values()];
             colorSelector.innerHTML = '';
@@ -520,6 +537,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function createStorageOptions() {
+            if (!storageSelector) return;
             storageSelector.parentElement.style.display = 'block';
             const allPossibleStorages = [...new Set(product.variants.map(v => v.storage))].filter(Boolean);
             const availableStoragesForColor = product.variants.filter(v => v.color === selectedColor).map(v => v.storage);
@@ -539,8 +557,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 storageSelector.appendChild(option);
             });
         }
-        
+
         function createFeatureOptions(){
+            if (!featureSelector) return;
             featureSelector.parentElement.style.display = 'block';
             const allPossibleFeatures = [...new Set(product.variants.map(v => v.feature))].filter(Boolean);
             featureSelector.innerHTML = '';
@@ -553,17 +572,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 featureSelector.appendChild(option);
             });
         }
+
+        function createGenericOptions(variantType, label) {
+            const selectorContainer = document.getElementById(`${variantType}-selector`);
+            if (!selectorContainer) return;
+            selectorContainer.parentElement.style.display = 'block';
+            selectorContainer.parentElement.querySelector('.variant-label').textContent = label;
+            
+            const allPossibleValues = [...new Set(product.variants.map(v => v[variantType]))].filter(Boolean);
+            
+            let selectedValue;
+            if(variantType === 'keys') selectedValue = product.variants.find(v => v.sku === (product.variants.find(va => va.keys)?.sku))?.keys;
+            if(variantType === 'surface') selectedValue = product.variants.find(v => v.sku === (product.variants.find(va => va.surface)?.sku))?.surface;
+            
+            selectorContainer.innerHTML = '';
+            allPossibleValues.forEach(value => {
+                const option = document.createElement('div');
+                option.className = 'storage-option';
+                option.textContent = value;
+                if (value === selectedValue) { option.classList.add('active'); }
+                option.addEventListener('click', () => {
+                    if(variantType === 'keys') selectedValue = value;
+                    if(variantType === 'surface') selectedValue = value;
+                    updateDisplay();
+                });
+                selectorContainer.appendChild(option);
+            });
+        }
         
         nameEl.textContent = product.name;
-        document.getElementById('detail-sku').textContent = '';
-        document.getElementById('detail-description-container').innerHTML = `<p>${product.description.intro}</p>`;
-
-        // === PERBAIKAN DI SINI ===
-        // Langsung panggil slider dengan gambar 'Default' jika ada
-        if (product.images && product.images['Default']) {
-            setupImageSlider(product.images['Default']);
-        }
-        // ... (Logika untuk menampilkan pros, cons, dll. bisa ditambahkan di sini jika perlu)
+        const descriptionContainer = document.getElementById('detail-description-container');
+        descriptionContainer.innerHTML = `<p>${product.description.intro}</p>`;
+        // (Logika untuk menampilkan pros, cons, dll. bisa ditambahkan di sini jika perlu)
         
         createVariantSelectors();
         updateDisplay();
@@ -1121,6 +1161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (path.includes('/product/buy-macbook')) { renderProductPage('Mac'); }
         else if (path.includes('/product/buy-iphone')) { renderProductPage('iPhone');}
         else if (path.includes('/product/buy-ipad')) { renderProductPage('iPad');}
+        else if (path.includes('/product/buy-accessories')) { renderProductPage('Accessories'); }
         else if (path.includes('/product/buy-airpods')) { renderProductPage('AirPods');} 
         else if (path.includes('/detail-produk')) { renderDetailPage(); } 
         else if (path.includes('/keranjang')) { renderCartPage(); } 
