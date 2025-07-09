@@ -1336,6 +1336,13 @@ const products = [
         cons: ['Refresh rate layar hanya 60Hz', 'Ukuran layar kecil untuk multitasking', 'Wi-Fi Only, tidak ada opsi seluler'],
         inTheBox: ['Unit iPad mini', 'Kabel Pengisi Daya USB-C (1 m)', '20W USB-C Power Adapter']
     },
+
+    // =========AIRPODS=========AIRPODS=======AIRPODS=======AIRPODS========AIRPODS
+    // =========AIRPODS=========AIRPODS=======AIRPODS=======AIRPODS========AIRPODS
+    // =========AIRPODS=========AIRPODS=======AIRPODS=======AIRPODS========AIRPODS
+    // =========AIRPODS=========AIRPODS=======AIRPODS=======AIRPODS========AIRPODS
+    // =========AIRPODS=========AIRPODS=======AIRPODS=======AIRPODS========AIRPODS
+
     // Produk 46 AirPods Max
     {
         id: 46,
@@ -1384,13 +1391,13 @@ const products = [
         id: 48,
         kategori: 'AirPods',
         name: 'AirPods (Generasi ke-4)',
-        basePrice: 2499000,
+        basePrice: 1799000,
         images: {
             'Default': ['images/produk/id48_ap4/1.jpg', 'images/produk/id48_ap4/2.jpg', 'images/produk/id48_ap4/3.jpg', 'images/produk/id48_ap4/4.jpg', 'images/produk/id48_ap4/5.jpg']
         },
         variants: [
-            { sku: 'AP4-NONANC', feature: 'Desain Universal', priceModifier: 0, stock: 10, sold: 20 },
-            { sku: 'AP4-ANC', feature: 'Peredam Bising Aktif', priceModifier: 500000, stock: 10, sold: 20 }
+            { sku: 'AP4-NONANC', feature: 'Non-ANC', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'AP4-ANC', feature: 'Active Noice Cancelation', priceModifier: 500000, stock: 10, sold: 20 }
         ],
         description: { intro: 'Memperkenalkan AirPods (Generasi ke-4) dengan desain baru yang nyaman dan Audio Spasial Personal. Kini hadir dalam dua pilihan: dengan desain universal atau dengan Peredam Kebisingan Aktif untuk pengalaman mendengar yang lebih fokus.', specs: ['Chip H2 Apple', 'Audio Spasial Personal', 'Desain berkontur baru'], condition: 'Produk Baru, Garansi Resmi.' },
         pros: ['Kualitas audio yang jernih', 'Daya tahan baterai lebih lama', 'Desain lebih nyaman', 'Tersedia opsi dengan ANC'],

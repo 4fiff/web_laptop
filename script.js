@@ -84,78 +84,69 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveCart = () => localStorage.setItem('macintozCart', JSON.stringify(cart));
     
     const addToCart = (productData, quantity = 1) => {
-        let productToAdd;
-        let productImg;
+        let productInfoForCart;
+        let originalProduct;
 
+        // Cek apakah yang dikirim adalah objek (varian) atau ID (non-varian)
         if (typeof productData === 'number') {
-            productToAdd = products.find(p => p.id === productData);
-            if (productToAdd && productToAdd.images) {
-                productImg = productToAdd.images[0];
-            }
+            originalProduct = products.find(p => p.id === productData);
+            if (!originalProduct) return;
+            // Untuk produk non-varian (Mac), kita buat objeknya di sini
+            productInfoForCart = {
+                id: originalProduct.id,
+                name: originalProduct.name,
+                price: originalProduct.price,
+                stock: originalProduct.stock,
+                specs: originalProduct.specs,
+                img: originalProduct.images ? originalProduct.images[0] : ''
+            };
         } else {
-            productToAdd = productData;
-            // Jika produk varian (iPhone/iPad/AirPods), ambil gambar dari objeknya
-            // `productData.img` sudah disiapkan saat tombol 'Tambah ke keranjang' dibuat
-            productImg = productToAdd.img;
+            // Untuk produk varian (iPhone, iPad, AirPods), data sudah berupa objek
+            productInfoForCart = productData;
         }
 
-        if (!productToAdd) return; 
+        if (!productInfoForCart) return; 
 
-        if (productToAdd.stock < quantity) {
+        if (productInfoForCart.stock < quantity) {
             alert('Maaf, stok produk tidak mencukupi.');
             return;
         }
 
-        const cartItemId = productToAdd.sku || productToAdd.id;
+        const cartItemId = productInfoForCart.id;
         const cartItem = cart.find(item => item.id === cartItemId);
 
         if (cartItem) {
-            if ((cartItem.quantity + quantity) <= productToAdd.stock) {
+            if ((cartItem.quantity + quantity) <= productInfoForCart.stock) {
                 cartItem.quantity += quantity;
             } else {
                 alert('Jumlah di keranjang akan melebihi stok yang tersedia.');
                 return;
             }
         } else {
-            const { images, description, variants, ...productInfo } = productToAdd;
-            cart.push({ 
-                ...productInfo,
-                id: cartItemId,
-                img: productImg, // Gunakan variabel gambar yang sudah disiapkan
-                quantity: quantity 
-            });
+            // Tambahkan kuantitas ke objek sebelum memasukkan ke keranjang
+            productInfoForCart.quantity = quantity;
+            cart.push(productInfoForCart);
         }
         
         saveCart();
         updateSharedUI();
-        showCustomToast(`"${productToAdd.name}" ditambahkan ke keranjang`);
+        showCustomToast(`"${productInfoForCart.name}" ditambahkan ke keranjang`);
     };
 
     const updateQuantity = (productId, newQuantity) => {
-        // Cari item di dalam keranjang. `productId` dari tombol adalah string, jadi kita bandingkan sebagai string.
         const cartItem = cart.find(item => String(item.id) === String(productId));
+        if (!cartItem) { console.error('Item tidak ditemukan di keranjang untuk diupdate:', productId); return; }
 
-        if (!cartItem) {
-            console.error('Item tidak ditemukan di keranjang untuk diupdate:', productId);
-            return;
-        }
-
-        // Jika kuantitas baru adalah 0 atau kurang (untuk tombol Hapus atau mengurangi dari 1)
         if (newQuantity <= 0) {
             cart = cart.filter(item => String(item.id) !== String(productId));
-        } 
-        // Jika kuantitas baru melebihi stok yang TERCATAT di item keranjang
-        else if (newQuantity > cartItem.stock) {
+        } else if (newQuantity > cartItem.stock) {
             alert(`Stok untuk produk ini hanya tersisa ${cartItem.stock} buah.`);
-            cartItem.quantity = cartItem.stock; // Set ke jumlah maksimal
-        } 
-        // Jika valid, perbarui kuantitasnya
-        else {
+            cartItem.quantity = cartItem.stock;
+        } else {
             cartItem.quantity = newQuantity;
         }
-
         saveCart();
-        renderCartPage(); // Langsung perbarui tampilan halaman keranjang
+        renderCartPage();
     };
 
     const updateSharedUI = () => {
