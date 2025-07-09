@@ -174,9 +174,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const searchInput = document.getElementById('search-input');
         const sortSelect = document.getElementById('sort-select');
         const filtersContainer = document.getElementById('filters-container');
-        let activeFilters = { model: [], chip: [], size: [], grade: [], iphoneModel: [] };
+
+        // Sembunyikan sidebar jika tidak diperlukan (khususnya untuk iPad)
+        const filterSidebar = document.querySelector('.filter-sidebar');
+        if (category === 'iPad' && filterSidebar) {
+            filterSidebar.style.display = 'none';
+        }
+
+        let activeFilters = { model: [], chip: [], size: [], grade: [], iphoneModel: [], ipadModel: [] };
         
         function createFilters() {
+            if (!filtersContainer) return;
+
             let filtersHTML = '';
             const categoryProducts = products.filter(p => p.kategori === category);
 
@@ -201,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else {
                         activeFilters[filterCategory] = activeFilters[filterCategory].filter(item => item !== value);
                     }
-                    displayProducts();
+                    
                 });
             });
         }
@@ -1085,7 +1094,8 @@ document.addEventListener('DOMContentLoaded', () => {
         initializeNavbar();
         const path = window.location.pathname;
         if (path.includes('/product/buy-macbook')) { renderProductPage('Mac'); }
-        else if (path.includes('/product/buy-iphone')) {renderProductPage('iPhone');} 
+        else if (path.includes('/product/buy-iphone')) {renderProductPage('iPhone');}
+        else if (path.includes('/product/buy-ipad')) {renderProductPage('iPad');} 
         else if (path.includes('/detail-produk')) { renderDetailPage(); } 
         else if (path.includes('/keranjang')) { renderCartPage(); } 
         else if (path.includes('/pembayaran')) { renderCheckoutPage(); } 

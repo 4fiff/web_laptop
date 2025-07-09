@@ -1129,4 +1129,35 @@ const products = [
         cons: ['Ukuran besar mungkin tidak nyaman untuk semua orang', 'Harga sangat premium'],
         inTheBox: ['Unit iPhone 14', 'Kabel Pengisi Daya USB-C (1 m)']
         },
+
+        // =========IPAD=========IPAD=======IPAD=======IPAD========IPAD
+        // =========IPAD=========IPAD=======IPAD=======IPAD========IPAD
+        // =========IPAD=========IPAD=======IPAD=======IPAD========IPAD
+        // =========IPAD=========IPAD=======IPAD=======IPAD========IPAD
+        // =========IPAD=========IPAD=======IPAD=======IPAD========IPAD
+
+        {
+        // produk 40
+        id: 40,
+        kategori: 'iPad', // <-- Kategori baru
+        name: 'iPad Pro 13" 2024',
+        basePrice: 21999000,
+        images: {
+            'Space Black': ['https://placehold.co/600x600/3a3a3d/fff?text=iPad+Pro+Black+1', 'https://placehold.co/600x600/3a3a3d/fff?text=iPad+Pro+Black+2'],
+            'Silver': ['https://placehold.co/600x600/e3e4e6/333?text=iPad+Pro+Silver+1', 'https://placehold.co/600x600/e3e4e6/333?text=iPad+Pro+Silver+2'],
+        },
+        variants: [
+            { sku: 'IPP13-SB-256', color: 'Space Black', colorHex: '#3a3a3d', storage: '256GB', priceModifier: 0, stock: 15, sold: 95 },
+            { sku: 'IPP13-SB-512', color: 'Space Black', colorHex: '#3a3a3d', storage: '512GB', priceModifier: 3500000, stock: 10, sold: 60 },
+            { sku: 'IPP13-SL-256', color: 'Silver', colorHex: '#e3e4e6', storage: '256GB', priceModifier: 0, stock: 18, sold: 110 },
+            { sku: 'IPP13-SL-1TB', color: 'Silver', colorHex: '#e3e4e6', storage: '1TB', priceModifier: 7000000, stock: 5, sold: 25 },
+        ],
+        description: {
+            intro: 'iPad Pro. Tenaga luar biasa dengan layar paling canggih di dunia. Ditenagai chip Apple M4, iPad Pro baru menghadirkan performa menakjubkan dalam desain yang super tipis dan ringan.',
+            specs: [ 'Layar: Ultra Retina XDR 13 inci dengan ProMotion', 'Chip: Apple M4', 'Kamera: 12MP Wide, 10MP Ultra Wide', 'Konektor: USB-C dengan dukungan Thunderbolt / USB 4' ],
+        },
+        pros: ['Performa setara laptop dengan chip M4', 'Layar OLED Tandem terbaik di pasaran', 'Desain sangat tipis dan ringan', 'Mendukung Apple Pencil Pro dan Magic Keyboard baru'],
+        cons: ['Harga sangat premium', 'Posisi kamera depan di sisi samping'],
+        inTheBox: ['Unit iPad Pro 13"', 'Kabel Pengisi Daya USB-C (1 m)']
+    }
 ];
