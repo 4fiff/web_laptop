@@ -1371,7 +1371,7 @@ const products = [
         grade: 'Baru',
         sku: 'APP-G2',
         sold: 20,
-        images: ['https://placehold.co/600x600/f5f5f7/333?text=AirPods+Pro+2'],
+        images: ['images/produk/id47_app/1.jpg', 'images/produk/id47_app/2.jpg', 'images/produk/id47_app/3.jpg', 'images/produk/id47_app/4.jpg', 'images/produk/id47_app/5.jpg'],
         description: { intro: 'AirPods Pro telah direkayasa ulang untuk menghasilkan kualitas audio yang lebih kaya. Peredam Kebisingan Aktif level berikutnya dan Transparansi Adaptif mengurangi lebih banyak suara eksternal.', specs: ['Chip H2 Apple', 'Audio Spasial Personal', 'Casing Pengisian Daya MagSafe (USB-C)'], condition: 'Produk Baru, Garansi Resmi.' },
         pros: ['Peredam bising (ANC) jauh lebih baik', 'Kontrol volume sentuh pada batang', 'Kualitas audio meningkat signifikan', 'Daya tahan baterai lebih lama'],
         cons: ['Desain tidak banyak berubah dari generasi pertama'],
@@ -1384,7 +1384,7 @@ const products = [
         name: 'AirPods (Generasi ke-4)',
         basePrice: 2499000,
         images: {
-            'Default': ['https://placehold.co/600x600/f5f5f7/333?text=AirPods+4']
+            'Default': ['images/produk/id48_ap4/1.jpg', 'images/produk/id48_ap4/2.jpg', 'images/produk/id48_ap4/3.jpg', 'images/produk/id48_ap4/4.jpg', 'images/produk/id48_ap4/5.jpg']
         },
         variants: [
             { sku: 'AP4-NONANC', feature: 'Desain Universal', priceModifier: 0, stock: 10, sold: 20 },
