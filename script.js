@@ -87,11 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
         let productInfoForCart;
         let originalProduct;
 
-        // Cek apakah yang dikirim adalah objek (varian) atau ID (non-varian)
+        // Jika yang dikirim adalah ID (untuk produk non-varian seperti Mac), cari produknya
         if (typeof productData === 'number') {
             originalProduct = products.find(p => p.id === productData);
             if (!originalProduct) return;
-            // Untuk produk non-varian (Mac), kita buat objeknya di sini
+
+            // Untuk produk non-varian, kita buat objeknya di sini
             productInfoForCart = {
                 id: originalProduct.id,
                 name: originalProduct.name,
@@ -101,11 +102,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 img: originalProduct.images ? originalProduct.images[0] : ''
             };
         } else {
-            // Untuk produk varian (iPhone, iPad, AirPods), data sudah berupa objek
+            // Jika yang dikirim adalah objek (untuk produk varian), data sudah lengkap
             productInfoForCart = productData;
         }
 
-        if (!productInfoForCart) return; 
+        if (!productInfoForCart) {
+            console.error("Gagal membuat data produk untuk keranjang.");
+            return;
+        }
 
         if (productInfoForCart.stock < quantity) {
             alert('Maaf, stok produk tidak mencukupi.');
@@ -123,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
         } else {
-            // Tambahkan kuantitas ke objek sebelum memasukkan ke keranjang
             productInfoForCart.quantity = quantity;
             cart.push(productInfoForCart);
         }
@@ -423,8 +426,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
         
         function updateDisplay() {
-            let currentVariant = product.variants.find(v => {
-                const colorMatch = v.color === selectedColor;
+            const currentVariant = product.variants.find(v => {
+                const colorMatch = !v.color || v.color === selectedColor;
                 const storageMatch = !v.storage || v.storage === selectedStorage;
                 const featureMatch = !v.feature || v.feature === selectedFeature;
                 return colorMatch && storageMatch && featureMatch;
@@ -462,10 +465,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(currentVariant.stock > 0) {
                     const itemToAdd = {
                         id: currentVariant.sku, 
-                        name: `${product.name} ${currentVariant.feature ? `(${currentVariant.feature})` : ''} ${currentVariant.storage ? `(${currentVariant.storage})` : ''}, ${currentVariant.color}`, 
+                        name: `${product.name} ${currentVariant.feature ? `(${currentVariant.feature})` : ''} ${currentVariant.storage ? `(${currentVariant.storage})` : ''} ${currentVariant.color ? `(${currentVariant.color})` : ''}`.replace(' ()','').trim(),
                         price: finalPrice, 
                         stock: currentVariant.stock, 
-                        img: product.images[currentVariant.color] ? product.images[currentVariant.color][0] : ''
+                        img: product.images[currentVariant.color] ? product.images[currentVariant.color][0] : product.images['Default'][0],
+                        specs: product.specs || null 
                     };
                     addToCart(itemToAdd, 1);
                 }
