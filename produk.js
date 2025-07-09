@@ -1335,5 +1335,64 @@ const products = [
         pros: ['Ukuran sangat ringkas dan mudah dibawa', 'Performa A17 Pro setara iPhone Pro', 'Mendukung Apple Pencil (Generasi ke-2)', 'Layar laminasi penuh'],
         cons: ['Refresh rate layar hanya 60Hz', 'Ukuran layar kecil untuk multitasking', 'Wi-Fi Only, tidak ada opsi seluler'],
         inTheBox: ['Unit iPad mini', 'Kabel Pengisi Daya USB-C (1 m)', '20W USB-C Power Adapter']
+    },
+    // Produk 46 AirPods Max
+    {
+        id: 46,
+        kategori: 'AirPods',
+        name: 'AirPods Max',
+        basePrice: 8999000,
+        images: {
+            'Blue': ['https://placehold.co/600x600/a5b8cd/fff?text=AirPods+Max+Blue'],
+            'Purple': ['https://placehold.co/600x600/b8b5ce/fff?text=AirPods+Max+Purple'],
+            'Midnight': ['https://placehold.co/600x600/3a3a3d/fff?text=AirPods+Max+Midnight'],
+            'Starlight': ['https://placehold.co/600x600/f0e5d8/333?text=AirPods+Max+Starlight'],
+            'Orange': ['https://placehold.co/600x600/ff8c69/fff?text=AirPods+Max+Orange'],
+        },
+        variants: [
+            { sku: 'APM-BL', color: 'Blue', colorHex: '#a5b8cd', stock: 10, sold: 20 },
+            { sku: 'APM-PU', color: 'Purple', colorHex: '#b8b5ce', stock: 10, sold: 20 },
+            { sku: 'APM-MD', color: 'Midnight', colorHex: '#3a3a3d', stock: 10, sold: 20 },
+            { sku: 'APM-SL', color: 'Starlight', colorHex: '#f0e5d8', stock: 10, sold: 20 },
+            { sku: 'APM-OR', color: 'Orange', colorHex: '#ff8c69', stock: 10, sold: 20 },
+        ],
+        description: { intro: 'AirPods Max menata ulang headphone over-ear. Audio spasial dengan pelacakan kepala dinamis memberikan suara surround laksana teater untuk film dan acara TV.', specs: ['Audio Spasial Personal', 'Active Noise Cancellation dan mode Transparansi Adaptif', 'Hingga 20 jam waktu dengar'], condition: 'Produk Baru, Garansi Resmi.' },
+        pros: ['Kualitas audio terbaik di kelasnya', 'Fitur peredam bising (ANC) yang luar biasa', 'Desain premium dan material berkualitas tinggi', 'Sangat nyaman digunakan'],
+        cons: ['Harga sangat premium', 'Smart Case tidak memberikan perlindungan penuh', 'Tidak ada jack audio 3.5mm'],
+        inTheBox: ['AirPods Max', 'Smart Case', 'Kabel Lightning ke USB-C']
+    },
+    // Produk 47 AirPods Pro 2
+    {
+        id: 47,
+        kategori: 'AirPods',
+        name: 'AirPods Pro (Generasi ke-2)',
+        price: 3999000,
+        stock: 10,
+        grade: 'Baru',
+        sku: 'APP-G2',
+        sold: 20,
+        images: ['https://placehold.co/600x600/f5f5f7/333?text=AirPods+Pro+2'],
+        description: { intro: 'AirPods Pro telah direkayasa ulang untuk menghasilkan kualitas audio yang lebih kaya. Peredam Kebisingan Aktif level berikutnya dan Transparansi Adaptif mengurangi lebih banyak suara eksternal.', specs: ['Chip H2 Apple', 'Audio Spasial Personal', 'Casing Pengisian Daya MagSafe (USB-C)'], condition: 'Produk Baru, Garansi Resmi.' },
+        pros: ['Peredam bising (ANC) jauh lebih baik', 'Kontrol volume sentuh pada batang', 'Kualitas audio meningkat signifikan', 'Daya tahan baterai lebih lama'],
+        cons: ['Desain tidak banyak berubah dari generasi pertama'],
+        inTheBox: ['AirPods Pro', 'Casing Pengisian Daya MagSafe (USB-C) dengan speaker', 'Ujung silikon (empat ukuran)', 'Kabel Pengisi Daya USB-C']
+    },
+    // Produk 48 AirPods 4
+    {
+        id: 48,
+        kategori: 'AirPods',
+        name: 'AirPods (Generasi ke-4)',
+        basePrice: 2499000,
+        images: {
+            'Default': ['https://placehold.co/600x600/f5f5f7/333?text=AirPods+4']
+        },
+        variants: [
+            { sku: 'AP4-NONANC', feature: 'Desain Universal', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'AP4-ANC', feature: 'Peredam Bising Aktif', priceModifier: 500000, stock: 10, sold: 20 }
+        ],
+        description: { intro: 'Memperkenalkan AirPods (Generasi ke-4) dengan desain baru yang nyaman dan Audio Spasial Personal. Kini hadir dalam dua pilihan: dengan desain universal atau dengan Peredam Kebisingan Aktif untuk pengalaman mendengar yang lebih fokus.', specs: ['Chip H2 Apple', 'Audio Spasial Personal', 'Desain berkontur baru'], condition: 'Produk Baru, Garansi Resmi.' },
+        pros: ['Kualitas audio yang jernih', 'Daya tahan baterai lebih lama', 'Desain lebih nyaman', 'Tersedia opsi dengan ANC'],
+        cons: ['Opsi non-ANC tidak meredam suara sekitar', 'Tidak memiliki fitur audio adaptif seperti seri Pro'],
+        inTheBox: ['AirPods', 'Casing Pengisian Daya', 'Kabel Pengisi Daya USB-C']
     }
 ];

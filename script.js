@@ -171,36 +171,60 @@ document.addEventListener('DOMContentLoaded', () => {
         const productGrid = document.getElementById('product-grid');
         if (!productGrid) return;
 
+        // Ambil elemen-elemen kontrol dari HTML
         const searchInput = document.getElementById('search-input');
         const sortSelect = document.getElementById('sort-select');
         const filtersContainer = document.getElementById('filters-container');
 
-        // Sembunyikan sidebar jika tidak diperlukan (khususnya untuk iPad)
+        // Sembunyikan sidebar jika tidak diperlukan (khususnya untuk kategori tanpa filter)
         const filterSidebar = document.querySelector('.filter-sidebar');
-        if (category === 'iPad' && filterSidebar) {
-            filterSidebar.style.display = 'none';
+        if (category === 'iPad' || category === 'AirPods') {
+            if(filterSidebar) filterSidebar.style.display = 'none';
+        } else {
+            if(filterSidebar) filterSidebar.style.display = 'block';
         }
 
-        let activeFilters = { model: [], chip: [], size: [], grade: [], iphoneModel: [], ipadModel: [] };
+        // Objek untuk menyimpan filter yang sedang aktif
+        let activeFilters = {
+            model: [],
+            chip: [],
+            size: [],
+            grade: [],
+            iphoneModel: []
+        };
         
+        // --- Fungsi untuk MEMBUAT filter secara dinamis berdasarkan kategori ---
         function createFilters() {
+            // Jika tidak ada container filter (seperti di halaman iPad/AirPods), hentikan fungsi
             if (!filtersContainer) return;
 
             let filtersHTML = '';
             const categoryProducts = products.filter(p => p.kategori === category);
 
             if (category === 'Mac') {
+                // Logika untuk membuat filter Mac
                 const models = [...new Set(categoryProducts.map(p => p.name.includes('Air') ? 'Air' : 'Pro'))];
                 const chips = [...new Set(categoryProducts.flatMap(p => (p.name.match(/(M[1-4]|Intel i[3579])/g) || [])))];
                 const sizes = [...new Set(categoryProducts.flatMap(p => (p.name.match(/1[3-6]/g) || [])))];
                 const grades = [...new Set(categoryProducts.map(p => p.grade))];
-                filtersHTML = `<div class="filter-group"><h4>Model</h4>${models.map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.toLowerCase()}" data-category="model" value="${model}"><label for="model-${model.toLowerCase()}">MacBook ${model}</label></div>`).join('')}</div><div class="filter-group"><h4>Chip</h4>${chips.sort().map(chip => `<div class="filter-option"><input type="checkbox" id="chip-${chip.toLowerCase().replace(' ', '-')}" data-category="chip" value="${chip}"><label for="chip-${chip.toLowerCase().replace(' ', '-')}"">${chip}</label></div>`).join('')}</div><div class="filter-group"><h4>Ukuran Layar</h4>${sizes.sort().map(size => `<div class="filter-option"><input type="checkbox" id="size-${size}" data-category="size" value="${size}"><label for="size-${size}">${size} Inci</label></div>`).join('')}</div><div class="filter-group"><h4>Kondisi</h4>${grades.sort().map(grade => `<div class="filter-option"><input type="checkbox" id="grade-${grade.toLowerCase()}" data-category="grade" value="${grade}"><label for="grade-${grade.toLowerCase()}">${grade === 'Baru' ? 'Baru (BNIB)' : `Grade ${grade}`}</label></div>`).join('')}</div>`;
+
+                filtersHTML = `
+                    <div class="filter-group"><h4>Model</h4>${models.map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.toLowerCase()}" data-category="model" value="${model}"><label for="model-${model.toLowerCase()}">MacBook ${model}</label></div>`).join('')}</div>
+                    <div class="filter-group"><h4>Chip</h4>${chips.sort().map(chip => `<div class="filter-option"><input type="checkbox" id="chip-${chip.toLowerCase().replace(' ', '-')}" data-category="chip" value="${chip}"><label for="chip-${chip.toLowerCase().replace(' ', '-')}"">${chip}</label></div>`).join('')}</div>
+                    <div class="filter-group"><h4>Ukuran Layar</h4>${sizes.sort().map(size => `<div class="filter-option"><input type="checkbox" id="size-${size}" data-category="size" value="${size}"><label for="size-${size}">${size} Inci</label></div>`).join('')}</div>
+                    <div class="filter-group"><h4>Kondisi</h4>${grades.sort().map(grade => `<div class="filter-option"><input type="checkbox" id="grade-${grade.toLowerCase()}" data-category="grade" value="${grade}"><label for="grade-${grade.toLowerCase()}">${grade === 'Baru' ? 'Baru (BNIB)' : `Grade ${grade}`}</label></div>`).join('')}</div>
+                `;
             } else if (category === 'iPhone') {
+                // Logika untuk membuat filter iPhone
                 const iphoneModels = [...new Set(categoryProducts.map(p => p.name))];
-                filtersHTML = `<div class="filter-group"><h4>Model iPhone</h4>${iphoneModels.sort().map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.replace(/\s+/g, '-').toLowerCase()}" data-category="iphoneModel" value="${model}"><label for="model-${model.replace(/\s+/g, '-').toLowerCase()}">${model}</label></div>`).join('')}</div>`;
+                filtersHTML = `
+                    <div class="filter-group"><h4>Model iPhone</h4>${iphoneModels.sort().map(model => `<div class="filter-option"><input type="checkbox" id="model-${model.replace(/\s+/g, '-').toLowerCase()}" data-category="iphoneModel" value="${model}"><label for="model-${model.replace(/\s+/g, '-').toLowerCase()}">${model}</label></div>`).join('')}</div>
+                `;
             }
             
             filtersContainer.innerHTML = filtersHTML;
+
+            // Tambahkan event listener ke setiap checkbox yang baru dibuat
             document.querySelectorAll('#filters-container input[type="checkbox"]').forEach(checkbox => {
                 checkbox.addEventListener('change', (e) => {
                     const filterCategory = e.target.dataset.category;
@@ -210,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else {
                         activeFilters[filterCategory] = activeFilters[filterCategory].filter(item => item !== value);
                     }
-                    
+                    displayProducts();
                 });
             });
         }
@@ -220,6 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const sortOrder = sortSelect.value;
             let processedProducts = products.filter(p => p.kategori === category);
 
+            // Terapkan filter checkbox
             Object.keys(activeFilters).forEach(filterCategory => {
                 if (activeFilters[filterCategory].length > 0) {
                     processedProducts = processedProducts.filter(product => {
@@ -232,16 +257,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
+            // Terapkan filter search
             if (searchTerm) {
-                processedProducts = processedProducts.filter(product => product.name.toLowerCase().includes(searchTerm));
+                processedProducts = processedProducts.filter(product => 
+                    product.name.toLowerCase().includes(searchTerm)
+                );
             }
 
+            // Terapkan filter sort
             if (sortOrder === 'price-asc') {
                 processedProducts.sort((a, b) => (a.basePrice || a.price) - (b.basePrice || b.price));
             } else if (sortOrder === 'price-desc') {
                 processedProducts.sort((a, b) => (b.basePrice || b.price) - (a.basePrice || a.price));
             }
 
+            // Render hasil akhir ke layar
             productGrid.innerHTML = '';
             if (processedProducts.length === 0) {
                 productGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Tidak ada produk yang cocok dengan kriteria Anda.</p>';
@@ -255,15 +285,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     const isVariant = !!product.variants;
                     const displayPrice = isVariant ? product.basePrice : product.price;
-                    const displayImage = isVariant ? product.images[product.variants[0].color][0] : product.images[0];
-                    const displaySpecs = isVariant ? `${product.variants.length} pilihan warna & kapasitas` : product.specs;
+                    const displayImage = isVariant ? product.images[Object.keys(product.images)[0]][0] : product.images[0];
+                    const displaySpecs = isVariant ? `${product.variants.length} pilihan varian` : product.specs;
                     const gradeText = product.grade ? (product.grade === 'Baru' ? 'BARU' : `GRADE ${product.grade}`) : '';
                     const gradeBadgeClass = product.grade ? `product-grade-badge grade-${product.grade.toLowerCase()}` : '';
                     const gradeBadge = product.grade ? `<div class="${gradeBadgeClass}">${gradeText}</div>` : '';
                     const buttonText = isVariant ? 'Lihat Opsi' : 'Lihat Detail';
 
                     if(isVariant){
-                         card.innerHTML = `<img src="/${displayImage}" alt="${product.name}"><div><h3 class="product-name">${product.name}</h3><p class="product-specs">${displaySpecs}</p><p class="product-price">Mulai dari ${formatRupiah(displayPrice)}</p><div class="button">${buttonText}</div></div>`;
+                        card.innerHTML = `<img src="/${displayImage}" alt="${product.name}"><div><h3 class="product-name">${product.name}</h3><p class="product-specs">${displaySpecs}</p><p class="product-price">Mulai dari ${formatRupiah(displayPrice)}</p><div class="button">${buttonText}</div></div>`;
                     } else {
                         let stockText = product.stock > 0 ? `<span class="${product.stock <= CONFIG.LOW_STOCK_THRESHOLD ? 'stock-status low-stock' : 'stock-status'}">Sisa stok: ${product.stock}</span>` : `<span class="stock-status">Stok Habis</span>`;
                         let soldText = product.sold > 0 ? `<span class="sold-info"><i class="fas fa-fire"></i> ${product.sold} terjual</span>` : '';
@@ -434,6 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // FUNGSI BARU UNTUK MENAMPILKAN PRODUK DENGAN VARIAN (iPHONE)
+    // GANTI FUNGSI renderVariantProduct LAMA ANDA DENGAN VERSI LENGKAP INI
     function renderVariantProduct(product) {
         const variantOptionsContainer = document.getElementById('variant-options-container');
         if (variantOptionsContainer) variantOptionsContainer.style.display = 'block';
@@ -441,8 +472,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const gradeElement = document.getElementById('detail-grade');
         if(gradeElement) gradeElement.innerHTML = '';
         
+        document.title = `${product.name} - Macintoz`;
+        
         let selectedColor = product.variants[0].color;
-        let selectedStorage = product.variants[0].storage;
+        let selectedStorage = product.variants.find(v => v.color === selectedColor)?.storage;
+        let selectedFeature = product.variants.find(v => v.color === selectedColor)?.feature;
 
         const nameEl = document.getElementById('detail-name');
         const priceEl = document.getElementById('detail-price');
@@ -450,14 +484,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const stockEl = document.getElementById('detail-stock');
         const colorSelector = document.getElementById('color-selector');
         const storageSelector = document.getElementById('storage-selector');
+        const featureSelector = document.getElementById('feature-selector'); // Asumsi Anda punya div ini
         const selectedColorNameEl = document.getElementById('selected-color-name');
         const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
-
+        
         function updateDisplay() {
-            const currentVariant = product.variants.find(v => v.color === selectedColor && v.storage === selectedStorage);
-            if (!currentVariant) return;
+            let currentVariant = product.variants.find(v => {
+                const colorMatch = v.color === selectedColor;
+                const storageMatch = !v.storage || v.storage === selectedStorage;
+                const featureMatch = !v.feature || v.feature === selectedFeature;
+                return colorMatch && storageMatch && featureMatch;
+            });
 
-            const finalPrice = product.basePrice + currentVariant.priceModifier;
+            if (!currentVariant) {
+                const firstAvailable = product.variants.find(v => v.color === selectedColor);
+                if(firstAvailable) {
+                    selectedStorage = firstAvailable.storage;
+                    selectedFeature = firstAvailable.feature;
+                    currentVariant = firstAvailable;
+                } else {
+                    return; // Seharusnya tidak terjadi
+                }
+            }
+
+            const finalPrice = (product.basePrice || 0) + (currentVariant.priceModifier || 0);
             priceEl.textContent = formatRupiah(finalPrice);
             skuEl.textContent = `SKU: ${currentVariant.sku}`;
             
@@ -468,7 +518,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const soldInfoSpan = stockEl.querySelector('.sold-info');
             if(soldInfoSpan) soldInfoSpan.remove();
-
             if (currentVariant.sold > 0) {
                 stockEl.innerHTML += ` &bull; <span class="sold-info"><i class="fas fa-fire"></i> ${currentVariant.sold} terjual</span>`;
             }
@@ -478,7 +527,11 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCartBtn.onclick = () => {
                 if(currentVariant.stock > 0) {
                     const itemToAdd = {
-                        id: currentVariant.sku, name: `${product.name} (${currentVariant.storage}, ${currentVariant.color})`, price: finalPrice, stock: currentVariant.stock, img: product.images[currentVariant.color] ? product.images[currentVariant.color][0] : ''
+                        id: currentVariant.sku, 
+                        name: `${product.name} ${currentVariant.feature ? `(${currentVariant.feature})` : ''} ${currentVariant.storage ? `(${currentVariant.storage})` : ''}, ${currentVariant.color}`, 
+                        price: finalPrice, 
+                        stock: currentVariant.stock, 
+                        img: product.images[currentVariant.color] ? product.images[currentVariant.color][0] : ''
                     };
                     addToCart(itemToAdd, 1);
                 }
@@ -489,11 +542,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             selectedColorNameEl.textContent = selectedColor;
-            updateStorageOptions();
-            updateColorOptions();
+            createVariantSelectors(); // Panggil ini untuk update semua pilihan
         }
 
-        function updateColorOptions() {
+        function createVariantSelectors() {
+            const variantTypes = new Set(product.variants.flatMap(v => Object.keys(v)));
+            
+            // Sembunyikan semua kontainer pilihan dulu
+            if(colorSelector) colorSelector.parentElement.style.display = 'none';
+            if(storageSelector) storageSelector.parentElement.style.display = 'none';
+            if(featureSelector) featureSelector.parentElement.style.display = 'none';
+            
+            // Hanya tampilkan dan buat pilihan yang ada di data varian
+            if (variantTypes.has('color')) createColorOptions();
+            if (variantTypes.has('storage')) createStorageOptions();
+            if (variantTypes.has('feature')) createFeatureOptions();
+        }
+
+        function createColorOptions() {
+            colorSelector.parentElement.style.display = 'block';
             const uniqueColors = [...new Map(product.variants.map(v => [v.color, v])).values()];
             colorSelector.innerHTML = '';
             uniqueColors.forEach(variant => {
@@ -504,18 +571,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (variant.color === selectedColor) { swatch.classList.add('active'); }
                 swatch.addEventListener('click', () => {
                     selectedColor = variant.color;
-                    const availableStoragesForColor = product.variants.filter(v => v.color === selectedColor);
-                    if (!availableStoragesForColor.some(v => v.storage === selectedStorage)) {
-                        selectedStorage = availableStoragesForColor[0].storage;
-                    }
+                    const availableVariantsForColor = product.variants.filter(v => v.color === selectedColor);
+                    const firstAvailable = availableVariantsForColor[0];
+                    selectedStorage = firstAvailable.storage;
+                    selectedFeature = firstAvailable.feature;
                     updateDisplay();
                 });
                 colorSelector.appendChild(swatch);
             });
         }
 
-        function updateStorageOptions() {
-            const allPossibleStorages = [...new Set(product.variants.map(v => v.storage))];
+        function createStorageOptions() {
+            storageSelector.parentElement.style.display = 'block';
+            const allPossibleStorages = [...new Set(product.variants.map(v => v.storage))].filter(Boolean);
             const availableStoragesForColor = product.variants.filter(v => v.color === selectedColor).map(v => v.storage);
             
             storageSelector.innerHTML = '';
@@ -523,13 +591,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const option = document.createElement('div');
                 option.className = 'storage-option';
                 option.textContent = storageValue;
-
                 if (availableStoragesForColor.includes(storageValue)) {
                     option.classList.remove('disabled');
-                    option.addEventListener('click', () => {
-                        selectedStorage = storageValue;
-                        updateDisplay();
-                    });
+                    option.addEventListener('click', () => { selectedStorage = storageValue; updateDisplay(); });
                 } else {
                     option.classList.add('disabled');
                 }
@@ -538,13 +602,27 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         
+        function createFeatureOptions(){
+            featureSelector.parentElement.style.display = 'block';
+            const allPossibleFeatures = [...new Set(product.variants.map(v => v.feature))].filter(Boolean);
+            featureSelector.innerHTML = '';
+            allPossibleFeatures.forEach(featureValue => {
+                const option = document.createElement('div');
+                option.className = 'storage-option';
+                option.textContent = featureValue;
+                if (featureValue === selectedFeature) { option.classList.add('active'); }
+                option.addEventListener('click', () => { selectedFeature = featureValue; updateDisplay(); });
+                featureSelector.appendChild(option);
+            });
+        }
+        
         nameEl.textContent = product.name;
         const descriptionContainer = document.getElementById('detail-description-container');
         descriptionContainer.innerHTML = `<p>${product.description.intro}</p>`;
-        // Anda bisa menambahkan logika untuk menampilkan pros, cons, dll. di sini jika perlu
+        // ... (Logika untuk menampilkan pros, cons, dll. bisa ditambahkan di sini jika perlu)
         
+        createVariantSelectors();
         updateDisplay();
-        updateColorOptions();
     }
 
     // --- FUNGSI SLIDER TERPUSAT ---
