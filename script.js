@@ -560,8 +560,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         nameEl.textContent = product.name;
-        const descriptionContainer = document.getElementById('detail-description-container');
-        descriptionContainer.innerHTML = `<p>${product.description.intro}</p>`;
+        document.getElementById('detail-sku').textContent = '';
+        document.getElementById('detail-description-container').innerHTML = `<p>${product.description.intro}</p>`;
+
+        // === PERBAIKAN DI SINI ===
+        // Langsung panggil slider dengan gambar 'Default' jika ada
+        if (product.images && product.images['Default']) {
+            setupImageSlider(product.images['Default']);
+        }
         // ... (Logika untuk menampilkan pros, cons, dll. bisa ditambahkan di sini jika perlu)
         
         createVariantSelectors();
