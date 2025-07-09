@@ -1418,8 +1418,8 @@ const products = [
         name: 'Magic Keyboard with Touch ID and Numeric Keypad',
         basePrice: 2999000,
         images: {
-            'Black Keys': ['https://placehold.co/600x600/3a3a3d/fff?text=MK+Black'],
-            'White Keys': ['https://placehold.co/600x600/f5f5f7/333?text=MK+White'],
+            'Black Keys': ['images/produk/id49_mkm/mkm-bl-1.jpg', 'images/produk/id49_mkm/mkm-bl-2.jpg', 'images/produk/id49_mkm/mkm-bl-3.jpg', 'images/produk/id49_mkm/mkm-bl-4.jpg', 'images/produk/id49_mkm/mkm-bl-5.jpg'],
+            'White Keys': ['images/produk/id49_mkm/mkm-wh-1.jpg', 'images/produk/id49_mkm/mkm-wh-2.jpg', 'images/produk/id49_mkm/mkm-wh-3.jpg', 'images/produk/id49_mkm/mkm-wh-4.jpg', 'images/produk/id49_mkm/mkm-wh-5.jpg'],
         },
         variants: [
             { sku: 'MKM-BK', keys: 'Black Keys', priceModifier: 0, stock: 10, sold: 20 },
@@ -1437,8 +1437,8 @@ const products = [
         name: 'Magic Trackpad',
         basePrice: 2199000,
         images: {
-            'Black': ['https://placehold.co/600x600/3a3a3d/fff?text=Trackpad+Black'],
-            'White': ['https://placehold.co/600x600/f5f5f7/333?text=Trackpad+White'],
+            'Black': ['images/produk/id50_mt/mt-bl-1.jpg', 'images/produk/id50_mt/mt-bl-2.jpg', 'images/produk/id50_mt/mt-bl-3.jpg', 'images/produk/id50_mt/mt-bl-4.jpg', 'images/produk/id50_mt/mt-bl-5.jpg'],
+            'White': ['images/produk/id50_mt/mt-wh-1.jpg', 'images/produk/id50_mt/mt-wh-2.jpg', 'images/produk/id50_mt/mt-wh-3.jpg', 'images/produk/id50_mt/mt-wh-4.jpg', 'images/produk/id50_mt/mt-wh-5.jpg'],
         },
         variants: [
             { sku: 'MTP-BK', surface: 'Black', priceModifier: 300000, stock: 10, sold: 20 },
@@ -1456,8 +1456,8 @@ const products = [
         name: 'Magic Keyboard for iPad Pro 13‑inch (M4)',
         basePrice: 5899000,
         images: {
-            'Black': ['https://placehold.co/600x600/3a3a3d/fff?text=MK+iPad+13+Black'],
-            'White': ['https://placehold.co/600x600/f5f5f7/333?text=MK+iPad+13+White'],
+            'Black': ['images/produk/id51_mk13/mk13-bl-1.jpg', 'images/produk/id51_mk13/mk13-bl-2.jpg', 'images/produk/id51_mk13/mk13-bl-3.jpg', 'images/produk/id51_mk13/mk13-bl-4.jpg', 'images/produk/id51_mk13/mk13-bl-5.jpg'],
+            'White': ['images/produk/id51_mk13/mk13-wh-1.jpg', 'images/produk/id51_mk13/mk13-wh-2.jpg', 'images/produk/id51_mk13/mk13-wh-3.jpg', 'images/produk/id51_mk13/mk13-wh-5.jpg', 'images/produk/id51_mk13/mk13-wh-5.jpg'],
         },
         variants: [
             { sku: 'MKIP13-BK', color: 'Black', colorHex: '#3a3a3d', stock: 10, sold: 20 },
@@ -1475,12 +1475,12 @@ const products = [
         name: 'Magic Keyboard for iPad Pro 11‑inch (M4)',
         basePrice: 4999000,
         images: {
-            'Black': ['https://placehold.co/600x600/3a3a3d/fff?text=MK+iPad+11+Black'],
-            'White': ['https://placehold.co/600x600/f5f5f7/333?text=MK+iPad+11+White'],
+            'White': ['images/produk/id52_mk11/mk11-wh-1.jpg', 'images/produk/id52_mk11/mk11-wh-2.jpg', 'images/produk/id52_mk11/mk11-wh-3.jpg', 'images/produk/id52_mk11/mk11-wh-4.jpg', 'images/produk/id52_mk11/mk11-wh-5.jpg'],
+            'Black': ['images/produk/id52_mk11/mk11-bl-1.jpg', 'images/produk/id52_mk11/mk11-bl-2.jpg', 'images/produk/id52_mk11/mk11-bl-3.jpg', 'images/produk/id52_mk11/mk11-bl-4.jpg', 'images/produk/id52_mk11/mk11-bl-5.jpg'],
         },
         variants: [
-            { sku: 'MKIP11-BK', color: 'Black', colorHex: '#3a3a3d', stock: 10, sold: 20 },
             { sku: 'MKIP11-WH', color: 'White', colorHex: '#f5f5f7', stock: 10, sold: 20 },
+            { sku: 'MKIP11-BK', color: 'Black', colorHex: '#3a3a3d', stock: 10, sold: 20 },
         ],
         description: { intro: 'Magic Keyboard baru untuk iPad Pro adalah pendamping yang luar biasa. Menghadirkan pengalaman mengetik terbaik, trackpad baru, dan sandaran aluminium yang kokoh.', specs: ['Kompatibilitas: iPad Pro 11 inci (M4)', 'Fitur: Baris fungsi, Trackpad yang lebih besar dengan umpan balik haptik'], condition: 'Produk Baru, Garansi Resmi.' },
         pros: ['Pengalaman mengetik seperti laptop', 'Trackpad yang responsif dengan haptik', 'Desain melayang yang bisa disesuaikan sudutnya', 'Memberikan perlindungan depan dan belakang'], cons: ['Menambah bobot yang signifikan pada iPad', 'Harga sangat mahal'],
