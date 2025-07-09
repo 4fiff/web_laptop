@@ -1267,4 +1267,73 @@ const products = [
         cons: ['Tidak memiliki layar ProMotion 120Hz', 'Ukuran layar mungkin terasa kecil untuk multitasking berat'],
         inTheBox: ['Unit iPad Air 11"', 'Kabel Pengisi Daya USB-C (1 m)']
     },
+    // Produk 44 iPad 11th Gen
+    {
+        id: 44,
+        kategori: 'iPad',
+        name: 'iPad (11th Gen)',
+        basePrice: 7999000,
+        images: {
+            'Pink': ['images/produk/id44_ip11/ip11-pi-1.jpg', 'images/produk/id44_ip11/ip11-pi-2.jpg', 'images/produk/id44_ip11/ip11-pi-3.jpg'],
+            'Blue': ['images/produk/id44_ip11/ip11-bu-1.jpg', 'images/produk/id44_ip11/ip11-bu-2.jpg', 'images/produk/id44_ip11/ip11-bu-3.jpg'],
+            'Yellow': ['images/produk/id44_ip11/ip11-ye-1.jpg', 'images/produk/id44_ip11/ip11-ye-2.jpg', 'images/produk/id44_ip11/ip11-ye-3.jpg'],
+            'Silver': ['images/produk/id44_ip11/ip11-sl-1.jpg', 'images/produk/id44_ip11/ip11-sl-2.jpg', 'images/produk/id44_ip11/ip11-sl-3.jpg'],
+        },
+        variants: [
+            { sku: 'IP11-PI-128', color: 'Pink', colorHex: '#f5d7de', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IP11-PI-256', color: 'Pink', colorHex: '#f5d7de', storage: '256GB', priceModifier: 2000000, stock: 10, sold: 20 },
+            { sku: 'IP11-PI-512', color: 'Pink', colorHex: '#f5d7de', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 20 },
+            { sku: 'IP11-BU-128', color: 'Blue', colorHex: '#a5b8cd', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IP11-BU-256', color: 'Blue', colorHex: '#a5b8cd', storage: '256GB', priceModifier: 2000000, stock: 10, sold: 20 },
+            { sku: 'IP11-BU-512', color: 'Blue', colorHex: '#a5b8cd', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 20 },
+            { sku: 'IP11-YE-128', color: 'Yellow', colorHex: '#f5e6a8', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IP11-YE-256', color: 'Yellow', colorHex: '#f5e6a8', storage: '256GB', priceModifier: 2000000, stock: 10, sold: 20 },
+            { sku: 'IP11-YE-512', color: 'Yellow', colorHex: '#f5e6a8', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 20 },
+            { sku: 'IP11-SI-128', color: 'Silver', colorHex: '#e3e4e6', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IP11-SI-256', color: 'Silver', colorHex: '#e3e4e6', storage: '256GB', priceModifier: 2000000, stock: 10, sold: 20 },
+            { sku: 'IP11-SI-512', color: 'Silver', colorHex: '#e3e4e6', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 20 },
+        ],
+        description: {
+            intro: 'iPad baru yang penuh warna dengan chip A16 Bionic yang andal, menjadikannya perangkat serbaguna untuk belajar, bermain, dan berkreasi. Ini adalah model Wi-Fi Only.',
+            specs: [ 'Layar: Liquid Retina 10.9 inci', 'Chip: A16 Bionic', 'Kamera: 12MP Wide di bagian belakang', 'Konektor: USB-C' ],
+        },
+        pros: ['Desain penuh warna yang menarik', 'Performa A16 Bionic yang cepat untuk tugas sehari-hari', 'Harga paling terjangkau di jajaran iPad', 'Mendukung Apple Pencil (USB-C)'],
+        cons: ['Layar belum laminasi', 'Tidak mendukung Apple Pencil Pro', 'Wi-Fi Only, tidak ada opsi seluler'],
+        inTheBox: ['Unit iPad (11th Gen)', 'Kabel Pengisi Daya USB-C (1 m)', '20W USB-C Power Adapter']
+    },
+
+    // Produk 45 iPad mini 7th Gen
+    {
+        id: 45,
+        kategori: 'iPad',
+        name: 'iPad mini (7th Gen)',
+        basePrice: 8499000,
+        images: {
+            'Starlight': ['images/produk/id45_ipm7/ipm7-sl-1.jpg', 'images/produk/id45_ipm7/ipm7-sl-2.jpg', 'images/produk/id45_ipm7/ipm7-sl-3.jpg'],
+            'Blue': ['images/produk/id45_ipm7/ipm7-bu-1.jpg', 'images/produk/id45_ipm7/ipm7-bu-2.jpg', 'images/produk/id45_ipm7/ipm7-bu-3.jpg'],
+            'Purple': ['images/produk/id45_ipm7/ipm7-pu-1.jpg', 'images/produk/id45_ipm7/ipm7-pu-2.jpg', 'images/produk/id45_ipm7/ipm7-pu-3.jpg'],
+            'Space Grey': ['images/produk/id45_ipm7/ipm7-sg-1.jpg', 'images/produk/id45_ipm7/ipm7-sg-2.jpg', 'images/produk/id45_ipm7/ipm7-sg-3.jpg'],
+        },
+        variants: [
+            { sku: 'IPM7-SL-128', color: 'Starlight', colorHex: '#f0e5d8', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IPM7-SL-256', color: 'Starlight', colorHex: '#f0e5d8', storage: '256GB', priceModifier: 2000000, stock: 10, sold: 20 },
+            { sku: 'IPM7-SL-512', color: 'Starlight', colorHex: '#f0e5d8', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 20 },
+            { sku: 'IPM7-BU-128', color: 'Blue', colorHex: '#a5b8cd', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IPM7-BU-256', color: 'Blue', colorHex: '#a5b8cd', storage: '256GB', priceModifier: 2000000, stock: 10, sold: 20 },
+            { sku: 'IPM7-BU-512', color: 'Blue', colorHex: '#a5b8cd', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 20 },
+            { sku: 'IPM7-PU-128', color: 'Purple', colorHex: '#b8b5ce', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IPM7-PU-256', color: 'Purple', colorHex: '#b8b5ce', storage: '256GB', priceModifier: 2000000, stock: 10, sold: 20 },
+            { sku: 'IPM7-PU-512', color: 'Purple', colorHex: '#b8b5ce', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 20 },
+            { sku: 'IPM7-SG-128', color: 'Space Grey', colorHex: '#5e5d5a', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IPM7-SG-256', color: 'Space Grey', colorHex: '#5e5d5a', storage: '256GB', priceModifier: 2000000, stock: 10, sold: 20 },
+            { sku: 'IPM7-SG-512', color: 'Space Grey', colorHex: '#5e5d5a', storage: '512GB', priceModifier: 4000000, stock: 10, sold: 20 },
+        ],
+        description: {
+            intro: 'Ukuran mini, performa Pro. iPad mini terbaru kini ditenagai chip A17 Pro yang sangat kencang, menjadikannya perangkat ultra-portabel yang sempurna untuk catatan, membaca, dan bermain game. Ini adalah model Wi-Fi Only.',
+            specs: [ 'Layar: Liquid Retina 8.3 inci', 'Chip: A17 Pro', 'Kamera: 12MP Wide di bagian belakang', 'Fitur: Touch ID di tombol atas' ],
+        },
+        pros: ['Ukuran sangat ringkas dan mudah dibawa', 'Performa A17 Pro setara iPhone Pro', 'Mendukung Apple Pencil (Generasi ke-2)', 'Layar laminasi penuh'],
+        cons: ['Refresh rate layar hanya 60Hz', 'Ukuran layar kecil untuk multitasking', 'Wi-Fi Only, tidak ada opsi seluler'],
+        inTheBox: ['Unit iPad mini', 'Kabel Pengisi Daya USB-C (1 m)', '20W USB-C Power Adapter']
+    }
 ];
