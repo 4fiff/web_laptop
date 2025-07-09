@@ -1139,17 +1139,21 @@ const products = [
     {
         id: 40,
         kategori: 'iPad', // <-- Kategori baru
-        name: 'iPad Pro 13" 2024',
+        name: 'iPad Pro 13" (2024)',
         basePrice: 21999000,
         images: {
-            'Space Black': ['https://placehold.co/600x600/3a3a3d/fff?text=iPad+Pro+Black+1', 'https://placehold.co/600x600/3a3a3d/fff?text=iPad+Pro+Black+2'],
-            'Silver': ['https://placehold.co/600x600/e3e4e6/333?text=iPad+Pro+Silver+1', 'https://placehold.co/600x600/e3e4e6/333?text=iPad+Pro+Silver+2'],
+            'Space Black': ['images/produk/id40_ipp13/ipp13-sb-1.jpg', 'images/produk/id40_ipp13/ipp13-sb-2.jpg', 'images/produk/id40_ipp13/ipp13-sb-3.jpg'],
+            'Silver': ['images/produk/id40_ipp13/ipp13-sl-1.jpg', 'images/produk/id40_ipp13/ipp13-sl-2.jpg', 'images/produk/id40_ipp13/ipp13-sl-3.jpg'],
         },
         variants: [
             { sku: 'IPP13-SB-256', color: 'Space Black', colorHex: '#3a3a3d', storage: '256GB', priceModifier: 0, stock: 15, sold: 95 },
             { sku: 'IPP13-SB-512', color: 'Space Black', colorHex: '#3a3a3d', storage: '512GB', priceModifier: 3500000, stock: 10, sold: 60 },
+            { sku: 'IPP13-SB-1TB', color: 'Space Black', colorHex: '#3a3a3d', storage: '1TB', priceModifier: 7000000, stock: 10, sold: 60 },
+            { sku: 'IPP13-SB-2TB', color: 'Space Black', colorHex: '#3a3a3d', storage: '2TB', priceModifier: 9000000, stock: 10, sold: 60 },
             { sku: 'IPP13-SL-256', color: 'Silver', colorHex: '#e3e4e6', storage: '256GB', priceModifier: 0, stock: 18, sold: 110 },
+            { sku: 'IPP13-SL-512', color: 'Silver', colorHex: '#e3e4e6', storage: '512GB', priceModifier: 4000000, stock: 18, sold: 110 },
             { sku: 'IPP13-SL-1TB', color: 'Silver', colorHex: '#e3e4e6', storage: '1TB', priceModifier: 7000000, stock: 5, sold: 25 },
+            { sku: 'IPP13-SL-2TB', color: 'Silver', colorHex: '#e3e4e6', storage: '2TB', priceModifier: 9000000, stock: 0, sold: 25 },
         ],
         description: {
             intro: 'iPad Pro. Tenaga luar biasa dengan layar paling canggih di dunia. Ditenagai chip Apple M4, iPad Pro baru menghadirkan performa menakjubkan dalam desain yang super tipis dan ringan.',
@@ -1163,17 +1167,21 @@ const products = [
     {
         id: 41,
         kategori: 'iPad',
-        name: 'iPad Pro 11" 2024',
+        name: 'iPad Pro 11" (2024)',
         basePrice: 17999000,
         images: {
-            'Space Black': ['https://placehold.co/600x600/3a3a3d/fff?text=iPad+Pro+Black+1', 'https://placehold.co/600x600/3a3a3d/fff?text=iPad+Pro+Black+2'],
-            'Silver': ['https://placehold.co/600x600/e3e4e6/333?text=iPad+Pro+Silver+1', 'https://placehold.co/600x600/e3e4e6/333?text=iPad+Pro+Silver+2'],
+            'Silver': ['images/produk/id41_ipp11/ipp11-sl-1.jpg', 'images/produk/id41_ipp11/ipp11-sl-2.jpg', 'images/produk/id41_ipp11/ipp11-sl-3.jpg'],
+            'Space Black': ['images/produk/id41_ipp11/ipp11-sb-1.jpg', 'images/produk/id41_ipp11/ipp11-sb-2.jpg', 'images/produk/id41_ipp11/ipp11-sb-3.jpg'],
         },
         variants: [
+            { sku: 'IPP11-SL-256', color: 'Silver', colorHex: '#e3e4e6', storage: '256GB', priceModifier: 0, stock: 18, sold: 21 },
+            { sku: 'IPP11-SL-512', color: 'Silver', colorHex: '#e3e4e6', storage: '512GB', priceModifier: 3500000, stock: 0, sold: 43 },
+            { sku: 'IPP11-SL-1TB', color: 'Silver', colorHex: '#e3e4e6', storage: '1TB', priceModifier: 7000000, stock: 5, sold: 32 },
+            { sku: 'IPP11-SL-2TB', color: 'Silver', colorHex: '#e3e4e6', storage: '2TB', priceModifier: 9000000, stock: 5, sold: 12 },
             { sku: 'IPP11-SB-256', color: 'Space Black', colorHex: '#3a3a3d', storage: '256GB', priceModifier: 0, stock: 15, sold: 95 },
             { sku: 'IPP11-SB-512', color: 'Space Black', colorHex: '#3a3a3d', storage: '512GB', priceModifier: 3500000, stock: 10, sold: 60 },
-            { sku: 'IPP11-SL-256', color: 'Silver', colorHex: '#e3e4e6', storage: '256GB', priceModifier: 0, stock: 18, sold: 110 },
-            { sku: 'IPP11-SL-1TB', color: 'Silver', colorHex: '#e3e4e6', storage: '1TB', priceModifier: 7000000, stock: 5, sold: 0 },
+            { sku: 'IPP11-SB-1TB', color: 'Space Black', colorHex: '#3a3a3d', storage: '1TB', priceModifier: 7000000, stock: 0, sold: 95 },
+            { sku: 'IPP11-SB-2TB', color: 'Space Black', colorHex: '#3a3a3d', storage: '2TB', priceModifier: 9000000, stock: 10, sold: 60 },
         ],
         description: {
             intro: 'iPad Pro. Tenaga luar biasa dengan layar paling canggih di dunia. Ditenagai chip Apple M4, iPad Pro baru menghadirkan performa menakjubkan dalam desain yang super tipis dan ringan.',
