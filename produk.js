@@ -1139,7 +1139,7 @@ const products = [
     {
         id: 40,
         kategori: 'iPad', // <-- Kategori baru
-        name: 'iPad Pro 13" (2024)',
+        name: 'iPad Pro M4 13" (2024)',
         basePrice: 21999000,
         images: {
             'Space Black': ['images/produk/id40_ipp13/ipp13-sb-1.jpg', 'images/produk/id40_ipp13/ipp13-sb-2.jpg', 'images/produk/id40_ipp13/ipp13-sb-3.jpg'],
@@ -1167,7 +1167,7 @@ const products = [
     {
         id: 41,
         kategori: 'iPad',
-        name: 'iPad Pro 11" (2024)',
+        name: 'iPad Pro M4 11" (2024)',
         basePrice: 17999000,
         images: {
             'Silver': ['images/produk/id41_ipp11/ipp11-sl-1.jpg', 'images/produk/id41_ipp11/ipp11-sl-2.jpg', 'images/produk/id41_ipp11/ipp11-sl-3.jpg'],
@@ -1190,5 +1190,81 @@ const products = [
         pros: ['Performa setara laptop dengan chip M4', 'Layar OLED Tandem terbaik di pasaran', 'Desain sangat tipis dan ringan', 'Mendukung Apple Pencil Pro dan Magic Keyboard baru'],
         cons: ['Harga sangat premium', 'Posisi kamera depan di sisi samping'],
         inTheBox: ['Unit iPad Pro 11"', 'Kabel Pengisi Daya USB-C (1 m)']
+    },
+    // Produk 42 iPad Air 13" M3
+    {
+        id: 42,
+        kategori: 'iPad',
+        name: 'iPad Air M3 13" (2025)',
+        basePrice: 12999000,
+        images: {
+            'Blue': ['images/produk/id42_ipa13/ipa13-bu-1.jpg', 'images/produk/id42_ipa13/ipa13-bu-2.jpg', 'images/produk/id42_ipa13/ipa13-bu-3.jpg'],
+            'Space Grey': ['images/produk/id42_ipa13/ipa13-sg-1.jpg', 'images/produk/id42_ipa13/ipa13-sg-2.jpg', 'images/produk/id42_ipa13/ipa13-sg-3.jpg'],
+            'Purple': ['images/produk/id42_ipa13/ipa13-pu-1.jpg', 'images/produk/id42_ipa13/ipa13-pu-2.jpg', 'images/produk/id42_ipa13/ipa13-pu-3.jpg'],
+            'Starlight': ['images/produk/id42_ipa13/ipa13-sl-1.jpg', 'images/produk/id42_ipa13/ipa13-sl-2.jpg', 'images/produk/id42_ipa13/ipa13-sl-3.jpg'],
+        },
+        variants: [
+            { sku: 'IPA13-BU-128', color: 'Blue', colorHex: '#a5b8cd', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IPA13-BU-256', color: 'Blue', colorHex: '#a5b8cd', storage: '256GB', priceModifier: 1700000, stock: 10, sold: 20 },
+            { sku: 'IPA13-BU-512', color: 'Blue', colorHex: '#a5b8cd', storage: '512GB', priceModifier: 3400000, stock: 10, sold: 20 },
+            { sku: 'IPA13-BU-1TB', color: 'Blue', colorHex: '#a5b8cd', storage: '1TB', priceModifier: 6800000, stock: 10, sold: 20 },
+            { sku: 'IPA13-SG-128', color: 'Space Grey', colorHex: '#5e5d5a', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IPA13-SG-256', color: 'Space Grey', colorHex: '#5e5d5a', storage: '256GB', priceModifier: 1700000, stock: 10, sold: 20 },
+            { sku: 'IPA13-SG-512', color: 'Space Grey', colorHex: '#5e5d5a', storage: '512GB', priceModifier: 3400000, stock: 10, sold: 20 },
+            { sku: 'IPA13-SG-1TB', color: 'Space Grey', colorHex: '#5e5d5a', storage: '1TB', priceModifier: 6800000, stock: 10, sold: 20 },
+            { sku: 'IPA13-PU-128', color: 'Purple', colorHex: '#b8b5ce', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IPA13-PU-256', color: 'Purple', colorHex: '#b8b5ce', storage: '256GB', priceModifier: 1700000, stock: 10, sold: 20 },
+            { sku: 'IPA13-PU-512', color: 'Purple', colorHex: '#b8b5ce', storage: '512GB', priceModifier: 3400000, stock: 10, sold: 20 },
+            { sku: 'IPA13-PU-1TB', color: 'Purple', colorHex: '#b8b5ce', storage: '1TB', priceModifier: 6800000, stock: 10, sold: 20 },
+            { sku: 'IPA13-SL-128', color: 'Starlight', colorHex: '#f0e5d8', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IPA13-SL-256', color: 'Starlight', colorHex: '#f0e5d8', storage: '256GB', priceModifier: 1700000, stock: 10, sold: 20 },
+            { sku: 'IPA13-SL-512', color: 'Starlight', colorHex: '#f0e5d8', storage: '512GB', priceModifier: 3400000, stock: 10, sold: 20 },
+            { sku: 'IPA13-SL-1TB', color: 'Starlight', colorHex: '#f0e5d8', storage: '1TB', priceModifier: 6800000, stock: 10, sold: 20 },
+        ],
+        description: {
+            intro: 'iPad Air baru dengan chip M3 super cepat. Kini hadir dalam dua ukuran portabel, dengan layar Liquid Retina yang memukau dan kemampuan AI terdepan untuk produktivitas dan kreativitas tanpa batas.',
+            specs: [ 'Layar: Liquid Retina 13 inci dengan True Tone', 'Chip: Apple M3', 'Kamera: 12MP Wide di bagian depan dan belakang', 'Konektor: USB-C' ],
+        },
+        pros: ['Performa M3 yang sangat kencang', 'Desain yang ringan dan penuh warna', 'Mendukung Apple Pencil Pro', 'Posisi kamera depan yang lebih baik untuk video call'],
+        cons: ['Tidak memiliki layar ProMotion 120Hz', 'Speaker stereo standar'],
+        inTheBox: ['Unit iPad Air 13"', 'Kabel Pengisi Daya USB-C (1 m)']
+    },
+    // Produk 43 iPad Air 11" M3
+    {
+        id: 43,
+        kategori: 'iPad',
+        name: 'iPad Air M3 11" (2025)',
+        basePrice: 9999000,
+        images: {
+            'Purple': ['images/produk/id43_ipa11/ipa11-pu-1.jpg', 'images/produk/id43_ipa11/ipa11-pu-2.jpg', 'images/produk/id43_ipa11/ipa11-pu-3.jpg'],
+            'Blue': ['images/produk/id43_ipa11/ipa11-bu-1.jpg', 'images/produk/id43_ipa11/ipa11-bu-2.jpg', 'images/produk/id43_ipa11/ipa11-bu-3.jpg'],
+            'Space Grey': ['images/produk/id43_ipa11/ipa11-sg-1.jpg', 'images/produk/id43_ipa11/ipa11-sg-2.jpg', 'images/produk/id43_ipa11/ipa11-sg-3.jpg'],
+            'Starlight': ['images/produk/id43_ipa11/ipa11-sl-1.jpg', 'images/produk/id43_ipa11/ipa11-sl-2.jpg', 'images/produk/id43_ipa11/ipa11-sl-3.jpg'],
+        },
+        variants: [
+            { sku: 'IPA11-PU-128', color: 'Purple', colorHex: '#b8b5ce', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IPA11-PU-256', color: 'Purple', colorHex: '#b8b5ce', storage: '256GB', priceModifier: 1700000, stock: 10, sold: 20 },
+            { sku: 'IPA11-PU-512', color: 'Purple', colorHex: '#b8b5ce', storage: '512GB', priceModifier: 3400000, stock: 10, sold: 20 },
+            { sku: 'IPA11-PU-1TB', color: 'Purple', colorHex: '#b8b5ce', storage: '1TB', priceModifier: 6800000, stock: 10, sold: 20 },
+            { sku: 'IPA11-BU-128', color: 'Blue', colorHex: '#a5b8cd', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IPA11-BU-256', color: 'Blue', colorHex: '#a5b8cd', storage: '256GB', priceModifier: 1700000, stock: 10, sold: 20 },
+            { sku: 'IPA11-BU-512', color: 'Blue', colorHex: '#a5b8cd', storage: '512GB', priceModifier: 3400000, stock: 10, sold: 20 },
+            { sku: 'IPA11-BU-1TB', color: 'Blue', colorHex: '#a5b8cd', storage: '1TB', priceModifier: 6800000, stock: 10, sold: 20 },
+            { sku: 'IPA11-SG-128', color: 'Space Grey', colorHex: '#5e5d5a', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IPA11-SG-256', color: 'Space Grey', colorHex: '#5e5d5a', storage: '256GB', priceModifier: 1700000, stock: 10, sold: 20 },
+            { sku: 'IPA11-SG-512', color: 'Space Grey', colorHex: '#5e5d5a', storage: '512GB', priceModifier: 3400000, stock: 10, sold: 20 },
+            { sku: 'IPA11-SG-1TB', color: 'Space Grey', colorHex: '#5e5d5a', storage: '1TB', priceModifier: 6800000, stock: 10, sold: 20 },
+            { sku: 'IPA11-SL-128', color: 'Starlight', colorHex: '#f0e5d8', storage: '128GB', priceModifier: 0, stock: 10, sold: 20 },
+            { sku: 'IPA11-SL-256', color: 'Starlight', colorHex: '#f0e5d8', storage: '256GB', priceModifier: 1700000, stock: 10, sold: 20 },
+            { sku: 'IPA11-SL-512', color: 'Starlight', colorHex: '#f0e5d8', storage: '512GB', priceModifier: 3400000, stock: 10, sold: 20 },
+            { sku: 'IPA11-SL-1TB', color: 'Starlight', colorHex: '#f0e5d8', storage: '1TB', priceModifier: 6800000, stock: 10, sold: 20 },
+        ],
+        description: {
+            intro: 'iPad Air baru dengan chip M3 super cepat. Kini hadir dalam dua ukuran portabel, dengan layar Liquid Retina yang memukau dan kemampuan AI terdepan untuk produktivitas dan kreativitas tanpa batas.',
+            specs: [ 'Layar: Liquid Retina 11 inci dengan True Tone', 'Chip: Apple M3', 'Kamera: 12MP Wide di bagian depan dan belakang', 'Konektor: USB-C' ],
+        },
+        pros: ['Sangat portabel dan ringan', 'Performa M3 yang sangat kencang', 'Mendukung Apple Pencil Pro', 'Posisi kamera depan yang lebih baik untuk video call'],
+        cons: ['Tidak memiliki layar ProMotion 120Hz', 'Ukuran layar mungkin terasa kecil untuk multitasking berat'],
+        inTheBox: ['Unit iPad Air 11"', 'Kabel Pengisi Daya USB-C (1 m)']
     },
 ];
