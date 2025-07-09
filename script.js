@@ -401,211 +401,158 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderVariantProduct(product) {
-        // Tampilkan wadah untuk pilihan varian
         const variantOptionsContainer = document.getElementById('variant-options-container');
         if (variantOptionsContainer) variantOptionsContainer.style.display = 'block';
 
-        // Sembunyikan elemen grade A/B/C yang tidak relevan untuk produk varian
         const gradeElement = document.getElementById('detail-grade');
-        if(gradeElement) gradeElement.innerHTML = '';
-        
+        if(gradeElement) gradeElement.style.display = 'none';
+
         // Inisialisasi state awal berdasarkan data varian pertama
-        let selectedColor = product.variants[0].color;
-        let selectedStorage = product.variants.find(v => v.color === selectedColor)?.storage;
-        let selectedFeature = product.variants.find(v => v.color === selectedColor)?.feature;
+        let selectedVariant = product.variants[0];
 
         // Ambil semua elemen HTML yang akan dimanipulasi
         const nameEl = document.getElementById('detail-name');
         const priceEl = document.getElementById('detail-price');
         const skuEl = document.getElementById('detail-sku');
         const stockEl = document.getElementById('detail-stock');
-        const colorSelector = document.getElementById('color-selector');
-        const storageSelector = document.getElementById('storage-selector');
-        const featureSelector = document.getElementById('feature-selector');
-        const selectedColorNameEl = document.getElementById('selected-color-name');
         const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
-        
-        // Fungsi utama untuk memperbarui seluruh tampilan berdasarkan pilihan
+
+        // Fungsi utama untuk memperbarui seluruh tampilan halaman
         function updateDisplay() {
-            // Cari varian yang cocok dengan semua pilihan saat ini
-            let currentVariant = product.variants.find(v => {
-                const colorMatch = !v.color || v.color === selectedColor;
-                const storageMatch = !v.storage || v.storage === selectedStorage;
-                const featureMatch = !v.feature || v.feature === selectedFeature;
-                return colorMatch && storageMatch && featureMatch;
-            });
+            if (!selectedVariant) return;
 
-            // Jika kombinasi tidak ada, kembali ke varian valid pertama untuk warna yang dipilih
-            if (!currentVariant) {
-                const firstAvailable = product.variants.find(v => v.color === selectedColor);
-                if(firstAvailable) {
-                    selectedStorage = firstAvailable.storage;
-                    selectedFeature = firstAvailable.feature;
-                    currentVariant = firstAvailable;
-                } else {
-                    return; // Seharusnya tidak terjadi
-                }
-            }
-
-            const finalPrice = (product.basePrice || product.price) + (currentVariant.priceModifier || 0);
+            const finalPrice = (product.basePrice || product.price) + (selectedVariant.priceModifier || 0);
             priceEl.textContent = formatRupiah(finalPrice);
-            skuEl.textContent = `SKU: ${currentVariant.sku}`;
-            
-            let stockText = currentVariant.stock > 0 ? `Ketersediaan: Sisa ${currentVariant.stock} unit` : `Ketersediaan: Stok Habis`;
+            skuEl.textContent = `SKU: ${selectedVariant.sku}`;
+
+            let stockText = selectedVariant.stock > 0 ? `Ketersediaan: Sisa ${selectedVariant.stock} unit` : `Ketersediaan: Stok Habis`;
             stockEl.textContent = stockText;
-            if (currentVariant.stock <= CONFIG.LOW_STOCK_THRESHOLD) { stockEl.classList.add('low-stock'); } 
+            if (selectedVariant.stock <= CONFIG.LOW_STOCK_THRESHOLD) { stockEl.classList.add('low-stock'); } 
             else { stockEl.classList.remove('low-stock'); }
             
             const soldInfoSpan = stockEl.querySelector('.sold-info');
             if(soldInfoSpan) soldInfoSpan.remove();
-            if (currentVariant.sold > 0) {
-                stockEl.innerHTML += ` &bull; <span class="sold-info"><i class="fas fa-fire"></i> ${currentVariant.sold} terjual</span>`;
+            if (selectedVariant.sold > 0) {
+                stockEl.innerHTML += ` &bull; <span class="sold-info"><i class="fas fa-fire"></i> ${selectedVariant.sold} terjual</span>`;
             }
 
-            addToCartBtn.disabled = currentVariant.stock === 0;
-            addToCartBtn.textContent = currentVariant.stock > 0 ? 'Tambah ke Keranjang' : 'Stok Kosong';
+            addToCartBtn.disabled = selectedVariant.stock === 0;
+            addToCartBtn.textContent = selectedVariant.stock > 0 ? 'Tambah ke Keranjang' : 'Stok Kosong';
             addToCartBtn.onclick = () => {
-                if(currentVariant.stock > 0) {
+                if(selectedVariant.stock > 0) {
                     let variantName = `${product.name}`;
-                    if(currentVariant.feature) variantName += ` (${currentVariant.feature})`;
-                    if(currentVariant.storage) variantName += ` (${currentVariant.storage})`;
-                    if(currentVariant.color && !currentVariant.keys && !currentVariant.surface) variantName += `, ${currentVariant.color}`;
+                    if(selectedVariant.feature) variantName += ` (${selectedVariant.feature})`;
+                    if(selectedVariant.storage) variantName += ` (${selectedVariant.storage})`;
+                    if(selectedVariant.keys) variantName += ` - ${selectedVariant.keys}`;
+                    if(selectedVariant.surface) variantName += ` - ${selectedVariant.surface}`;
+                    if(selectedVariant.color && !selectedVariant.keys && !selectedVariant.surface) variantName += `, ${selectedVariant.color}`;
                     
                     const itemToAdd = {
-                        id: currentVariant.sku, 
-                        name: variantName,
+                        id: selectedVariant.sku, 
+                        name: variantName.trim(),
                         price: finalPrice, 
-                        stock: currentVariant.stock, 
-                        img: product.images[currentVariant.color || 'Default']?.[0] || ''
+                        stock: selectedVariant.stock, 
+                        img: product.images[selectedVariant.color || selectedVariant.keys || selectedVariant.surface || 'Default'][0]
                     };
                     addToCart(itemToAdd, 1);
                 }
             };
-            
-            if (product.images[selectedColor || 'Default']) {
-                setupImageSlider(product.images[selectedColor || 'Default']);
+
+            const imageKey = selectedVariant.color || selectedVariant.keys || selectedVariant.surface || 'Default';
+            if (product.images[imageKey]) {
+                setupImageSlider(product.images[imageKey]);
             }
             
-            if (selectedColorNameEl) selectedColorNameEl.textContent = selectedColor || '';
             createVariantSelectors();
         }
 
         // Fungsi untuk membuat tombol-tombol pilihan secara dinamis
         function createVariantSelectors() {
-            const variantTypes = new Set(product.variants.flatMap(v => Object.keys(v)));
-            
-            const colorGroup = document.getElementById('color-variant-group');
-            const storageGroup = document.getElementById('storage-variant-group');
-            const featureGroup = document.getElementById('feature-variant-group');
-            const keysGroup = document.getElementById('keys-variant-group');
-            const surfaceGroup = document.getElementById('surface-variant-group');
+            const variantTypes = new Set(product.variants.flatMap(v => Object.keys(v).filter(key => ['color', 'storage', 'feature', 'keys', 'surface'].includes(key))));
 
-            if(colorGroup) colorGroup.style.display = 'none';
-            if(storageGroup) storageGroup.style.display = 'none';
-            if(featureGroup) featureGroup.style.display = 'none';
-            if(keysGroup) keysGroup.style.display = 'none';
-            if(surfaceGroup) surfaceGroup.style.display = 'none';
-            
+            ['color', 'storage', 'feature', 'keys', 'surface'].forEach(type => {
+                const group = document.getElementById(`${type}-variant-group`);
+                if (group) {
+                    group.style.display = variantTypes.has(type) ? 'block' : 'none';
+                }
+            });
+
             if (variantTypes.has('color')) createColorOptions();
-            if (variantTypes.has('storage')) createStorageOptions();
-            if (variantTypes.has('feature')) createFeatureOptions();
+            if (variantTypes.has('storage')) createGenericOptions('storage', 'Kapasitas');
+            if (variantTypes.has('feature')) createGenericOptions('feature', 'Fitur');
             if (variantTypes.has('keys')) createGenericOptions('keys', 'Pilihan Tombol');
             if (variantTypes.has('surface')) createGenericOptions('surface', 'Pilihan Permukaan');
         }
-
+        
         function createColorOptions() {
-            if (!colorSelector) return;
-            colorSelector.parentElement.style.display = 'block';
+            const colorSelector = document.getElementById('color-selector');
+            const selectedColorNameEl = document.getElementById('selected-color-name');
+            if (!colorSelector || !selectedColorNameEl) return;
+            
             const uniqueColors = [...new Map(product.variants.map(v => [v.color, v])).values()];
             colorSelector.innerHTML = '';
+            selectedColorNameEl.textContent = selectedVariant.color;
+
             uniqueColors.forEach(variant => {
                 const swatch = document.createElement('div');
                 swatch.className = 'color-swatch';
                 swatch.style.backgroundColor = variant.colorHex;
                 swatch.title = variant.color;
-                if (variant.color === selectedColor) { swatch.classList.add('active'); }
+                if (variant.color === selectedVariant.color) swatch.classList.add('active');
+                
                 swatch.addEventListener('click', () => {
-                    selectedColor = variant.color;
-                    const availableVariantsForColor = product.variants.filter(v => v.color === selectedColor);
-                    const firstAvailable = availableVariantsForColor[0];
-                    selectedStorage = firstAvailable.storage;
-                    selectedFeature = firstAvailable.feature;
-                    updateDisplay();
+                    const newColor = variant.color;
+                    const firstAvailableVariantForNewColor = product.variants.find(v => v.color === newColor);
+                    if (firstAvailableVariantForNewColor) {
+                        selectedVariant = firstAvailableVariantForNewColor;
+                        updateDisplay();
+                    }
                 });
                 colorSelector.appendChild(swatch);
-            });
-        }
-
-        function createStorageOptions() {
-            if (!storageSelector) return;
-            storageSelector.parentElement.style.display = 'block';
-            const allPossibleStorages = [...new Set(product.variants.map(v => v.storage))].filter(Boolean);
-            const availableStoragesForColor = product.variants.filter(v => v.color === selectedColor).map(v => v.storage);
-            
-            storageSelector.innerHTML = '';
-            allPossibleStorages.forEach(storageValue => {
-                const option = document.createElement('div');
-                option.className = 'storage-option';
-                option.textContent = storageValue;
-                if (availableStoragesForColor.includes(storageValue)) {
-                    option.classList.remove('disabled');
-                    option.addEventListener('click', () => { selectedStorage = storageValue; updateDisplay(); });
-                } else {
-                    option.classList.add('disabled');
-                }
-                if (storageValue === selectedStorage) { option.classList.add('active'); }
-                storageSelector.appendChild(option);
-            });
-        }
-
-        function createFeatureOptions(){
-            if (!featureSelector) return;
-            featureSelector.parentElement.style.display = 'block';
-            const allPossibleFeatures = [...new Set(product.variants.map(v => v.feature))].filter(Boolean);
-            featureSelector.innerHTML = '';
-            allPossibleFeatures.forEach(featureValue => {
-                const option = document.createElement('div');
-                option.className = 'storage-option';
-                option.textContent = featureValue;
-                if (featureValue === selectedFeature) { option.classList.add('active'); }
-                option.addEventListener('click', () => { selectedFeature = featureValue; updateDisplay(); });
-                featureSelector.appendChild(option);
             });
         }
 
         function createGenericOptions(variantType, label) {
             const selectorContainer = document.getElementById(`${variantType}-selector`);
             if (!selectorContainer) return;
-            selectorContainer.parentElement.style.display = 'block';
-            selectorContainer.parentElement.querySelector('.variant-label').textContent = label;
+
+            selectorContainer.parentElement.querySelector('.variant-label').textContent = label + ':';
             
             const allPossibleValues = [...new Set(product.variants.map(v => v[variantType]))].filter(Boolean);
-            
-            let selectedValue;
-            if(variantType === 'keys') selectedValue = product.variants.find(v => v.sku === (product.variants.find(va => va.keys)?.sku))?.keys;
-            if(variantType === 'surface') selectedValue = product.variants.find(v => v.sku === (product.variants.find(va => va.surface)?.sku))?.surface;
             
             selectorContainer.innerHTML = '';
             allPossibleValues.forEach(value => {
                 const option = document.createElement('div');
-                option.className = 'storage-option';
+                option.className = 'storage-option'; // Re-use style
                 option.textContent = value;
-                if (value === selectedValue) { option.classList.add('active'); }
+                
+                if (value === selectedVariant[variantType]) {
+                    option.classList.add('active');
+                }
+
                 option.addEventListener('click', () => {
-                    if(variantType === 'keys') selectedValue = value;
-                    if(variantType === 'surface') selectedValue = value;
-                    updateDisplay();
+                    const newSelection = { ...selectedVariant, [variantType]: value };
+                    const correspondingVariant = product.variants.find(v => {
+                        return Object.keys(newSelection).every(key => !v[key] || v[key] === newSelection[key]);
+                    });
+
+                    if(correspondingVariant){
+                        selectedVariant = correspondingVariant;
+                        updateDisplay();
+                    }
                 });
                 selectorContainer.appendChild(option);
             });
         }
         
+        // Inisialisasi Halaman Varian
         nameEl.textContent = product.name;
         const descriptionContainer = document.getElementById('detail-description-container');
-        descriptionContainer.innerHTML = `<p>${product.description.intro}</p>`;
-        // (Logika untuk menampilkan pros, cons, dll. bisa ditambahkan di sini jika perlu)
+        if (descriptionContainer) {
+            descriptionContainer.innerHTML = `<p>${product.description.intro}</p>`;
+            // Logika untuk menampilkan pros, cons, dll.
+        }
         
-        createVariantSelectors();
         updateDisplay();
     }
 
