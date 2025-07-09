@@ -1368,7 +1368,7 @@ const products = [
         name: 'AirPods Pro (Generasi ke-2)',
         basePrice: 3999000,
         images: {
-                'White': ['https://placehold.co/600x600/f5f5f7/333?text=AirPods+Pro+2']
+                'White': ['images/produk/id47_app/1.jpg', 'images/produk/id47_app/2.jpg', 'images/produk/id47_app/3.jpg', 'images/produk/id47_app/4.jpg', 'images/produk/id47_app/5.jpg']
         },
         // Dibuat menjadi struktur varian meskipun hanya ada satu
         variants: [
