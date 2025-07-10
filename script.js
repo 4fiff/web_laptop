@@ -241,10 +241,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isNaN(productId)) { contentDiv.style.display = 'none'; notFoundDiv.style.display = 'block'; return; }
         const product = products.find(p => p.id === productId);
         if (!product) { contentDiv.style.display = 'none'; notFoundDiv.style.display = 'block'; return; }
+        
         contentDiv.style.display = 'flex';
         notFoundDiv.style.display = 'none';
         document.title = `${product.name} - Macintoz`;
         document.getElementById('detail-name').textContent = product.name;
+
         if (product.variants && product.variants.length > 0) {
             renderVariantProduct(product);
         } else {
@@ -257,26 +259,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // FUNGSI BARU UNTUK MENAMPILKAN PRODUK STANDAR (MACBOOK)
     function renderStandardProduct(product) {
         if (document.getElementById('variant-options-container')) document.getElementById('variant-options-container').style.display = 'none';
+        if (document.getElementById('detail-grade')) document.getElementById('detail-grade').style.display = 'flex';
+        
         const gradeElement = document.getElementById('detail-grade');
         if (gradeElement) {
-            gradeElement.style.display = 'flex';
             const gradeText = product.grade === 'Baru' ? 'BARU' : `GRADE ${product.grade}`;
             const gradeBadgeClass = `product-grade-badge grade-${product.grade.toLowerCase()}`;
             const gradeDescriptions = { 'A': 'Seperti Baru', 'B': 'Sangat Baik', 'C': 'Baik' };
             let gradeDescriptionText = (product.grade === 'Baru') ? 'Brand New In Box (BNIB)' : `Kondisi: ${gradeDescriptions[product.grade] || product.grade}`;
             gradeElement.innerHTML = `<div class="${gradeBadgeClass}">${gradeText}</div><span>${gradeDescriptionText}</span>`;
         }
+        
         document.getElementById('detail-price').textContent = formatRupiah(product.price);
         document.getElementById('detail-sku').textContent = `SKU: ${product.sku}`;
-        renderDescriptionDetails(product);
+        
         const stockElement = document.getElementById('detail-stock');
         let stockText = product.stock > 0 ? `Ketersediaan: Sisa ${product.stock} unit` : `Ketersediaan: Stok Habis`;
         stockElement.textContent = stockText;
-        if (product.stock <= CONFIG.LOW_STOCK_THRESHOLD && product.stock > 0) { stockElement.classList.add('low-stock'); }
+        if (product.stock <= CONFIG.LOW_STOCK_THRESHOLD && product.stock > 0) { stockElement.classList.add('low-stock'); } 
         else { stockElement.classList.remove('low-stock'); }
         if (product.sold > 0) {
             stockElement.innerHTML += ` &bull; <span class="sold-info"><i class="fas fa-fire"></i> ${product.sold} terjual</span>`;
         }
+        
         const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
         if (product.stock > 0) {
             addToCartBtn.disabled = false;
@@ -287,6 +292,8 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCartBtn.textContent = 'Stok Kosong';
             addToCartBtn.onclick = null;
         }
+
+        renderDescriptionDetails(product);
         setupImageSlider(product.images);
     }
 
@@ -294,11 +301,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (document.getElementById('variant-options-container')) document.getElementById('variant-options-container').style.display = 'block';
         if (document.getElementById('detail-grade')) document.getElementById('detail-grade').style.display = 'none';
         
+        // Inisialisasi state awal
         let selectedVariant = product.variants[0];
 
+        // Fungsi utama untuk memperbarui seluruh tampilan halaman
         function updateDisplay() {
-            if (!selectedVariant) { selectedVariant = product.variants.find(v => v.stock > 0) || product.variants[0]; }
-            
             const finalPrice = (product.basePrice || 0) + (selectedVariant.priceModifier || 0);
             document.getElementById('detail-price').textContent = formatRupiah(finalPrice);
             document.getElementById('detail-sku').textContent = `SKU: ${selectedVariant.sku}`;
@@ -306,11 +313,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const stockElement = document.getElementById('detail-stock');
             let stockText = selectedVariant.stock > 0 ? `Ketersediaan: Sisa ${selectedVariant.stock} unit` : `Ketersediaan: Stok Habis`;
             stockElement.textContent = stockText;
-            if (selectedVariant.stock <= CONFIG.LOW_STOCK_THRESHOLD && selectedVariant.stock > 0) { stockElement.classList.add('low-stock'); }
+            if (selectedVariant.stock <= CONFIG.LOW_STOCK_THRESHOLD && selectedVariant.stock > 0) { stockElement.classList.add('low-stock'); } 
             else { stockElement.classList.remove('low-stock'); }
             
             const soldInfoSpan = stockElement.querySelector('.sold-info');
-            if (soldInfoSpan) soldInfoSpan.remove();
+            if(soldInfoSpan) soldInfoSpan.remove();
             if (selectedVariant.sold > 0) {
                 stockElement.innerHTML += ` &bull; <span class="sold-info"><i class="fas fa-fire"></i> ${selectedVariant.sold} terjual</span>`;
             }
@@ -319,29 +326,36 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCartBtn.disabled = selectedVariant.stock === 0;
             addToCartBtn.textContent = selectedVariant.stock > 0 ? 'Tambah ke Keranjang' : 'Stok Kosong';
             addToCartBtn.onclick = () => {
-                if (selectedVariant.stock > 0) {
+                if(selectedVariant.stock > 0) {
                     let variantName = `${product.name}`;
                     if(selectedVariant.feature) variantName += ` (${selectedVariant.feature})`;
                     if(selectedVariant.storage) variantName += ` (${selectedVariant.storage})`;
                     if(selectedVariant.color) variantName += `, ${selectedVariant.color}`;
                     if(selectedVariant.keys) variantName += ` - ${selectedVariant.keys}`;
                     if(selectedVariant.surface) variantName += ` - ${selectedVariant.surface}`;
+
                     const imageKey = selectedVariant.color || selectedVariant.keys || selectedVariant.surface || 'Default';
+                    
                     const itemToAdd = {
-                        id: selectedVariant.sku, name: variantName.replace(/,$/, '').trim(),
-                        price: finalPrice, stock: selectedVariant.stock,
+                        id: selectedVariant.sku, 
+                        name: variantName.replace(/,$/, '').trim(),
+                        price: finalPrice, 
+                        stock: selectedVariant.stock, 
                         img: product.images[imageKey]?.[0] || ''
                     };
                     addToCart(itemToAdd, 1);
                 }
             };
+            
+            createVariantSelectors();
+            
             const imageKey = selectedVariant.color || selectedVariant.keys || selectedVariant.surface || 'Default';
             if (product.images[imageKey]) {
                 setupImageSlider(product.images[imageKey]);
             }
-            createVariantSelectors();
         }
 
+        // Fungsi untuk membuat tombol-tombol pilihan secara dinamis
         function createVariantSelectors() {
             const variantTypes = new Set(product.variants.flatMap(v => Object.keys(v).filter(key => ['color', 'storage', 'feature', 'keys', 'surface'].includes(key))));
             
@@ -350,16 +364,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (group) { group.style.display = variantTypes.has(type) ? 'block' : 'none'; }
             });
 
-            variantTypes.forEach(type => createOptions(type));
+            variantTypes.forEach(type => {
+                createOptions(type);
+            });
         }
         
+        // Fungsi generik untuk membuat pilihan (lebih fleksibel)
         function createOptions(variantType) {
-            const selectorId = `${variantType}-selector`;
-            const selectorContainer = document.getElementById(selectorId);
+            const selectorContainer = document.getElementById(`${variantType}-selector`);
             if (!selectorContainer) return;
 
             const labels = { color: 'Warna', storage: 'Kapasitas', feature: 'Fitur', keys: 'Pilihan Tombol', surface: 'Pilihan Permukaan' };
             selectorContainer.parentElement.querySelector('.variant-label').textContent = labels[variantType] + ':';
+            
             if (variantType === 'color' && selectedVariant.color) {
                 document.getElementById('selected-color-name').textContent = selectedVariant.color;
             }
@@ -385,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 optionEl.addEventListener('click', () => {
-                    let tempSelection = { ...selectedVariant };
+                    const tempSelection = { ...selectedVariant };
                     tempSelection[variantType] = value;
                     
                     let bestMatch = product.variants.find(v => 
@@ -400,8 +417,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         bestMatch = product.variants.find(v => v[variantType] === value);
                     }
                     
-                    if (bestMatch) {
-                        selectedVariant = { ...bestMatch };
+                    if(bestMatch) {
+                        selectedVariant = bestMatch;
                         updateDisplay();
                     }
                 });
@@ -416,64 +433,47 @@ document.addEventListener('DOMContentLoaded', () => {
     // FUNGSI PEMBANTU UNTUK MENAMPILKAN DESKRIPSI, PROS, CONS, DLL.
     function renderDescriptionDetails(product) {
         const descriptionContainer = document.getElementById('detail-description-container');
-        if (descriptionContainer) {
-            descriptionContainer.innerHTML = ''; 
-            const introParagraph = document.createElement('p');
-            introParagraph.textContent = product.description.intro;
-            descriptionContainer.appendChild(introParagraph);
+        if(descriptionContainer) {
+            descriptionContainer.innerHTML = '';
+            const intro = document.createElement('p');
+            intro.textContent = product.description.intro;
+            descriptionContainer.appendChild(intro);
+
             if (product.description.specs && product.description.specs.length > 0) {
-                const specsSection = document.createElement('div');
-                specsSection.className = 'detail-description-section';
-                const specsHeader = document.createElement('h4');
-                specsHeader.textContent = 'Spesifikasi Detail:';
-                const specsList = document.createElement('ul');
-                product.description.specs.forEach(specText => { const listItem = document.createElement('li'); listItem.textContent = specText; specsList.appendChild(listItem); });
-                specsSection.appendChild(specsHeader);
-                specsSection.appendChild(specsList);
-                descriptionContainer.appendChild(specsSection);
+                const section = document.createElement('div');
+                section.className = 'detail-description-section';
+                section.innerHTML = `<h4>Spesifikasi Detail:</h4><ul>${product.description.specs.map(s => `<li>${s}</li>`).join('')}</ul>`;
+                descriptionContainer.appendChild(section);
             }
         }
+
         const prosConsContainer = document.getElementById('detail-pros-cons-container');
         if (prosConsContainer) {
             prosConsContainer.innerHTML = '';
             if (product.pros && product.pros.length > 0) {
-                const prosSection = document.createElement('div');
-                prosSection.id = 'detail-pros';
-                prosSection.className = 'detail-pros-cons-section';
-                const prosHeader = document.createElement('h4');
-                prosHeader.textContent = 'Kelebihan Produk';
-                const prosList = document.createElement('ul');
-                product.pros.forEach(text => { const li = document.createElement('li'); li.textContent = text; prosList.appendChild(li); });
-                prosSection.appendChild(prosHeader);
-                prosSection.appendChild(prosList);
-                prosConsContainer.appendChild(prosSection);
+                const section = document.createElement('div');
+                section.id = 'detail-pros';
+                section.className = 'detail-pros-cons-section';
+                section.innerHTML = `<h4>Kelebihan Produk</h4><ul>${product.pros.map(p => `<li>${p}</li>`).join('')}</ul>`;
+                prosConsContainer.appendChild(section);
             }
             if (product.cons && product.cons.length > 0) {
-                const consSection = document.createElement('div');
-                consSection.id = 'detail-cons';
-                consSection.className = 'detail-pros-cons-section';
-                const consHeader = document.createElement('h4');
-                consHeader.textContent = 'Kekurangan Produk';
-                const consList = document.createElement('ul');
-                product.cons.forEach(text => { const li = document.createElement('li'); li.textContent = text; consList.appendChild(li); });
-                consSection.appendChild(consHeader);
-                consSection.appendChild(consList);
-                prosConsContainer.appendChild(consSection);
+                const section = document.createElement('div');
+                section.id = 'detail-cons';
+                section.className = 'detail-pros-cons-section';
+                section.innerHTML = `<h4>Kekurangan Produk</h4><ul>${product.cons.map(c => `<li>${c}</li>`).join('')}</ul>`;
+                prosConsContainer.appendChild(section);
             }
         }
+
         const inTheBoxContainer = document.getElementById('detail-in-the-box-container');
         if (inTheBoxContainer) {
             inTheBoxContainer.innerHTML = '';
             if (product.inTheBox && product.inTheBox.length > 0) {
-                const inTheBoxSection = document.createElement('div');
-                inTheBoxSection.className = 'detail-description-section';
-                const inTheBoxHeader = document.createElement('h4');
-                inTheBoxHeader.textContent = 'Kelengkapan dalam Kotak';
-                const inTheBoxList = document.createElement('ul');
-                product.inTheBox.forEach(text => { const li = document.createElement('li'); li.textContent = text; inTheBoxList.appendChild(li); });
-                inTheBoxSection.appendChild(inTheBoxHeader);
-                inTheBoxSection.appendChild(inTheBoxList);
-                inTheBoxContainer.appendChild(inTheBoxSection);
+                const section = document.createElement('div');
+                section.className = 'detail-description-section';
+                section.innerHTML = `<h4>Kelengkapan dalam Kotak</h4><ul>${product.inTheBox.map(i => `<li>${i}</li>`).join('')}</ul>`;
+                inTheBoxContainer.appendChild(section);
             }
         }
     }
