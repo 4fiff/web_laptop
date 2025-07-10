@@ -1449,41 +1449,87 @@ const products = [
         inTheBox: ['Magic Trackpad', 'Kabel USB-C ke Lightning']
     },
 
-    // Produk 51 Magic Keyboard for iPad Pro 13"
+    // Produk 51 Magic Keyboard for iPad Pro 13" - Black
     {
         id: 51,
         kategori: 'Accessories',
-        name: 'Magic Keyboard for iPad Pro 13‑inch (M4)',
-        basePrice: 5899000,
-        images: {
-            'Black': ['images/produk/id51_mk13/mk13-bl-1.jpg', 'images/produk/id51_mk13/mk13-bl-2.jpg', 'images/produk/id51_mk13/mk13-bl-3.jpg', 'images/produk/id51_mk13/mk13-bl-4.jpg', 'images/produk/id51_mk13/mk13-bl-5.jpg'],
-            'White': ['images/produk/id51_mk13/mk13-wh-1.jpg', 'images/produk/id51_mk13/mk13-wh-2.jpg', 'images/produk/id51_mk13/mk13-wh-3.jpg', 'images/produk/id51_mk13/mk13-wh-5.jpg', 'images/produk/id51_mk13/mk13-wh-5.jpg'],
+        name: 'Magic Keyboard for iPad Pro 13‑inch (M4) - Black',
+        specs: 'US English',
+        price: 5899000,
+        stock: 10,
+        grade: 'Baru',
+        sku: 'MKIP13-BK-US',
+        sold: 15,
+        images: ['images/produk/id51_mk13_bl/mk13-bl-1.jpg', 'images/produk/id51_mk13_bl/mk13-bl-2.jpg', 'images/produk/id51_mk13_bl/mk13-bl-3.jpg', 'images/produk/id51_mk13_bl/mk13-bl-4.jpg', 'images/produk/id51_mk13_bl/mk13-bl-5.jpg'],
+        description: {
+            intro: 'Magic Keyboard baru untuk iPad Pro adalah pendamping yang luar biasa. Menghadirkan pengalaman mengetik terbaik, trackpad baru yang lebih besar, dan sandaran aluminium yang kokoh dalam warna Hitam klasik.',
+            specs: ['Kompatibilitas: iPad Pro 13 inci (M4)', 'Fitur: Baris fungsi, Trackpad dengan umpan balik haptik', 'Konektor: USB-C untuk pass-through charging'],
         },
-        variants: [
-            { sku: 'MKIP13-BK', color: 'Black', colorHex: '#3a3a3d', stock: 10, sold: 20 },
-            { sku: 'MKIP13-WH', color: 'White', colorHex: '#f5f5f7', stock: 10, sold: 20 },
-        ],
-        description: { intro: 'Magic Keyboard baru untuk iPad Pro adalah pendamping yang luar biasa. Menghadirkan pengalaman mengetik terbaik, trackpad baru, dan sandaran aluminium yang kokoh.', specs: ['Kompatibilitas: iPad Pro 13 inci (M4)', 'Fitur: Baris fungsi, Trackpad yang lebih besar dengan umpan balik haptik'], condition: 'Produk Baru, Garansi Resmi.' },
-        pros: ['Pengalaman mengetik seperti laptop', 'Trackpad yang responsif dengan haptik', 'Desain melayang yang bisa disesuaikan sudutnya', 'Memberikan perlindungan depan dan belakang'], cons: ['Menambah bobot yang signifikan pada iPad', 'Harga sangat mahal'],
-        inTheBox: ['Magic Keyboard for iPad Pro 13-inch']
+        pros: ['Pengalaman mengetik seperti laptop', 'Trackpad yang sangat responsif', 'Desain melayang yang bisa disesuaikan sudutnya', 'Memberikan perlindungan depan dan belakang'],
+        cons: ['Menambah bobot yang signifikan pada iPad', 'Harga sangat premium'],
+        inTheBox: ['Magic Keyboard for iPad Pro 13-inch (Black)']
     },
 
-    // Produk 52 Magic Keyboard for iPad Pro 11"
+    // Produk 52 Magic Keyboard for iPad Pro 13" - White
     {
         id: 52,
         kategori: 'Accessories',
-        name: 'Magic Keyboard for iPad Pro 11‑inch (M4)',
-        basePrice: 4999000,
-        images: {
-            'White': ['images/produk/id52_mk11/mk11-wh-1.jpg', 'images/produk/id52_mk11/mk11-wh-2.jpg', 'images/produk/id52_mk11/mk11-wh-3.jpg', 'images/produk/id52_mk11/mk11-wh-4.jpg', 'images/produk/id52_mk11/mk11-wh-5.jpg'],
-            'Black': ['images/produk/id52_mk11/mk11-bl-1.jpg', 'images/produk/id52_mk11/mk11-bl-2.jpg', 'images/produk/id52_mk11/mk11-bl-3.jpg', 'images/produk/id52_mk11/mk11-bl-4.jpg', 'images/produk/id52_mk11/mk11-bl-5.jpg'],
+        name: 'Magic Keyboard for iPad Pro 13‑inch (M4) - White',
+        specs: 'US English',
+        price: 5899000,
+        stock: 10,
+        grade: 'Baru',
+        sku: 'MKIP13-WH-US',
+        sold: 12,
+        images: ['images/produk/id52_mk13_wh/mk13-wh-1.jpg', 'images/produk/id52_mk13_wh/mk13-wh-2.jpg', 'images/produk/id52_mk13_wh/mk13-wh-3.jpg', 'images/produk/id52_mk13_wh/mk13-wh-4.jpg', 'images/produk/id52_mk13_wh/mk13-wh-5.jpg'],
+        description: {
+            intro: 'Magic Keyboard baru untuk iPad Pro adalah pendamping yang luar biasa. Menghadirkan pengalaman mengetik terbaik, trackpad baru yang lebih besar, dan sandaran aluminium yang kokoh dalam warna Putih yang elegan.',
+            specs: ['Kompatibilitas: iPad Pro 13 inci (M4)', 'Fitur: Baris fungsi, Trackpad dengan umpan balik haptik', 'Konektor: USB-C untuk pass-through charging'],
         },
-        variants: [
-            { sku: 'MKIP11-WH', color: 'White', colorHex: '#f5f5f7', stock: 10, sold: 20 },
-            { sku: 'MKIP11-BK', color: 'Black', colorHex: '#3a3a3d', stock: 10, sold: 20 },
-        ],
-        description: { intro: 'Magic Keyboard baru untuk iPad Pro adalah pendamping yang luar biasa. Menghadirkan pengalaman mengetik terbaik, trackpad baru, dan sandaran aluminium yang kokoh.', specs: ['Kompatibilitas: iPad Pro 11 inci (M4)', 'Fitur: Baris fungsi, Trackpad yang lebih besar dengan umpan balik haptik'], condition: 'Produk Baru, Garansi Resmi.' },
-        pros: ['Pengalaman mengetik seperti laptop', 'Trackpad yang responsif dengan haptik', 'Desain melayang yang bisa disesuaikan sudutnya', 'Memberikan perlindungan depan dan belakang'], cons: ['Menambah bobot yang signifikan pada iPad', 'Harga sangat mahal'],
-        inTheBox: ['Magic Keyboard for iPad Pro 11-inch']
+        pros: ['Pengalaman mengetik seperti laptop', 'Trackpad yang sangat responsif', 'Desain melayang yang bisa disesuaikan sudutnya', 'Memberikan perlindungan depan dan belakang'],
+        cons: ['Menambah bobot yang signifikan pada iPad', 'Warna putih lebih rentan kotor'],
+        inTheBox: ['Magic Keyboard for iPad Pro 13-inch (White)']
+    },
+
+    // Produk 53 Magic Keyboard for iPad Pro 11" - Black
+    {
+        id: 53,
+        kategori: 'Accessories',
+        name: 'Magic Keyboard for iPad Pro 11‑inch (M4) - Black',
+        specs: 'US English',
+        price: 4999000,
+        stock: 10,
+        grade: 'Baru',
+        sku: 'MKIP11-BK-US',
+        sold: 22,
+        images: ['images/produk/id53_mk11_bl/mk11-bl-1.jpg', 'images/produk/id53_mk11_bl/mk11-bl-2.jpg', 'images/produk/id53_mk11_bl/mk11-bl-3.jpg', 'images/produk/id53_mk11_bl/mk11-bl-4.jpg', 'images/produk/id53_mk11_bl/mk11-bl-5.jpg'],
+        description: {
+            intro: 'Mengubah iPad Pro 11 inci Anda menjadi laptop. Magic Keyboard baru ini menghadirkan pengalaman mengetik terbaik, trackpad baru yang lebih besar, dan sandaran aluminium kokoh dalam warna Hitam klasik.',
+            specs: ['Kompatibilitas: iPad Pro 11 inci (M4)', 'Fitur: Baris fungsi, Trackpad dengan umpan balik haptik', 'Konektor: USB-C untuk pass-through charging'],
+        },
+        pros: ['Pengalaman mengetik seperti laptop', 'Trackpad yang responsif', 'Desain melayang yang bisa disesuaikan sudutnya', 'Memberikan perlindungan penuh'],
+        cons: ['Menambah bobot pada iPad', 'Harga premium'],
+        inTheBox: ['Magic Keyboard for iPad Pro 11-inch (Black)']
+    },
+
+    // Produk 54 Magic Keyboard for iPad Pro 11" - White
+    {
+        id: 54,
+        kategori: 'Accessories',
+        name: 'Magic Keyboard for iPad Pro 11‑inch (M4) - White',
+        specs: 'US English',
+        price: 4999000,
+        stock: 10,
+        grade: 'Baru',
+        sku: 'MKIP11-WH-US',
+        sold: 18,
+        images: ['images/produk/id54_mk11_wh/mk11-wh-1.jpg', 'images/produk/id54_mk11_wh/mk11-wh-2.jpg', 'images/produk/id54_mk11_wh/mk11-wh-3.jpg', 'images/produk/id54_mk11_wh/mk11-wh-4.jpg', 'images/produk/id54_mk11_wh/mk11-wh-5.jpg'],
+        description: {
+            intro: 'Mengubah iPad Pro 11 inci Anda menjadi laptop. Magic Keyboard baru ini menghadirkan pengalaman mengetik terbaik, trackpad baru yang lebih besar, dan sandaran aluminium kokoh dalam warna Putih yang elegan.',
+            specs: ['Kompatibilitas: iPad Pro 11 inci (M4)', 'Fitur: Baris fungsi, Trackpad dengan umpan balik haptik', 'Konektor: USB-C untuk pass-through charging'],
+        },
+        pros: ['Pengalaman mengetik seperti laptop', 'Trackpad yang responsif', 'Desain melayang yang bisa disesuaikan sudutnya', 'Memberikan perlindungan penuh'],
+        cons: ['Menambah bobot pada iPad', 'Warna putih lebih rentan kotor'],
+        inTheBox: ['Magic Keyboard for iPad Pro 11-inch (White)']
     }
 ];
