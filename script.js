@@ -330,127 +330,129 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderVariantProduct(product) {
-        const variantContainer = document.getElementById('variant-options-container');
-        if (!variantContainer) return;
+        if (document.getElementById('variant-options-container')) document.getElementById('variant-options-container').style.display = 'block';
+        if (document.getElementById('detail-grade')) document.getElementById('detail-grade').style.display = 'none';
         
-        variantContainer.style.display = 'block';
-        document.getElementById('detail-grade').style.display = 'none';
-
-        let selectedVariant = { ...product.variants[0] };
+        let selectedVariant = product.variants[0];
 
         function updateDisplay() {
-            const currentVariant = product.variants.find(v => v.sku === selectedVariant.sku);
-            if (!currentVariant) return;
-
-            const finalPrice = product.basePrice + currentVariant.priceModifier;
+            if (!selectedVariant) {
+                selectedVariant = product.variants.find(v => v.stock > 0) || product.variants[0];
+            }
+            const finalPrice = (product.basePrice || 0) + (selectedVariant.priceModifier || 0);
             document.getElementById('detail-price').textContent = formatRupiah(finalPrice);
-            document.getElementById('detail-sku').textContent = `SKU: ${currentVariant.sku}`;
+            document.getElementById('detail-sku').textContent = `SKU: ${selectedVariant.sku}`;
             
             const stockElement = document.getElementById('detail-stock');
-            stockElement.innerHTML = '';
-            let stockText = currentVariant.stock > 0 ? `Ketersediaan: Sisa ${currentVariant.stock} unit` : `Ketersediaan: Stok Habis`;
+            let stockText = selectedVariant.stock > 0 ? `Ketersediaan: Sisa ${selectedVariant.stock} unit` : `Ketersediaan: Stok Habis`;
             stockElement.textContent = stockText;
-            if (currentVariant.sold > 0) {
-                stockElement.innerHTML += ` &bull; <span class="sold-info"><i class="fas fa-fire"></i> ${currentVariant.sold} terjual</span>`;
+            if (selectedVariant.stock <= CONFIG.LOW_STOCK_THRESHOLD && selectedVariant.stock > 0) { stockElement.classList.add('low-stock'); } 
+            else { stockElement.classList.remove('low-stock'); }
+            
+            const soldInfoSpan = stockElement.querySelector('.sold-info');
+            if(soldInfoSpan) soldInfoSpan.remove();
+            if (selectedVariant.sold > 0) {
+                stockElement.innerHTML += ` &bull; <span class="sold-info"><i class="fas fa-fire"></i> ${selectedVariant.sold} terjual</span>`;
             }
 
             const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
-            addToCartBtn.disabled = currentVariant.stock === 0;
-            addToCartBtn.textContent = currentVariant.stock > 0 ? 'Tambah ke Keranjang' : 'Stok Kosong';
+            addToCartBtn.disabled = selectedVariant.stock === 0;
+            addToCartBtn.textContent = selectedVariant.stock > 0 ? 'Tambah ke Keranjang' : 'Stok Kosong';
             addToCartBtn.onclick = () => {
-                if (currentVariant.stock > 0) {
+                if(selectedVariant.stock > 0) {
+                    const imageKey = selectedVariant.color || selectedVariant.keys || selectedVariant.surface || 'Default';
                     let variantName = `${product.name}`;
-                    const variantDetails = [];
-                    if (currentVariant.feature) variantDetails.push(currentVariant.feature);
-                    if (currentVariant.storage) variantDetails.push(currentVariant.storage);
-                    if (currentVariant.color) variantDetails.push(currentVariant.color);
-                    if (currentVariant.keys) variantDetails.push(currentVariant.keys);
-                    if (currentVariant.surface) variantDetails.push(currentVariant.surface);
-                    if (variantDetails.length > 0) variantName += ` (${variantDetails.join(', ')})`;
-
-                    const imageKey = currentVariant.color || currentVariant.keys || currentVariant.surface || 'Default';
+                    if(selectedVariant.feature) variantName += ` (${selectedVariant.feature})`;
+                    if(selectedVariant.storage) variantName += ` (${selectedVariant.storage})`;
+                    if(selectedVariant.color) variantName += `, ${selectedVariant.color}`;
+                    if(selectedVariant.keys) variantName += ` - ${selectedVariant.keys}`;
+                    if(selectedVariant.surface) variantName += ` - ${selectedVariant.surface}`;
+                    
                     const itemToAdd = {
-                        id: currentVariant.sku, name: variantName, price: finalPrice,
-                        stock: currentVariant.stock, img: product.images[imageKey]?.[0] || ''
+                        id: selectedVariant.sku, name: variantName.replace(/,$/, '').trim(), price: finalPrice, stock: selectedVariant.stock, 
+                        img: product.images[imageKey]?.[0] || ''
                     };
                     addToCart(itemToAdd, 1);
                 }
             };
             
             const imageKey = selectedVariant.color || selectedVariant.keys || selectedVariant.surface || 'Default';
-            if (product.images[imageKey]) {
+            if (product.images && product.images[imageKey]) {
                 setupImageSlider(product.images[imageKey]);
             }
             
-            renderAllSelectors();
+            createVariantSelectors();
         }
 
-        function renderAllSelectors() {
-            variantContainer.innerHTML = '';
-            const variantKeys = new Set(product.variants.flatMap(v => Object.keys(v).filter(key => ['color', 'storage', 'feature', 'keys', 'surface'].includes(key))));
+        function createVariantSelectors() {
+            const variantTypes = new Set(product.variants.flatMap(v => Object.keys(v).filter(key => ['color', 'storage', 'feature', 'keys', 'surface'].includes(key))));
             
-            variantKeys.forEach(variantType => {
-                const group = document.createElement('div');
-                group.className = 'variant-group';
-                
-                const label = document.createElement('p');
-                label.className = 'variant-label';
-                
-                const selector = document.createElement('div');
-                selector.className = 'selector-group';
-                
-                const labels = { color: 'Warna', storage: 'Kapasitas', feature: 'Fitur', keys: 'Pilihan Tombol', surface: 'Pilihan Permukaan' };
-                label.innerHTML = `${labels[variantType]}: <span id="selected-${variantType}-name">${selectedVariant[variantType] || ''}</span>`;
-                if (variantType !== 'color') label.querySelector('span').style.display = 'none';
+            ['color', 'storage', 'feature', 'keys', 'surface'].forEach(type => {
+                const group = document.getElementById(`${type}-variant-group`);
+                if (group) { group.style.display = variantTypes.has(type) ? 'block' : 'none'; }
+            });
 
-                group.appendChild(label);
-                group.appendChild(selector);
-                variantContainer.appendChild(group);
+            if (variantTypes.has('color')) createOptions('color', 'Warna');
+            if (variantTypes.has('storage')) createOptions('storage', 'Kapasitas');
+            if (variantTypes.has('feature')) createOptions('feature', 'Fitur');
+            if (variantTypes.has('keys')) createOptions('keys', 'Pilihan Tombol');
+            if (variantTypes.has('surface')) createOptions('surface', 'Pilihan Permukaan');
+        }
+        
+        function createOptions(variantType, label) {
+            const selectorContainer = document.getElementById(`${variantType}-selector`);
+            if (!selectorContainer) return;
+            selectorContainer.parentElement.querySelector('.variant-label').textContent = label + ':';
+            if (variantType === 'color') {
+                document.getElementById('selected-color-name').textContent = selectedVariant.color;
+            }
+            const allPossibleValues = [...new Set(product.variants.map(v => v[variantType]))].filter(Boolean);
+            
+            selectorContainer.innerHTML = '';
+            allPossibleValues.forEach(value => {
+                const optionEl = document.createElement('div');
+                optionEl.title = value;
 
-                const allPossibleValues = [...new Set(product.variants.map(v => v[variantType]))].filter(Boolean);
+                if (variantType === 'color') {
+                    optionEl.className = 'color-swatch';
+                    const colorData = product.variants.find(v => v.color === value);
+                    optionEl.style.backgroundColor = colorData.colorHex;
+                } else {
+                    optionEl.className = 'storage-option';
+                    optionEl.textContent = value;
+                }
                 
-                allPossibleValues.forEach(value => {
-                    const optionEl = document.createElement('div');
-                    optionEl.title = value;
+                if (value === selectedVariant[variantType]) {
+                    optionEl.classList.add('active');
+                }
 
-                    if (variantType === 'color') {
-                        optionEl.className = 'color-swatch';
-                        const colorData = product.variants.find(v => v.color === value);
-                        optionEl.style.backgroundColor = colorData.colorHex;
-                    } else {
-                        optionEl.className = 'storage-option';
-                        optionEl.textContent = value;
+                optionEl.addEventListener('click', () => {
+                    const tempSelection = { ...selectedVariant, [variantType]: value };
+                    // Cari varian yang paling cocok dengan pilihan baru
+                    let bestMatch = product.variants.find(v => {
+                        let isMatch = true;
+                        for (const key in tempSelection) {
+                            if (['color', 'storage', 'feature', 'keys', 'surface'].includes(key)) {
+                                if (v[key] && v[key] !== tempSelection[key]) {
+                                    isMatch = false;
+                                    break;
+                                }
+                            }
+                        }
+                        return isMatch;
+                    });
+                    
+                    // Jika kombinasi persis tidak ada, cari yang paling mendekati
+                    if(!bestMatch) {
+                        bestMatch = product.variants.find(v => v[variantType] === value);
                     }
                     
-                    if (value === selectedVariant[variantType]) {
-                        optionEl.classList.add('active');
+                    if(bestMatch) {
+                        selectedVariant = { ...bestMatch };
+                        updateDisplay();
                     }
-
-                    optionEl.addEventListener('click', () => {
-                        const currentSelection = { ...selectedVariant };
-                        currentSelection[variantType] = value;
-                        
-                        let bestMatch = product.variants.find(v => {
-                            return (v[variantType] === value) &&
-                                   (!v.color || v.color === currentSelection.color) &&
-                                   (!v.storage || v.storage === currentSelection.storage) &&
-                                   (!v.feature || v.feature === currentSelection.feature) &&
-                                   (!v.keys || v.keys === currentSelection.keys) &&
-                                   (!v.surface || v.surface === currentSelection.surface);
-                        });
-
-                        if (!bestMatch) {
-                            bestMatch = product.variants.find(v => v[variantType] === value);
-                        }
-                        
-                        if (bestMatch) {
-                            selectedVariant = { ...bestMatch };
-                            updateDisplay();
-                        }
-                    });
-
-                    selector.appendChild(optionEl);
                 });
+                selectorContainer.appendChild(optionEl);
             });
         }
         

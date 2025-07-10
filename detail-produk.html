@@ -81,14 +81,37 @@
             <div class="product-detail-info">
                 <h1 id="detail-name">Nama Produk Sedang Dimuat...</h1>
 
-                <div id="variant-options-container">
+                <div id="variant-options-container" style="display: none;">
+                    <div class="variant-group" id="color-variant-group">
+                        <p class="variant-label">Warna: <span id="selected-color-name"></span></p>
+                        <div id="color-selector" class="selector-group"></div>
+                    </div>
+                    <div class="variant-group" id="storage-variant-group">
+                        <p class="variant-label">Kapasitas:</p>
+                        <div id="storage-selector" class="selector-group"></div>
+                    </div>
+                    <div class="variant-group" id="feature-variant-group">
+                        <p class="variant-label">Fitur:</p>
+                        <div id="feature-selector" class="selector-group"></div>
+                    </div>
+                    <div class="variant-group" id="keys-variant-group">
+                        <p class="variant-label">Pilihan Tombol:</p>
+                        <div id="keys-selector" class="selector-group"></div>
+                    </div>
+                    <div class="variant-group" id="surface-variant-group">
+                        <p class="variant-label">Pilihan Permukaan:</p>
+                        <div id="surface-selector" class="selector-group"></div>
+                    </div>
                 </div>
 
                 <p id="detail-price" class="detail-price">Rp 0</p>
                 <p id="detail-sku" class="product-sku"></p>
 
                 <div id="detail-description-container"></div>
-                <div id="detail-pros-cons-container"></div>
+                <div id="detail-pros-cons-container">
+                    <div id="detail-pros"></div>
+                    <div id="detail-cons"></div>
+                </div>
                 <div id="detail-in-the-box-container"></div>
 
                 <p id="detail-stock" class="product-stock"></p>
@@ -102,17 +125,18 @@
                 </div>
                 <button id="detail-add-to-cart-btn" class="button button-full">Tambah ke Keranjang</button>
             </div>
+        </div>
 
-            <div id="product-not-found" style="display: none; text-align: center; padding: 50px;">
-                <h2>Produk Tidak Ditemukan</h2>
-                <p>Maaf, produk yang Anda cari tidak ada.</p>
-                <a href="produk.html" class="button">Kembali ke Daftar Produk</a>
-            </div>
+        <div id="product-not-found" style="display: none; text-align: center; padding: 50px;">
+            <h2>Produk Tidak Ditemukan</h2>
+            <p>Maaf, produk yang Anda cari tidak ada.</p>
+            <a href="produk.html" class="button">Kembali ke Daftar Produk</a>
+        </div>
 
-            <section class="related-products-section">
-                <h2>Anda Mungkin Juga Suka</h2>
-                <div id="related-products-grid" class="product-grid"></div>
-            </section>
+        <section class="related-products-section">
+            <h2>Anda Mungkin Juga Suka</h2>
+            <div id="related-products-grid" class="product-grid"></div>
+        </section>
     </main>
 
     <footer class="footer">
