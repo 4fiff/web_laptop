@@ -1415,43 +1415,91 @@ const products = [
     {
         id: 49,
         kategori: 'Accessories',
-        name: 'Magic Keyboard with Touch ID and Numeric Keypad',
-        basePrice: 2999000,
-        images: {
-            'Black Keys': ['images/produk/id49_mkm/mkm-bl-1.jpg', 'images/produk/id49_mkm/mkm-bl-2.jpg', 'images/produk/id49_mkm/mkm-bl-3.jpg', 'images/produk/id49_mkm/mkm-bl-4.jpg', 'images/produk/id49_mkm/mkm-bl-5.jpg'],
-            'White Keys': ['images/produk/id49_mkm/mkm-wh-1.jpg', 'images/produk/id49_mkm/mkm-wh-2.jpg', 'images/produk/id49_mkm/mkm-wh-3.jpg', 'images/produk/id49_mkm/mkm-wh-4.jpg', 'images/produk/id49_mkm/mkm-wh-5.jpg'],
+        name: 'Magic Keyboard with Touch ID and Numeric Keypad - Black Keys',
+        specs: 'US English',
+        price: 3299000, // Harga bisa disesuaikan jika berbeda
+        stock: 10,
+        grade: 'Baru',
+        sku: 'MKM-BK-US',
+        sold: 25,
+        images: ['images/produk/id49_mkm_bl/mkm-bl-1.jpg', 'images/produk/id49_mkm_bl/mkm-bl-2.jpg', 'images/produk/id49_mkm_bl/mkm-bl-3.jpg', 'images/produk/id49_mkm_bl/mkm-bl-4.jpg', 'images/produk/id49_mkm_bl/mkm-bl-5.jpg'],
+        description: {
+            intro: 'Magic Keyboard dengan tombol hitam menghadirkan pengalaman mengetik yang sangat nyaman dan presisi. Dilengkapi Touch ID untuk autentikasi yang cepat dan aman.',
+            specs: ['Koneksi: Bluetooth, port Lightning', 'Fitur: Tombol Panah Ukuran Penuh, Keypad Numerik'],
+            condition: 'Produk Baru, Garansi Resmi.'
         },
-        variants: [
-            { sku: 'MKM-BK', keys: 'Black Keys', priceModifier: 0, stock: 10, sold: 20 },
-            { sku: 'MKM-WH', keys: 'White Keys', priceModifier: 0, stock: 10, sold: 20 },
-        ],
-        description: { intro: 'Magic Keyboard menghadirkan pengalaman mengetik yang sangat nyaman dan presisi. Dilengkapi Touch ID untuk autentikasi yang cepat dan aman.', specs: ['Koneksi: Bluetooth, port Lightning', 'Fitur: Tombol Panah Ukuran Penuh, Keypad Numerik'], condition: 'Produk Baru, Garansi Resmi.' },
-        pros: ['Pengalaman mengetik yang luar biasa', 'Touch ID untuk login dan pembayaran yang mudah', 'Desain elegan dan minimalis'], cons: ['Harga premium', 'Menggunakan port Lightning untuk mengisi daya'],
-        inTheBox: ['Magic Keyboard', 'Kabel USB-C ke Lightning']
+        pros: ['Pengalaman mengetik yang luar biasa', 'Touch ID untuk login dan pembayaran yang mudah', 'Desain elegan dan minimalis'],
+        cons: ['Harga premium', 'Menggunakan port Lightning untuk mengisi daya'],
+        inTheBox: ['Magic Keyboard (Black Keys)', 'Kabel USB-C ke Lightning']
     },
 
-    // Produk 50 Magic Trackpad
+    // Produk 50 Magic Keyboard for Mac - White Keys
     {
         id: 50,
         kategori: 'Accessories',
-        name: 'Magic Trackpad',
-        basePrice: 2199000,
-        images: {
-            'Black': ['images/produk/id50_mt/mt-bl-1.jpg', 'images/produk/id50_mt/mt-bl-2.jpg', 'images/produk/id50_mt/mt-bl-3.jpg', 'images/produk/id50_mt/mt-bl-4.jpg', 'images/produk/id50_mt/mt-bl-5.jpg'],
-            'White': ['images/produk/id50_mt/mt-wh-1.jpg', 'images/produk/id50_mt/mt-wh-2.jpg', 'images/produk/id50_mt/mt-wh-3.jpg', 'images/produk/id50_mt/mt-wh-4.jpg', 'images/produk/id50_mt/mt-wh-5.jpg'],
+        name: 'Magic Keyboard with Touch ID and Numeric Keypad - White Keys',
+        specs: 'US English',
+        price: 2999000,
+        stock: 15,
+        grade: 'Baru',
+        sku: 'MKM-WH-US',
+        sold: 35,
+        images: ['images/produk/id50_mkm_wh/mkm-wh-1.jpg', 'images/produk/id50_mkm_wh/mkm-wh-2.jpg', 'images/produk/id50_mkm_wh/mkm-wh-3.jpg', 'images/produk/id50_mkm_wh/mkm-wh-4.jpg', 'images/produk/id50_mkm_wh/mkm-wh-5.jpg'],
+        description: {
+            intro: 'Magic Keyboard dengan tombol putih klasik menghadirkan pengalaman mengetik yang sangat nyaman dan presisi. Dilengkapi Touch ID untuk autentikasi yang cepat dan aman.',
+            specs: ['Koneksi: Bluetooth, port Lightning', 'Fitur: Tombol Panah Ukuran Penuh, Keypad Numerik'],
+            condition: 'Produk Baru, Garansi Resmi.'
         },
-        variants: [
-            { sku: 'MTP-BK', surface: 'Black', priceModifier: 300000, stock: 10, sold: 20 },
-            { sku: 'MTP-WH', surface: 'White', priceModifier: 0, stock: 10, sold: 20 },
-        ],
-        description: { intro: 'Magic Trackpad bersifat nirkabel dan dapat diisi ulang, dengan rangkaian lengkap gestur Multi-Touch dan teknologi Force Touch.', specs: ['Koneksi: Bluetooth, port Lightning', 'Teknologi: Force Touch, Multi-Touch'], condition: 'Produk Baru, Garansi Resmi.' },
-        pros: ['Permukaan kaca yang luas dan responsif', 'Mendukung semua gestur macOS', 'Daya tahan baterai yang sangat lama'], cons: ['Harga premium untuk sebuah trackpad'],
-        inTheBox: ['Magic Trackpad', 'Kabel USB-C ke Lightning']
+        pros: ['Pengalaman mengetik yang luar biasa', 'Touch ID untuk login dan pembayaran yang mudah', 'Desain elegan dan minimalis'],
+        cons: ['Harga premium', 'Menggunakan port Lightning untuk mengisi daya'],
+        inTheBox: ['Magic Keyboard (White Keys)', 'Kabel USB-C ke Lightning']
     },
 
-    // Produk 51 Magic Keyboard for iPad Pro 13" - Black
+    // Produk 51 Magic Trackpad - Black
     {
         id: 51,
+        kategori: 'Accessories',
+        name: 'Magic Trackpad - Black',
+        specs: 'Multi-Touch Surface',
+        price: 2499000,
+        stock: 8,
+        grade: 'Baru',
+        sku: 'MTP-BK',
+        sold: 28,
+        images: ['images/produk/id51_mt_bl/mt-bl-1.jpg', 'images/produk/id51_mt_bl/mt-bl-2.jpg', 'images/produk/id51_mt_bl/mt-bl-3.jpg', 'images/produk/id51_mt_bl/mt-bl-4.jpg', 'images/produk/id51_mt_bl/mt-bl-5.jpg'],
+        description: {
+            intro: 'Magic Trackpad nirkabel dengan permukaan hitam elegan. Dapat diisi ulang, dengan rangkaian lengkap gestur Multi-Touch dan teknologi Force Touch.',
+            specs: ['Koneksi: Bluetooth, port Lightning', 'Teknologi: Force Touch, Multi-Touch'],
+            condition: 'Produk Baru, Garansi Resmi.'
+        },
+        pros: ['Permukaan kaca yang luas dan responsif', 'Mendukung semua gestur macOS', 'Daya tahan baterai yang sangat lama'],
+        cons: ['Harga premium untuk sebuah trackpad'],
+        inTheBox: ['Magic Trackpad (Black)', 'Kabel USB-C ke Lightning']
+    },
+    // Produk 52 Magic Trackpad - White
+    {
+        id: 52,
+        kategori: 'Accessories',
+        name: 'Magic Trackpad - White',
+        specs: 'Multi-Touch Surface',
+        price: 2199000,
+        stock: 12,
+        grade: 'Baru',
+        sku: 'MTP-WH',
+        sold: 45,
+        images: ['images/produk/id52_mt_wh/mt-wh-1.jpg', 'images/produk/id52_mt_wh/mt-wh-2.jpg', 'images/produk/id52_mt_wh/mt-wh-3.jpg', 'images/produk/id52_mt_wh/mt-wh-4.jpg', 'images/produk/id52_mt_wh/mt-wh-5.jpg'],
+        description: {
+            intro: 'Magic Trackpad nirkabel dengan permukaan putih klasik. Dapat diisi ulang, dengan rangkaian lengkap gestur Multi-Touch dan teknologi Force Touch.',
+            specs: ['Koneksi: Bluetooth, port Lightning', 'Teknologi: Force Touch, Multi-Touch'],
+            condition: 'Produk Baru, Garansi Resmi.'
+        },
+        pros: ['Permukaan kaca yang luas dan responsif', 'Mendukung semua gestur macOS', 'Daya tahan baterai yang sangat lama'],
+        cons: ['Harga premium untuk sebuah trackpad'],
+        inTheBox: ['Magic Trackpad (White)', 'Kabel USB-C ke Lightning']
+    },
+    // Produk 53 Magic Keyboard for iPad Pro 13" - Black
+    {
+        id: 53,
         kategori: 'Accessories',
         name: 'Magic Keyboard for iPad Pro 13‑inch (M4) - Black',
         specs: 'US English',
@@ -1460,7 +1508,7 @@ const products = [
         grade: 'Baru',
         sku: 'MKIP13-BK-US',
         sold: 15,
-        images: ['images/produk/id51_mk13_bl/mk13-bl-1.jpg', 'images/produk/id51_mk13_bl/mk13-bl-2.jpg', 'images/produk/id51_mk13_bl/mk13-bl-3.jpg', 'images/produk/id51_mk13_bl/mk13-bl-4.jpg', 'images/produk/id51_mk13_bl/mk13-bl-5.jpg'],
+        images: ['images/produk/id53_mk13_bl/mk13-bl-1.jpg', 'images/produk/id53_mk13_bl/mk13-bl-2.jpg', 'images/produk/id53_mk13_bl/mk13-bl-3.jpg', 'images/produk/id53_mk13_bl/mk13-bl-4.jpg', 'images/produk/id53_mk13_bl/mk13-bl-5.jpg'],
         description: {
             intro: 'Magic Keyboard baru untuk iPad Pro adalah pendamping yang luar biasa. Menghadirkan pengalaman mengetik terbaik, trackpad baru yang lebih besar, dan sandaran aluminium yang kokoh dalam warna Hitam klasik.',
             specs: ['Kompatibilitas: iPad Pro 13 inci (M4)', 'Fitur: Baris fungsi, Trackpad dengan umpan balik haptik', 'Konektor: USB-C untuk pass-through charging'],
@@ -1470,9 +1518,9 @@ const products = [
         inTheBox: ['Magic Keyboard for iPad Pro 13-inch (Black)']
     },
 
-    // Produk 52 Magic Keyboard for iPad Pro 13" - White
+    // Produk 54 Magic Keyboard for iPad Pro 13" - White
     {
-        id: 52,
+        id: 54,
         kategori: 'Accessories',
         name: 'Magic Keyboard for iPad Pro 13‑inch (M4) - White',
         specs: 'US English',
@@ -1481,7 +1529,7 @@ const products = [
         grade: 'Baru',
         sku: 'MKIP13-WH-US',
         sold: 12,
-        images: ['images/produk/id52_mk13_wh/mk13-wh-1.jpg', 'images/produk/id52_mk13_wh/mk13-wh-2.jpg', 'images/produk/id52_mk13_wh/mk13-wh-3.jpg', 'images/produk/id52_mk13_wh/mk13-wh-4.jpg', 'images/produk/id52_mk13_wh/mk13-wh-5.jpg'],
+        images: ['images/produk/id54_mk13_wh/mk13-wh-1.jpg', 'images/produk/id54_mk13_wh/mk13-wh-2.jpg', 'images/produk/id54_mk13_wh/mk13-wh-3.jpg', 'images/produk/id54_mk13_wh/mk13-wh-4.jpg', 'images/produk/id54_mk13_wh/mk13-wh-5.jpg'],
         description: {
             intro: 'Magic Keyboard baru untuk iPad Pro adalah pendamping yang luar biasa. Menghadirkan pengalaman mengetik terbaik, trackpad baru yang lebih besar, dan sandaran aluminium yang kokoh dalam warna Putih yang elegan.',
             specs: ['Kompatibilitas: iPad Pro 13 inci (M4)', 'Fitur: Baris fungsi, Trackpad dengan umpan balik haptik', 'Konektor: USB-C untuk pass-through charging'],
@@ -1491,9 +1539,9 @@ const products = [
         inTheBox: ['Magic Keyboard for iPad Pro 13-inch (White)']
     },
 
-    // Produk 53 Magic Keyboard for iPad Pro 11" - Black
+    // Produk 55 Magic Keyboard for iPad Pro 11" - Black
     {
-        id: 53,
+        id: 55,
         kategori: 'Accessories',
         name: 'Magic Keyboard for iPad Pro 11‑inch (M4) - Black',
         specs: 'US English',
@@ -1502,7 +1550,7 @@ const products = [
         grade: 'Baru',
         sku: 'MKIP11-BK-US',
         sold: 22,
-        images: ['images/produk/id53_mk11_bl/mk11-bl-1.jpg', 'images/produk/id53_mk11_bl/mk11-bl-2.jpg', 'images/produk/id53_mk11_bl/mk11-bl-3.jpg', 'images/produk/id53_mk11_bl/mk11-bl-4.jpg', 'images/produk/id53_mk11_bl/mk11-bl-5.jpg'],
+        images: ['images/produk/id55_mk11_bl/mk11-bl-1.jpg', 'images/produk/id55_mk11_bl/mk11-bl-2.jpg', 'images/produk/id55_mk11_bl/mk11-bl-3.jpg', 'images/produk/id55_mk11_bl/mk11-bl-4.jpg', 'images/produk/id55_mk11_bl/mk11-bl-5.jpg'],
         description: {
             intro: 'Mengubah iPad Pro 11 inci Anda menjadi laptop. Magic Keyboard baru ini menghadirkan pengalaman mengetik terbaik, trackpad baru yang lebih besar, dan sandaran aluminium kokoh dalam warna Hitam klasik.',
             specs: ['Kompatibilitas: iPad Pro 11 inci (M4)', 'Fitur: Baris fungsi, Trackpad dengan umpan balik haptik', 'Konektor: USB-C untuk pass-through charging'],
@@ -1512,9 +1560,9 @@ const products = [
         inTheBox: ['Magic Keyboard for iPad Pro 11-inch (Black)']
     },
 
-    // Produk 54 Magic Keyboard for iPad Pro 11" - White
+    // Produk 56 Magic Keyboard for iPad Pro 11" - White
     {
-        id: 54,
+        id: 56,
         kategori: 'Accessories',
         name: 'Magic Keyboard for iPad Pro 11‑inch (M4) - White',
         specs: 'US English',
@@ -1523,7 +1571,7 @@ const products = [
         grade: 'Baru',
         sku: 'MKIP11-WH-US',
         sold: 18,
-        images: ['images/produk/id54_mk11_wh/mk11-wh-1.jpg', 'images/produk/id54_mk11_wh/mk11-wh-2.jpg', 'images/produk/id54_mk11_wh/mk11-wh-3.jpg', 'images/produk/id54_mk11_wh/mk11-wh-4.jpg', 'images/produk/id54_mk11_wh/mk11-wh-5.jpg'],
+        images: ['images/produk/id56_mk11_wh/mk11-wh-1.jpg', 'images/produk/id56_mk11_wh/mk11-wh-2.jpg', 'images/produk/id56_mk11_wh/mk11-wh-3.jpg', 'images/produk/id56_mk11_wh/mk11-wh-4.jpg', 'images/produk/id56_mk11_wh/mk11-wh-5.jpg'],
         description: {
             intro: 'Mengubah iPad Pro 11 inci Anda menjadi laptop. Magic Keyboard baru ini menghadirkan pengalaman mengetik terbaik, trackpad baru yang lebih besar, dan sandaran aluminium kokoh dalam warna Putih yang elegan.',
             specs: ['Kompatibilitas: iPad Pro 11 inci (M4)', 'Fitur: Baris fungsi, Trackpad dengan umpan balik haptik', 'Konektor: USB-C untuk pass-through charging'],
