@@ -269,47 +269,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderDetailPage = () => {
         const contentDiv = document.getElementById('product-detail-content');
         if (!contentDiv) return;
-
         const notFoundDiv = document.getElementById('product-not-found');
         const params = new URLSearchParams(window.location.search);
         const productId = parseInt(params.get('id'));
-
-        if (isNaN(productId)) {
-            contentDiv.style.display = 'none';
-            notFoundDiv.style.display = 'block';
-            return;
-        }
-
+        if (isNaN(productId)) { contentDiv.style.display = 'none'; notFoundDiv.style.display = 'block'; return; }
         const product = products.find(p => p.id === productId);
-
-        if (!product) {
-            contentDiv.style.display = 'none';
-            notFoundDiv.style.display = 'block';
-            return;
-        }
-        
+        if (!product) { contentDiv.style.display = 'none'; notFoundDiv.style.display = 'block'; return; }
         contentDiv.style.display = 'flex';
         notFoundDiv.style.display = 'none';
         document.title = `${product.name} - Macintoz`;
         document.getElementById('detail-name').textContent = product.name;
-
         if (product.variants && product.variants.length > 0) {
             renderVariantProduct(product);
         } else {
             renderStandardProduct(product);
         }
-        
         renderRelatedProducts(product);
     };
 
+
     // FUNGSI BARU UNTUK MENAMPILKAN PRODUK STANDAR (MACBOOK)
     function renderStandardProduct(product) {
-        const variantOptionsContainer = document.getElementById('variant-options-container');
-        if (variantOptionsContainer) variantOptionsContainer.style.display = 'none';
-
+        if (document.getElementById('variant-options-container')) document.getElementById('variant-options-container').style.display = 'none';
+        if (document.getElementById('detail-grade')) document.getElementById('detail-grade').style.display = 'block';
+        
         const gradeElement = document.getElementById('detail-grade');
         if (gradeElement) {
-            gradeElement.style.display = 'block';
             const gradeText = product.grade === 'Baru' ? 'BARU' : `GRADE ${product.grade}`;
             const gradeBadgeClass = `product-grade-badge grade-${product.grade.toLowerCase()}`;
             const gradeDescriptions = { 'A': 'Seperti Baru', 'B': 'Sangat Baik', 'C': 'Baik' };
@@ -320,64 +305,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('detail-price').textContent = formatRupiah(product.price);
         document.getElementById('detail-sku').textContent = `SKU: ${product.sku}`;
         
-        const descriptionContainer = document.getElementById('detail-description-container');
-        descriptionContainer.innerHTML = ''; 
-        const introParagraph = document.createElement('p');
-        introParagraph.textContent = product.description.intro;
-        descriptionContainer.appendChild(introParagraph);
-        if (product.description.specs && product.description.specs.length > 0) {
-            const specsSection = document.createElement('div');
-            specsSection.className = 'detail-description-section';
-            const specsHeader = document.createElement('h4');
-            specsHeader.textContent = 'Spesifikasi Detail:';
-            const specsList = document.createElement('ul');
-            product.description.specs.forEach(specText => { const listItem = document.createElement('li'); listItem.textContent = specText; specsList.appendChild(listItem); });
-            specsSection.appendChild(specsHeader);
-            specsSection.appendChild(specsList);
-            descriptionContainer.appendChild(specsSection);
-        }
-
-        const prosConsContainer = document.getElementById('detail-pros-cons-container');
-        prosConsContainer.innerHTML = '';
-        if (product.pros && product.pros.length > 0) {
-            const prosSection = document.createElement('div');
-            prosSection.id = 'detail-pros';
-            prosSection.className = 'detail-pros-cons-section';
-            const prosHeader = document.createElement('h4');
-            prosHeader.textContent = 'Kelebihan Produk';
-            const prosList = document.createElement('ul');
-            product.pros.forEach(text => { const li = document.createElement('li'); li.textContent = text; prosList.appendChild(li); });
-            prosSection.appendChild(prosHeader);
-            prosSection.appendChild(prosList);
-            prosConsContainer.appendChild(prosSection);
-        }
-        if (product.cons && product.cons.length > 0) {
-            const consSection = document.createElement('div');
-            consSection.id = 'detail-cons';
-            consSection.className = 'detail-pros-cons-section';
-            const consHeader = document.createElement('h4');
-            consHeader.textContent = 'Kekurangan Produk';
-            const consList = document.createElement('ul');
-            product.cons.forEach(text => { const li = document.createElement('li'); li.textContent = text; consList.appendChild(li); });
-            consSection.appendChild(consHeader);
-            consSection.appendChild(consList);
-            prosConsContainer.appendChild(consSection);
-        }
-
-        const inTheBoxContainer = document.getElementById('detail-in-the-box-container');
-        inTheBoxContainer.innerHTML = '';
-        if (product.inTheBox && product.inTheBox.length > 0) {
-            const inTheBoxSection = document.createElement('div');
-            inTheBoxSection.className = 'detail-description-section';
-            const inTheBoxHeader = document.createElement('h4');
-            inTheBoxHeader.textContent = 'Kelengkapan dalam Kotak';
-            const inTheBoxList = document.createElement('ul');
-            product.inTheBox.forEach(text => { const li = document.createElement('li'); li.textContent = text; inTheBoxList.appendChild(li); });
-            inTheBoxSection.appendChild(inTheBoxHeader);
-            inTheBoxSection.appendChild(inTheBoxList);
-            inTheBoxContainer.appendChild(inTheBoxSection);
-        }
-
         const stockElement = document.getElementById('detail-stock');
         let stockText = product.stock > 0 ? `Ketersediaan: Sisa ${product.stock} unit` : `Ketersediaan: Stok Habis`;
         stockElement.textContent = stockText;
@@ -399,48 +326,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         setupImageSlider(product.images);
+        renderDescriptionDetails(product);
     }
 
     function renderVariantProduct(product) {
-        const variantOptionsContainer = document.getElementById('variant-options-container');
-        if (variantOptionsContainer) variantOptionsContainer.style.display = 'block';
-
-        const gradeElement = document.getElementById('detail-grade');
-        if(gradeElement) gradeElement.style.display = 'none';
+        if (document.getElementById('variant-options-container')) document.getElementById('variant-options-container').style.display = 'block';
+        if (document.getElementById('detail-grade')) document.getElementById('detail-grade').style.display = 'none';
         
         let selectedVariant = product.variants[0];
 
-        const nameEl = document.getElementById('detail-name');
-        const priceEl = document.getElementById('detail-price');
-        const skuEl = document.getElementById('detail-sku');
-        const stockEl = document.getElementById('detail-stock');
-        const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
-        
         function updateDisplay() {
             if (!selectedVariant) {
-                // Cari varian pertama yang tersedia sebagai fallback
                 selectedVariant = product.variants.find(v => v.stock > 0) || product.variants[0];
             }
-
             const finalPrice = (product.basePrice || 0) + (selectedVariant.priceModifier || 0);
-            priceEl.textContent = formatRupiah(finalPrice);
-            skuEl.textContent = `SKU: ${selectedVariant.sku}`;
+            document.getElementById('detail-price').textContent = formatRupiah(finalPrice);
+            document.getElementById('detail-sku').textContent = `SKU: ${selectedVariant.sku}`;
             
+            const stockElement = document.getElementById('detail-stock');
             let stockText = selectedVariant.stock > 0 ? `Ketersediaan: Sisa ${selectedVariant.stock} unit` : `Ketersediaan: Stok Habis`;
-            stockEl.textContent = stockText;
-            if (selectedVariant.stock <= CONFIG.LOW_STOCK_THRESHOLD && selectedVariant.stock > 0) { stockEl.classList.add('low-stock'); } 
-            else { stockEl.classList.remove('low-stock'); }
+            stockElement.textContent = stockText;
+            if (selectedVariant.stock <= CONFIG.LOW_STOCK_THRESHOLD && selectedVariant.stock > 0) { stockElement.classList.add('low-stock'); } 
+            else { stockElement.classList.remove('low-stock'); }
             
-            const existingSoldInfo = stockEl.querySelector('.sold-info');
-            if (existingSoldInfo) existingSoldInfo.remove();
+            const soldInfoSpan = stockElement.querySelector('.sold-info');
+            if(soldInfoSpan) soldInfoSpan.remove();
             if (selectedVariant.sold > 0) {
-                stockEl.innerHTML += ` &bull; <span class="sold-info"><i class="fas fa-fire"></i> ${selectedVariant.sold} terjual</span>`;
+                stockElement.innerHTML += ` &bull; <span class="sold-info"><i class="fas fa-fire"></i> ${selectedVariant.sold} terjual</span>`;
             }
 
+            const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
             addToCartBtn.disabled = selectedVariant.stock === 0;
             addToCartBtn.textContent = selectedVariant.stock > 0 ? 'Tambah ke Keranjang' : 'Stok Kosong';
             addToCartBtn.onclick = () => {
                 if(selectedVariant.stock > 0) {
+                    const imageKey = selectedVariant.color || selectedVariant.keys || selectedVariant.surface || 'Default';
                     let variantName = `${product.name}`;
                     if(selectedVariant.feature) variantName += ` (${selectedVariant.feature})`;
                     if(selectedVariant.storage) variantName += ` (${selectedVariant.storage})`;
@@ -448,13 +368,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if(selectedVariant.keys) variantName += ` - ${selectedVariant.keys}`;
                     if(selectedVariant.surface) variantName += ` - ${selectedVariant.surface}`;
                     
-                    const imageKey = selectedVariant.color || selectedVariant.keys || selectedVariant.surface || 'Default';
-                    
                     const itemToAdd = {
-                        id: selectedVariant.sku, 
-                        name: variantName.trim(),
-                        price: finalPrice, 
-                        stock: selectedVariant.stock, 
+                        id: selectedVariant.sku, name: variantName.replace(/,$/, '').trim(), price: finalPrice, stock: selectedVariant.stock, 
                         img: product.images[imageKey]?.[0] || ''
                     };
                     addToCart(itemToAdd, 1);
@@ -462,9 +377,10 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             
             const imageKey = selectedVariant.color || selectedVariant.keys || selectedVariant.surface || 'Default';
-            if (product.images[imageKey]) {
+            if (product.images && product.images[imageKey]) {
                 setupImageSlider(product.images[imageKey]);
             }
+            
             createVariantSelectors();
         }
 
@@ -487,8 +403,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectorContainer = document.getElementById(`${variantType}-selector`);
             if (!selectorContainer) return;
             selectorContainer.parentElement.querySelector('.variant-label').textContent = label + ':';
-            if(variantType === 'color') selectorContainer.parentElement.querySelector('.variant-label span').textContent = selectedVariant.color;
-
+            if (variantType === 'color') {
+                document.getElementById('selected-color-name').textContent = selectedVariant.color;
+            }
             const allPossibleValues = [...new Set(product.variants.map(v => v[variantType]))].filter(Boolean);
             
             selectorContainer.innerHTML = '';
@@ -510,17 +427,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 optionEl.addEventListener('click', () => {
-                    const tempSelection = {...selectedVariant, [variantType]: value};
+                    const tempSelection = { ...selectedVariant, [variantType]: value };
+                    // Cari varian yang paling cocok dengan pilihan baru
                     let bestMatch = product.variants.find(v => {
-                        return Object.keys(tempSelection).every(key => !v[key] || v[key] === tempSelection[key]);
+                        let isMatch = true;
+                        for (const key in tempSelection) {
+                            if (['color', 'storage', 'feature', 'keys', 'surface'].includes(key)) {
+                                if (v[key] && v[key] !== tempSelection[key]) {
+                                    isMatch = false;
+                                    break;
+                                }
+                            }
+                        }
+                        return isMatch;
                     });
-
+                    
+                    // Jika kombinasi persis tidak ada, cari yang paling mendekati
                     if(!bestMatch) {
                         bestMatch = product.variants.find(v => v[variantType] === value);
                     }
                     
                     if(bestMatch) {
-                        selectedVariant = {...bestMatch};
+                        selectedVariant = { ...bestMatch };
                         updateDisplay();
                     }
                 });
@@ -528,14 +456,75 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         
-        nameEl.textContent = product.name;
-        const descriptionContainer = document.getElementById('detail-description-container');
-        descriptionContainer.innerHTML = ''; 
-        const introParagraph = document.createElement('p');
-        introParagraph.textContent = product.description.intro;
-        descriptionContainer.appendChild(introParagraph);
-        
+        renderDescriptionDetails(product);
         updateDisplay();
+    }
+
+    // FUNGSI PEMBANTU UNTUK MENAMPILKAN DESKRIPSI, PROS, CONS, DLL.
+    function renderDescriptionDetails(product){
+        const descriptionContainer = document.getElementById('detail-description-container');
+        if (descriptionContainer) {
+            descriptionContainer.innerHTML = ''; 
+            const introParagraph = document.createElement('p');
+            introParagraph.textContent = product.description.intro;
+            descriptionContainer.appendChild(introParagraph);
+            if (product.description.specs && product.description.specs.length > 0) {
+                const specsSection = document.createElement('div');
+                specsSection.className = 'detail-description-section';
+                const specsHeader = document.createElement('h4');
+                specsHeader.textContent = 'Spesifikasi Detail:';
+                const specsList = document.createElement('ul');
+                product.description.specs.forEach(specText => { const listItem = document.createElement('li'); listItem.textContent = specText; specsList.appendChild(listItem); });
+                specsSection.appendChild(specsHeader);
+                specsSection.appendChild(specsList);
+                descriptionContainer.appendChild(specsSection);
+            }
+        }
+
+        const prosConsContainer = document.getElementById('detail-pros-cons-container');
+        if (prosConsContainer) {
+            prosConsContainer.innerHTML = '';
+            if (product.pros && product.pros.length > 0) {
+                const prosSection = document.createElement('div');
+                prosSection.id = 'detail-pros';
+                prosSection.className = 'detail-pros-cons-section';
+                const prosHeader = document.createElement('h4');
+                prosHeader.textContent = 'Kelebihan Produk';
+                const prosList = document.createElement('ul');
+                product.pros.forEach(text => { const li = document.createElement('li'); li.textContent = text; prosList.appendChild(li); });
+                prosSection.appendChild(prosHeader);
+                prosSection.appendChild(prosList);
+                prosConsContainer.appendChild(prosSection);
+            }
+            if (product.cons && product.cons.length > 0) {
+                const consSection = document.createElement('div');
+                consSection.id = 'detail-cons';
+                consSection.className = 'detail-pros-cons-section';
+                const consHeader = document.createElement('h4');
+                consHeader.textContent = 'Kekurangan Produk';
+                const consList = document.createElement('ul');
+                product.cons.forEach(text => { const li = document.createElement('li'); li.textContent = text; consList.appendChild(li); });
+                consSection.appendChild(consHeader);
+                consSection.appendChild(consList);
+                prosConsContainer.appendChild(consSection);
+            }
+        }
+
+        const inTheBoxContainer = document.getElementById('detail-in-the-box-container');
+        if (inTheBoxContainer) {
+            inTheBoxContainer.innerHTML = '';
+            if (product.inTheBox && product.inTheBox.length > 0) {
+                const inTheBoxSection = document.createElement('div');
+                inTheBoxSection.className = 'detail-description-section';
+                const inTheBoxHeader = document.createElement('h4');
+                inTheBoxHeader.textContent = 'Kelengkapan dalam Kotak';
+                const inTheBoxList = document.createElement('ul');
+                product.inTheBox.forEach(text => { const li = document.createElement('li'); li.textContent = text; inTheBoxList.appendChild(li); });
+                inTheBoxSection.appendChild(inTheBoxHeader);
+                inTheBoxSection.appendChild(inTheBoxList);
+                inTheBoxContainer.appendChild(inTheBoxSection);
+            }
+        }
     }
 
     // --- FUNGSI SLIDER TERPUSAT ---
